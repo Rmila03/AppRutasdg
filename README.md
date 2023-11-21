@@ -1,6 +1,6 @@
-# ruta_sdg
+# AppRutasdg
 
-A new Flutter project.
+Aplicativo movil para la COOPACSDG en el área de creditos
 
 ## Getting Started
 
