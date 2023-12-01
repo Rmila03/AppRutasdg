@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ruta_sdg/plan.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,11 @@ class MyApp extends StatelessWidget {
         ),*/
         useMaterial3: true,
       ),
-      home: const Login(title: ''),
+      home: const SafeArea(
+        child: Login(
+          title: '',
+        ),
+      ),
     );
   }
 }
@@ -43,6 +48,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       //appBar: AppBar(),
+      resizeToAvoidBottomInset: false,
       body: Form(
         key: _formKey,
         child: Stack(children: <Widget>[
@@ -140,13 +146,16 @@ class _LoginState extends State<Login> {
                                   horizontal: 8, vertical: 16),
                               child: TextFormField(
                                 controller: emailController,
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(
+                                decoration: InputDecoration(
+                                  border: const OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                   ),
                                   labelText: "Usuario",
                                   hintText: "ejemplo@gmail.com",
-                                  labelStyle: TextStyle(
+                                  hintStyle: (TextStyle(
+                                    color: Colors.grey[400],
+                                  )),
+                                  labelStyle: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
                                   floatingLabelBehavior:
@@ -262,6 +271,11 @@ class _LoginState extends State<Login> {
                         });
                         if (_formKey.currentState!.validate()) {
                           // Navigate the user to the Home page
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomePage()),
+                          );
                         } else {
                           setState(() {
                             showError = true; // Mostrar el mensaje de error
