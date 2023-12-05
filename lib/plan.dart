@@ -51,11 +51,12 @@ class MapScreen extends State {
         /*appBar: AppBar(
           title: Text('Home'),
         ),*/
+        drawer: NavigationDrawer(),
         resizeToAvoidBottomInset: false,
         body: Column(
           children: [
             Container(
-              height: 150,
+              height: 160,
               padding: const EdgeInsets.only(
                 left: 20,
                 right: 5,
@@ -73,10 +74,17 @@ class MapScreen extends State {
                     children: [
                       Row(
                         children: [
-                          const Icon(
-                            Icons.format_list_bulleted,
-                            color: Colors.white,
-                            size: 42.0,
+                          Builder(
+                            builder: (context) => IconButton(
+                              icon: const Icon(
+                                Icons.format_list_bulleted,
+                                color: Colors.white,
+                                size: 42.0,
+                              ),
+                              onPressed: () {
+                                _showPopupMenu(context);
+                              },
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
@@ -180,6 +188,40 @@ class MapScreen extends State {
       ),
     );
   }
+
+  void _showPopupMenu(BuildContext context) {
+    final RenderBox overlay =
+        Overlay.of(context).context.findRenderObject() as RenderBox;
+    final RenderBox button = context.findRenderObject() as RenderBox;
+
+    final RelativeRect position = RelativeRect.fromRect(
+      Rect.fromPoints(
+        button.localToGlobal(Offset.zero, ancestor: overlay),
+        button.localToGlobal(button.size.bottomRight(Offset.zero),
+            ancestor: overlay),
+      ),
+      Offset.zero & overlay.size,
+    );
+
+    showMenu(
+      context: context,
+      position: position,
+      shape: RoundedRectangleBorder(
+        // Cambia la forma del menú emergente
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      items: <PopupMenuEntry>[
+        PopupMenuItem(
+          child: Text('Option 1'),
+          value: 'option1',
+        ),
+        PopupMenuItem(
+          child: Text('Option 2'),
+          value: 'option2',
+        ),
+      ],
+    );
+  }
 }
 
 class MapButton extends StatelessWidget {
@@ -215,4 +257,13 @@ class MapButton extends StatelessWidget {
       ),
     );
   }
+
+}
+
+class NavigationDrawer extends StatelessWidget{
+ const NavigationDrawer(Key? key) : super(key: key)
+ @override
+ Widget build(BuildContext context) => Drawer(
+  child: Single
+ );
 }
