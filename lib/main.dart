@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/plan.dart';
+import 'package:ruta_sdg/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +15,6 @@ class MyApp extends StatelessWidget {
       title: 'AppRutasdg',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        /*colorScheme: ColorScheme.fromSeed(
-          seedColor: Color(0x004C80),
-        ),*/
         useMaterial3: true,
       ),
       home: const SafeArea(
