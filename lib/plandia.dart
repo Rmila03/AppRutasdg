@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import 'package:ruta_sdg/plan.dart';
+import 'package:ruta_sdg/promocion.dart';
+import 'package:ruta_sdg/recuperacion.dart';
+import 'package:ruta_sdg/seguimiento.dart';
 
 void main() {
   runApp(const MyApp());
@@ -72,7 +75,7 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
           children: <Widget>[
             _bottomAction("Inicio", FontAwesomeIcons.house,
                 const Color.fromARGB(255, 4, 54, 95), 20.0),
-            _bottomAction("Notificaciones", FontAwesomeIcons.bell,
+            _bottomAction("Notificaciones", FontAwesomeIcons.solidBell,
                 const Color.fromARGB(255, 4, 54, 95), 20.0),
             _bottomAction("Reportes", FontAwesomeIcons.newspaper,
                 const Color.fromARGB(255, 4, 54, 95), 20.0),
@@ -181,21 +184,52 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
                 ],
               ),
             ),
-            const CustomTextContainer(
-              text: "PROMOCIÓN",
-              leftIcon: FontAwesomeIcons.bullhorn,
-              shadowColor: Colors.orange,
+            // Reemplaza con tu texto deseado
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PromocionPage()),
+                );
+              },
+              child: const CustomTextContainer(
+                text: "PROMOCIÓN",
+                leftIcon: FontAwesomeIcons.bullhorn,
+                shadowColor: Colors.orange,
+              ),
             ),
-            const CustomTextContainer(
-              text: "SEGUIMIENTO",
-              leftIcon: FontAwesomeIcons.fileCircleCheck,
-              shadowColor: Color.fromARGB(255, 4, 58, 6),
+
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SeguimientoPage()),
+                );
+              },
+              child: const CustomTextContainer(
+                text: "SEGUIMIENTO",
+                leftIcon: FontAwesomeIcons.fileCircleCheck,
+                shadowColor: Color.fromARGB(255, 4, 58, 6),
+              ),
             ),
-            const CustomTextContainer(
-              text: "RECUPERACIÓN",
-              leftIcon: FontAwesomeIcons.wallet,
-              shadowColor: Color.fromARGB(255, 114, 175, 76),
-            ), // Reemplaza con tu texto deseado
+
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RecuperacionPage()),
+                );
+              },
+              child: const CustomTextContainer(
+                text: "RECUPERACIÓN",
+                leftIcon: FontAwesomeIcons.wallet,
+                shadowColor: Color.fromARGB(255, 114, 175, 76),
+              ),
+            ),
+            //
           ],
         ),
       ),
