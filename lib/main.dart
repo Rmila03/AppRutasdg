@@ -8,7 +8,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,82 +40,81 @@ class _LoginState extends State<Login> {
   TextEditingController passwordController = TextEditingController();
   bool _obscureText = true;
   bool showError = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: AppBar(),
       resizeToAvoidBottomInset: false,
       body: Form(
         key: _formKey,
-        child: Stack(children: <Widget>[
-          Positioned(
-            top: 0,
-            left: 0,
-            child: Container(
-              color: const Color.fromARGB(255, 0, 76, 128),
-              width: MediaQuery.of(context).size.width,
-              height: 220,
-              child: Center(
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.topCenter,
-                      width: 100,
-                      height: 100,
-                      child: Image.asset(
-                        'assets/logo-sdg.png', // Ruta de la imagen en assets
-                        width: 100, // Ancho de la imagen
-                        height: 100, // Alto de la imagen
-                        fit: BoxFit.cover, // Modo de ajuste de la imagen
+        child: Stack(
+          children: <Widget>[
+            Positioned(
+              top: 0,
+              left: 0,
+              child: Container(
+                color: const Color.fromARGB(255, 0, 76, 128),
+                width: MediaQuery.of(context).size.width,
+                height: 220,
+                child: Center(
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.topCenter,
+                        width: 100,
+                        height: 100,
+                        child: Image.asset(
+                          'assets/logo-sdg.png',
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                    Stack(
-                      children: [
-                        Text(
-                          'Rutas SDG',
-                          style: TextStyle(
-                            fontSize: 20,
-                            letterSpacing: 5,
-                            fontWeight: FontWeight.bold,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 10
-                              ..color = Colors.black,
+                      Stack(
+                        children: [
+                          Text(
+                            'RUTASDG',
+                            style: TextStyle(
+                              fontSize: 20,
+                              letterSpacing: 5,
+                              fontWeight: FontWeight.bold,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 10
+                                ..color = Colors.black,
+                            ),
                           ),
-                        ),
-                        // The text inside
-                        const Text(
-                          'Rutas SDG',
-                          style: TextStyle(
-                            fontSize: 20,
-                            letterSpacing: 5,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.yellow,
+                          const Text(
+                            'RUTASDG',
+                            style: TextStyle(
+                              fontSize: 20,
+                              letterSpacing: 5,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.yellow,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 175,
-              left: 20,
-              right: 20,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                PhysicalModel(
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 175,
+                left: 20,
+                right: 20,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  PhysicalModel(
                     borderRadius: BorderRadius.circular(40),
                     color: Colors.white,
                     elevation: 5.0,
                     shadowColor: Colors.black,
                     child: Container(
-                      //margin: EdgeInsets.symmetric(horizontal: 20),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 30),
                       child: Column(
@@ -143,16 +141,16 @@ class _LoginState extends State<Login> {
                                   horizontal: 8, vertical: 16),
                               child: TextFormField(
                                 controller: emailController,
-                                decoration: InputDecoration(
-                                  border: const OutlineInputBorder(
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                   ),
                                   labelText: "Usuario",
                                   hintText: "ejemplo@gmail.com",
-                                  hintStyle: (TextStyle(
-                                    color: Colors.grey[400],
-                                  )),
-                                  labelStyle: const TextStyle(
+                                  hintStyle: TextStyle(
+                                    color: Colors.grey,
+                                  ),
+                                  labelStyle: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
                                   floatingLabelBehavior:
@@ -240,59 +238,57 @@ class _LoginState extends State<Login> {
                           ),
                         ],
                       ),
-                    )),
-                if (showError)
-                  const Text(
-                    '¡Usuario o contraseña incorrectos!',
-                    style: TextStyle(color: Colors.red),
-                    textAlign: TextAlign.center,
-                  ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
-                  child: Center(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(254, 255, 224, 1),
-                        elevation: 5,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              20), // Ajusta el radio para hacer el borde más redondeado
-                        ),
-                        minimumSize: const Size(180, 50),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          showError =
-                              false; // Reiniciar el estado del mensaje de error
-                        });
-                        if (_formKey.currentState!.validate()) {
-                          // Navigate the user to the Home page
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomePage()),
-                          );
-                        } else {
-                          setState(() {
-                            showError = true; // Mostrar el mensaje de error
-                          });
-                          /*ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content:
-                                    Text('Usuario o contraseña incorrecta!')),
-                          );*/
-                        }
-                      },
-                      child: const Text('INGRESAR',
-                          style: TextStyle(fontSize: 15, color: Colors.black)),
                     ),
                   ),
-                ),
-              ],
+                  if (showError)
+                    const Text(
+                      '¡Usuario o contraseña incorrectos!',
+                      style: TextStyle(color: Colors.red),
+                      textAlign: TextAlign.center,
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8, vertical: 16.0),
+                    child: Center(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(254, 255, 224, 1),
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          minimumSize: const Size(180, 50),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            showError = false;
+                          });
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomePage(),
+                              ),
+                            );
+                          } else {
+                            setState(() {
+                              showError = true;
+                            });
+                          }
+                        },
+                        child: const Text(
+                          'INGRESAR',
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ]),
+          ],
+        ),
       ),
     );
   }
