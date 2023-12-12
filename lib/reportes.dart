@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
-import 'package:ruta_sdg/plan.dart';
-import 'package:ruta_sdg/promocion.dart';
-import 'package:ruta_sdg/recuperacion.dart';
-import 'package:ruta_sdg/seguimiento.dart';
-
 import 'package:ruta_sdg/notificaciones.dart';
-import 'package:ruta_sdg/reportes.dart';
+import 'package:ruta_sdg/plan.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,20 +18,20 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 209, 200, 224)),
         useMaterial3: true,
       ),
-      home: const MyPlanDiarioPage(title: ""),
+      home: const ReportePage(title: ""),
     );
   }
 }
 
-class MyPlanDiarioPage extends StatefulWidget {
-  const MyPlanDiarioPage({super.key, required this.title});
+class ReportePage extends StatefulWidget {
+  const ReportePage({super.key, required this.title});
   final String title;
 
   @override
-  State<MyPlanDiarioPage> createState() => _MyPlanDiarioPageState();
+  State<ReportePage> createState() => _ReportePageState();
 }
 
-class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
+class _ReportePageState extends State<ReportePage> {
   Widget _bottomAction(
       String label, IconData icon, Color iconColor, double iconSize) {
     return InkWell(
@@ -114,7 +109,7 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
         body: Column(
           children: [
             Container(
-              height: 125,
+              height: 50,
               padding: const EdgeInsets.only(
                 left: 20,
                 right: 5,
@@ -158,101 +153,116 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
                           ),
                         ],
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(24),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
-                              spreadRadius: 2,
-                              blurRadius: 3,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: const Text(
-                          "PLAN DEL DIA",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
                     ],
                   ),
-                  Expanded(
-                    child: Container(
-                      width: 80.0,
-                      height: 80.0,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          FontAwesomeIcons.user,
-                          color: Color.fromARGB(255, 0, 76, 128),
-                          size: 60.0,
-                        ),
-                      ),
-                    ),
-                  )
                 ],
               ),
             ),
-            // Reemplaza con tu texto deseado
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PromocionPage()),
-                );
-              },
-              child: const CustomTextContainer(
-                text: "PROMOCIÓN",
-                leftIcon: FontAwesomeIcons.bullhorn,
-                shadowColor: Colors.orange,
-              ),
-            ),
-
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const SeguimientoPage()),
-                );
-              },
-              child: const CustomTextContainer(
-                text: "SEGUIMIENTO",
-                leftIcon: FontAwesomeIcons.fileCircleCheck,
-                shadowColor: Color.fromARGB(255, 4, 58, 6),
-              ),
-            ),
-
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RecuperacionPage()),
-                );
-              },
-              child: const CustomTextContainer(
-                text: "RECUPERACIÓN",
-                leftIcon: FontAwesomeIcons.wallet,
-                shadowColor: Color.fromARGB(255, 114, 175, 76),
-              ),
-            ),
-            //
+            const FechaSelector(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class FechaSelector extends StatefulWidget {
+  const FechaSelector({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _FechaSelectorState createState() => _FechaSelectorState();
+}
+
+class _FechaSelectorState extends State<FechaSelector> {
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = (await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2022),
+      lastDate: DateTime(2024),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor:
+                const Color.fromARGB(255, 4, 56, 99), // Define el color azul
+            hintColor: const Color.fromARGB(
+                255, 140, 178, 210), // Define el color azul
+            colorScheme: const ColorScheme.light(
+              primary: Color.fromARGB(255, 4, 56, 99), // Define el color azul
+            ),
+            buttonTheme:
+                const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    ))!;
+    if (picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Text(
+                "Fecha  :  ",
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => _selectDate(context),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.calendar_today,
+                      color: Color.fromARGB(255, 4, 56, 99),
+                    ),
+                    const SizedBox(width: 8),
+                    Container(
+                      height: 24,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                      padding: const EdgeInsets.all(0.0),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "${selectedDate.toLocal()}".split(' ')[0],
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            "Hoja de ruta generada :  ",
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }
