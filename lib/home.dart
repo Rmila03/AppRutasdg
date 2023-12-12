@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import '/locations.dart' as locations;
+
+import 'package:ruta_sdg/notificaciones.dart';
+import 'package:ruta_sdg/reportes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -46,6 +50,24 @@ class MapScreen extends State {
             MaterialPageRoute(builder: (context) => const HomePage()),
           );
         }
+        if (label == "Notificaciones") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const NotificacionPage(
+                      title: '',
+                    )),
+          );
+        }
+        if (label == "Reportes") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ReportePage(
+                      title: '',
+                    )),
+          );
+        }
       },
       child: Column(
         children: [
@@ -76,7 +98,7 @@ class MapScreen extends State {
           children: <Widget>[
             _bottomAction("Inicio", FontAwesomeIcons.house,
                 const Color.fromARGB(255, 4, 54, 95), 20.0),
-            _bottomAction("Notificaciones", FontAwesomeIcons.bell,
+            _bottomAction("Notificaciones", FontAwesomeIcons.solidBell,
                 const Color.fromARGB(255, 4, 54, 95), 20.0),
             _bottomAction("Reportes", FontAwesomeIcons.newspaper,
                 const Color.fromARGB(255, 4, 54, 95), 20.0),
@@ -94,14 +116,14 @@ class MapScreen extends State {
         body: Column(
           children: [
             Container(
-              height: 140,
+              height: 135,
               padding: const EdgeInsets.only(
                 left: 20,
                 right: 5,
               ),
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(30),
+                  bottomRight: Radius.zero,
                 ),
                 color: Color.fromARGB(255, 0, 76, 128),
               ),

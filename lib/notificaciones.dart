@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import 'package:ruta_sdg/home.dart';
-import 'package:ruta_sdg/promocion.dart';
-import 'package:ruta_sdg/recuperacion.dart';
-import 'package:ruta_sdg/seguimiento.dart';
-
-import 'package:ruta_sdg/notificaciones.dart';
 import 'package:ruta_sdg/reportes.dart';
 
 void main() {
@@ -23,20 +18,20 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 209, 200, 224)),
         useMaterial3: true,
       ),
-      home: const MyPlanDiarioPage(title: ""),
+      home: const NotificacionPage(title: ""),
     );
   }
 }
 
-class MyPlanDiarioPage extends StatefulWidget {
-  const MyPlanDiarioPage({super.key, required this.title});
+class NotificacionPage extends StatefulWidget {
+  const NotificacionPage({super.key, required this.title});
   final String title;
 
   @override
-  State<MyPlanDiarioPage> createState() => _MyPlanDiarioPageState();
+  State<NotificacionPage> createState() => _NotificacionPageState();
 }
 
-class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
+class _NotificacionPageState extends State<NotificacionPage> {
   Widget _bottomAction(
       String label, IconData icon, Color iconColor, double iconSize) {
     return InkWell(
@@ -114,7 +109,7 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
         body: Column(
           children: [
             Container(
-              height: 125,
+              height: 50,
               padding: const EdgeInsets.only(
                 left: 20,
                 right: 5,
@@ -158,105 +153,89 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
                           ),
                         ],
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(24),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
-                              spreadRadius: 2,
-                              blurRadius: 3,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: const Text(
-                          "PLAN DEL DIA",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
                     ],
                   ),
-                  Expanded(
-                    child: Container(
-                      width: 80.0,
-                      height: 80.0,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          FontAwesomeIcons.user,
-                          color: Color.fromARGB(255, 0, 76, 128),
-                          size: 60.0,
-                        ),
-                      ),
-                    ),
-                  )
                 ],
               ),
             ),
-            // Reemplaza con tu texto deseado
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PromocionPage()),
+            //Container(child: Column(children: <Widget>[_list()])),
+            Expanded(
+                child: ListView.separated(
+              itemCount: 15,
+              itemBuilder: (BuildContext context, int index) =>
+                  _item("Alerta de retraso ", "Justino Ferro Alvarez", 15),
+              separatorBuilder: (BuildContext context, int index) {
+                return Container(
+                  color:
+                      const Color.fromARGB(255, 45, 49, 62).withOpacity(0.15),
+                  height: 8.0,
                 );
               },
-              child: const CustomTextContainer(
-                text: "PROMOCIÓN",
-                leftIcon: FontAwesomeIcons.bullhorn,
-                shadowColor: Colors.orange,
-              ),
-            ),
 
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const SeguimientoPage()),
-                );
-              },
-              child: const CustomTextContainer(
-                text: "SEGUIMIENTO",
-                leftIcon: FontAwesomeIcons.fileCircleCheck,
-                shadowColor: Color.fromARGB(255, 4, 58, 6),
-              ),
-            ),
-
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RecuperacionPage()),
-                );
-              },
-              child: const CustomTextContainer(
-                text: "RECUPERACIÓN",
-                leftIcon: FontAwesomeIcons.wallet,
-                shadowColor: Color.fromARGB(255, 114, 175, 76),
-              ),
-            ),
-            //
+              /*children: <Widget>[
+                _item("Alerta de retraso 1", "Justino Ferro Alvarez", 15),
+                _item("Alerta de retraso 2", "Stiward Maldonado", 1),
+                _item("Alerta de retraso 3", "Ruth Milagros Arce Quispe", 4),
+                _item("Alerta de retraso 4", "Yolmy Milagros Cahuata Lavilla", 2),
+                _item("Alerta de retraso 5", "Yanet Cusi Quispe", 5),
+                _item("Alerta de retraso 6", "Glina de la Flor Puma Huamani", 7),
+                _item("Alerta de retraso 7", "Yerson Chirinos Vilca", 8)
+              ],*/
+            ))
           ],
         ),
       ),
     );
   }
 }
+
+Widget _item(String nameAlert, String nameSocio, int dias) {
+  return ListTile(
+    leading: const Icon(
+      FontAwesomeIcons.bell,
+      size: 25.0,
+      color: Colors.red,
+    ),
+    title: Text(
+      nameAlert,
+      style: const TextStyle(
+          fontWeight: FontWeight.bold, fontSize: 14.0, color: Colors.black),
+    ),
+    subtitle: Text(
+      nameSocio,
+      style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 12.0,
+          color: Color.fromARGB(255, 7, 62, 90)),
+    ),
+    trailing: Container(
+      decoration: BoxDecoration(
+        color: Colors.red.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          "$dias dias",
+          style: const TextStyle(
+              color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16.0),
+        ),
+      ),
+    ),
+  );
+}
+
+/*Widget _list() {
+  return Expanded(
+      child: ListView(
+    children: <Widget>[
+      _item(FontAwesomeIcons.bell, "Alerta 1", 3),
+      _item(FontAwesomeIcons.bell, "Alerta 2", 3),
+      _item(FontAwesomeIcons.bell, "Alerta 3", 3),
+      _item(FontAwesomeIcons.bell, "Alerta 4", 3)
+    ],
+  ));
+}*/
 
 class MapButton extends StatelessWidget {
   final String name;
