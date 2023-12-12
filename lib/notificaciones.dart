@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import 'package:ruta_sdg/plan.dart';
+import 'package:ruta_sdg/reportes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,6 +48,15 @@ class _NotificacionPageState extends State<NotificacionPage> {
             context,
             MaterialPageRoute(
                 builder: (context) => const NotificacionPage(
+                      title: '',
+                    )),
+          );
+        }
+        if (label == "Reportes") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ReportePage(
                       title: '',
                     )),
           );

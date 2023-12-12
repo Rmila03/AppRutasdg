@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruta_sdg/notificaciones.dart';
+import 'package:ruta_sdg/reportes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -60,6 +61,15 @@ class MapScreen extends State {
             context,
             MaterialPageRoute(
                 builder: (context) => const NotificacionPage(
+                      title: '',
+                    )),
+          );
+        }
+        if (label == "Reportes") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ReportePage(
                       title: '',
                     )),
           );
