@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
-import 'package:ruta_sdg/promocion_socio.dart';
 import 'package:ruta_sdg/views/promocion.dart';
 import 'package:ruta_sdg/views/recuperacion.dart';
 import 'package:ruta_sdg/views/seguimiento.dart';
