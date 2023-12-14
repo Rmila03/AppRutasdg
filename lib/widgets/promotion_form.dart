@@ -96,7 +96,7 @@ class PromotionFormState extends State<PromotionForm> {
                 ],
               ),
               //DropdownButtonFormField(items: , onChanged: onChanged),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               ElevatedButton(
@@ -125,10 +125,13 @@ class TextForm extends StatelessWidget {
     super.key,
     required GlobalKey<FormState> formKey,
     required this.label,
+    // ignore: non_constant_identifier_names
     required this.InputType,
   }) : _formKey = formKey;
   final String label;
+  // ignore: non_constant_identifier_names
   final TextInputType InputType;
+  // ignore: unused_field
   final GlobalKey<FormState> _formKey;
 
   @override

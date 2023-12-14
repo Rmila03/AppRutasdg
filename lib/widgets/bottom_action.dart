@@ -3,6 +3,7 @@ import 'package:ruta_sdg/views/home.dart';
 import 'package:ruta_sdg/views/notificaciones.dart';
 import 'package:ruta_sdg/views/reportes.dart';
 
+// ignore: must_be_immutable
 class BottomAction extends StatelessWidget {
   String label;
   IconData icon;

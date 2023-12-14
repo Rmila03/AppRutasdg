@@ -210,53 +210,90 @@ class CustomTextContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 270.0,
-      height: 50.0,
-      margin: const EdgeInsets.all(24),
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 255, 255, 255),
-        borderRadius: BorderRadius.zero,
-        boxShadow: [
-          BoxShadow(
-            color: shadowColor,
-            spreadRadius: 2,
-            blurRadius: 3,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Icon(
-                leftIcon,
-                color: Colors.black,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                text,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontWeight: FontWeight.bold,
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      child: Center(
+        child: Row(
+          mainAxisSize: MainAxisSize.min, // Establecer mainAxisSize en min
+          children: [
+            Container(
+              width: 15.0,
+              height: 50.0,
+              decoration: BoxDecoration(
+                color: shadowColor,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(
+                      10.0), // Redondear la esquina superior derecha
+                  bottomLeft: Radius.circular(
+                      10.0), // Redondear la esquina inferior derecha
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: shadowColor,
+                    spreadRadius: 1,
+                    blurRadius: 1.5,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
               ),
-            ],
-          ),
-          Row(
-            children: [
-              Icon(
-                rightIcon,
-                color: Colors.black,
+            ),
+            Container(
+              width: 250.0,
+              height: 50.0,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 2,
               ),
-              const SizedBox(width: 8),
-            ],
-          ),
-        ],
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 255, 255, 255),
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(
+                      10.0), // Redondear la esquina superor derecha
+                  bottomRight: Radius.circular(
+                      10.0), // Redondear la esquina inferior derecha
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: shadowColor,
+                    spreadRadius: 1,
+                    blurRadius: 1.5,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        leftIcon,
+                        color: Colors.black,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        text,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        rightIcon,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

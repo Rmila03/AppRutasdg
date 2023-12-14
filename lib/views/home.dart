@@ -193,7 +193,7 @@ class MapScreen extends State {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
               width: 10,
             ),
