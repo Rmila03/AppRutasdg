@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
-import 'package:ruta_sdg/home.dart';
-import 'package:ruta_sdg/reportes.dart';
-
-void main() {
-  runApp(const MyApp());
-}
+import 'package:ruta_sdg/widgets/header.dart';
+import 'package:ruta_sdg/widgets/tabbar.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -32,71 +28,11 @@ class NotificacionPage extends StatefulWidget {
 }
 
 class _NotificacionPageState extends State<NotificacionPage> {
-  Widget _bottomAction(
-      String label, IconData icon, Color iconColor, double iconSize) {
-    return InkWell(
-      onTap: () {
-        // Lógica que se ejecuta al hacer clic en el ícono
-        if (label == "Inicio") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
-          );
-        }
-        if (label == "Notificaciones") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const NotificacionPage(
-                      title: '',
-                    )),
-          );
-        }
-        if (label == "Reportes") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const ReportePage(
-                      title: '',
-                    )),
-          );
-        }
-      },
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(3.0),
-            child: Icon(
-              icon,
-              color: iconColor,
-              size: iconSize,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(2.0),
-            child: Text(label),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            _bottomAction("Inicio", FontAwesomeIcons.house,
-                const Color.fromARGB(255, 4, 54, 95), 20.0),
-            _bottomAction("Notificaciones", FontAwesomeIcons.solidBell,
-                const Color.fromARGB(255, 4, 54, 95), 20.0),
-            _bottomAction("Reportes", FontAwesomeIcons.newspaper,
-                const Color.fromARGB(255, 4, 54, 95), 20.0),
-          ],
-        ),
+      bottomNavigationBar: const BottomAppBar(
+        child: TabBarBottom(),
       ),
       body: _body(),
     );
@@ -120,39 +56,11 @@ class _NotificacionPageState extends State<NotificacionPage> {
                 ),
                 color: Color.fromARGB(255, 0, 76, 128),
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Column(
                     children: [
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.format_list_bulleted,
-                            color: Colors.white,
-                            size: 30.0,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 20,
-                              right: 8,
-                            ),
-                            child: Image.asset(
-                              'assets/logo-sdg.png',
-                              width: 45,
-                              height: 45,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const Text(
-                            'RUTASDG',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
+                      Header(),
                     ],
                   ),
                 ],

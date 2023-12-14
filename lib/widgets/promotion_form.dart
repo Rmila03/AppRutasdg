@@ -95,6 +95,7 @@ class PromotionFormState extends State<PromotionForm> {
                   ),
                 ],
               ),
+              //DropdownButtonFormField(items: , onChanged: onChanged),
               ElevatedButton(
                 onPressed: () {
                   // Validate returns true if the form is valid, or false otherwise.

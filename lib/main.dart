@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/home.dart';
+import 'package:ruta_sdg/views/home.dart';
 
 void main() {
   runApp(const MyApp());

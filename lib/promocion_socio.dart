@@ -1,77 +1,100 @@
 import 'package:flutter/material.dart';
+import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/promotion_form.dart';
+import 'package:ruta_sdg/widgets/tabbar.dart';
 
-class Promotion extends StatefulWidget {
-  const Promotion({super.key});
+class PromocionSocio extends StatefulWidget {
+  const PromocionSocio({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  PromotionState createState() => PromotionState();
+  PromocionSocioState createState() => PromocionSocioState();
 }
 
-class PromotionState extends State<Promotion> {
+class PromocionSocioState extends State<PromocionSocio> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      /*appBar: AppBar(
-          title: Text('Home'),
-      ),*/
-      //drawer: NavigationDrawer(),
-      body: SafeArea(
-        child: SingleChildScrollView(
+    return SafeArea(
+      child: Scaffold(
+        /*appBar: AppBar(
+            title: Text('Home'),
+        ),*/
+        //drawer: NavigationDrawer(),
+        resizeToAvoidBottomInset: false,
+        body: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                height: 100,
+                height: 60,
                 padding: const EdgeInsets.only(
+                  left: 20,
                   right: 5,
                 ),
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 0, 76, 128),
                 ),
-                child: const Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Tab(
-                    colorLeft: Color(0xffef8702),
-                    name: 'PROMOCIÓN',
-                  ),
-                ),
+                child: const Header(),
               ),
-              Container(
-                margin: const EdgeInsets.all(24),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      blurRadius: 2,
-                      offset: const Offset(6, 0), // Sombra hacia la derecha
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 70,
+                      padding: const EdgeInsets.only(
+                        right: 5,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 0, 76, 128),
+                      ),
+                      child: const Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Tab(
+                          colorLeft: Color(0xffef8702),
+                          name: 'PROMOCIÓN',
+                        ),
+                      ),
                     ),
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      blurRadius: 2,
-                      offset: const Offset(0, 6), // Sombra hacia abajo
+                    Container(
+                      margin: const EdgeInsets.all(24),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 25, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            blurRadius: 2,
+                            offset:
+                                const Offset(6, 0), // Sombra hacia la derecha
+                          ),
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            blurRadius: 2,
+                            offset: const Offset(0, 6), // Sombra hacia abajo
+                          ),
+                        ],
+                      ),
+                      child: const Text(
+                        "DATOS DEL SOCIO",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
+                    const PromotionForm(),
                   ],
                 ),
-                child: const Text(
-                  "DATOS DEL SOCIO",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
               ),
-              const PromotionForm(),
             ],
           ),
         ),
+        bottomNavigationBar: const BottomAppBar(
+          child: TabBarBottom(),
+        ),
       ),
-      bottomNavigationBar: BottomAppBar(),
     );
   }
 }
