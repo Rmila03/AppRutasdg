@@ -88,7 +88,7 @@ Future<Locations> getGoogleOffices() async {
       return Locations.fromJson(json.decode(response.body));
     }
   } catch (e) {
-    print(e);
+    //print(e);
   }
 
   // Fallback for when the above HTTP request fails.
