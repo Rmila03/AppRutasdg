@@ -135,12 +135,12 @@ class PromotionFormState extends State<PromotionForm> {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: Container(
                         width: 20,
                         height: 5,
                         color: Colors.amber,
-                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
                       ),
                     ),
                   )
@@ -174,9 +174,9 @@ class PromotionFormState extends State<PromotionForm> {
                   ),
                 ),
               ),
-              TextFormResult(label: "Pago Mensual:"),
-              TextFormResult(label: "Primera fecha de pago:"),
-              TextFormResult(label: "Última fehca de pago"),
+              const TextFormResult(label: "Pago Mensual:"),
+              const TextFormResult(label: "Primera fecha de pago:"),
+              const TextFormResult(label: "Última fehca de pago"),
               ElevatedButton(
                 onPressed: () {
                   // Validate returns true if the form is valid, or false otherwise.
@@ -211,7 +211,7 @@ class TextFormResult extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
         children: [
-          Container(
+          SizedBox(
             width: 150,
             child: Text(
               label,
@@ -357,7 +357,7 @@ class CustomDropdownState extends State<CustomDropdown> {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
-          Container(
+          SizedBox(
             width: 140,
             child: Text(
               widget.label,
