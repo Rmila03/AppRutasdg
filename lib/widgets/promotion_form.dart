@@ -96,7 +96,6 @@ class PromotionFormState extends State<PromotionForm> {
                 ],
               ),
               //DropdownButtonFormField(items: , onChanged: onChanged),
-<<<<<<< HEAD
               const CustomDropdown(
                 items: ['', 'Socio 1', 'Socio 2', 'Socio 3'],
                 label: "Tipo de Socio:",
@@ -124,8 +123,6 @@ class PromotionFormState extends State<PromotionForm> {
                   ),
                 ),
               ),
-=======
->>>>>>> 6e36b4dcccd90c47f3a5441e1ad58777bb66d452
               const SizedBox(
                 height: 20,
               ),
