@@ -1,11 +1,9 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:ruta_sdg/promocion_socio.dart';
 import 'package:ruta_sdg/widgets/header.dart';
-import 'package:ruta_sdg/widgets/promotion_form.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 
 class PromocionPage extends StatefulWidget {
