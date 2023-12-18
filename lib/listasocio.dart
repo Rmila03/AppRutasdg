@@ -4,6 +4,7 @@ import 'package:ruta_sdg/widgets/tabbar.dart';
 import "package:ruta_sdg/widgets/promotion_form.dart";
 import "package:ruta_sdg/widgets/seguimiento_form.dart";
 import "package:ruta_sdg/widgets/recuperacion_form.dart";
+import "package:ruta_sdg/widgets/nuevo_form.dart";
 
 class ListaSocio extends StatefulWidget {
   final Color tabColorLeft;
@@ -33,6 +34,8 @@ class ListaSocioState extends State<ListaSocio> {
       CasoFormWidget = const SeguimientoForm();
     } else if (widget.tabName == 'RECUPERACIÓN') {
       CasoFormWidget = const RecuperacionForm();
+    } else if (widget.tabName == 'NUEVO') {
+      CasoFormWidget = const NuevoForm();
     }
   }
 

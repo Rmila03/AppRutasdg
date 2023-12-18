@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruta_sdg/widgets/bottom_action.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 import '../mapa/locations.dart' as locations;
+import 'package:ruta_sdg/views/promocion.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -47,6 +48,44 @@ class MapScreen extends State {
     );
   }
 
+  Widget _bottomActionIcon(IconData icon) {
+    return InkWell(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Icon(
+          icon,
+          color: Colors.white,
+          size: 30.0,
+        ),
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return const PromocionPage();
+            },
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              const begin = Offset(-1.0, 0.0);
+              const end = Offset.zero;
+              const curve = Curves.easeInOutCubic;
+
+              var tween =
+                  Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+              var offsetAnimation = animation.drive(tween);
+
+              return SlideTransition(
+                position: offsetAnimation,
+                child: child,
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
   Widget _body() {
     return SafeArea(
       child: Scaffold(
@@ -71,11 +110,12 @@ class MapScreen extends State {
                     children: [
                       Row(
                         children: [
-                          const Icon(
+                          _bottomActionIcon(Icons.format_list_bulleted),
+                          /*const Icon(
                             Icons.format_list_bulleted,
                             color: Colors.white,
                             size: 30.0,
-                          ),
+                          ),*/
                           Padding(
                             padding: const EdgeInsets.only(
                               left: 20,
@@ -163,32 +203,32 @@ class MapScreen extends State {
             const SizedBox(
               height: 15,
             ),
-            Row(
+            const Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 BottomAction(
                   label: "Promoción",
                   icon: FontAwesomeIcons.bagShopping,
-                  iconColor: const Color.fromARGB(255, 4, 54, 95),
+                  iconColor: Color.fromARGB(255, 4, 54, 95),
                   iconSize: 30.0,
                 ),
                 BottomAction(
                   label: "Seguimiento",
                   icon: FontAwesomeIcons.bagShopping,
-                  iconColor: const Color.fromARGB(255, 4, 54, 95),
+                  iconColor: Color.fromARGB(255, 4, 54, 95),
                   iconSize: 30.0,
                 ),
                 BottomAction(
                   label: "Recuperación",
                   icon: FontAwesomeIcons.bagShopping,
-                  iconColor: const Color.fromARGB(255, 4, 54, 95),
+                  iconColor: Color.fromARGB(255, 4, 54, 95),
                   iconSize: 30.0,
                 ),
                 BottomAction(
                   label: "Nuevo",
                   icon: FontAwesomeIcons.bagShopping,
-                  iconColor: const Color.fromARGB(255, 4, 54, 95),
+                  iconColor: Color.fromARGB(255, 4, 54, 95),
                   iconSize: 30.0,
                 ),
               ],

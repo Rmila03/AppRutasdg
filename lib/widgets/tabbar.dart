@@ -9,26 +9,26 @@ class TabBarBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         BottomAction(
           label: "Inicio",
           icon: FontAwesomeIcons.house,
-          iconColor: const Color.fromARGB(255, 4, 54, 95),
+          iconColor: Color.fromARGB(255, 4, 54, 95),
           iconSize: 20.0,
         ),
         BottomAction(
           label: "Notificaciones",
           icon: FontAwesomeIcons.solidBell,
-          iconColor: const Color.fromARGB(255, 4, 54, 95),
+          iconColor: Color.fromARGB(255, 4, 54, 95),
           iconSize: 20.0,
         ),
         BottomAction(
           label: "Reportes",
           icon: FontAwesomeIcons.newspaper,
-          iconColor: const Color.fromARGB(255, 4, 54, 95),
+          iconColor: Color.fromARGB(255, 4, 54, 95),
           iconSize: 20.0,
         ),
       ],

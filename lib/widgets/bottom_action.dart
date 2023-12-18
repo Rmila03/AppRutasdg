@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:ruta_sdg/views/home.dart';
 import 'package:ruta_sdg/views/notificaciones.dart';
 import 'package:ruta_sdg/views/reportes.dart';
+import 'package:ruta_sdg/listasocio.dart';
 
-// ignore: must_be_immutable
 class BottomAction extends StatelessWidget {
-  String label;
-  IconData icon;
-  Color iconColor;
-  double iconSize;
-  BottomAction({
-    super.key,
+  final String label;
+  final IconData icon;
+  final Color iconColor;
+  final double iconSize;
+
+  const BottomAction({
+    Key? key,
     required this.label,
     required this.icon,
     required this.iconColor,
     required this.iconSize,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,23 +28,29 @@ class BottomAction extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => const HomePage()),
           );
-        }
-        if (label == "Notificaciones") {
+        } else if (label == "Notificaciones") {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const NotificacionPage(
-                      title: '',
-                    )),
+              builder: (context) => const NotificacionPage(title: ''),
+            ),
           );
-        }
-        if (label == "Reportes") {
+        } else if (label == "Reportes") {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const ReportePage(
-                      title: '',
-                    )),
+              builder: (context) => const ReportePage(title: ''),
+            ),
+          );
+        } else if (label == "Nuevo") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ListaSocio(
+                tabColorLeft: Colors.orange,
+                tabName: 'NUEVO',
+              ),
+            ),
           );
         }
       },
