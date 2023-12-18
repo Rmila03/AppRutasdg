@@ -37,6 +37,8 @@ class _PromocionPageState extends State<PromocionPage> {
                   _buildTab("Promoción"),
                   _buildTab("Ampliación"),
                 ],
+                labelColor: const Color.fromARGB(255, 0, 76, 128),
+                indicatorColor: const Color.fromARGB(255, 0, 76, 128),
               ),
               Expanded(
                 child: TabBarView(
