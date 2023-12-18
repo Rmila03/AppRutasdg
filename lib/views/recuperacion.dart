@@ -95,7 +95,6 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
               ),
             ),
             // Agrega aquí el contenido específico de la pantalla de Recuperación
-            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Card(

@@ -170,7 +170,7 @@ class _PromocionPageState extends State<PromocionPage> {
 
   Widget _buildHeader() {
     return Container(
-      height: 110,
+      height: 125,
       padding: const EdgeInsets.only(left: 20, right: 5),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -179,10 +179,12 @@ class _PromocionPageState extends State<PromocionPage> {
         color: Color.fromARGB(255, 0, 76, 128),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Header(),
           Container(
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.only(
+                top: 10, bottom: 5), // Ajusta el margen inferior aquí
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 2),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 255, 255, 255),

@@ -68,9 +68,15 @@ class ListaSocioState extends State<ListaSocio> {
                       ),
                       child: Align(
                         alignment: Alignment.bottomLeft,
-                        child: Tab(
-                          colorLeft: widget.tabColorLeft,
-                          name: widget.tabName,
+                        child: GestureDetector(
+                          onTap: () {
+                            // Navega de vuelta a TabNamePage() cuando se presiona el contenedor
+                            Navigator.pop(context);
+                          },
+                          child: Tab(
+                            colorLeft: widget.tabColorLeft,
+                            name: widget.tabName,
+                          ),
                         ),
                       ),
                     ),
