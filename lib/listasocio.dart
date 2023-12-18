@@ -1,31 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/widgets/header.dart';
-import 'package:ruta_sdg/widgets/promotion_form.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
+import "package:ruta_sdg/widgets/promotion_form.dart";
+import "package:ruta_sdg/widgets/seguimiento_form.dart";
+import "package:ruta_sdg/widgets/recuperacion_form.dart";
 
-class PromocionSocio extends StatefulWidget {
-  const PromocionSocio({super.key});
+class ListaSocio extends StatefulWidget {
+  final Color tabColorLeft;
+  final String tabName;
+
+  const ListaSocio({
+    Key? key,
+    required this.tabColorLeft,
+    required this.tabName,
+  }) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  PromocionSocioState createState() => PromocionSocioState();
+  ListaSocioState createState() => ListaSocioState();
 }
 
-class PromocionSocioState extends State<PromocionSocio> {
+class ListaSocioState extends State<ListaSocio> {
+  // ignore: non_constant_identifier_names
+  late Widget CasoFormWidget; // Declara la variable para la redirección
+
+  @override
+  void initState() {
+    super.initState();
+    // Asigna la redirección según el valor de tabName
+    if (widget.tabName == 'PROMOCIÓN') {
+      CasoFormWidget = const PromotionForm();
+    } else if (widget.tabName == 'SEGUIMIENTO') {
+      CasoFormWidget = const SeguimientoForm();
+    } else if (widget.tabName == 'RECUPERACIÓN') {
+      CasoFormWidget = const RecuperacionForm();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        /*appBar: AppBar(
-            title: Text('Home'),
-        ),*/
-        //drawer: NavigationDrawer(),
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                height: 60,
+                height: 50,
                 padding: const EdgeInsets.only(
                   left: 20,
                   right: 5,
@@ -39,18 +59,18 @@ class PromocionSocioState extends State<PromocionSocio> {
                 child: Column(
                   children: [
                     Container(
-                      height: 70,
+                      height: 45,
                       padding: const EdgeInsets.only(
                         right: 5,
                       ),
                       decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 0, 76, 128),
                       ),
-                      child: const Align(
+                      child: Align(
                         alignment: Alignment.bottomLeft,
                         child: Tab(
-                          colorLeft: Color(0xffef8702),
-                          name: 'PROMOCIÓN',
+                          colorLeft: widget.tabColorLeft,
+                          name: widget.tabName,
                         ),
                       ),
                     ),
@@ -65,13 +85,12 @@ class PromocionSocioState extends State<PromocionSocio> {
                           BoxShadow(
                             color: Colors.black.withOpacity(0.3),
                             blurRadius: 2,
-                            offset:
-                                const Offset(6, 0), // Sombra hacia la derecha
+                            offset: const Offset(6, 0),
                           ),
                           BoxShadow(
                             color: Colors.black.withOpacity(0.3),
                             blurRadius: 2,
-                            offset: const Offset(0, 6), // Sombra hacia abajo
+                            offset: const Offset(0, 6),
                           ),
                         ],
                       ),
@@ -84,7 +103,7 @@ class PromocionSocioState extends State<PromocionSocio> {
                         ),
                       ),
                     ),
-                    const PromotionForm(),
+                    CasoFormWidget,
                   ],
                 ),
               ),
@@ -102,11 +121,12 @@ class PromocionSocioState extends State<PromocionSocio> {
 class Tab extends StatelessWidget {
   final Color colorLeft;
   final String name;
+
   const Tab({
-    super.key,
+    Key? key,
     required this.colorLeft,
     required this.name,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -126,13 +146,6 @@ class Tab extends StatelessWidget {
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(20),
             ),
-            /*boxShadow: [
-              BoxShadow(
-                color: Color(0x3f000000),
-                offset: Offset(0, 4),
-                blurRadius: 2,
-              )
-            ],*/
           ),
           child: Text(
             name,

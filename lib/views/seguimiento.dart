@@ -1,9 +1,9 @@
 import 'dart:core';
-
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
+import 'package:ruta_sdg/listasocio.dart';
 
 class SeguimientoPage extends StatefulWidget {
   const SeguimientoPage({Key? key}) : super(key: key);
@@ -131,7 +131,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                     "CARTERA DE SEGUIMIENTO",
                     style: TextStyle(
                       fontSize: 18,
-                      color: Colors.lightGreen,
+                      color: Color.fromARGB(255, 4, 58, 6),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -145,7 +145,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               child: Card(
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(
-                      color: Colors.white, width: 2.0), // Borde blanco
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                      width: 2.0), // Borde blanco
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 color: const Color.fromARGB(255, 255, 255, 255),
@@ -155,8 +156,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                   width: 600,
                   child: SingleChildScrollView(
                     child: DataTable(
-                      // ignore: deprecated_member_use
-                      dataRowHeight: 50.0,
+                      showCheckboxColumn: false,
+                      //dataRowHeight: 50.0,
                       columnSpacing: 7.0,
                       columns: const [
                         DataColumn(label: Text('N°')),
@@ -165,12 +166,27 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                         DataColumn(label: Text('')),
                       ],
                       rows: users.map((user) {
-                        return DataRow(cells: [
-                          DataCell(Text(user.number)),
-                          DataCell(Text(user.dni)),
-                          DataCell(Text(user.name)),
-                          const DataCell(Icon(Icons.check)),
-                        ]);
+                        return DataRow(
+                          onSelectChanged: (isSelected) {
+                            if (isSelected != null && isSelected) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ListaSocio(
+                                          tabColorLeft:
+                                              Color.fromARGB(255, 4, 58, 6),
+                                          tabName: 'SEGUIMIENTO',
+                                        )),
+                              );
+                            }
+                          },
+                          cells: [
+                            DataCell(Text(user.number)),
+                            DataCell(Text(user.dni)),
+                            DataCell(Text(user.name)),
+                            const DataCell(Icon(Icons.check)),
+                          ],
+                        );
                       }).toList(),
                     ),
                   ),

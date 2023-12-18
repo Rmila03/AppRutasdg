@@ -2,7 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/plandia.dart';
-import 'package:ruta_sdg/promocion_socio.dart';
+import 'package:ruta_sdg/listasocio.dart';
 import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 
@@ -169,9 +169,10 @@ class _PromocionPageState extends State<PromocionPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PromocionSocio(),
-                                  ),
+                                      builder: (context) => const ListaSocio(
+                                            tabColorLeft: Colors.orange,
+                                            tabName: 'PROMOCIÓN',
+                                          )),
                                 );
                               }
                             },

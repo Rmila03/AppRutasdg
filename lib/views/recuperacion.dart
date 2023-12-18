@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
+import 'package:ruta_sdg/listasocio.dart';
 
 class RecuperacionPage extends StatefulWidget {
   const RecuperacionPage({Key? key}) : super(key: key);
@@ -131,7 +132,7 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
                     "CARTERA DE RECUPERACIÓN",
                     style: TextStyle(
                       fontSize: 18,
-                      color: Colors.green,
+                      color: Color.fromARGB(255, 114, 175, 76),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -145,7 +146,8 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
               child: Card(
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(
-                      color: Colors.white, width: 2.0), // Borde blanco
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                      width: 2.0), // Borde blanco
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 color: const Color.fromARGB(255, 255, 255, 255),
@@ -155,8 +157,8 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
                   width: 600,
                   child: SingleChildScrollView(
                     child: DataTable(
-                      // ignore: deprecated_member_use
-                      dataRowHeight: 50.0,
+                      showCheckboxColumn: false,
+                      //dataRowHeight: 50.0,
                       columnSpacing: 7.0,
                       columns: const [
                         DataColumn(label: Text('N°')),
@@ -165,12 +167,27 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
                         DataColumn(label: Text('')),
                       ],
                       rows: users.map((user) {
-                        return DataRow(cells: [
-                          DataCell(Text(user.number)),
-                          DataCell(Text(user.dni)),
-                          DataCell(Text(user.name)),
-                          const DataCell(Icon(Icons.check)),
-                        ]);
+                        return DataRow(
+                          onSelectChanged: (isSelected) {
+                            if (isSelected != null && isSelected) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ListaSocio(
+                                          tabColorLeft:
+                                              Color.fromARGB(255, 114, 175, 76),
+                                          tabName: 'RECUPERACIÓN',
+                                        )),
+                              );
+                            }
+                          },
+                          cells: [
+                            DataCell(Text(user.number)),
+                            DataCell(Text(user.dni)),
+                            DataCell(Text(user.name)),
+                            const DataCell(Icon(Icons.check)),
+                          ],
+                        );
                       }).toList(),
                     ),
                   ),

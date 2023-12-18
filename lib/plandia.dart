@@ -222,9 +222,9 @@ class CustomTextContainer extends StatelessWidget {
                 color: shadowColor,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(
-                      10.0), // Redondear la esquina superior derecha
+                      5.0), // Redondear la esquina superior derecha
                   bottomLeft: Radius.circular(
-                      10.0), // Redondear la esquina inferior derecha
+                      5.0), // Redondear la esquina inferior derecha
                 ),
                 boxShadow: [
                   BoxShadow(
@@ -247,15 +247,15 @@ class CustomTextContainer extends StatelessWidget {
                 color: const Color.fromARGB(255, 255, 255, 255),
                 borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(
-                      10.0), // Redondear la esquina superor derecha
+                      5.0), // Redondear la esquina superor derecha
                   bottomRight: Radius.circular(
-                      10.0), // Redondear la esquina inferior derecha
+                      5.0), // Redondear la esquina inferior derecha
                 ),
                 boxShadow: [
                   BoxShadow(
                     color: shadowColor,
                     spreadRadius: 1,
-                    blurRadius: 1.5,
+                    blurRadius: 1,
                     offset: const Offset(0, 1),
                   ),
                 ],

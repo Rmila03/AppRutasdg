@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
-class PromotionForm extends StatefulWidget {
-  const PromotionForm({super.key});
+class SeguimientoForm extends StatefulWidget {
+  const SeguimientoForm({super.key});
 
   @override
-  PromotionFormState createState() {
-    return PromotionFormState();
+  SeguimientoFormState createState() {
+    return SeguimientoFormState();
   }
 }
 
-class PromotionFormState extends State<PromotionForm> {
+class SeguimientoFormState extends State<SeguimientoForm> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         child: Form(
           key: _formKey,
           child: Column(
@@ -112,71 +112,7 @@ class PromotionFormState extends State<PromotionForm> {
                 items: ['', 'Modalidad 1', 'Modalidad 2', 'Modalidad 3'],
                 label: "Modalidad:",
               ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Cálculo de Crédito",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color.fromARGB(255, 0, 76, 128),
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  const Expanded(
-                    child: InputTextForm(
-                      label: "Crédito total",
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Container(
-                        width: 20,
-                        height: 5,
-                        color: Colors.amber,
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const Row(
-                children: [
-                  Expanded(
-                    child: InputTextForm(
-                      label: "Plazo(meses)",
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40),
-                      child: InputTextForm(
-                        label: "Tasa de interés(%)",
-                        percentage: "%",
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Cálculo",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const TextFormResult(label: "Pago Mensual:"),
-              const TextFormResult(label: "Primera fecha de pago:"),
-              const TextFormResult(label: "Última fehca de pago"),
+
               ElevatedButton(
                 onPressed: () {
                   // Validate returns true if the form is valid, or false otherwise.
