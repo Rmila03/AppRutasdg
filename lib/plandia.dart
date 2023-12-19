@@ -3,7 +3,7 @@ import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import 'package:ruta_sdg/views/promocion.dart';
 import 'package:ruta_sdg/views/recuperacion.dart';
 import 'package:ruta_sdg/views/seguimiento.dart';
-import 'package:ruta_sdg/widgets/navigation_drawer.dart';
+import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 
 class MyApp extends StatelessWidget {
@@ -33,48 +33,11 @@ class MyPlanDiarioPage extends StatefulWidget {
 class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SafeArea(
-          child: Stack(
-            children: [
-              _body(),
-              Positioned(
-                top: 5,
-                left: 0,
-                right: 0,
-                child: AppBar(
-                  backgroundColor: const Color.fromARGB(255, 0, 76, 128),
-                  iconTheme: const IconThemeData(color: Colors.white),
-                  title: Row(
-                    children: [
-                      const Text(
-                        '               ',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      const SizedBox(width: 20),
-                      Image.asset(
-                        'assets/logo-sdg.png',
-                        height: 45,
-                        width: 45,
-                      ),
-                      const Text(
-                        'RUTASDG',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: const BottomAppBar(
-          child: TabBarBottom(),
-        ),
-        drawer: const menuDrawer(),
+    return Scaffold(
+      bottomNavigationBar: const BottomAppBar(
+        child: TabBarBottom(),
       ),
+      body: _body(),
     );
   }
 
@@ -85,7 +48,7 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
         body: Column(
           children: [
             Container(
-              height: 170, //header
+              height: 125,
               padding: const EdgeInsets.only(
                 left: 20,
                 right: 5,
@@ -98,39 +61,37 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
               ),
               child: Row(
                 children: [
-                  Transform.translate(
-                    offset: const Offset(
-                        0.0, 30.0), // Ajusta el valor en Y según sea necesario
-                    child: Container(
-                      margin: const EdgeInsets.all(24),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            spreadRadius: 2,
-                            blurRadius: 3,
-                            offset: const Offset(0, 3),
+                  Column(
+                    children: [
+                      const Header(),
+                      Container(
+                        margin: const EdgeInsets.all(24),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              spreadRadius: 2,
+                              blurRadius: 3,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: const Text(
+                          "PLAN DEL DIA",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontWeight: FontWeight.bold,
                           ),
-                        ],
-                      ),
-                      child: const Text(
-                        "PLAN DEL DIA",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
+                    ],
                   ),
                   Expanded(
-                      child: Transform.translate(
-                    offset: const Offset(
-                        0.0, 30.0), // Ajusta el valor en Y según sea necesario
                     child: Container(
                       width: 80.0,
                       height: 80.0,
@@ -146,71 +107,55 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
                         ),
                       ),
                     ),
-                  ))
+                  )
                 ],
               ),
             ),
             // Reemplaza con tu texto deseado
-            Transform.translate(
-              offset: const Offset(
-                  0.0, 40.0), // Ajusta el valor en Y según sea necesario
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PromocionPage(),
-                    ),
-                  );
-                },
-                child: const CustomTextContainer(
-                  text: "PROMOCIÓN",
-                  leftIcon: FontAwesomeIcons.bullhorn,
-                  shadowColor: Colors.orange,
-                ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PromocionPage()),
+                );
+              },
+              child: const CustomTextContainer(
+                text: "PROMOCIÓN",
+                leftIcon: FontAwesomeIcons.bullhorn,
+                shadowColor: Colors.orange,
               ),
             ),
 
-            Transform.translate(
-              offset: const Offset(
-                  0.0, 60.0), // Ajusta el valor en Y según sea necesario
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SeguimientoPage(),
-                    ),
-                  );
-                },
-                child: const CustomTextContainer(
-                  text: "SEGUIMIENTO",
-                  leftIcon: FontAwesomeIcons.fileCircleCheck,
-                  shadowColor: Color.fromARGB(255, 4, 58, 6),
-                ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SeguimientoPage()),
+                );
+              },
+              child: const CustomTextContainer(
+                text: "SEGUIMIENTO",
+                leftIcon: FontAwesomeIcons.fileCircleCheck,
+                shadowColor: Color.fromARGB(255, 4, 58, 6),
               ),
             ),
 
-            Transform.translate(
-              offset: const Offset(
-                  0.0, 80.0), // Ajusta el valor en Y según sea necesario
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RecuperacionPage(),
-                    ),
-                  );
-                },
-                child: const CustomTextContainer(
-                  text: "RECUPERACIÓN",
-                  leftIcon: FontAwesomeIcons.wallet,
-                  shadowColor: Color.fromARGB(255, 114, 175, 76),
-                ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RecuperacionPage()),
+                );
+              },
+              child: const CustomTextContainer(
+                text: "RECUPERACIÓN",
+                leftIcon: FontAwesomeIcons.wallet,
+                shadowColor: Color.fromARGB(255, 114, 175, 76),
               ),
             ),
-
             //
           ],
         ),

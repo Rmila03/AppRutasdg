@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/widgets/navigation_drawer.dart';
+import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 import "package:ruta_sdg/widgets/promotion_form.dart";
 import "package:ruta_sdg/widgets/seguimiento_form.dart";
@@ -44,33 +44,11 @@ class ListaSocioState extends State<ListaSocio> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 0, 76, 128),
-          iconTheme: const IconThemeData(color: Colors.white),
-          title: Row(
-            children: [
-              const Text(
-                '               ',
-                style: TextStyle(color: Colors.white),
-              ),
-              const SizedBox(width: 20),
-              Image.asset(
-                'assets/logo-sdg.png',
-                height: 45,
-                width: 45,
-              ),
-              const Text(
-                'RUTASDG',
-                style: TextStyle(color: Colors.white),
-              ),
-            ],
-          ),
-        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                height: 0,
+                height: 50,
                 padding: const EdgeInsets.only(
                   left: 20,
                   right: 5,
@@ -78,6 +56,7 @@ class ListaSocioState extends State<ListaSocio> {
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 0, 76, 128),
                 ),
+                child: const Header(),
               ),
               SingleChildScrollView(
                 child: Column(
@@ -143,7 +122,6 @@ class ListaSocioState extends State<ListaSocio> {
         bottomNavigationBar: const BottomAppBar(
           child: TabBarBottom(),
         ),
-        drawer: const menuDrawer(),
       ),
     );
   }

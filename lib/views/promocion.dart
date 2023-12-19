@@ -2,7 +2,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:ruta_sdg/listasocio.dart';
-import 'package:ruta_sdg/widgets/navigation_drawer.dart';
+import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 
 class PromocionPage extends StatefulWidget {
@@ -16,6 +16,7 @@ class _PromocionPageState extends State<PromocionPage> {
   final List<UserData> users = [
     UserData("1", "12345678", "Arce Quispe Ruth Milagros"),
     UserData("2", "98765432", "Cahuata Lavilla Yolmy Milagros"),
+    // Agrega más usuarios según sea necesario
   ];
 
   @override
@@ -26,34 +27,9 @@ class _PromocionPageState extends State<PromocionPage> {
         bottomNavigationBar: const BottomAppBar(
           child: TabBarBottom(),
         ),
-        drawer: const menuDrawer(),
         body: SafeArea(
           child: Column(
             children: [
-              AppBar(
-                backgroundColor: const Color.fromARGB(255, 0, 76, 128),
-                iconTheme: const IconThemeData(color: Colors.white),
-                title: Row(
-                  children: [
-                    const Text(
-                      '               ',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    const SizedBox(width: 20),
-                    Image.asset(
-                      'assets/logo-sdg.png',
-                      height: 45,
-                      width: 45,
-                    ),
-                    const Text(
-                      'RUTASDG',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Ahora continúa con el resto de tus widgets
               _buildHeader(),
               _buildPromotionCard(),
               TabBar(
@@ -194,8 +170,7 @@ class _PromocionPageState extends State<PromocionPage> {
 
   Widget _buildHeader() {
     return Container(
-      height: 60, //header
-      width: MediaQuery.of(context).size.width,
+      height: 125,
       padding: const EdgeInsets.only(left: 20, right: 5),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -203,43 +178,41 @@ class _PromocionPageState extends State<PromocionPage> {
         ),
         color: Color.fromARGB(255, 0, 76, 128),
       ),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Transform.translate(
-            offset: const Offset(0.0, 5.0),
-            child: Container(
-              margin: const EdgeInsets.only(top: 10, bottom: 5),
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 2),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 255, 255, 255),
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.3),
-                    spreadRadius: 2,
-                    blurRadius: 3,
-                    offset: const Offset(0, 3),
+          const Header(),
+          Container(
+            margin: const EdgeInsets.only(
+                top: 10, bottom: 5), // Ajusta el margen inferior aquí
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 2),
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 255, 255, 255),
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.3),
+                  spreadRadius: 2,
+                  blurRadius: 3,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MyPlanDiarioPage(title: ""),
                   ),
-                ],
-              ),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MyPlanDiarioPage(title: ""),
-                    ),
-                  );
-                },
-                child: const Text(
-                  "PLAN DEL DIA",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontWeight: FontWeight.bold,
-                  ),
+                );
+              },
+              child: const Text(
+                "PLAN DEL DIA",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),

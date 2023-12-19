@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
-import 'package:ruta_sdg/widgets/navigation_drawer.dart';
+import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 
 class MyApp extends StatelessWidget {
@@ -30,48 +30,11 @@ class NotificacionPage extends StatefulWidget {
 class _NotificacionPageState extends State<NotificacionPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-          body: Stack(
-            children: [
-              _body(),
-              Positioned(
-                top: 5,
-                left: 0,
-                right: 0,
-                child: AppBar(
-                  backgroundColor: const Color.fromARGB(255, 0, 76, 128),
-                  iconTheme: const IconThemeData(color: Colors.white),
-                  title: Row(
-                    children: [
-                      const Text(
-                        '               ',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      const SizedBox(width: 20),
-                      Image.asset(
-                        'assets/logo-sdg.png',
-                        height: 45,
-                        width: 45,
-                      ),
-                      const Text(
-                        'RUTASDG',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          bottomNavigationBar: const BottomAppBar(
-            child: TabBarBottom(),
-          ),
-          drawer: const menuDrawer(),
-        ),
+    return Scaffold(
+      bottomNavigationBar: const BottomAppBar(
+        child: TabBarBottom(),
       ),
+      body: _body(),
     );
   }
 
@@ -96,7 +59,9 @@ class _NotificacionPageState extends State<NotificacionPage> {
               child: const Row(
                 children: [
                   Column(
-                    children: [],
+                    children: [
+                      Header(),
+                    ],
                   ),
                 ],
               ),

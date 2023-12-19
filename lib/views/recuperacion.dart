@@ -2,7 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/plandia.dart';
-import 'package:ruta_sdg/widgets/navigation_drawer.dart';
+import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 import 'package:ruta_sdg/listasocio.dart';
 
@@ -22,48 +22,11 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SafeArea(
-          child: Stack(
-            children: [
-              _body(),
-              Positioned(
-                top: 5,
-                left: 0,
-                right: 0,
-                child: AppBar(
-                  backgroundColor: const Color.fromARGB(255, 0, 76, 128),
-                  iconTheme: const IconThemeData(color: Colors.white),
-                  title: Row(
-                    children: [
-                      const Text(
-                        '               ',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      const SizedBox(width: 20),
-                      Image.asset(
-                        'assets/logo-sdg.png',
-                        height: 45,
-                        width: 45,
-                      ),
-                      const Text(
-                        'RUTASDG',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: const BottomAppBar(
-          child: TabBarBottom(),
-        ),
-        drawer: const menuDrawer(),
+    return Scaffold(
+      bottomNavigationBar: const BottomAppBar(
+        child: TabBarBottom(),
       ),
+      body: _body(),
     );
   }
 
@@ -74,7 +37,7 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
         body: Column(
           children: [
             Container(
-              height: 110,
+              height: 125,
               padding: const EdgeInsets.only(
                 left: 20,
                 right: 5,
@@ -89,42 +52,39 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
                 children: [
                   Column(
                     children: [
-                      Transform.translate(
-                        offset: const Offset(0.0,
-                            40.0), // Ajusta el valor en Y según sea necesario
-                        child: Container(
-                          margin: const EdgeInsets.all(24),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 40, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            borderRadius: BorderRadius.circular(8),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.3),
-                                spreadRadius: 2,
-                                blurRadius: 3,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: GestureDetector(
-                            onTap: () {
-                              // Navegar a MyPlanDiarioPage
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const MyPlanDiarioPage(title: "")),
-                              );
-                            },
-                            child: const Text(
-                              "PLAN DEL DIA",
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Color.fromARGB(255, 0, 0, 0),
-                                fontWeight: FontWeight.bold,
-                              ),
+                      const Header(),
+                      Container(
+                        margin: const EdgeInsets.all(24),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              spreadRadius: 2,
+                              blurRadius: 3,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            // Navegar a MyPlanDiarioPage
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const MyPlanDiarioPage(title: "")),
+                            );
+                          },
+                          child: const Text(
+                            "PLAN DEL DIA",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -233,6 +193,7 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
                 ),
               ),
             ),
+//////////////////////
           ],
         ),
       ),
