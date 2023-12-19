@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:ruta_sdg/listasocio.dart';
 import 'package:ruta_sdg/widgets/header.dart';
+import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 
 class PromocionPage extends StatefulWidget {
@@ -27,6 +28,12 @@ class _PromocionPageState extends State<PromocionPage> {
         bottomNavigationBar: const BottomAppBar(
           child: TabBarBottom(),
         ),
+        appBar: AppBar(
+          title: const Header(),
+          backgroundColor: const Color.fromARGB(255, 0, 76, 128),
+          iconTheme: const IconThemeData(color: Colors.white),
+        ),
+        drawer: const MenuDrawer(),
         body: SafeArea(
           child: Column(
             children: [
@@ -170,7 +177,8 @@ class _PromocionPageState extends State<PromocionPage> {
 
   Widget _buildHeader() {
     return Container(
-      height: 125,
+      height: 70,
+      width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(left: 20, right: 5),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -181,7 +189,6 @@ class _PromocionPageState extends State<PromocionPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Header(),
           Container(
             margin: const EdgeInsets.only(
                 top: 10, bottom: 5), // Ajusta el margen inferior aquí

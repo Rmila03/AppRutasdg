@@ -175,9 +175,42 @@ class PromotionFormState extends State<PromotionForm> {
                   ),
                 ),
               ),
-              const TextFormResult(label: "Pago Mensual:"),
-              const TextFormResult(label: "Primera fecha de pago:"),
-              const TextFormResult(label: "Última fehca de pago"),
+              const TextFormResult(
+                  label: "Pago Mensual:", InputType: TextInputType.number),
+              const TextFormResult(
+                  label: "Primera fecha de pago:",
+                  InputType: TextInputType.datetime),
+              const TextFormResult(
+                  label: "Última fehca de pago",
+                  InputType: TextInputType.datetime),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.circular(10), // Bordes redondeados
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black
+                            .withOpacity(0.2), // Color y opacidad de la sombra
+                        offset: Offset(0, 2), // Desplazamiento de la sombra
+                        blurRadius: 4, // Radio de desenfoque de la sombra
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    "FEEDBACK",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 0, 76, 128),
+                    ),
+                  ),
+                ),
+              ),
+
               ElevatedButton(
                 onPressed: () {
                   // Validate returns true if the form is valid, or false otherwise.
@@ -206,9 +239,11 @@ class PromotionFormState extends State<PromotionForm> {
 
 class TextFormResult extends StatelessWidget {
   final String label;
+  final TextInputType InputType;
   const TextFormResult({
     super.key,
     required this.label,
+    required this.InputType,
   });
 
   @override
@@ -228,7 +263,7 @@ class TextFormResult extends StatelessWidget {
           ),
           Expanded(
             child: TextFormField(
-              keyboardType: TextInputType.number,
+              keyboardType: InputType,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.grey[300],

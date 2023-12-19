@@ -4,15 +4,15 @@ import 'package:ruta_sdg/views/home.dart';
 import '../views/reportes.dart';
 import '../views/notificaciones.dart';
 
-class menuDrawer extends StatelessWidget {
-  const menuDrawer({Key? key});
+class MenuDrawer extends StatelessWidget {
+  const MenuDrawer({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: SafeArea(
         child: Column(
-          children: <Widget>[
+          children: [
             const UserAccountsDrawerHeader(
               accountName: Padding(
                 padding: EdgeInsets.only(top: 5.0),

@@ -4,6 +4,7 @@ import 'package:ruta_sdg/views/promocion.dart';
 import 'package:ruta_sdg/views/recuperacion.dart';
 import 'package:ruta_sdg/views/seguimiento.dart';
 import 'package:ruta_sdg/widgets/header.dart';
+import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 
 class MyApp extends StatelessWidget {
@@ -38,6 +39,12 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
         child: TabBarBottom(),
       ),
       body: _body(),
+      appBar: AppBar(
+        title: const Header(),
+        backgroundColor: const Color.fromARGB(255, 0, 76, 128),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      drawer: const MenuDrawer(),
     );
   }
 
@@ -48,7 +55,7 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
         body: Column(
           children: [
             Container(
-              height: 125,
+              height: 100,
               padding: const EdgeInsets.only(
                 left: 20,
                 right: 5,
@@ -61,35 +68,30 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
               ),
               child: Row(
                 children: [
-                  Column(
-                    children: [
-                      const Header(),
-                      Container(
-                        margin: const EdgeInsets.all(24),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
-                              spreadRadius: 2,
-                              blurRadius: 3,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
+                  Container(
+                    margin: const EdgeInsets.all(24),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          spreadRadius: 2,
+                          blurRadius: 3,
+                          offset: const Offset(0, 3),
                         ),
-                        child: const Text(
-                          "PLAN DEL DIA",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                      ],
+                    ),
+                    child: const Text(
+                      "PLAN DEL DIA",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.bold,
                       ),
-                    ],
+                    ),
                   ),
                   Expanded(
                     child: Container(
@@ -112,6 +114,7 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
               ),
             ),
             // Reemplaza con tu texto deseado
+            const SizedBox(height: 30),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -126,7 +129,7 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
                 shadowColor: Colors.orange,
               ),
             ),
-
+            const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -141,7 +144,7 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
                 shadowColor: Color.fromARGB(255, 4, 58, 6),
               ),
             ),
-
+            const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
                 Navigator.push(

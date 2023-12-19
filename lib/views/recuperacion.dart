@@ -3,6 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:ruta_sdg/widgets/header.dart';
+import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 import 'package:ruta_sdg/listasocio.dart';
 
@@ -27,6 +28,12 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
         child: TabBarBottom(),
       ),
       body: _body(),
+      appBar: AppBar(
+        title: const Header(),
+        backgroundColor: const Color.fromARGB(255, 0, 76, 128),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      drawer: const MenuDrawer(),
     );
   }
 
@@ -37,7 +44,7 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
         body: Column(
           children: [
             Container(
-              height: 125,
+              height: 80,
               padding: const EdgeInsets.only(
                 left: 20,
                 right: 5,
@@ -52,7 +59,6 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
                 children: [
                   Column(
                     children: [
-                      const Header(),
                       Container(
                         margin: const EdgeInsets.all(24),
                         padding: const EdgeInsets.symmetric(

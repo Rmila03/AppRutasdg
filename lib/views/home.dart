@@ -3,6 +3,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruta_sdg/widgets/bottom_action.dart';
+import 'package:ruta_sdg/widgets/header.dart';
+import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 import '../mapa/locations.dart' as locations;
 import 'package:ruta_sdg/views/promocion.dart';
@@ -41,10 +43,17 @@ class MapScreen extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       bottomNavigationBar: const BottomAppBar(
         child: TabBarBottom(),
       ),
       body: _body(),
+      appBar: AppBar(
+        title: const Header(),
+        backgroundColor: const Color.fromARGB(255, 0, 76, 128),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      drawer: const MenuDrawer(),
     );
   }
 
@@ -108,36 +117,6 @@ class MapScreen extends State {
                 children: [
                   Column(
                     children: [
-                      Row(
-                        children: [
-                          _bottomActionIcon(Icons.format_list_bulleted),
-                          /*const Icon(
-                            Icons.format_list_bulleted,
-                            color: Colors.white,
-                            size: 30.0,
-                          ),*/
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 20,
-                              right: 8,
-                            ),
-                            child: Image.asset(
-                              'assets/logo-sdg.png',
-                              width: 45,
-                              height: 45,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const Text(
-                            'RUTASDG',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
                       const Text(
                         'Hola RAMÓN',
                         style: TextStyle(fontSize: 17, color: Colors.yellow),

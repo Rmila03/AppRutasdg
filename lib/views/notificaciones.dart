@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import 'package:ruta_sdg/widgets/header.dart';
+import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 
 class MyApp extends StatelessWidget {
@@ -35,6 +36,12 @@ class _NotificacionPageState extends State<NotificacionPage> {
         child: TabBarBottom(),
       ),
       body: _body(),
+      appBar: AppBar(
+        title: const Header(),
+        backgroundColor: const Color.fromARGB(255, 0, 76, 128),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      drawer: const MenuDrawer(),
     );
   }
 
@@ -44,28 +51,6 @@ class _NotificacionPageState extends State<NotificacionPage> {
         resizeToAvoidBottomInset: false,
         body: Column(
           children: [
-            Container(
-              height: 50,
-              padding: const EdgeInsets.only(
-                left: 20,
-                right: 5,
-              ),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.zero,
-                ),
-                color: Color.fromARGB(255, 0, 76, 128),
-              ),
-              child: const Row(
-                children: [
-                  Column(
-                    children: [
-                      Header(),
-                    ],
-                  ),
-                ],
-              ),
-            ),
             //Container(child: Column(children: <Widget>[_list()])),
             Expanded(
                 child: ListView.separated(

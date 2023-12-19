@@ -2,6 +2,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:ruta_sdg/widgets/header.dart';
+import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 import 'package:ruta_sdg/listasocio.dart';
 
@@ -26,6 +27,12 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
         child: TabBarBottom(),
       ),
       body: _body(),
+      appBar: AppBar(
+        title: const Header(),
+        backgroundColor: const Color.fromARGB(255, 0, 76, 128),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      drawer: const MenuDrawer(),
     );
   }
 
@@ -36,7 +43,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
         body: Column(
           children: [
             Container(
-              height: 125,
+              height: 80,
               padding: const EdgeInsets.only(
                 left: 20,
                 right: 5,
@@ -51,7 +58,6 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 children: [
                   Column(
                     children: [
-                      const Header(),
                       Container(
                         margin: const EdgeInsets.all(24),
                         padding: const EdgeInsets.symmetric(

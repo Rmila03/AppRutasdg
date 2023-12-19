@@ -9,14 +9,8 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Icon(
-          Icons.format_list_bulleted,
-          color: Colors.white,
-          size: 30.0,
-        ),
         Padding(
           padding: const EdgeInsets.only(
-            left: 20,
             right: 8,
           ),
           child: Image.asset(
