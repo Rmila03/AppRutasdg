@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
-import 'package:ruta_sdg/widgets/header.dart';
+import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 
 class MyApp extends StatelessWidget {
@@ -30,11 +30,48 @@ class ReportePage extends StatefulWidget {
 class _ReportePageState extends State<ReportePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: const BottomAppBar(
-        child: TabBarBottom(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: [
+              _body(),
+              Positioned(
+                top: 5,
+                left: 0,
+                right: 0,
+                child: AppBar(
+                  backgroundColor: const Color.fromARGB(255, 0, 76, 128),
+                  iconTheme: const IconThemeData(color: Colors.white),
+                  title: Row(
+                    children: [
+                      const Text(
+                        '               ',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      const SizedBox(width: 20),
+                      Image.asset(
+                        'assets/logo-sdg.png',
+                        height: 45,
+                        width: 45,
+                      ),
+                      const Text(
+                        'RUTASDG',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: const BottomAppBar(
+          child: TabBarBottom(),
+        ),
+        drawer: const menuDrawer(),
       ),
-      body: _body(),
     );
   }
 
@@ -59,9 +96,7 @@ class _ReportePageState extends State<ReportePage> {
               child: const Row(
                 children: [
                   Column(
-                    children: [
-                      Header(),
-                    ],
+                    children: [],
                   ),
                 ],
               ),
@@ -124,50 +159,62 @@ class _FechaSelectorState extends State<FechaSelector> {
         children: [
           Row(
             children: [
-              const Text(
-                "Fecha  :  ",
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
+              Transform.translate(
+                offset: const Offset(
+                    0.0, 20.0), // Ajusta el valor Y según sea necesario
+                child: const Text(
+                  "Fecha  :  ",
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              GestureDetector(
-                onTap: () => _selectDate(context),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.calendar_today,
-                      color: Color.fromARGB(255, 4, 56, 99),
-                    ),
-                    const SizedBox(width: 8),
-                    Container(
-                      height: 24,
-                      width: 100,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue),
-                        borderRadius: BorderRadius.circular(4.0),
+              Transform.translate(
+                offset: const Offset(
+                    0.0, 21.0), // Ajusta el valor Y según sea necesario
+                child: GestureDetector(
+                  onTap: () => _selectDate(context),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.calendar_today,
+                        color: Color.fromARGB(255, 4, 56, 99),
                       ),
-                      padding: const EdgeInsets.all(0.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "${selectedDate.toLocal()}".split(' ')[0],
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
+                      const SizedBox(width: 8),
+                      Container(
+                        height: 24,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue),
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                        padding: const EdgeInsets.all(0.0),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "${selectedDate.toLocal()}".split(' ')[0],
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 8),
-          const Text(
-            "Hoja de ruta generada :  ",
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.bold,
+          Transform.translate(
+            offset: const Offset(
+                0.0, 15.0), // Ajusta el valor Y según sea necesario
+            child: const Text(
+              "Hoja de ruta generada :  ",
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],

@@ -1,0 +1,128 @@
+import 'package:flutter/material.dart';
+import 'package:ruta_sdg/main.dart';
+import 'package:ruta_sdg/views/home.dart';
+import '../views/reportes.dart';
+import '../views/notificaciones.dart';
+
+class menuDrawer extends StatelessWidget {
+  const menuDrawer({Key? key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: SafeArea(
+        child: Column(
+          children: <Widget>[
+            const UserAccountsDrawerHeader(
+              accountName: Padding(
+                padding: EdgeInsets.only(top: 5.0),
+                child: Text(
+                  "RAMÓN PEREZ",
+                  style: TextStyle(
+                    fontSize: 25.0,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              accountEmail: Text(
+                "ramonp123@coopacsdg.com",
+                style: TextStyle(
+                  fontSize: 14.0,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
+              ),
+              decoration: BoxDecoration(color: Color.fromARGB(255, 0, 76, 128)),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text(
+                'Inicio',
+                style: TextStyle(fontSize: 20.0),
+              ),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const HomePage()));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.newspaper),
+              title: const Text(
+                'Notificaciones',
+                style: TextStyle(fontSize: 20.0),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const NotificacionPage(
+                      title: '',
+                    ),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text(
+                'Configuración',
+                style: TextStyle(fontSize: 20.0),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.picture_as_pdf_rounded),
+              title: const Text(
+                'Reporte',
+                style: TextStyle(fontSize: 20.0),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ReportePage(
+                      title: '',
+                    ),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.help),
+              title: const Text(
+                'Ayuda o Soporte',
+                style: TextStyle(fontSize: 20.0),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            const Spacer(),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Login(
+                      title: '',
+                    ),
+                  ),
+                );
+              },
+              child: const ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: Text(
+                  'Cerrar Sesión',
+                  style: TextStyle(fontSize: 20.0),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

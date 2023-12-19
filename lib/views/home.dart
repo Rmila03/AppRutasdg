@@ -3,9 +3,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruta_sdg/widgets/bottom_action.dart';
+import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 import '../mapa/locations.dart' as locations;
-import 'package:ruta_sdg/views/promocion.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,49 +40,48 @@ class MapScreen extends State {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: const BottomAppBar(
-        child: TabBarBottom(),
-      ),
-      body: _body(),
-    );
-  }
-
-  Widget _bottomActionIcon(IconData icon) {
-    return InkWell(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Icon(
-          icon,
-          color: Colors.white,
-          size: 30.0,
-        ),
-      ),
-      onTap: () {
-        Navigator.push(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) {
-              return const PromocionPage();
-            },
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              const begin = Offset(-1.0, 0.0);
-              const end = Offset.zero;
-              const curve = Curves.easeInOutCubic;
-
-              var tween =
-                  Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-              var offsetAnimation = animation.drive(tween);
-
-              return SlideTransition(
-                position: offsetAnimation,
-                child: child,
-              );
-            },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: [
+              _body(),
+              Positioned(
+                top: 5,
+                left: 0,
+                right: 0,
+                child: AppBar(
+                  backgroundColor: const Color.fromARGB(255, 0, 76, 128),
+                  iconTheme: const IconThemeData(color: Colors.white),
+                  title: Row(
+                    children: [
+                      const Text(
+                        '               ',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      const SizedBox(width: 20),
+                      Image.asset(
+                        'assets/logo-sdg.png',
+                        height: 45,
+                        width: 45,
+                      ),
+                      const Text(
+                        'RUTASDG',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        );
-      },
+        ),
+        bottomNavigationBar: const BottomAppBar(
+          child: TabBarBottom(),
+        ),
+        drawer: const menuDrawer(),
+      ),
     );
   }
 
@@ -93,7 +92,7 @@ class MapScreen extends State {
         body: Column(
           children: [
             Container(
-              height: 135,
+              height: 170, // head
               padding: const EdgeInsets.only(
                 left: 20,
                 right: 5,
@@ -110,12 +109,6 @@ class MapScreen extends State {
                     children: [
                       Row(
                         children: [
-                          _bottomActionIcon(Icons.format_list_bulleted),
-                          /*const Icon(
-                            Icons.format_list_bulleted,
-                            color: Colors.white,
-                            size: 30.0,
-                          ),*/
                           Padding(
                             padding: const EdgeInsets.only(
                               left: 20,
@@ -138,61 +131,71 @@ class MapScreen extends State {
                           ),
                         ],
                       ),
-                      const Text(
-                        'Hola RAMÓN',
-                        style: TextStyle(fontSize: 17, color: Colors.yellow),
+                      Transform.translate(
+                        offset: const Offset(0.0, 20.0),
+                        child: const Text(
+                          'Hola RAMÓN',
+                          style: TextStyle(fontSize: 17, color: Colors.yellow),
+                        ),
                       ),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const MyPlanDiarioPage(
-                                      title: '',
-                                    )),
+                              builder: (context) => const MyPlanDiarioPage(
+                                title: '',
+                              ),
+                            ),
                           );
                         },
-                        child: Container(
-                          margin: const EdgeInsets.all(15),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.3),
-                                spreadRadius: 2,
-                                blurRadius: 3,
-                                offset: const Offset(0, 3),
+                        child: Transform.translate(
+                          offset: const Offset(10.0, 25.0),
+                          child: Container(
+                            margin: const EdgeInsets.all(15),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 255, 255, 255),
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.3),
+                                  spreadRadius: 2,
+                                  blurRadius: 3,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: const Text(
+                              "PLAN DEL DIA",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Color.fromARGB(255, 4, 54, 95),
+                                fontWeight: FontWeight.bold,
                               ),
-                            ],
-                          ),
-                          child: const Text(
-                            "PLAN DEL DIA",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Color.fromARGB(255, 4, 54, 95),
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                      ),
+                      )
                     ],
                   ),
-                  Expanded(
-                    child: Container(
-                      width: 80.0,
-                      height: 80.0,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          FontAwesomeIcons.user,
-                          color: Color.fromARGB(255, 0, 76, 128),
-                          size: 60.0,
+                  Transform.translate(
+                    offset: const Offset(150.0, 35.0), // user
+                    child: Expanded(
+                      child: Container(
+                        width: 80.0,
+                        height: 80.0,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: const Center(
+                          child: Icon(
+                            FontAwesomeIcons.user,
+                            color: Color.fromARGB(255, 0, 76, 128),
+                            size: 60.0,
+                          ),
                         ),
                       ),
                     ),
