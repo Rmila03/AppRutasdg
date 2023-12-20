@@ -42,7 +42,8 @@ class MapScreen extends State {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+        child: Scaffold(
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: const BottomAppBar(
         child: TabBarBottom(),
@@ -54,7 +55,7 @@ class MapScreen extends State {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: const MenuDrawer(),
-    );
+    ));
   }
 
   Widget _bottomActionIcon(IconData icon) {
