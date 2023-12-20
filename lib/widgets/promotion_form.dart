@@ -200,7 +200,7 @@ class PromotionFormState extends State<PromotionForm> {
                       ),
                     ],
                   ),
-                  child: Text(
+                  child: const Text(
                     "FEEDBACK",
                     style: TextStyle(
                       fontSize: 15,
