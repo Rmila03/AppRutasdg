@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/views/home.dart';
 
+import 'text_form_result.dart';
+
 class NuevoForm extends StatefulWidget {
   const NuevoForm({super.key});
 
@@ -22,6 +24,7 @@ class NuevoFormState extends State<NuevoForm> {
           key: _formKey,
           child: Column(
             children: [
+              const TextFormInto(label: "DNI"),
               TextForm(
                 formKey: _formKey,
                 label: "Nombres",
@@ -175,9 +178,18 @@ class NuevoFormState extends State<NuevoForm> {
                   ),
                 ),
               ),
-              const TextFormResult(label: "Pago Mensual:"),
-              const TextFormResult(label: "Primera fecha de pago:"),
-              const TextFormResult(label: "Última fecha de pago"),
+              const TextFormResult(
+                label: "Pago Mensual:",
+                content: "",
+              ),
+              const TextFormResult(
+                label: "Primera fecha de pago:",
+                content: "",
+              ),
+              const TextFormResult(
+                label: "Última fecha de pago",
+                content: "",
+              ),
               ElevatedButton(
                 onPressed: () {
                   // Validate returns true if the form is valid, or false otherwise.
@@ -203,9 +215,9 @@ class NuevoFormState extends State<NuevoForm> {
   }
 }
 
-class TextFormResult extends StatelessWidget {
+class TextFormInto extends StatelessWidget {
   final String label;
-  const TextFormResult({
+  const TextFormInto({
     super.key,
     required this.label,
   });
@@ -217,7 +229,7 @@ class TextFormResult extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-            width: 150,
+            width: 100,
             child: Text(
               label,
               style: const TextStyle(
@@ -229,23 +241,27 @@ class TextFormResult extends StatelessWidget {
             child: TextFormField(
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[300],
-                border: OutlineInputBorder(
-                  // Borde personalizado
-                  borderRadius:
-                      BorderRadius.circular(10.0), // Bordes redondeados
-                  borderSide: BorderSide.none, // Sin borde visible
-                ),
-                focusedBorder: OutlineInputBorder(
-                  // Borde cuando está enfocado
-                  borderRadius: BorderRadius.circular(10.0),
-                  // ignore: prefer_const_constructors
-                  borderSide: BorderSide(
-                      color: Colors.white, width: 0), // Grosor del borde
-                ),
-                // Puedes añadir más propiedades de estilo según tus necesidades
-              ),
+                  filled: true,
+                  fillColor: Colors.grey[300],
+                  border: OutlineInputBorder(
+                    // Borde personalizado
+                    borderRadius:
+                        BorderRadius.circular(10.0), // Bordes redondeados
+                    borderSide: BorderSide.none, // Sin borde visible
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    // Borde cuando está enfocado
+                    borderRadius: BorderRadius.circular(10.0),
+                    // ignore: prefer_const_constructors
+                    borderSide: BorderSide(
+                        color: Colors.white, width: 0), // Grosor del borde
+                  ),
+                  suffix: const Icon(
+                    Icons.search,
+                    color: Colors.black,
+                  )
+                  // Puedes añadir más propiedades de estilo según tus necesidades
+                  ),
             ),
           ),
         ],
