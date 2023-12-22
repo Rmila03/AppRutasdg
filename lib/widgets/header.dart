@@ -8,11 +8,10 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.only(
-            right: 8,
-          ),
+          padding: const EdgeInsets.only(),
           child: Image.asset(
             'assets/logo-sdg.png',
             width: 45,

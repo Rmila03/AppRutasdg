@@ -22,20 +22,20 @@ class _PromocionPageState extends State<PromocionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        bottomNavigationBar: const BottomAppBar(
-          child: TabBarBottom(),
-        ),
-        appBar: AppBar(
-          title: const Header(),
-          backgroundColor: const Color.fromARGB(255, 0, 76, 128),
-          iconTheme: const IconThemeData(color: Colors.white),
-        ),
-        drawer: const MenuDrawer(),
-        body: SafeArea(
-          child: Column(
+    return SafeArea(
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          bottomNavigationBar: const BottomAppBar(
+            child: TabBarBottom(),
+          ),
+          appBar: AppBar(
+            title: const Header(),
+            backgroundColor: const Color.fromARGB(255, 0, 76, 128),
+            iconTheme: const IconThemeData(color: Colors.white),
+          ),
+          drawer: const MenuDrawer(),
+          body: Column(
             children: [
               _buildHeader(),
               _buildPromotionCard(),

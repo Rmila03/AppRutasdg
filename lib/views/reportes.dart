@@ -31,17 +31,19 @@ class ReportePage extends StatefulWidget {
 class _ReportePageState extends State<ReportePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: const BottomAppBar(
-        child: TabBarBottom(),
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: const BottomAppBar(
+          child: TabBarBottom(),
+        ),
+        body: _body(),
+        appBar: AppBar(
+          title: const Header(),
+          backgroundColor: const Color.fromARGB(255, 0, 76, 128),
+          iconTheme: const IconThemeData(color: Colors.white),
+        ),
+        drawer: const MenuDrawer(),
       ),
-      body: _body(),
-      appBar: AppBar(
-        title: const Header(),
-        backgroundColor: const Color.fromARGB(255, 0, 76, 128),
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
-      drawer: const MenuDrawer(),
     );
   }
 
