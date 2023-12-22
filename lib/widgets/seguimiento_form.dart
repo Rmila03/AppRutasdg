@@ -107,93 +107,17 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                   ),
                 ],
               ),
-              //DropdownButtonFormField(items: , onChanged: onChanged),
-              const CustomDropdown(
-                items: ['', 'Socio 1', 'Socio 2', 'Socio 3'],
-                label: "Tipo de Socio:",
-              ),
-              const CustomDropdown(
-                items: ['', 'Crédito 1', 'Crédito 2', 'Crédito 3'],
-                label: "Tipo de Crédito:",
-              ),
-              const CustomDropdown(
-                items: ['', 'Producto 1', 'Producto 2', 'Producto 3'],
-                label: "Tipo de Producto:",
-              ),
-              const CustomDropdown(
-                items: ['', 'Modalidad 1', 'Modalidad 2', 'Modalidad 3'],
-                label: "Modalidad:",
-              ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Cálculo de Crédito",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color.fromARGB(255, 0, 76, 128),
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
               const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  const Expanded(
-                    child: InputTextForm(
-                      label: "Crédito total",
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Container(
-                        width: 20,
-                        height: 5,
-                        color: Colors.amber,
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const Row(
-                children: [
-                  Expanded(
-                    child: InputTextForm(
-                      label: "Plazo(meses)",
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40),
-                      child: InputTextForm(
-                        label: "Tasa de interés(%)",
-                        percentage: "%",
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Cálculo",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                height: 10,
               ),
               const TextFormResult(
-                  label: "Pago Mensual:", InputType: TextInputType.number),
+                  label: "Tipo de socio:", InputType: TextInputType.text),
               const TextFormResult(
-                  label: "Primera fecha de pago:",
-                  InputType: TextInputType.datetime),
+                  label: "Tipo de crédito:", InputType: TextInputType.text),
               const TextFormResult(
-                  label: "Última fehca de pago",
-                  InputType: TextInputType.datetime),
+                  label: "Tipo de producto:", InputType: TextInputType.text),
+              const TextFormResult(
+                  label: "Modalidad:", InputType: TextInputType.text),
               const SizedBox(height: 20),
               const Encontro(),
               const SizedBox(height: 20),
@@ -257,7 +181,6 @@ class SeguimientoFormState extends State<SeguimientoForm> {
               const SizedBox(
                 height: 20,
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
