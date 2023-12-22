@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/plandia.dart';
+import 'package:ruta_sdg/user.dart';
 import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
@@ -15,8 +16,19 @@ class SeguimientoPage extends StatefulWidget {
 
 class _SeguimientoPageState extends State<SeguimientoPage> {
   final List<UserData> users = [
-    UserData("1", "12345678", "Arce Quispe Ruth Milagros"),
-    UserData("2", "98765432", "Cahuata Lavilla Yolmy Milagros"),
+    UserData(
+        "1",
+        "Ruth Milagros",
+        "Arce Quispe",
+        "12345678",
+        "978563412",
+        'abcd@gmail.com',
+        "Jr. Jose Carlos Mariategui #345",
+        "Cusco",
+        "Cusco",
+        "Cusco"),
+    UserData("2", "Yolmy Milagros", "Cahuata Lavilla", "98765432", "978563412",
+        "foo@gmail.com", "Av. La cultura #345", "Cusco", "Cusco", "Cusco"),
     // Agrega más usuarios según sea necesario
   ];
 
@@ -179,10 +191,11 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ListaSocio(
+                                    builder: (context) => ListaSocio(
                                           tabColorLeft:
                                               Color.fromARGB(255, 4, 58, 6),
                                           tabName: 'SEGUIMIENTO',
+                                          user: user,
                                         )),
                               );
                             }
@@ -206,12 +219,4 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
       ),
     );
   }
-}
-
-class UserData {
-  final String number;
-  final String dni;
-  final String name;
-
-  UserData(this.number, this.dni, this.name);
 }
