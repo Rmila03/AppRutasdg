@@ -36,9 +36,13 @@ class ListaSocioState extends State<ListaSocio> {
         user: widget.user!,
       );
     } else if (widget.tabName == 'SEGUIMIENTO') {
-      CasoFormWidget = SeguimientoForm();
+      CasoFormWidget = SeguimientoForm(
+        user: widget.user!,
+      );
     } else if (widget.tabName == 'RECUPERACIÓN') {
-      CasoFormWidget = const RecuperacionForm();
+      CasoFormWidget = RecuperacionForm(
+        user: widget.user!,
+      );
     } else if (widget.tabName == 'NUEVO') {
       CasoFormWidget = const NuevoForm();
     }
