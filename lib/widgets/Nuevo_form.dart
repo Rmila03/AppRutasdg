@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/views/promocion.dart';
+import 'package:ruta_sdg/views/home.dart';
 
 class NuevoForm extends StatefulWidget {
   const NuevoForm({super.key});
@@ -177,7 +177,7 @@ class NuevoFormState extends State<NuevoForm> {
               ),
               const TextFormResult(label: "Pago Mensual:"),
               const TextFormResult(label: "Primera fecha de pago:"),
-              const TextFormResult(label: "Última fehca de pago"),
+              const TextFormResult(label: "Última fecha de pago"),
               ElevatedButton(
                 onPressed: () {
                   // Validate returns true if the form is valid, or false otherwise.
@@ -189,8 +189,7 @@ class NuevoFormState extends State<NuevoForm> {
                     );*/
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const PromocionPage()),
+                      MaterialPageRoute(builder: (context) => const HomePage()),
                     );
                   }
                 },

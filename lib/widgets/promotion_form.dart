@@ -186,7 +186,8 @@ class PromotionFormState extends State<PromotionForm> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius:
@@ -195,12 +196,13 @@ class PromotionFormState extends State<PromotionForm> {
                       BoxShadow(
                         color: Colors.black
                             .withOpacity(0.2), // Color y opacidad de la sombra
-                        offset: Offset(0, 2), // Desplazamiento de la sombra
+                        offset:
+                            const Offset(0, 2), // Desplazamiento de la sombra
                         blurRadius: 4, // Radio de desenfoque de la sombra
                       ),
                     ],
                   ),
-                  child: Text(
+                  child: const Text(
                     "FEEDBACK",
                     style: TextStyle(
                       fontSize: 15,
