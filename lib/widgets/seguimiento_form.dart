@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/user.dart';
 import 'package:ruta_sdg/views/seguimiento.dart';
+import 'package:ruta_sdg/widgets/text_form_result.dart';
 
 class SeguimientoForm extends StatefulWidget {
   final UserData user;
@@ -111,13 +112,21 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                 height: 10,
               ),
               const TextFormResult(
-                  label: "Tipo de socio:", InputType: TextInputType.text),
+                label: "Tipo de socio:",
+                content: "GENERICO",
+              ),
               const TextFormResult(
-                  label: "Tipo de crédito:", InputType: TextInputType.text),
+                label: "Tipo de crédito:",
+                content: "CONSUMO",
+              ),
               const TextFormResult(
-                  label: "Tipo de producto:", InputType: TextInputType.text),
+                label: "Tipo de producto:",
+                content: "INDEPENDIENTE",
+              ),
               const TextFormResult(
-                  label: "Modalidad:", InputType: TextInputType.text),
+                label: "Modalidad:",
+                content: "COOPENAVIDEÑO",
+              ),
               const SizedBox(height: 20),
               const Encontro(),
               const SizedBox(height: 20),
@@ -232,59 +241,6 @@ class SeguimientoFormState extends State<SeguimientoForm> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class TextFormResult extends StatelessWidget {
-  final String label;
-  final TextInputType InputType;
-  const TextFormResult({
-    super.key,
-    required this.label,
-    required this.InputType,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 150,
-            child: Text(
-              label,
-              style: const TextStyle(
-                fontSize: 12,
-              ),
-            ),
-          ),
-          Expanded(
-            child: TextFormField(
-              keyboardType: InputType,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[300],
-                contentPadding: const EdgeInsets.symmetric(vertical: 4),
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(10.0), // Bordes redondeados
-                  borderSide: BorderSide.none, // Sin borde visible
-                ),
-                focusedBorder: OutlineInputBorder(
-                  // Borde cuando está enfocado
-                  borderRadius: BorderRadius.circular(10.0),
-                  // ignore: prefer_const_constructors
-                  borderSide: BorderSide(
-                      color: Colors.white, width: 0), // Grosor del borde
-                ),
-                // Puedes añadir más propiedades de estilo según tus necesidades
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
