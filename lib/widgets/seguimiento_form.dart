@@ -196,7 +196,9 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                   InputType: TextInputType.datetime),
               const SizedBox(height: 20),
               const Encontro(),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
+              const RadioButtonCustom(),
+              const SizedBox(height: 20),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
@@ -252,9 +254,10 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              const RadioButtonCustom(),
-              const SizedBox(height: 20),
+              const SizedBox(
+                height: 20,
+              ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
