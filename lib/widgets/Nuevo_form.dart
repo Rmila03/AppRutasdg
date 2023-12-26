@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/plandia.dart';
+//import 'package:ruta_sdg/plandia.dart';
 import 'package:ruta_sdg/views/home.dart';
 
 import 'text_form_result.dart';
