@@ -291,7 +291,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                         'GUARDAR',
                         style: TextStyle(
                           fontSize: 15,
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 0, 76, 128),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
