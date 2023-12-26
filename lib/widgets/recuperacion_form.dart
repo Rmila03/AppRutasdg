@@ -571,21 +571,24 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
               });
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 40),
-              margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8), // Bordes redondeados
-                border: Border.all(
-                  color: Colors.green, // Color del borde
-                  width: 2, // Grosor del borde
+                padding:
+                    const EdgeInsets.symmetric(vertical: 2, horizontal: 40),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8), // Bordes redondeados
+                  border: Border.all(
+                    color: Colors.green, // Color del borde
+                    width: 2, // Grosor del borde
+                  ),
+                  color: selectedButton == 1 ? Colors.green : Colors.white,
                 ),
-                color: selectedButton == 1 ? Colors.green : Colors.white,
-              ),
-              child: const Text(
-                'SI',
-                style: TextStyle(color: Colors.black, fontSize: 15),
-              ),
-            ),
+                child: const Center(
+                  child: Text(
+                    'SI',
+                    style: TextStyle(color: Colors.black, fontSize: 15),
+                  ),
+                )),
           ),
         ),
         Expanded(
@@ -606,9 +609,11 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
                 ),
                 color: selectedButton == 2 ? Colors.orange : Colors.white,
               ),
-              child: const Text(
-                'NO',
-                style: TextStyle(color: Colors.black, fontSize: 15),
+              child: const Center(
+                child: Text(
+                  'NO',
+                  style: TextStyle(color: Colors.black, fontSize: 15),
+                ),
               ),
             ),
           ),
