@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ruta_sdg/plandia.dart';
 import 'package:ruta_sdg/views/home.dart';
 
 import 'text_form_result.dart';
@@ -190,6 +191,61 @@ class NuevoFormState extends State<NuevoForm> {
                 label: "Última fecha de pago",
                 content: "",
               ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.circular(10), // Bordes redondeados
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black
+                            .withOpacity(0.2), // Color y opacidad de la sombra
+                        offset:
+                            const Offset(0, 2), // Desplazamiento de la sombra
+                        blurRadius: 4, // Radio de desenfoque de la sombra
+                      ),
+                    ],
+                  ),
+                  child: const Text(
+                    "FEEDBACK",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 0, 76, 128),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextField(
+                maxLines: 2,
+                keyboardType: TextInputType.multiline,
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(10.0), // Bordes redondeados
+                    borderSide: const BorderSide(
+                      color: Color.fromARGB(255, 0, 76, 128),
+                      width: 2.0, // Grosor del borde al tener foco
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(10.0), // Bordes redondeados
+                    borderSide: const BorderSide(
+                      color:
+                          Colors.grey, // Color del borde cuando no tiene foco
+                      width: 1.0, // Grosor del borde cuando no tiene foco
+                    ),
+                  ),
+                ),
+              ),
               ElevatedButton(
                 onPressed: () {
                   // Validate returns true if the form is valid, or false otherwise.
@@ -205,7 +261,7 @@ class NuevoFormState extends State<NuevoForm> {
                     );
                   }
                 },
-                child: const Text('Guardar'),
+                child: const Text('GUARDAR'),
               ),
             ],
           ),
@@ -256,10 +312,22 @@ class TextFormInto extends StatelessWidget {
                     borderSide: BorderSide(
                         color: Colors.white, width: 0), // Grosor del borde
                   ),
-                  suffix: const Icon(
-                    Icons.search,
-                    color: Colors.black,
-                  )
+                  suffixIcon: InkWell(
+                      onTap: () {
+                        //Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomePage()));
+                      },
+                      child: const Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      )
+                      /*Icons.search,
+                    color: Colors.black,*/
+                      )
+
                   // Puedes añadir más propiedades de estilo según tus necesidades
                   ),
             ),

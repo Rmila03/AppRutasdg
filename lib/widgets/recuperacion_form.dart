@@ -413,7 +413,6 @@ class InputTextForm extends StatelessWidget {
 class TextForm extends StatefulWidget {
   final String label;
   final TextInputType inputType;
-  final GlobalKey<FormState> _formKey;
   final String content;
   const TextForm({
     super.key,
@@ -421,7 +420,7 @@ class TextForm extends StatefulWidget {
     required this.label,
     required this.inputType,
     required this.content,
-  }) : _formKey = formKey;
+  });
   _TextForm createState() => _TextForm();
 }
 
