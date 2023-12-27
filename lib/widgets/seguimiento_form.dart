@@ -449,28 +449,26 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          child: Container(
-            //width: 400,
-            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
-            margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              // Bordes redondeados
-              border: Border.all(
-                color: Colors.green, // Color del borde
-                width: 3, // Grosor del borde
-              ),
-              color: Colors.green,
+        Container(
+          //width: 600,
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+          margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            // Bordes redondeados
+            border: Border.all(
+              color: const Color.fromRGBO(20, 153, 74, 1), // Color del borde
+              width: 3, // Grosor del borde
             ),
-            child: const Center(
-              child: Text(
-                '¿Necesita actualizar dato(s)?',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold),
-              ),
+            color: const Color.fromRGBO(20, 153, 74, 1),
+          ),
+          child: const Center(
+            child: Text(
+              '¿Necesita actualizar dato(s)?',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -483,19 +481,25 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
             },
             child: Container(
               //padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 10),
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8), // Bordes redondeados
                 border: Border.all(
-                  color: Colors.green, // Color del borde
-                  width: 2, // Grosor del borde
+                  color:
+                      const Color.fromRGBO(150, 158, 153, 1), // Color del borde
+                  width: 1.5, // Grosor del borde
                 ),
-                color: selectedButton == 1 ? Colors.green : Colors.white,
+                color: selectedButton == 1
+                    ? const Color.fromRGBO(160, 218, 183, 1)
+                    : Colors.white,
               ),
               child: const Center(
                 child: Text(
                   'SI',
-                  style: TextStyle(color: Colors.black, fontSize: 15),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -512,19 +516,24 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
 
                 //padding:const EdgeInsets.symmetric(vertical: 2, horizontal: 40),
                 margin:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8), // Bordes redondeados
                   border: Border.all(
-                    color: Colors.orange, // Color del borde
-                    width: 2, // Grosor del borde
+                    color: Color.fromRGBO(150, 158, 153, 1), // Color del borde
+                    width: 1.5, // Grosor del borde
                   ),
-                  color: selectedButton == 2 ? Colors.orange : Colors.white,
+                  color: selectedButton == 2
+                      ? const Color.fromARGB(255, 250, 162, 29)
+                      : Colors.white,
                 ),
                 child: const Center(
                   child: Text(
                     'NO',
-                    style: TextStyle(color: Colors.black, fontSize: 15),
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
                   ),
                 )),
           ),
@@ -564,15 +573,21 @@ class _Encontro extends State<Encontro> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20), // Bordes redondeados
                   border: Border.all(
-                    color: Colors.green, // Color del borde
-                    width: 3, // Grosor del borde
+                    color: const Color.fromRGBO(
+                        150, 158, 153, 1), // Color del borde
+                    width: 1.5, // Grosor del borde
                   ),
-                  color: selectedButton == 1 ? Colors.green : Colors.white,
+                  color: selectedButton == 1
+                      ? const Color.fromRGBO(160, 218, 183, 1)
+                      : Colors.white,
                 ),
                 child: const Center(
                   child: Text(
                     'SE ENCONTRÓ',
-                    style: TextStyle(color: Colors.black, fontSize: 15),
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold),
                   ),
                 )),
           ),
@@ -585,20 +600,25 @@ class _Encontro extends State<Encontro> {
               });
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
-              margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20), // Bordes redondeados
                 border: Border.all(
-                  color: Colors.orange, // Color del borde
-                  width: 3, // Grosor del borde
+                  color: Color.fromRGBO(150, 158, 153, 1), // Color del borde
+                  width: 1.5, // Grosor del borde
                 ),
-                color: selectedButton == 2 ? Colors.orange : Colors.white,
+                color: selectedButton == 2
+                    ? const Color.fromARGB(255, 250, 162, 29)
+                    : Colors.white,
               ),
               child: const Center(
                 child: Text(
                   'NO SE ENCONTRÓ',
-                  style: TextStyle(color: Colors.black, fontSize: 15),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),

@@ -115,33 +115,39 @@ class _FechaSelectorState extends State<FechaSelector> {
                 onTap: () => _selectDate(context),
                 child: Row(
                   children: [
-                    const Text(
-                      "FECHA :  ",
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10.0, top: 20),
+                      child: Text(
+                        "FECHA :  ",
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 8),
-                    Container(
-                      height: 24,
-                      width: 100,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      padding: const EdgeInsets.all(0.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        _dateFormat.format(selectedDate),
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5.0, top: 20),
+                      child: Container(
+                        height: 24,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        padding: const EdgeInsets.all(0.0),
+                        alignment: Alignment.center,
+                        child: Text(
+                          _dateFormat.format(selectedDate),
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
                     const Padding(
-                      padding: EdgeInsets.only(left: 20.0),
+                      padding: EdgeInsets.only(left: 20.0, top: 20),
                       child: Icon(
                         Icons.calendar_today,
                         color: Color.fromARGB(255, 4, 56, 99),
@@ -152,15 +158,16 @@ class _FechaSelectorState extends State<FechaSelector> {
               ),
             ],
           ),
-          const SizedBox(height: 15),
-          const Text(
-            "Hoja de ruta generada :  ",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.normal,
+          const Padding(
+            padding: EdgeInsets.only(left: 10.0, top: 20),
+            child: Text(
+              "Hoja de ruta generada :  ",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.normal,
+              ),
             ),
           ),
-          const SizedBox(height: 15),
           Row(
             children: [
               InkWell(
@@ -189,7 +196,7 @@ class _FechaSelectorState extends State<FechaSelector> {
                   );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 40.0),
+                  padding: const EdgeInsets.only(left: 40.0, top: 20),
                   child: Row(
                     children: [
                       const Icon(
@@ -212,7 +219,7 @@ class _FechaSelectorState extends State<FechaSelector> {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 70.0),
+                padding: EdgeInsets.only(left: 20.0, top: 20),
                 child: Icon(
                   Icons.download_sharp,
                   color: Color.fromARGB(255, 0, 76, 128),
