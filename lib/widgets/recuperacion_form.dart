@@ -320,7 +320,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                 ),
               ),
               Visibility(
-                visible: (show == 2),
+                visible: (show == 2 || show == 1),
                 child: Column(
                   children: [
                     Align(
