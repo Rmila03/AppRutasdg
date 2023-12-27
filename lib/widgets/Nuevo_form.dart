@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+//import 'package:ruta_sdg/plandia.dart';
 import 'package:ruta_sdg/views/home.dart';
+
+import 'text_form_result.dart';
 
 class NuevoForm extends StatefulWidget {
   const NuevoForm({super.key});
@@ -22,6 +25,7 @@ class NuevoFormState extends State<NuevoForm> {
           key: _formKey,
           child: Column(
             children: [
+              const TextFormInto(label: "DNI"),
               TextForm(
                 formKey: _formKey,
                 label: "Nombres",
@@ -175,9 +179,73 @@ class NuevoFormState extends State<NuevoForm> {
                   ),
                 ),
               ),
-              const TextFormResult(label: "Pago Mensual:"),
-              const TextFormResult(label: "Primera fecha de pago:"),
-              const TextFormResult(label: "Última fecha de pago"),
+              const TextFormResult(
+                label: "Pago Mensual:",
+                content: "",
+              ),
+              const TextFormResult(
+                label: "Primera fecha de pago:",
+                content: "",
+              ),
+              const TextFormResult(
+                label: "Última fecha de pago",
+                content: "",
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.circular(10), // Bordes redondeados
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black
+                            .withOpacity(0.2), // Color y opacidad de la sombra
+                        offset:
+                            const Offset(0, 2), // Desplazamiento de la sombra
+                        blurRadius: 4, // Radio de desenfoque de la sombra
+                      ),
+                    ],
+                  ),
+                  child: const Text(
+                    "FEEDBACK",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 0, 76, 128),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextField(
+                maxLines: 2,
+                keyboardType: TextInputType.multiline,
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(10.0), // Bordes redondeados
+                    borderSide: const BorderSide(
+                      color: Color.fromARGB(255, 0, 76, 128),
+                      width: 2.0, // Grosor del borde al tener foco
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(10.0), // Bordes redondeados
+                    borderSide: const BorderSide(
+                      color:
+                          Colors.grey, // Color del borde cuando no tiene foco
+                      width: 1.0, // Grosor del borde cuando no tiene foco
+                    ),
+                  ),
+                ),
+              ),
               ElevatedButton(
                 onPressed: () {
                   // Validate returns true if the form is valid, or false otherwise.
@@ -193,7 +261,7 @@ class NuevoFormState extends State<NuevoForm> {
                     );
                   }
                 },
-                child: const Text('Guardar'),
+                child: const Text('GUARDAR'),
               ),
             ],
           ),
@@ -203,9 +271,9 @@ class NuevoFormState extends State<NuevoForm> {
   }
 }
 
-class TextFormResult extends StatelessWidget {
+class TextFormInto extends StatelessWidget {
   final String label;
-  const TextFormResult({
+  const TextFormInto({
     super.key,
     required this.label,
   });
@@ -217,7 +285,7 @@ class TextFormResult extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-            width: 150,
+            width: 100,
             child: Text(
               label,
               style: const TextStyle(
@@ -229,23 +297,39 @@ class TextFormResult extends StatelessWidget {
             child: TextFormField(
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[300],
-                border: OutlineInputBorder(
-                  // Borde personalizado
-                  borderRadius:
-                      BorderRadius.circular(10.0), // Bordes redondeados
-                  borderSide: BorderSide.none, // Sin borde visible
-                ),
-                focusedBorder: OutlineInputBorder(
-                  // Borde cuando está enfocado
-                  borderRadius: BorderRadius.circular(10.0),
-                  // ignore: prefer_const_constructors
-                  borderSide: BorderSide(
-                      color: Colors.white, width: 0), // Grosor del borde
-                ),
-                // Puedes añadir más propiedades de estilo según tus necesidades
-              ),
+                  filled: true,
+                  fillColor: Colors.grey[300],
+                  border: OutlineInputBorder(
+                    // Borde personalizado
+                    borderRadius:
+                        BorderRadius.circular(10.0), // Bordes redondeados
+                    borderSide: BorderSide.none, // Sin borde visible
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    // Borde cuando está enfocado
+                    borderRadius: BorderRadius.circular(10.0),
+                    // ignore: prefer_const_constructors
+                    borderSide: BorderSide(
+                        color: Colors.white, width: 0), // Grosor del borde
+                  ),
+                  suffixIcon: InkWell(
+                      onTap: () {
+                        //Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomePage()));
+                      },
+                      child: const Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      )
+                      /*Icons.search,
+                    color: Colors.black,*/
+                      )
+
+                  // Puedes añadir más propiedades de estilo según tus necesidades
+                  ),
             ),
           ),
         ],

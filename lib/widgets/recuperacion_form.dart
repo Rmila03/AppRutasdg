@@ -272,6 +272,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                           ),
                         ),
                       ),
+<<<<<<< HEAD
                     ],
                   ),
                   Row(
@@ -349,6 +350,14 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                             fontWeight: FontWeight.bold,
                             color: Color.fromARGB(255, 0, 76, 128),
                           ),
+=======
+                      child: const Text(
+                        'GUARDAR',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 0, 76, 128),
+                          fontWeight: FontWeight.bold,
+>>>>>>> f6103fed3ba8ad3a4136855731db98aa209a8e03
                         ),
                       ),
                     ),
@@ -497,7 +506,6 @@ class InputTextForm extends StatelessWidget {
 class TextForm extends StatefulWidget {
   final String label;
   final TextInputType inputType;
-  final GlobalKey<FormState> _formKey;
   final String content;
   const TextForm({
     super.key,
@@ -505,7 +513,7 @@ class TextForm extends StatefulWidget {
     required this.label,
     required this.inputType,
     required this.content,
-  }) : _formKey = formKey;
+  });
   _TextForm createState() => _TextForm();
 }
 

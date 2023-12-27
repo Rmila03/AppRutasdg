@@ -291,7 +291,7 @@ class PromotionFormState extends State<PromotionForm> {
                         'GUARDAR',
                         style: TextStyle(
                           fontSize: 15,
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 0, 76, 128),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -413,7 +413,6 @@ class InputTextForm extends StatelessWidget {
 class TextForm extends StatefulWidget {
   final String label;
   final TextInputType inputType;
-  final GlobalKey<FormState> _formKey;
   final String content;
   const TextForm({
     super.key,
@@ -421,7 +420,7 @@ class TextForm extends StatefulWidget {
     required this.label,
     required this.inputType,
     required this.content,
-  }) : _formKey = formKey;
+  });
   _TextForm createState() => _TextForm();
 }
 
@@ -582,9 +581,11 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
                 ),
                 color: selectedButton == 1 ? Colors.green : Colors.white,
               ),
-              child: const Text(
-                'SI',
-                style: TextStyle(color: Colors.black, fontSize: 15),
+              child: const Center(
+                child: Text(
+                  'SI',
+                  style: TextStyle(color: Colors.black, fontSize: 15),
+                ),
               ),
             ),
           ),
@@ -607,9 +608,11 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
                 ),
                 color: selectedButton == 2 ? Colors.orange : Colors.white,
               ),
-              child: const Text(
-                'NO',
-                style: TextStyle(color: Colors.black, fontSize: 15),
+              child: const Center(
+                child: Text(
+                  'NO',
+                  style: TextStyle(color: Colors.black, fontSize: 15),
+                ),
               ),
             ),
           ),

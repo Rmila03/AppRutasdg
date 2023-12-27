@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/user.dart';
 import 'package:ruta_sdg/views/home.dart';
 import 'package:ruta_sdg/views/notificaciones.dart';
 import 'package:ruta_sdg/views/reportes.dart';

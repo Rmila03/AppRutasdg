@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/user.dart';
 import 'package:ruta_sdg/views/seguimiento.dart';
+import 'package:ruta_sdg/widgets/text_form_result.dart';
 
 class SeguimientoForm extends StatefulWidget {
   final UserData user;
@@ -111,18 +112,26 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                 height: 10,
               ),
               const TextFormResult(
-                  label: "Tipo de socio:", InputType: TextInputType.text),
+                label: "Tipo de socio:",
+                content: "GENERICO",
+              ),
               const TextFormResult(
-                  label: "Tipo de crédito:", InputType: TextInputType.text),
+                label: "Tipo de crédito:",
+                content: "CONSUMO",
+              ),
               const TextFormResult(
-                  label: "Tipo de producto:", InputType: TextInputType.text),
+                label: "Tipo de producto:",
+                content: "INDEPENDIENTE",
+              ),
               const TextFormResult(
-                  label: "Modalidad:", InputType: TextInputType.text),
-              const SizedBox(height: 20),
+                label: "Modalidad:",
+                content: "COOPENAVIDEÑO",
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               const Encontro(),
-              const SizedBox(height: 20),
               const RadioButtonCustom(),
-              const SizedBox(height: 20),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
@@ -221,7 +230,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                         'GUARDAR',
                         style: TextStyle(
                           fontSize: 15,
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 0, 76, 128),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -232,59 +241,6 @@ class SeguimientoFormState extends State<SeguimientoForm> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class TextFormResult extends StatelessWidget {
-  final String label;
-  final TextInputType InputType;
-  const TextFormResult({
-    super.key,
-    required this.label,
-    required this.InputType,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 150,
-            child: Text(
-              label,
-              style: const TextStyle(
-                fontSize: 12,
-              ),
-            ),
-          ),
-          Expanded(
-            child: TextFormField(
-              keyboardType: InputType,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[300],
-                contentPadding: const EdgeInsets.symmetric(vertical: 4),
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(10.0), // Bordes redondeados
-                  borderSide: BorderSide.none, // Sin borde visible
-                ),
-                focusedBorder: OutlineInputBorder(
-                  // Borde cuando está enfocado
-                  borderRadius: BorderRadius.circular(10.0),
-                  // ignore: prefer_const_constructors
-                  borderSide: BorderSide(
-                      color: Colors.white, width: 0), // Grosor del borde
-                ),
-                // Puedes añadir más propiedades de estilo según tus necesidades
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -343,7 +299,6 @@ class InputTextForm extends StatelessWidget {
 class TextForm extends StatefulWidget {
   final String label;
   final TextInputType inputType;
-  final GlobalKey<FormState> _formKey;
   final String content;
   const TextForm({
     super.key,
@@ -351,7 +306,7 @@ class TextForm extends StatefulWidget {
     required this.label,
     required this.inputType,
     required this.content,
-  }) : _formKey = formKey;
+  });
   _TextForm createState() => _TextForm();
 }
 
@@ -494,79 +449,85 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          width: 250,
-          //padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
-          margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            // Bordes redondeados
-            border: Border.all(
-              color: Colors.green, // Color del borde
-              width: 3, // Grosor del borde
-            ),
-            color: Colors.green,
-          ),
-          child: const Center(
-            child: Text(
-              '¿Necesita actualizar dato(s)?',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              selectedButton = 1; // Primer botón seleccionado
-            });
-          },
+        Expanded(
           child: Container(
-            width: 50,
-            //padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 40),
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            //width: 400,
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+            margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8), // Bordes redondeados
+              borderRadius: BorderRadius.circular(10),
+              // Bordes redondeados
               border: Border.all(
                 color: Colors.green, // Color del borde
-                width: 2, // Grosor del borde
+                width: 3, // Grosor del borde
               ),
-              color: selectedButton == 1 ? Colors.green : Colors.white,
+              color: Colors.green,
             ),
             child: const Center(
               child: Text(
-                'SI',
-                style: TextStyle(color: Colors.black, fontSize: 15),
+                '¿Necesita actualizar dato(s)?',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              selectedButton = 2; // Segundo botón seleccionado
-            });
-          },
-          child: Container(
-              width: 50,
-              //padding:const EdgeInsets.symmetric(vertical: 2, horizontal: 40),
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                selectedButton = 1; // Primer botón seleccionado
+              });
+            },
+            child: Container(
+              //padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 10),
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8), // Bordes redondeados
                 border: Border.all(
-                  color: Colors.orange, // Color del borde
+                  color: Colors.green, // Color del borde
                   width: 2, // Grosor del borde
                 ),
-                color: selectedButton == 2 ? Colors.orange : Colors.white,
+                color: selectedButton == 1 ? Colors.green : Colors.white,
               ),
               child: const Center(
                 child: Text(
-                  'NO',
+                  'SI',
                   style: TextStyle(color: Colors.black, fontSize: 15),
                 ),
-              )),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                selectedButton = 2; // Segundo botón seleccionado
+              });
+            },
+            child: Container(
+
+                //padding:const EdgeInsets.symmetric(vertical: 2, horizontal: 40),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8), // Bordes redondeados
+                  border: Border.all(
+                    color: Colors.orange, // Color del borde
+                    width: 2, // Grosor del borde
+                  ),
+                  color: selectedButton == 2 ? Colors.orange : Colors.white,
+                ),
+                child: const Center(
+                  child: Text(
+                    'NO',
+                    style: TextStyle(color: Colors.black, fontSize: 15),
+                  ),
+                )),
+          ),
         ),
       ],
     );
@@ -596,7 +557,8 @@ class _Encontro extends State<Encontro> {
               });
             },
             child: Container(
-                //padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
                 margin:
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                 decoration: BoxDecoration(
@@ -623,7 +585,7 @@ class _Encontro extends State<Encontro> {
               });
             },
             child: Container(
-              //padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 30),
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
               margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20), // Bordes redondeados
