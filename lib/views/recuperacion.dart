@@ -205,7 +205,7 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
                           cells: [
                             DataCell(Text(user.number)),
                             DataCell(Text(user.dni)),
-                            DataCell(Text(user.name)),
+                            DataCell(Text("${user.name} ${user.lastName}")),
                             const DataCell(Icon(Icons.check)),
                           ],
                         );
@@ -215,7 +215,6 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
                 ),
               ),
             ),
-//////////////////////
           ],
         ),
       ),

@@ -47,7 +47,7 @@ class _TextFormResult extends State<TextFormResult> {
               enabled: false,
               decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.grey[300],
+                fillColor: Colors.grey[100],
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
                 border: OutlineInputBorder(

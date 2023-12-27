@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/user.dart';
 import 'package:ruta_sdg/views/recuperacion.dart';
+import 'package:ruta_sdg/widgets/radio_button_custom.dart';
+import 'package:ruta_sdg/widgets/text_form_result.dart';
 
 class RecuperacionForm extends StatefulWidget {
   final UserData user;
@@ -14,6 +16,8 @@ class RecuperacionForm extends StatefulWidget {
 
 class RecuperacionFormState extends State<RecuperacionForm> {
   final _formKey = GlobalKey<FormState>();
+  int show = 0;
+  int valorSeleccionado = 0;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -108,21 +112,21 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                 ],
               ),
               //DropdownButtonFormField(items: , onChanged: onChanged),
-              const CustomDropdown(
-                items: ['', 'Socio 1', 'Socio 2', 'Socio 3'],
+              const TextFormResult(
                 label: "Tipo de Socio:",
+                content: "CAMPAÑA",
               ),
-              const CustomDropdown(
-                items: ['', 'Crédito 1', 'Crédito 2', 'Crédito 3'],
+              const TextFormResult(
                 label: "Tipo de Crédito:",
+                content: "CONSUMO",
               ),
-              const CustomDropdown(
-                items: ['', 'Producto 1', 'Producto 2', 'Producto 3'],
+              const TextFormResult(
                 label: "Tipo de Producto:",
+                content: "INDEPENDIENTE",
               ),
-              const CustomDropdown(
-                items: ['', 'Modalidad 1', 'Modalidad 2', 'Modalidad 3'],
+              const TextFormResult(
                 label: "Modalidad:",
+                content: "COOPENAVIDEÑO",
               ),
               const Align(
                 alignment: Alignment.centerLeft,
@@ -187,174 +191,254 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                 ),
               ),
               const TextFormResult(
-                  label: "Pago Mensual:", InputType: TextInputType.number),
+                label: "Pago Mensual:",
+                content: "CAMPAÑA",
+              ),
               const TextFormResult(
-                  label: "Primera fecha de pago:",
-                  InputType: TextInputType.datetime),
+                label: "Primera fecha de pago:",
+                content: "CAMPAÑA",
+              ),
               const TextFormResult(
-                  label: "Última fehca de pago",
-                  InputType: TextInputType.datetime),
-              Align(
+                label: "Última fehca de pago",
+                content: "CAMPAÑA",
+              ),
+              RadioButtonCustom(
+                option1: "SE ENCONTRÓ",
+                option2: "NO SE ENCONTRÓ",
+                onValueChanged: (int newValue) {
+                  setState(() {
+                    valorSeleccionado = newValue;
+                    show = newValue;
+                  });
+                },
+              ),
+              const SizedBox(height: 15),
+              const Align(
                 alignment: Alignment.centerLeft,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                        BorderRadius.circular(10), // Bordes redondeados
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black
-                            .withOpacity(0.2), // Color y opacidad de la sombra
-                        offset:
-                            const Offset(0, 2), // Desplazamiento de la sombra
-                        blurRadius: 4, // Radio de desenfoque de la sombra
-                      ),
-                    ],
-                  ),
-                  child: const Text(
-                    "FEEDBACK",
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 76, 128),
-                    ),
+                child: Text(
+                  "N° Visitas: 3",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextField(
-                maxLines: 2,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Bordes redondeados
-                    borderSide: const BorderSide(
-                      color: Color.fromARGB(255, 0, 76, 128),
-                      width: 2.0, // Grosor del borde al tener foco
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Bordes redondeados
-                    borderSide: const BorderSide(
-                      color:
-                          Colors.grey, // Color del borde cuando no tiene foco
-                      width: 1.0, // Grosor del borde cuando no tiene foco
-                    ),
-                  ),
-                ),
-              ),
-              const RadioButtonCustom(),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
                 children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Validate returns true if the form is valid, or false otherwise.
-                        if (_formKey.currentState!.validate()) {
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
-                          /*ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );*/
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const RecuperacionPage()),
-                          );
-                        }
-                      },
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                          const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 10), // Padding en todos los lados
+                  Row(
+                    children: [
+                      const Expanded(
+                        child: Column(
+                          children: [
+                            TextFormResult(
+                                label: "Crédito", content: "S/. 10000.00"),
+                            TextFormResult(
+                                label: "Monto a pagar",
+                                content: "S/. 1150.53.00"),
+                            TextFormResult(
+                                label: "Cuota a Pagar", content: "8"),
+                          ],
                         ),
-                        shape: MaterialStateProperty.all<OutlinedBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                8.0), // Bordes redondeados
-                            side: const BorderSide(
-                                color: Color.fromARGB(255, 0, 76, 128),
-                                width: 2.0), // Color y grosor del borde
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                          ),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30.0),
+                              color: Colors.grey[300],
+                            ),
+                            child: const Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.insert_drive_file_rounded,
+                                    size: 60, color: Colors.black),
+                                SizedBox(height: 5),
+                                Text(
+                                  'Mas detalles',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                      child: const Text(
-                        'GUARDAR',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Expanded(
+                        child: TextFormResult(
+                            label: "Fecha de CPAnt",
+                            content: "12 de noviembre del 2023"),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(left: 20),
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            shape: const RoundedRectangleBorder(
+                              side: BorderSide.none, // Borde transparente
+                              borderRadius: BorderRadius.zero, // Bordes cero
+                            ),
+                          ),
+                          child: const Text(
+                            'Ver más',
+                            style: TextStyle(color: Colors.black, fontSize: 12),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Visibility(
+                visible: (show == 1),
+                child: const Column(
+                  children: [
+                    Text(
+                      'COMPROMISO DE PAGO',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 0, 76, 128),
+                          fontSize: 17,
+                          fontWeight: FontWeight.w900),
+                    ),
+                    TextFormResult(label: "Fecha de Cancelación", content: ""),
+                    TextFormResult(label: "Método de pago:", content: ""),
+                  ],
+                ),
+              ),
+              Visibility(
+                visible: (show == 2),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
+                              BorderRadius.circular(10), // Bordes redondeados
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(
+                                  0.2), // Color y opacidad de la sombra
+                              offset: const Offset(
+                                  0, 2), // Desplazamiento de la sombra
+                              blurRadius: 4, // Radio de desenfoque de la sombra
+                            ),
+                          ],
+                        ),
+                        child: const Text(
+                          "FEEDBACK",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 0, 76, 128),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextField(
+                      maxLines: 2,
+                      keyboardType: TextInputType.multiline,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(10.0), // Bordes redondeados
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 0, 76, 128),
+                            width: 2.0, // Grosor del borde al tener foco
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(10.0), // Bordes redondeados
+                          borderSide: const BorderSide(
+                            color: Colors
+                                .grey, // Color del borde cuando no tiene foco
+                            width: 1.0, // Grosor del borde cuando no tiene foco
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 20),
+              Visibility(
+                visible: (show != 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Validate returns true if the form is valid, or false otherwise.
+                          if (_formKey.currentState!.validate()) {
+                            // If the form is valid, display a snackbar. In the real world,
+                            // you'd often call a server or save the information in a database.
+                            /*ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Processing Data')),
+                            );*/
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const RecuperacionPage()),
+                            );
+                          }
+                        },
+                        style: ButtonStyle(
+                          padding:
+                              MaterialStateProperty.all<EdgeInsetsGeometry>(
+                            const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 10), // Padding en todos los lados
+                          ),
+                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  8.0), // Bordes redondeados
+                              side: const BorderSide(
+                                  color: Color.fromARGB(255, 0, 76, 128),
+                                  width: 2.0), // Color y grosor del borde
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          'GUARDAR',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class TextFormResult extends StatelessWidget {
-  final String label;
-  final TextInputType InputType;
-  const TextFormResult({
-    super.key,
-    required this.label,
-    required this.InputType,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 150,
-            child: Text(
-              label,
-              style: const TextStyle(
-                fontSize: 12,
-              ),
-            ),
-          ),
-          Expanded(
-            child: TextFormField(
-              keyboardType: InputType,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[300],
-                contentPadding: const EdgeInsets.symmetric(vertical: 4),
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(10.0), // Bordes redondeados
-                  borderSide: BorderSide.none, // Sin borde visible
-                ),
-                focusedBorder: OutlineInputBorder(
-                  // Borde cuando está enfocado
-                  borderRadius: BorderRadius.circular(10.0),
-                  // ignore: prefer_const_constructors
-                  borderSide: BorderSide(
-                      color: Colors.white, width: 0), // Grosor del borde
-                ),
-                // Puedes añadir más propiedades de estilo según tus necesidades
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -545,76 +629,6 @@ class CustomDropdownState extends State<CustomDropdown> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class RadioButtonCustom extends StatefulWidget {
-  const RadioButtonCustom({super.key});
-
-  @override
-  _RadioButtonCustomState createState() => _RadioButtonCustomState();
-}
-
-class _RadioButtonCustomState extends State<RadioButtonCustom> {
-  int selectedButton = 0; // Inicialmente ningún botón seleccionado
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedButton = 1; // Primer botón seleccionado
-              });
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 40),
-              margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8), // Bordes redondeados
-                border: Border.all(
-                  color: Colors.green, // Color del borde
-                  width: 2, // Grosor del borde
-                ),
-                color: selectedButton == 1 ? Colors.green : Colors.white,
-              ),
-              child: const Text(
-                'SI',
-                style: TextStyle(color: Colors.black, fontSize: 15),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedButton = 2; // Segundo botón seleccionado
-              });
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 40),
-              margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8), // Bordes redondeados
-                border: Border.all(
-                  color: Colors.orange, // Color del borde
-                  width: 2, // Grosor del borde
-                ),
-                color: selectedButton == 2 ? Colors.orange : Colors.white,
-              ),
-              child: const Text(
-                'NO',
-                style: TextStyle(color: Colors.black, fontSize: 15),
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
