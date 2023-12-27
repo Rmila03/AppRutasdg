@@ -3,6 +3,7 @@ import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
+import 'package:intl/intl.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -71,6 +72,7 @@ class FechaSelector extends StatefulWidget {
 
 class _FechaSelectorState extends State<FechaSelector> {
   DateTime selectedDate = DateTime.now();
+  final DateFormat _dateFormat = DateFormat('dd/MM/yyyy');
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = (await showDatePicker(
@@ -81,12 +83,10 @@ class _FechaSelectorState extends State<FechaSelector> {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
-            primaryColor:
-                const Color.fromARGB(255, 4, 56, 99), // Define el color azul
-            hintColor: const Color.fromARGB(
-                255, 140, 178, 210), // Define el color azul
+            primaryColor: const Color.fromARGB(255, 4, 56, 99),
+            hintColor: const Color.fromARGB(255, 140, 178, 210),
             colorScheme: const ColorScheme.light(
-              primary: Color.fromARGB(255, 4, 56, 99), // Define el color azul
+              primary: Color.fromARGB(255, 4, 56, 99),
             ),
             buttonTheme:
                 const ButtonThemeData(textTheme: ButtonTextTheme.primary),
@@ -111,20 +111,16 @@ class _FechaSelectorState extends State<FechaSelector> {
         children: [
           Row(
             children: [
-              const Text(
-                "Fecha  :  ",
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
               GestureDetector(
                 onTap: () => _selectDate(context),
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons.calendar_today,
-                      color: Color.fromARGB(255, 4, 56, 99),
+                    const Text(
+                      "FECHA :  ",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(width: 8),
                     Container(
@@ -132,16 +128,23 @@ class _FechaSelectorState extends State<FechaSelector> {
                       width: 100,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.blue),
-                        borderRadius: BorderRadius.circular(4.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                       padding: const EdgeInsets.all(0.0),
                       alignment: Alignment.center,
                       child: Text(
-                        "${selectedDate.toLocal()}".split(' ')[0],
+                        _dateFormat.format(selectedDate),
                         style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                         ),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20.0),
+                      child: Icon(
+                        Icons.calendar_today,
+                        color: Color.fromARGB(255, 4, 56, 99),
                       ),
                     ),
                   ],
@@ -149,13 +152,74 @@ class _FechaSelectorState extends State<FechaSelector> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 15),
           const Text(
             "Hoja de ruta generada :  ",
             style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.bold,
+              fontSize: 15,
+              fontWeight: FontWeight.normal,
             ),
+          ),
+          const SizedBox(height: 15),
+          Row(
+            children: [
+              InkWell(
+                onTap: () {
+                  // Lógica para mostrar la ventana emergente del PDF
+                  // Puedes utilizar showDialog para mostrar un AlertDialog o cualquier otra lógica que prefieras.
+                  // Aquí hay un ejemplo de cómo usar showDialog:
+                  showDialog(
+                    context:
+                        context, // Asegúrate de tener una referencia al contexto actual
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text(
+                            "Hoja de ruta del ${_dateFormat.format(selectedDate)}"),
+                        content: const Text("Contenido de la Hoja de Ruta"),
+                        actions: [
+                          TextButton(
+                            child: const Text("Cerrar"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 40.0),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.picture_as_pdf,
+                        color: Colors.red,
+                        size: 40,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Text(
+                          "Hoja de ruta del ${_dateFormat.format(selectedDate)}",
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 70.0),
+                child: Icon(
+                  Icons.download_sharp,
+                  color: Color.fromARGB(255, 0, 76, 128),
+                  size: 35,
+                ),
+              ),
+            ],
           ),
         ],
       ),
