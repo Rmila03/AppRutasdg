@@ -45,6 +45,7 @@ class _TextFormResult extends State<TextFormResult> {
             child: TextFormField(
               controller: _controller,
               enabled: false,
+              textAlign: TextAlign.center,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.grey[100],
