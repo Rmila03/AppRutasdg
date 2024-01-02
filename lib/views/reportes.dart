@@ -66,7 +66,6 @@ class FechaSelector extends StatefulWidget {
   const FechaSelector({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _FechaSelectorState createState() => _FechaSelectorState();
 }
 
@@ -79,7 +78,7 @@ class _FechaSelectorState extends State<FechaSelector> {
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(2022),
-      lastDate: DateTime(2024),
+      lastDate: DateTime(2025),
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
@@ -111,50 +110,21 @@ class _FechaSelectorState extends State<FechaSelector> {
         children: [
           Row(
             children: [
-              GestureDetector(
-                onTap: () => _selectDate(context),
-                child: Row(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10.0, top: 20),
-                      child: Text(
-                        "FECHA :  ",
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5.0, top: 20),
-                      child: Container(
-                        height: 24,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blue),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        padding: const EdgeInsets.all(0.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          _dateFormat.format(selectedDate),
-                          style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 20.0, top: 20),
-                      child: Icon(
-                        Icons.calendar_today,
-                        color: Color.fromARGB(255, 4, 56, 99),
-                      ),
-                    ),
-                  ],
+              const Padding(
+                padding: EdgeInsets.only(left: 10.0, top: 20),
+                child: Text(
+                  "FECHA :  ",
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+              ),
+              const SizedBox(width: 8),
+              FechaGestureDetector(
+                selectedDate: selectedDate,
+                selectDateCallback: _selectDate,
+                dateFormat: _dateFormat,
               ),
             ],
           ),
@@ -168,68 +138,134 @@ class _FechaSelectorState extends State<FechaSelector> {
               ),
             ),
           ),
-          Row(
+          FechaContent(selectedDate: selectedDate, dateFormat: _dateFormat),
+        ],
+      ),
+    );
+  }
+}
+
+class FechaGestureDetector extends StatelessWidget {
+  const FechaGestureDetector({
+    super.key,
+    required this.selectedDate,
+    required this.selectDateCallback,
+    required this.dateFormat,
+  });
+
+  final DateTime selectedDate;
+  final Function(BuildContext) selectDateCallback;
+  final DateFormat dateFormat;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        GestureDetector(
+          onTap: () => selectDateCallback(context),
+          child: Row(
             children: [
-              InkWell(
-                onTap: () {
-                  // Lógica para mostrar la ventana emergente del PDF
-                  // Puedes utilizar showDialog para mostrar un AlertDialog o cualquier otra lógica que prefieras.
-                  // Aquí hay un ejemplo de cómo usar showDialog:
-                  showDialog(
-                    context:
-                        context, // Asegúrate de tener una referencia al contexto actual
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text(
-                            "Hoja de ruta del ${_dateFormat.format(selectedDate)}"),
-                        content: const Text("Contenido de la Hoja de Ruta"),
-                        actions: [
-                          TextButton(
-                            child: const Text("Cerrar"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 40.0, top: 20),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.picture_as_pdf,
-                        color: Colors.red,
-                        size: 40,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: Text(
-                          "Hoja de ruta del ${_dateFormat.format(selectedDate)}",
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                    ],
+              Padding(
+                padding: const EdgeInsets.only(left: 5.0, top: 20),
+                child: Container(
+                  height: 24,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  padding: const EdgeInsets.all(0.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    dateFormat.format(selectedDate),
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 20.0, top: 20),
                 child: Icon(
-                  Icons.download_sharp,
-                  color: Color.fromARGB(255, 0, 76, 128),
-                  size: 35,
+                  Icons.calendar_today,
+                  color: Color.fromARGB(255, 4, 56, 99),
                 ),
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
+    );
+  }
+}
+
+class FechaContent extends StatelessWidget {
+  const FechaContent({
+    required this.selectedDate,
+    required this.dateFormat,
+  });
+
+  final DateTime selectedDate;
+  final DateFormat dateFormat;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        InkWell(
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text(
+                      "Hoja de ruta del ${dateFormat.format(selectedDate)}"),
+                  content: const Text("Contenido de la Hoja de Ruta"),
+                  actions: [
+                    TextButton(
+                      child: const Text("Cerrar"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(left: 40.0, top: 20),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.picture_as_pdf,
+                  color: Colors.red,
+                  size: 40,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    "Hoja de ruta del ${dateFormat.format(selectedDate)}",
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(left: 20.0, top: 20),
+          child: Icon(
+            Icons.download_sharp,
+            color: Color.fromARGB(255, 0, 76, 128),
+            size: 35,
+          ),
+        ),
+      ],
     );
   }
 }
