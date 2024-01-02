@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ruta_sdg/user.dart';
 import 'package:ruta_sdg/views/recuperacion.dart';
+import 'package:ruta_sdg/views/reportes.dart';
 import 'package:ruta_sdg/widgets/radio_button_custom.dart';
 import 'package:ruta_sdg/widgets/text_form_result.dart';
 
@@ -16,6 +18,7 @@ class RecuperacionForm extends StatefulWidget {
 
 class RecuperacionFormState extends State<RecuperacionForm> {
   final _formKey = GlobalKey<FormState>();
+  DateTime selectedDate = DateTime.now();
   int show = 0;
   int valorSeleccionado = 0;
   @override
@@ -128,80 +131,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                 label: "Modalidad:",
                 content: "COOPENAVIDEÑO",
               ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Cálculo de Crédito",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color.fromARGB(255, 0, 76, 128),
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  const Expanded(
-                    child: InputTextForm(
-                      label: "Crédito total",
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Container(
-                        width: 20,
-                        height: 5,
-                        color: Colors.amber,
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const Row(
-                children: [
-                  Expanded(
-                    child: InputTextForm(
-                      label: "Plazo(meses)",
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40),
-                      child: InputTextForm(
-                        label: "Tasa de interés(%)",
-                        percentage: "%",
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Cálculo",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const TextFormResult(
-                label: "Pago Mensual:",
-                content: "CAMPAÑA",
-              ),
-              const TextFormResult(
-                label: "Primera fecha de pago:",
-                content: "CAMPAÑA",
-              ),
-              const TextFormResult(
-                label: "Última fehca de pago",
-                content: "CAMPAÑA",
-              ),
+
               RadioButtonCustom(
                 option1: "SE ENCONTRÓ",
                 option2: "NO SE ENCONTRÓ",
@@ -234,8 +164,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                             TextFormResult(
                                 label: "Crédito", content: "S/. 10000.00"),
                             TextFormResult(
-                                label: "Monto a pagar",
-                                content: "S/. 1150.53.00"),
+                                label: "Monto a pagar", content: "S/. 1150.53"),
                             TextFormResult(
                                 label: "Cuota a Pagar", content: "8"),
                           ],
@@ -261,11 +190,12 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Icon(Icons.insert_drive_file_rounded,
-                                    size: 60, color: Colors.black),
+                                    size: 30, color: Colors.black),
                                 SizedBox(height: 5),
                                 Text(
                                   'Mas detalles',
-                                  style: TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 8),
                                 ),
                               ],
                             ),
@@ -303,19 +233,24 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                   ),
                 ],
               ),
+              const SizedBox(height: 15),
               Visibility(
                 visible: (show == 1),
                 child: const Column(
                   children: [
-                    Text(
-                      'COMPROMISO DE PAGO',
-                      style: TextStyle(
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "COMPROMISO DE PAGO",
+                        style: TextStyle(
+                          fontSize: 20,
                           color: Color.fromARGB(255, 0, 76, 128),
-                          fontSize: 17,
-                          fontWeight: FontWeight.w900),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                    TextFormResult(label: "Fecha de Cancelación", content: ""),
-                    TextFormResult(label: "Método de pago:", content: ""),
+                    TextFormInto(label: "Fecha de cancelación: "),
+                    TextFormInto(label: "Método de pago: ")
                   ],
                 ),
               ),
@@ -478,13 +413,7 @@ class InputTextForm extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0), // Bordes redondeados
                 borderSide: BorderSide.none, // Sin borde visible
               ),
-              focusedBorder: OutlineInputBorder(
-                // Borde cuando está enfocado
-                borderRadius: BorderRadius.circular(10.0),
-                // ignore: prefer_const_constructors
-                borderSide: BorderSide(
-                    color: Colors.white, width: 0), // Grosor del borde
-              ),
+
               // Puedes añadir más propiedades de estilo según tus necesidades
             ),
           ),
@@ -494,10 +423,74 @@ class InputTextForm extends StatelessWidget {
   }
 }
 
+class TextFormInto extends StatelessWidget {
+  final String label;
+  const TextFormInto({
+    super.key,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      child: Row(
+        children: [
+          SizedBox(
+            child: Text(
+              label,
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Expanded(
+            child: TextFormField(
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: const Color.fromARGB(255, 240, 240, 240),
+                border: OutlineInputBorder(
+                  borderRadius:
+                      BorderRadius.circular(10.0), // Bordes redondeados
+                  borderSide: BorderSide.none, // Sin borde visible
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TextFormDate extends StatelessWidget {
+  final String label;
+  const TextFormDate({
+    super.key,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(children: [
+        SizedBox(
+          width: 100,
+          child: Text(
+            label,
+            style: const TextStyle(
+              fontSize: 10,
+            ),
+          ),
+        ),
+      ]),
+    );
+  }
+}
+
 class TextForm extends StatefulWidget {
   final String label;
   final TextInputType inputType;
-  final GlobalKey<FormState> _formKey;
   final String content;
   const TextForm({
     super.key,
@@ -505,7 +498,7 @@ class TextForm extends StatefulWidget {
     required this.label,
     required this.inputType,
     required this.content,
-  }) : _formKey = formKey;
+  });
   _TextForm createState() => _TextForm();
 }
 
