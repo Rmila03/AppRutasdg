@@ -2,32 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 
-class HomeSupervisorPage extends StatelessWidget {
-  const HomeSupervisorPage({super.key});
+class DashboardSupervisorPage extends StatefulWidget {
+  const DashboardSupervisorPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomeSupervisorPage(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+  State<DashboardSupervisorPage> createState() =>
+      _DashboardSupervisorPageState();
 }
 
-class MyHomeSupervisorPage extends StatefulWidget {
-  const MyHomeSupervisorPage({super.key});
-
-  @override
-  State<MyHomeSupervisorPage> createState() => _MyHomeSupervisorPageState();
-}
-
-class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage> {
+class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
         children: [
-          const MenuSupervisor(name: "PLAN DEL DÍA"),
+          const MenuSupervisor(name: "DASHBOARD"),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -36,7 +25,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage> {
                 children: [
                   const SizedBox(height: 20.0),
                   const Text(
-                    'HOLA Ramón',
+                    'HOLA Ramónesssssssssss',
                     style: TextStyle(
                       color: Colors.orange,
                       fontSize: 20.0,

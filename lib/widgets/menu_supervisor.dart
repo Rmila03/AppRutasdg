@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:ruta_sdg/main.dart';
+import 'package:ruta_sdg/supervisor/dashboard_supervisor.dart';
 import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
 
 class MenuSupervisor extends StatefulWidget {
-  const MenuSupervisor({super.key});
+  final String? name;
+  const MenuSupervisor({super.key, this.name});
 
   @override
   State<MenuSupervisor> createState() => _MenuSupervisorState();
 }
 
 class _MenuSupervisorState extends State<MenuSupervisor> {
-  String selectedMenu = 'PLAN DEL DÍA'; // Inicialmente seleccionado 'Inicio'
+  String selectedMenu = 'PLAN DEL DÍA';
   Map<String, Widget> screens = {
     'PLAN DEL DÍA': const MyHomeSupervisorPage(),
     'REPORTES': const MyHomeSupervisorPage(),
     'CARTERA': const MyHomeSupervisorPage(),
-    'DASHBOARD': const MyHomeSupervisorPage(),
+    'DASHBOARD': const DashboardSupervisorPage(),
     'MORA': const MyHomeSupervisorPage(),
     'HISTORIAL': const MyHomeSupervisorPage(),
+    'CERRAR SESIÓN': const Login(title: ''),
     // Agrega las demás pantallas según sea necesario
   };
+  @override
+  void initState() {
+    super.initState();
+    selectedMenu = widget.name ?? 'PLAN DEL DÍA';
+  }
+
   @override
   Widget build(BuildContext context) {
     Color customColor = const Color(0xFFD9DEDA);
@@ -57,6 +67,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
           buildMenuItem('DASHBOARD'),
           buildMenuItem('MORA'),
           buildMenuItem('HISTORIAL'),
+          buildMenuItem('CERRAR SESIÓN'),
         ],
       ),
     );
