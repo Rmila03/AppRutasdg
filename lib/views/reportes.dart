@@ -74,7 +74,7 @@ class _FechaSelectorState extends State<FechaSelector> {
   final DateFormat _dateFormat = DateFormat('dd/MM/yyyy');
 
   Future<void> _selectDate(BuildContext context) async {
-    final DateTime picked = (await showDatePicker(
+    DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(2022),
@@ -93,10 +93,18 @@ class _FechaSelectorState extends State<FechaSelector> {
           child: child!,
         );
       },
-    ))!;
-    if (picked != selectedDate) {
+    );
+
+    // Verificar si el usuario seleccionó una fecha o canceló la selección
+    if (picked != null) {
       setState(() {
-        selectedDate = picked;
+        selectedDate = picked!;
+      });
+    } else {
+      // Si el usuario canceló la selección, asignar la fecha actual
+      picked = DateTime.now();
+      setState(() {
+        selectedDate = picked!;
       });
     }
   }

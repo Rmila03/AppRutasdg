@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:ruta_sdg/user.dart';
 import 'package:ruta_sdg/views/recuperacion.dart';
-import 'package:ruta_sdg/views/reportes.dart';
 import 'package:ruta_sdg/widgets/radio_button_custom.dart';
 import 'package:ruta_sdg/widgets/text_form_result.dart';
 
