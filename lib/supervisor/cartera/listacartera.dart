@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/supervisor/cartera/cartera_form.dart';
 import "package:ruta_sdg/user.dart";
-import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 
 class ListaSupervisor extends StatefulWidget {
   final Color tabColorLeft;
   final String tabName;
   final UserData? user;
   const ListaSupervisor({
-    Key? key,
+    super.key,
     required this.tabColorLeft,
     required this.tabName,
     this.user,
-  }) : super(key: key);
+  });
 
   @override
   ListaSupervisorState createState() => ListaSupervisorState();
@@ -93,10 +92,10 @@ class Tab extends StatelessWidget {
   final String name;
 
   const Tab({
-    Key? key,
+    super.key,
     required this.colorLeft,
     required this.name,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

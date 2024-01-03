@@ -1,6 +1,5 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
 import 'package:ruta_sdg/supervisor/cartera/listacartera.dart';
 import 'package:ruta_sdg/user.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';

@@ -544,8 +544,7 @@ class _TextForm extends State<TextForm> {
 class CustomDropdown extends StatefulWidget {
   final List<String> items;
   final String label;
-  const CustomDropdown({Key? key, required this.items, required this.label})
-      : super(key: key);
+  const CustomDropdown({super.key, required this.items, required this.label});
 
   @override
   CustomDropdownState createState() => CustomDropdownState();

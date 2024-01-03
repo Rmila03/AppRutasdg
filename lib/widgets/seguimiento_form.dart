@@ -307,11 +307,12 @@ class TextForm extends StatefulWidget {
     required this.inputType,
     required this.content,
   });
+  @override
   _TextForm createState() => _TextForm();
 }
 
 class _TextForm extends State<TextForm> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -357,8 +358,7 @@ class _TextForm extends State<TextForm> {
 class CustomDropdown extends StatefulWidget {
   final List<String> items;
   final String label;
-  const CustomDropdown({Key? key, required this.items, required this.label})
-      : super(key: key);
+  const CustomDropdown({super.key, required this.items, required this.label});
 
   @override
   CustomDropdownState createState() => CustomDropdownState();
@@ -520,7 +520,8 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8), // Bordes redondeados
                   border: Border.all(
-                    color: Color.fromRGBO(150, 158, 153, 1), // Color del borde
+                    color: const Color.fromRGBO(
+                        150, 158, 153, 1), // Color del borde
                     width: 1.5, // Grosor del borde
                   ),
                   color: selectedButton == 2
@@ -605,7 +606,8 @@ class _Encontro extends State<Encontro> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20), // Bordes redondeados
                 border: Border.all(
-                  color: Color.fromRGBO(150, 158, 153, 1), // Color del borde
+                  color:
+                      const Color.fromRGBO(150, 158, 153, 1), // Color del borde
                   width: 1.5, // Grosor del borde
                 ),
                 color: selectedButton == 2
