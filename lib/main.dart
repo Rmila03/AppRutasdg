@@ -116,8 +116,9 @@ class _LoginState extends State<Login> {
                       elevation: 5.0,
                       shadowColor: Colors.black,
                       child: Container(
+                        constraints: const BoxConstraints(maxWidth: 350),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 30),
+                            horizontal: 12, vertical: 40),
                         child: Column(
                           children: [
                             const Text(

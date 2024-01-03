@@ -330,15 +330,12 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                             vertical: 8, horizontal: 12),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius:
-                              BorderRadius.circular(10), // Bordes redondeados
+                          borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(
-                                  0.2), // Color y opacidad de la sombra
-                              offset: const Offset(
-                                  0, 2), // Desplazamiento de la sombra
-                              blurRadius: 4, // Radio de desenfoque de la sombra
+                              color: Colors.black.withOpacity(0.2),
+                              offset: const Offset(0, 2),
+                              blurRadius: 4,
                             ),
                           ],
                         ),
