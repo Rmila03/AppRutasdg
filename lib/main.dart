@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
 import 'package:ruta_sdg/views/home.dart';
 
 void main() {
@@ -267,12 +268,23 @@ class _LoginState extends State<Login> {
                               showError = false;
                             });
                             if (_formKey.currentState!.validate()) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HomePage(),
-                                ),
-                              );
+                              if (emailController.text.trim() ==
+                                  "analista@gmail.com") {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomePage(),
+                                  ),
+                                );
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const HomeSupervisorPage(),
+                                  ),
+                                );
+                              }
                             } else {
                               setState(() {
                                 showError = true;
