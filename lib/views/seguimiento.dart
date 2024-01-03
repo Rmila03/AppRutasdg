@@ -192,8 +192,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => ListaSocio(
-                                          tabColorLeft:
-                                              Color.fromARGB(255, 4, 58, 6),
+                                          tabColorLeft: const Color.fromARGB(
+                                              255, 4, 58, 6),
                                           tabName: 'SEGUIMIENTO',
                                           user: user,
                                         )),
