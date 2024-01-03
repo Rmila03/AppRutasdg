@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/user.dart';
 import 'package:ruta_sdg/views/promocion.dart';
+import 'package:ruta_sdg/widgets/text_form_result.dart';
 
 class PromotionForm extends StatefulWidget {
   final UserData user;
@@ -187,13 +188,13 @@ class PromotionFormState extends State<PromotionForm> {
                 ),
               ),
               const TextFormResult(
-                  label: "Pago Mensual:", InputType: TextInputType.number),
+                  label: "Pago Mensual:", content: "s/. 120.50"),
               const TextFormResult(
-                  label: "Primera fecha de pago:",
-                  InputType: TextInputType.datetime),
+                label: "Primera fecha de pago:",
+                content: "12/02/2023",
+              ),
               const TextFormResult(
-                  label: "Última fehca de pago",
-                  InputType: TextInputType.datetime),
+                  label: "Última fehca de pago", content: "12/02/2024"),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
@@ -307,59 +308,6 @@ class PromotionFormState extends State<PromotionForm> {
   }
 }
 
-class TextFormResult extends StatelessWidget {
-  final String label;
-  final TextInputType InputType;
-  const TextFormResult({
-    super.key,
-    required this.label,
-    required this.InputType,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 150,
-            child: Text(
-              label,
-              style: const TextStyle(
-                fontSize: 12,
-              ),
-            ),
-          ),
-          Expanded(
-            child: TextFormField(
-              keyboardType: InputType,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[300],
-                contentPadding: const EdgeInsets.symmetric(vertical: 4),
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(10.0), // Bordes redondeados
-                  borderSide: BorderSide.none, // Sin borde visible
-                ),
-                focusedBorder: OutlineInputBorder(
-                  // Borde cuando está enfocado
-                  borderRadius: BorderRadius.circular(10.0),
-                  // ignore: prefer_const_constructors
-                  borderSide: BorderSide(
-                      color: Colors.white, width: 0), // Grosor del borde
-                ),
-                // Puedes añadir más propiedades de estilo según tus necesidades
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class InputTextForm extends StatelessWidget {
   final String label;
   final String? percentage;
@@ -386,6 +334,7 @@ class InputTextForm extends StatelessWidget {
           padding: const EdgeInsets.only(left: 10),
           child: TextFormField(
             keyboardType: TextInputType.number,
+            textAlign: TextAlign.center,
             decoration: InputDecoration(
               filled: true,
               fillColor: Colors.grey[300],

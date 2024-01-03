@@ -33,12 +33,13 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
               }
             },
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 1),
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: Colors.green,
-                  width: 2,
+                  color: const Color.fromARGB(255, 185, 185, 185),
+                  width: 1,
                 ),
                 color: selectedButton == 1 ? Colors.green : Colors.white,
               ),
@@ -61,12 +62,13 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
               }
             },
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 1),
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: Colors.orange,
-                  width: 2,
+                  color: const Color.fromARGB(255, 185, 185, 185),
+                  width: 1,
                 ),
                 color: selectedButton == 2 ? Colors.orange : Colors.white,
               ),
