@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HistorialSupervisorPage extends StatelessWidget {
   // ignore: use_key_in_widget_constructors
@@ -30,12 +31,12 @@ class _HistorialSupervisorContentState
 
   // Lista de Cambios para cada fecha
   List<Cambio> cambios = [
-    Cambio(DateTime(2024, 1, 1), "Cambio 1", "Descripción Cambio 1"),
-    Cambio(DateTime(2024, 1, 1), "Cambio 2", "Descripción Cambio 2"),
-    Cambio(DateTime(2024, 1, 2), "Cambio 3", "Descripción Cambio 3"),
-    Cambio(DateTime(2024, 1, 2), "Cambio 4", "Descripción Cambio 4"),
-    Cambio(DateTime(2024, 1, 3), "Cambio 5", "Descripción Cambio 5"),
-    Cambio(DateTime(2024, 1, 3), "Cambio 6", "Descripción Cambio 6"),
+    Cambio(DateTime(2024, 1, 1), "Socio 1", "Descripción Cambio 1"),
+    Cambio(DateTime(2024, 1, 1), "Socio 2", "Descripción Cambio 2"),
+    Cambio(DateTime(2024, 1, 2), "Socio 3", "Descripción Cambio 3"),
+    Cambio(DateTime(2024, 1, 2), "Socio 4", "Descripción Cambio 4"),
+    Cambio(DateTime(2024, 1, 3), "Socio 5", "Descripción Cambio 5"),
+    Cambio(DateTime(2024, 1, 3), "Socio 6", "Descripción Cambio 6"),
     // Agrega más Cambios según sea necesario
   ];
 
@@ -58,6 +59,7 @@ class _HistorialSupervisorContentState
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start, // Cambiado a start
               children: [
+                const SizedBox(height: 50.0), // Añade un espacio en blanco
                 buildTitle(),
                 const SizedBox(height: 20.0),
                 buildDatePicker(),
@@ -85,7 +87,7 @@ class _HistorialSupervisorContentState
       'HISTORIAL DE CAMBIOS',
       style: TextStyle(
         fontSize: 20.0,
-        color: Colors.amber,
+        color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
         fontFamily: 'Montserrat',
       ),
@@ -99,7 +101,9 @@ class _HistorialSupervisorContentState
         Row(
           children: [
             IconButton(
-              icon: const Icon(Icons.calendar_today),
+              icon: const Icon(
+                FontAwesomeIcons.calendarDay,
+              ),
               color: const Color.fromARGB(255, 0, 76, 128),
               onPressed: () {
                 _selectDate(context);
@@ -151,7 +155,10 @@ class _HistorialSupervisorContentState
               ),
             ),
             const SizedBox(width: 10.0),
-            const Icon(Icons.alarm),
+            const Icon(
+              Icons.notifications,
+              color: Colors.red,
+            ),
             const SizedBox(width: 10.0),
             Expanded(
               child: Column(
