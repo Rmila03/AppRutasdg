@@ -96,7 +96,7 @@ class _HistorialSupervisorContentState
 
   Widget buildDatePicker() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Row(
           children: [
@@ -233,20 +233,24 @@ class _HistorialSupervisorContentState
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Todos los Cambios'),
-          content: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (var cambio in cambios) ...[
-                  buildAlarmInfo(
-                    cambio.fecha,
-                    cambio.nombre,
-                    cambio.descripcion,
-                    mostrarBotonVerTodo: false,
-                  ),
-                  const SizedBox(height: 10.0),
+          content: SizedBox(
+            width: MediaQuery.of(context).size.width *
+                0.8, // Ajusta el ancho según sea necesario
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (var cambio in cambios) ...[
+                    buildAlarmInfo(
+                      cambio.fecha,
+                      cambio.nombre,
+                      cambio.descripcion,
+                      mostrarBotonVerTodo: false,
+                    ),
+                    const SizedBox(height: 10.0),
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
           contentPadding: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 0.0),
@@ -258,6 +262,10 @@ class _HistorialSupervisorContentState
               child: const Text('Cerrar'),
             ),
           ],
+          shape: RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.circular(16.0), // Ajusta el radio de la esquina
+          ),
         );
       },
     );
