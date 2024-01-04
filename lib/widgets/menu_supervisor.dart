@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/main.dart';
 import 'package:ruta_sdg/supervisor/dashboard_supervisor.dart';
+import 'package:ruta_sdg/supervisor/historialSupervisor.dart';
 import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
 
 class MenuSupervisor extends StatefulWidget {
@@ -19,7 +20,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
     'CARTERA': const MyHomeSupervisorPage(),
     'DASHBOARD': const DashboardSupervisorPage(),
     'MORA': const MyHomeSupervisorPage(),
-    'HISTORIAL': const MyHomeSupervisorPage(),
+    'HISTORIAL': const HistorialSupervisorPage(),
     'CERRAR SESIÓN': const Login(title: ''),
     // Agrega las demás pantallas según sea necesario
   };
