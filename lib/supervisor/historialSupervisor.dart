@@ -29,7 +29,7 @@ class _HistorialSupervisorContentState
   DateTime selectedDate = DateTime.now();
 
   // Lista de Cambios para cada fecha
-  List<Cambio> Cambios = [
+  List<Cambio> cambios = [
     Cambio(DateTime(2024, 1, 1), "Cambio 1", "Descripción Cambio 1"),
     Cambio(DateTime(2024, 1, 1), "Cambio 2", "Descripción Cambio 2"),
     Cambio(DateTime(2024, 1, 2), "Cambio 3", "Descripción Cambio 3"),
@@ -47,7 +47,7 @@ class _HistorialSupervisorContentState
 
   @override
   Widget build(BuildContext context) {
-    List<Cambio> CambiosDelDia = obtenerCambiosDelDia(selectedDate);
+    List<Cambio> cambiosDelDia = obtenerCambiosDelDia(selectedDate);
 
     return Scaffold(
       body: Row(
@@ -62,11 +62,11 @@ class _HistorialSupervisorContentState
                 const SizedBox(height: 20.0),
                 buildDatePicker(),
                 const SizedBox(height: 20.0),
-                for (var Cambio in CambiosDelDia) ...[
+                for (var cambio in cambiosDelDia) ...[
                   buildAlarmInfo(
-                    Cambio.fecha,
-                    Cambio.nombre,
-                    Cambio.descripcion,
+                    cambio.fecha,
+                    cambio.nombre,
+                    cambio.descripcion,
                     mostrarBotonVerTodo: true,
                   ),
                   const SizedBox(height: 10.0),
@@ -212,10 +212,10 @@ class _HistorialSupervisorContentState
 
   // Función para obtener Cambios de una fecha específica
   List<Cambio> obtenerCambiosDelDia(DateTime fecha) {
-    return Cambios.where((Cambio) {
-      return Cambio.fecha.year == fecha.year &&
-          Cambio.fecha.month == fecha.month &&
-          Cambio.fecha.day == fecha.day;
+    return cambios.where((cambio) {
+      return cambio.fecha.year == fecha.year &&
+          cambio.fecha.month == fecha.month &&
+          cambio.fecha.day == fecha.day;
     }).toList();
   }
 
@@ -230,11 +230,11 @@ class _HistorialSupervisorContentState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                for (var Cambio in Cambios) ...[
+                for (var cambio in cambios) ...[
                   buildAlarmInfo(
-                    Cambio.fecha,
-                    Cambio.nombre,
-                    Cambio.descripcion,
+                    cambio.fecha,
+                    cambio.nombre,
+                    cambio.descripcion,
                     mostrarBotonVerTodo: false,
                   ),
                   const SizedBox(height: 10.0),
