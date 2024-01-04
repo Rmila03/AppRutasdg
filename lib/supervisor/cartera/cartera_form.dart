@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/user.dart';
-import 'package:ruta_sdg/views/seguimiento.dart';
+import 'package:ruta_sdg/views/promocion.dart';
 import 'package:ruta_sdg/widgets/text_form_result.dart';
 
-class SeguimientoForm extends StatefulWidget {
+class CarteraForm extends StatefulWidget {
   final UserData user;
-  const SeguimientoForm({super.key, required this.user});
+  const CarteraForm({super.key, required this.user});
 
   @override
-  SeguimientoFormState createState() {
-    return SeguimientoFormState();
+  CarteraFormState createState() {
+    return CarteraFormState();
   }
 }
 
-class SeguimientoFormState extends State<SeguimientoForm> {
+class CarteraFormState extends State<CarteraForm> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -24,18 +24,25 @@ class SeguimientoFormState extends State<SeguimientoForm> {
           key: _formKey,
           child: Column(
             children: [
-              TextForm(
-                formKey: _formKey,
-                label: "Nombres",
-                inputType: TextInputType.text,
-                content: widget.user.name,
-              ),
-              TextForm(
-                formKey: _formKey,
-                label: "Apellido Paterno",
-                inputType: TextInputType.text,
-                content: widget.user.lastName,
-              ),
+              Row(children: [
+                Expanded(
+                  child: TextForm(
+                    formKey: _formKey,
+                    label: "Nombres",
+                    inputType: TextInputType.text,
+                    content: widget.user.name,
+                  ),
+                ),
+                const SizedBox(width: 15),
+                Expanded(
+                  child: TextForm(
+                    formKey: _formKey,
+                    label: "Apellidos",
+                    inputType: TextInputType.text,
+                    content: widget.user.lastName,
+                  ),
+                )
+              ]),
               Row(
                 children: [
                   Expanded(
@@ -108,30 +115,93 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 10,
+              //DropdownButtonFormField(items: , onChanged: onChanged),
+              const CustomDropdown(
+                items: ['', 'Socio 1', 'Socio 2', 'Socio 3'],
+                label: "Tipo de Socio:",
               ),
-              const TextFormResult(
-                label: "Tipo de socio:",
-                content: "GENERICO",
+              const CustomDropdown(
+                items: ['', 'Crédito 1', 'Crédito 2', 'Crédito 3'],
+                label: "Tipo de Crédito:",
               ),
-              const TextFormResult(
-                label: "Tipo de crédito:",
-                content: "CONSUMO",
+              const CustomDropdown(
+                items: ['', 'Producto 1', 'Producto 2', 'Producto 3'],
+                label: "Tipo de Producto:",
               ),
-              const TextFormResult(
-                label: "Tipo de producto:",
-                content: "INDEPENDIENTE",
-              ),
-              const TextFormResult(
+              const CustomDropdown(
+                items: ['', 'Modalidad 1', 'Modalidad 2', 'Modalidad 3'],
                 label: "Modalidad:",
-                content: "COOPENAVIDEÑO",
+              ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Cálculo de Crédito",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 0, 76, 128),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
-              const Encontro(),
-              const RadioButtonCustom(),
+              Row(
+                children: [
+                  const Expanded(
+                    child: InputTextForm(
+                      label: "Crédito total",
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: Container(
+                        width: 20,
+                        height: 5,
+                        color: Colors.amber,
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              const Row(
+                children: [
+                  Expanded(
+                    child: InputTextForm(
+                      label: "Plazo(meses)",
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: InputTextForm(
+                        label: "Tasa de interés(%)",
+                        percentage: "%",
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Cálculo",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const TextFormResult(
+                  label: "Pago Mensual:", content: "s/. 120.50"),
+              const TextFormResult(
+                label: "Primera fecha de pago:",
+                content: "12/02/2023",
+              ),
+              const TextFormResult(
+                  label: "Última fehca de pago", content: "12/02/2024"),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
@@ -187,9 +257,8 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const RadioButtonCustom(),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -206,7 +275,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const SeguimientoPage()),
+                                builder: (context) => const PromocionPage()),
                           );
                         }
                       },
@@ -272,6 +341,7 @@ class InputTextForm extends StatelessWidget {
           padding: const EdgeInsets.only(left: 10),
           child: TextFormField(
             keyboardType: TextInputType.number,
+            textAlign: TextAlign.center,
             decoration: InputDecoration(
               filled: true,
               fillColor: Colors.grey[300],
@@ -307,12 +377,11 @@ class TextForm extends StatefulWidget {
     required this.inputType,
     required this.content,
   });
-  @override
   _TextForm createState() => _TextForm();
 }
 
 class _TextForm extends State<TextForm> {
-  final TextEditingController _controller = TextEditingController();
+  TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -358,7 +427,8 @@ class _TextForm extends State<TextForm> {
 class CustomDropdown extends StatefulWidget {
   final List<String> items;
   final String label;
-  const CustomDropdown({super.key, required this.items, required this.label});
+  const CustomDropdown({Key? key, required this.items, required this.label})
+      : super(key: key);
 
   @override
   CustomDropdownState createState() => CustomDropdownState();
@@ -449,29 +519,6 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          //width: 600,
-          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
-          margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            // Bordes redondeados
-            border: Border.all(
-              color: const Color.fromRGBO(20, 153, 74, 1), // Color del borde
-              width: 3, // Grosor del borde
-            ),
-            color: const Color.fromRGBO(20, 153, 74, 1),
-          ),
-          child: const Center(
-            child: Text(
-              '¿Necesita actualizar dato(s)?',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
         Expanded(
           child: GestureDetector(
             onTap: () {
@@ -480,26 +527,20 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
               });
             },
             child: Container(
-              //padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 10),
-              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 40),
+              margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8), // Bordes redondeados
                 border: Border.all(
-                  color:
-                      const Color.fromRGBO(150, 158, 153, 1), // Color del borde
-                  width: 1.5, // Grosor del borde
+                  color: Colors.green, // Color del borde
+                  width: 2, // Grosor del borde
                 ),
-                color: selectedButton == 1
-                    ? const Color.fromRGBO(160, 218, 183, 1)
-                    : Colors.white,
+                color: selectedButton == 1 ? Colors.green : Colors.white,
               ),
               child: const Center(
                 child: Text(
                   'SI',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.black, fontSize: 15),
                 ),
               ),
             ),
@@ -513,114 +554,20 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
               });
             },
             child: Container(
-
-                //padding:const EdgeInsets.symmetric(vertical: 2, horizontal: 40),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8), // Bordes redondeados
-                  border: Border.all(
-                    color: const Color.fromRGBO(
-                        150, 158, 153, 1), // Color del borde
-                    width: 1.5, // Grosor del borde
-                  ),
-                  color: selectedButton == 2
-                      ? const Color.fromARGB(255, 250, 162, 29)
-                      : Colors.white,
-                ),
-                child: const Center(
-                  child: Text(
-                    'NO',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold),
-                  ),
-                )),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class Encontro extends StatefulWidget {
-  const Encontro({super.key});
-
-  @override
-  _Encontro createState() => _Encontro();
-}
-
-class _Encontro extends State<Encontro> {
-  int selectedButton = 0; // Inicialmente ningún botón seleccionado
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedButton = 1; // Primer botón seleccionado
-              });
-            },
-            child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20), // Bordes redondeados
-                  border: Border.all(
-                    color: const Color.fromRGBO(
-                        150, 158, 153, 1), // Color del borde
-                    width: 1.5, // Grosor del borde
-                  ),
-                  color: selectedButton == 1
-                      ? const Color.fromRGBO(160, 218, 183, 1)
-                      : Colors.white,
-                ),
-                child: const Center(
-                  child: Text(
-                    'SE ENCONTRÓ',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold),
-                  ),
-                )),
-          ),
-        ),
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedButton = 2; // Segundo botón seleccionado
-              });
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 40),
+              margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20), // Bordes redondeados
+                borderRadius: BorderRadius.circular(8), // Bordes redondeados
                 border: Border.all(
-                  color:
-                      const Color.fromRGBO(150, 158, 153, 1), // Color del borde
-                  width: 1.5, // Grosor del borde
+                  color: Colors.orange, // Color del borde
+                  width: 2, // Grosor del borde
                 ),
-                color: selectedButton == 2
-                    ? const Color.fromARGB(255, 250, 162, 29)
-                    : Colors.white,
+                color: selectedButton == 2 ? Colors.orange : Colors.white,
               ),
               child: const Center(
                 child: Text(
-                  'NO SE ENCONTRÓ',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold),
+                  'NO',
+                  style: TextStyle(color: Colors.black, fontSize: 15),
                 ),
               ),
             ),

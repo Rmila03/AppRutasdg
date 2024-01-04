@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:ruta_sdg/supervisor/cartera/cartera_form.dart';
 import "package:ruta_sdg/user.dart";
-import 'package:ruta_sdg/widgets/header.dart';
-import "package:ruta_sdg/widgets/navigation_drawer.dart";
-import 'package:ruta_sdg/widgets/tabbar.dart';
-import "package:ruta_sdg/widgets/promotion_form.dart";
-import "package:ruta_sdg/widgets/seguimiento_form.dart";
-import "package:ruta_sdg/widgets/recuperacion_form.dart";
-import "package:ruta_sdg/widgets/nuevo_form.dart";
 
-class ListaSocio extends StatefulWidget {
+class ListaSupervisor extends StatefulWidget {
   final Color tabColorLeft;
   final String tabName;
   final UserData? user;
-  const ListaSocio({
+  const ListaSupervisor({
     super.key,
     required this.tabColorLeft,
     required this.tabName,
@@ -20,10 +14,10 @@ class ListaSocio extends StatefulWidget {
   });
 
   @override
-  ListaSocioState createState() => ListaSocioState();
+  ListaSupervisorState createState() => ListaSupervisorState();
 }
 
-class ListaSocioState extends State<ListaSocio> {
+class ListaSupervisorState extends State<ListaSupervisor> {
   // ignore: non_constant_identifier_names
   late Widget CasoFormWidget; // Declara la variable para la redirección
 
@@ -31,20 +25,10 @@ class ListaSocioState extends State<ListaSocio> {
   void initState() {
     super.initState();
     // Asigna la redirección según el valor de tabName
-    if (widget.tabName == 'PROMOCIÓN') {
-      CasoFormWidget = PromotionForm(
+    if (widget.tabName == 'CARTERA') {
+      CasoFormWidget = CarteraForm(
         user: widget.user!,
       );
-    } else if (widget.tabName == 'SEGUIMIENTO') {
-      CasoFormWidget = SeguimientoForm(
-        user: widget.user!,
-      );
-    } else if (widget.tabName == 'RECUPERACIÓN') {
-      CasoFormWidget = RecuperacionForm(
-        user: widget.user!,
-      );
-    } else if (widget.tabName == 'NUEVO') {
-      CasoFormWidget = const NuevoForm();
     }
   }
 
@@ -64,9 +48,6 @@ class ListaSocioState extends State<ListaSocio> {
                       padding: const EdgeInsets.only(
                         right: 5,
                       ),
-                      decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 0, 76, 128),
-                      ),
                       child: Align(
                         alignment: Alignment.bottomLeft,
                         child: GestureDetector(
@@ -85,27 +66,11 @@ class ListaSocioState extends State<ListaSocio> {
                       margin: const EdgeInsets.all(24),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 25, vertical: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 2,
-                            offset: const Offset(6, 0),
-                          ),
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 2,
-                            offset: const Offset(0, 6),
-                          ),
-                        ],
-                      ),
                       child: const Text(
-                        "DATOS DEL SOCIO",
+                        "PERFIL DEL SOCIO",
                         style: TextStyle(
                           fontSize: 20,
-                          color: Colors.black,
+                          color: Colors.orange,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -117,15 +82,6 @@ class ListaSocioState extends State<ListaSocio> {
             ],
           ),
         ),
-        bottomNavigationBar: const BottomAppBar(
-          child: TabBarBottom(),
-        ),
-        appBar: AppBar(
-          title: const Header(),
-          backgroundColor: const Color.fromARGB(255, 0, 76, 128),
-          iconTheme: const IconThemeData(color: Colors.white),
-        ),
-        drawer: const MenuDrawer(),
       ),
     );
   }
@@ -166,14 +122,7 @@ class Tab extends StatelessWidget {
               fontSize: 23,
               fontFamily: 'Rockwell Extra Bold',
               fontWeight: FontWeight.w800,
-              color: Colors.black,
-              shadows: [
-                Shadow(
-                  offset: Offset(2.0, 2.0),
-                  blurRadius: 3.0,
-                  color: Colors.grey,
-                ),
-              ],
+              color: Colors.white,
             ),
           ),
         ),
