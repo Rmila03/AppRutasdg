@@ -13,11 +13,11 @@ class ListaSocio extends StatefulWidget {
   final String tabName;
   final UserData? user;
   const ListaSocio({
-    Key? key,
+    super.key,
     required this.tabColorLeft,
     required this.tabName,
     this.user,
-  }) : super(key: key);
+  });
 
   @override
   ListaSocioState createState() => ListaSocioState();
@@ -136,10 +136,10 @@ class Tab extends StatelessWidget {
   final String name;
 
   const Tab({
-    Key? key,
+    super.key,
     required this.colorLeft,
     required this.name,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -7,11 +7,11 @@ class ListaSupervisor extends StatefulWidget {
   final String tabName;
   final UserData? user;
   const ListaSupervisor({
-    Key? key,
+    super.key,
     required this.tabColorLeft,
     required this.tabName,
     this.user,
-  }) : super(key: key);
+  });
 
   @override
   ListaSupervisorState createState() => ListaSupervisorState();
