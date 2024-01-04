@@ -210,6 +210,7 @@ class FechaGestureDetector extends StatelessWidget {
 
 class FechaContent extends StatelessWidget {
   const FechaContent({
+    super.key,
     required this.selectedDate,
     required this.dateFormat,
   });
