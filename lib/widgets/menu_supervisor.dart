@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/main.dart';
+import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
 import 'package:ruta_sdg/supervisor/dashboard_supervisor.dart';
 import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
 
@@ -16,7 +17,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
   Map<String, Widget> screens = {
     'PLAN DEL DÍA': const MyHomeSupervisorPage(),
     'REPORTES': const MyHomeSupervisorPage(),
-    'CARTERA': const MyHomeSupervisorPage(),
+    'CARTERA': const CarteraPage(),
     'DASHBOARD': const DashboardSupervisorPage(),
     'MORA': const MyHomeSupervisorPage(),
     'HISTORIAL': const MyHomeSupervisorPage(),

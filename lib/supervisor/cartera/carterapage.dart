@@ -1,6 +1,5 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
 import 'package:ruta_sdg/supervisor/cartera/listacartera.dart';
 import 'package:ruta_sdg/user.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
@@ -36,7 +35,7 @@ class _CarteraPageState extends State<CarteraPage> {
     return Scaffold(
       body: Row(
         children: [
-          const MenuSupervisor(),
+          const MenuSupervisor(name: "CARTERA"),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
