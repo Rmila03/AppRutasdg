@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/main.dart';
+import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
 import 'package:ruta_sdg/supervisor/dashboard_supervisor.dart';
 import 'package:ruta_sdg/supervisor/historialSupervisor.dart';
 import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
@@ -53,7 +54,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
                 Image.asset('assets/logo-sdg.png', width: 50, height: 50),
                 const SizedBox(width: 8.0),
                 const Text(
-                  'RUTASSDG',
+                  'RUTASDG',
                   style: TextStyle(
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold,

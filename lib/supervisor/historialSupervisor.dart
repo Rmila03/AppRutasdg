@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HistorialSupervisorPage extends StatelessWidget {
   // ignore: use_key_in_widget_constructors
@@ -29,13 +30,13 @@ class _HistorialSupervisorContentState
   DateTime selectedDate = DateTime.now();
 
   // Lista de Cambios para cada fecha
-  List<Cambio> Cambios = [
-    Cambio(DateTime(2024, 1, 1), "Cambio 1", "Descripción Cambio 1"),
-    Cambio(DateTime(2024, 1, 1), "Cambio 2", "Descripción Cambio 2"),
-    Cambio(DateTime(2024, 1, 2), "Cambio 3", "Descripción Cambio 3"),
-    Cambio(DateTime(2024, 1, 2), "Cambio 4", "Descripción Cambio 4"),
-    Cambio(DateTime(2024, 1, 3), "Cambio 5", "Descripción Cambio 5"),
-    Cambio(DateTime(2024, 1, 3), "Cambio 6", "Descripción Cambio 6"),
+  List<Cambio> cambios = [
+    Cambio(DateTime(2024, 1, 1), "Socio 1", "Descripción Cambio 1"),
+    Cambio(DateTime(2024, 1, 1), "Socio 2", "Descripción Cambio 2"),
+    Cambio(DateTime(2024, 1, 2), "Socio 3", "Descripción Cambio 3"),
+    Cambio(DateTime(2024, 1, 2), "Socio 4", "Descripción Cambio 4"),
+    Cambio(DateTime(2024, 1, 3), "Socio 5", "Descripción Cambio 5"),
+    Cambio(DateTime(2024, 1, 3), "Socio 6", "Descripción Cambio 6"),
     // Agrega más Cambios según sea necesario
   ];
 
@@ -47,7 +48,7 @@ class _HistorialSupervisorContentState
 
   @override
   Widget build(BuildContext context) {
-    List<Cambio> CambiosDelDia = obtenerCambiosDelDia(selectedDate);
+    List<Cambio> cambiosDelDia = obtenerCambiosDelDia(selectedDate);
 
     return Scaffold(
       body: Row(
@@ -58,15 +59,16 @@ class _HistorialSupervisorContentState
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start, // Cambiado a start
               children: [
+                const SizedBox(height: 50.0), // Añade un espacio en blanco
                 buildTitle(),
                 const SizedBox(height: 20.0),
                 buildDatePicker(),
                 const SizedBox(height: 20.0),
-                for (var Cambio in CambiosDelDia) ...[
+                for (var cambio in cambiosDelDia) ...[
                   buildAlarmInfo(
-                    Cambio.fecha,
-                    Cambio.nombre,
-                    Cambio.descripcion,
+                    cambio.fecha,
+                    cambio.nombre,
+                    cambio.descripcion,
                     mostrarBotonVerTodo: true,
                   ),
                   const SizedBox(height: 10.0),
@@ -85,7 +87,7 @@ class _HistorialSupervisorContentState
       'HISTORIAL DE CAMBIOS',
       style: TextStyle(
         fontSize: 20.0,
-        color: Colors.amber,
+        color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
         fontFamily: 'Montserrat',
       ),
@@ -99,7 +101,9 @@ class _HistorialSupervisorContentState
         Row(
           children: [
             IconButton(
-              icon: const Icon(Icons.calendar_today),
+              icon: const Icon(
+                FontAwesomeIcons.calendarDay,
+              ),
               color: const Color.fromARGB(255, 0, 76, 128),
               onPressed: () {
                 _selectDate(context);
@@ -151,7 +155,10 @@ class _HistorialSupervisorContentState
               ),
             ),
             const SizedBox(width: 10.0),
-            const Icon(Icons.alarm),
+            const Icon(
+              Icons.notifications,
+              color: Colors.red,
+            ),
             const SizedBox(width: 10.0),
             Expanded(
               child: Column(
@@ -212,10 +219,10 @@ class _HistorialSupervisorContentState
 
   // Función para obtener Cambios de una fecha específica
   List<Cambio> obtenerCambiosDelDia(DateTime fecha) {
-    return Cambios.where((Cambio) {
-      return Cambio.fecha.year == fecha.year &&
-          Cambio.fecha.month == fecha.month &&
-          Cambio.fecha.day == fecha.day;
+    return cambios.where((cambio) {
+      return cambio.fecha.year == fecha.year &&
+          cambio.fecha.month == fecha.month &&
+          cambio.fecha.day == fecha.day;
     }).toList();
   }
 
@@ -230,11 +237,11 @@ class _HistorialSupervisorContentState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                for (var Cambio in Cambios) ...[
+                for (var cambio in cambios) ...[
                   buildAlarmInfo(
-                    Cambio.fecha,
-                    Cambio.nombre,
-                    Cambio.descripcion,
+                    cambio.fecha,
+                    cambio.nombre,
+                    cambio.descripcion,
                     mostrarBotonVerTodo: false,
                   ),
                   const SizedBox(height: 10.0),
