@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -28,7 +27,8 @@ class MyHomeSupervisorPage extends StatefulWidget {
   _MyHomeSupervisorPageState createState() => _MyHomeSupervisorPageState();
 }
 
-class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage> {
+class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
+    with SingleTickerProviderStateMixin {
   String selectedOption = '';
   DateTime selectedDate = DateTime.now();
   List<String> menuOptions = [
@@ -54,6 +54,28 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage> {
         "foo@gmail.com", "Av. La cultura #345", "Cusco", "Cusco", "Cusco"),
     // Agrega más usuarios según sea necesario
   ];
+  bool isFloatingPageVisible = false;
+  late AnimationController _animationController;
+  late Animation<Offset> _offsetAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+
+    _offsetAnimation = Tween<Offset>(
+      begin: const Offset(0.0, 1.0),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     var container = Container(
@@ -96,100 +118,133 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage> {
     );
 
     return Scaffold(
-      body: Row(
+      body: Stack(
         children: [
-          const MenuSupervisor(name: "PLAN DEL DÍA"),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 20.0),
-                  // Texto "PLAN DEL DÍA" en negrita, de color verde claro, al centro y con un tamaño de letra de 25
-                  Container(
-                    alignment: Alignment.center,
-                    child: const Text(
-                      'PLAN DEL DÍA',
-                      style: TextStyle(
-                        color: Color(0xFF0E813C),
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Unna-Bold',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20.0),
-                  const Text(
-                    'Ramón Perez García',
-                    style: TextStyle(
-                      color: Colors.orange,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Unna-Bold',
-                    ),
-                    textAlign: TextAlign.start,
-                  ),
-                  const SizedBox(height: 20.0),
-                  Row(
+          Row(
+            children: [
+              const MenuSupervisor(name: "PLAN DEL DÍA"),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IconButton(
-                        icon: const Icon(
-                          FontAwesomeIcons.calendarDay,
-                          color: Color.fromARGB(255, 4, 56, 99),
-                        ),
-                        onPressed: () {
-                          _selectDate(context);
-                        },
-                      ),
-                      const SizedBox(
-                          width: 10), // Ajusta el espacio según sea necesario
-                      Text(
-                        DateFormat('dd/MM/yyyy').format(selectedDate),
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 4, 56, 99),
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 20.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      container,
-                      GestureDetector(
-                        onTap: () {
-                          // Agregar lógica para redirigir a la pantalla "añadirclass()"
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(16.0),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF0E813C),
-                            borderRadius: BorderRadius.circular(8.0),
+                      const SizedBox(height: 20.0),
+                      Container(
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'PLAN DEL DÍA',
+                          style: TextStyle(
+                            color: Color(0xFF0E813C),
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Unna-Bold',
                           ),
-                          child: const Row(
-                            children: [
-                              Icon(Icons.add, color: Colors.white),
-                              Text(
-                                'AÑADIR',
-                                style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
+                      const Text(
+                        'Ramón Perez García',
+                        style: TextStyle(
+                          color: Colors.orange,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Unna-Bold',
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                      const SizedBox(height: 20.0),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              FontAwesomeIcons.calendarDay,
+                              color: Color.fromARGB(255, 4, 56, 99),
+                            ),
+                            onPressed: () {
+                              _selectDate(context);
+                            },
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            DateFormat('dd/MM/yyyy').format(selectedDate),
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 4, 56, 99),
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          container,
+                          GestureDetector(
+                            onTap: () {
+                              _toggleFloatingPage();
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.only(right: 100),
+                              padding: const EdgeInsets.fromLTRB(16.0, 16.0,
+                                  16.0, 16.0), // Ajuste del margen derecho
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF0E813C),
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
-                            ],
+                              child: const Row(
+                                children: [
+                                  Icon(Icons.add, color: Colors.white),
+                                  Text(
+                                    'AÑADIR',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
+                          //const SizedBox(width: 0), // Ajuste del margen derecho
+                        ],
                       ),
+                      const SizedBox(height: 25.0),
+                      Center(
+                        child: _buildDataTable("", users),
+                      )
                     ],
                   ),
-                  const SizedBox(height: 16.0),
-                  // Aquí debes implementar la tabla con las columnas especificadas
-                  Center(child: _buildDataTable("", users))
-                ],
+                ),
               ),
-            ),
+            ],
           ),
+          if (isFloatingPageVisible)
+            Stack(
+              children: [
+                Positioned.fill(
+                  child: GestureDetector(
+                    onTap: () {
+                      _toggleFloatingPage();
+                    },
+                    child: Container(
+                      color: Colors.black.withOpacity(0.5),
+                    ),
+                  ),
+                ),
+                Center(
+                  child: SlideTransition(
+                    position: _offsetAnimation,
+                    child: SizedBox(
+                      width: 600,
+                      height: 800,
+                      child: FloatingPage(userList: users),
+                    ),
+                  ),
+                ),
+              ],
+            ),
         ],
       ),
     );
@@ -197,15 +252,14 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage> {
 
   Widget _buildDataTable(String title, List<UserData> userList) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
         shape: RoundedRectangleBorder(
-          side: const BorderSide(
-              color: Color.fromRGBO(255, 255, 255, 1), width: 2.0),
-          borderRadius: BorderRadius.circular(8.0),
+          side: const BorderSide(color: Color(0xFFD9DEDA), width: 2.0),
+          borderRadius: BorderRadius.circular(15.0),
         ),
-        color: const Color.fromARGB(255, 255, 255, 255),
-        elevation: 5,
+        color: Colors.white,
+        elevation: 0,
         child: SizedBox(
           height: 400,
           width: 1000,
@@ -213,6 +267,8 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage> {
             child: DataTable(
               showCheckboxColumn: false,
               columnSpacing: 7.0,
+              headingRowColor:
+                  MaterialStateProperty.all(const Color(0xFFD9DEDA)),
               columns: const [
                 DataColumn(label: Text('DNI')),
                 DataColumn(label: Text('NOMBRE')),
@@ -220,16 +276,18 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage> {
                 DataColumn(label: Text('MODALIDAD')),
                 DataColumn(label: Text('  ')),
               ],
-              rows: userList.map((user) {
+              rows: userList.asMap().entries.map((entry) {
+                UserData user = entry.value;
+
                 return DataRow(
-                  //onSelectChanged: () {},
                   cells: [
                     DataCell(Text(user.dni)),
                     DataCell(Text("${user.name} ${user.lastName}")),
                     DataCell(Text(user.address)),
                     const DataCell(Text("Promoción")),
                     const DataCell(
-                        Icon(FontAwesomeIcons.trash, color: Colors.green)),
+                      Icon(FontAwesomeIcons.trash, color: Color(0xFF0E813C)),
+                    ),
                   ],
                 );
               }).toList(),
@@ -267,58 +325,142 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage> {
         selectedDate = pickedDate!;
       });
     } else {
-      // Si el usuario canceló la selección, asignar la fecha actual
       pickedDate = DateTime.now();
       setState(() {
         selectedDate = pickedDate!;
       });
     }
   }
+
+  void _toggleFloatingPage() {
+    if (isFloatingPageVisible) {
+      _animationController.reverse();
+    } else {
+      _animationController.forward();
+    }
+    setState(() {
+      isFloatingPageVisible = !isFloatingPageVisible;
+    });
+  }
 }
 
-class FechaGestureDetector extends StatelessWidget {
-  const FechaGestureDetector({
-    super.key,
-    required this.selectedDate,
-    required this.selectDateCallback,
-    required this.dateFormat,
-  });
+class FloatingPage extends StatelessWidget {
+  final List<UserData> userList;
 
-  final DateTime selectedDate;
-  final Function(BuildContext) selectDateCallback;
-  final DateFormat dateFormat;
+  const FloatingPage({super.key, required this.userList});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Container(
+      height: 800,
+      width: 600,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(40.0),
+        border: Border.all(
+          color: const Color(0xFF0E813C),
+          width: 3.0,
+        ),
+      ),
+      child: Column(
+        children: [
+          const SizedBox(height: 20.0),
+          Container(
+            padding: const EdgeInsets.all(15.0),
+            decoration: BoxDecoration(
+              color: const Color(0xFF0E813C),
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+            child: const Text(
+              '   LISTA DE SOCIOS   ',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(height: 16.0),
+          Center(child: SearchAndUserList(userList: userList)),
+        ],
+      ),
+    );
+  }
+}
+
+class SearchAndUserList extends StatefulWidget {
+  final List<UserData> userList;
+
+  const SearchAndUserList({super.key, required this.userList});
+
+  @override
+  _SearchAndUserListState createState() => _SearchAndUserListState();
+}
+
+class _SearchAndUserListState extends State<SearchAndUserList> {
+  late TextEditingController _searchController;
+  List<UserData> filteredUsers = [];
+
+  @override
+  void initState() {
+    super.initState();
+    filteredUsers = widget.userList;
+    _searchController = TextEditingController();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  void _onSearchChanged() {
+    String searchText = _searchController.text.toLowerCase();
+    setState(() {
+      filteredUsers = widget.userList.where((user) {
+        return user.name.toLowerCase().contains(searchText) ||
+            user.lastName.toLowerCase().contains(searchText);
+      }).toList();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
       children: [
-        GestureDetector(
-          onTap: () => selectDateCallback(context),
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0, top: 20),
-                child: Container(
-                  height: 24,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  padding: const EdgeInsets.all(0.0),
-                  alignment: Alignment.center,
+        // Buscador
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: TextField(
+            controller: _searchController,
+            decoration: const InputDecoration(
+              hintText: 'Buscar',
+              prefixIcon: Icon(Icons.search),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16.0),
+        // Lista de usuarios
+        for (final user in filteredUsers)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(left: 20),
                   child: Text(
-                    dateFormat.format(selectedDate),
+                    '${user.name} ${user.lastName}',
                     style: const TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 16.0,
                     ),
                   ),
                 ),
-              ),
-            ],
+                Container(
+                  margin: const EdgeInsets.only(right: 20),
+                  child: const Icon(
+                    FontAwesomeIcons.plus,
+                    color: Color(0xFF0E813C),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
       ],
     );
   }

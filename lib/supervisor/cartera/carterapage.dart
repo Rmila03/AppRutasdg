@@ -5,7 +5,7 @@ import 'package:ruta_sdg/user.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 
 class CarteraPage extends StatefulWidget {
-  const CarteraPage({Key? key}) : super(key: key);
+  const CarteraPage({super.key});
 
   @override
   State createState() => _CarteraPageState();
@@ -35,7 +35,7 @@ class _CarteraPageState extends State<CarteraPage> {
     return Scaffold(
       body: Row(
         children: [
-          const MenuSupervisor(),
+          const MenuSupervisor(name: "CARTERA"),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
