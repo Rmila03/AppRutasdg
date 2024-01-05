@@ -5,6 +5,7 @@ import 'package:ruta_sdg/supervisor/dashboard_supervisor.dart';
 import 'package:ruta_sdg/supervisor/historialSupervisor.dart';
 import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
 import 'package:ruta_sdg/supervisor/moraSupervisor.dart';
+import 'package:ruta_sdg/supervisor/reporteSupervisor.dart';
 
 class MenuSupervisor extends StatefulWidget {
   final String? name;
@@ -18,7 +19,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
   String selectedMenu = 'PLAN DEL DÍA';
   Map<String, Widget> screens = {
     'PLAN DEL DÍA': const MyHomeSupervisorPage(),
-    'REPORTES': const MyHomeSupervisorPage(),
+    'REPORTES': const ReporteSupervisorPage(),
     'CARTERA': const CarteraPage(),
     'DASHBOARD': const DashboardSupervisorPage(),
     'MORA': const MoraSupervisorPage(),

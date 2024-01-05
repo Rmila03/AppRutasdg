@@ -100,15 +100,13 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
                 // Container with margin before the table title
                 const SizedBox(height: 50.0), // Añade un espacio en blanco
                 _buildTitle(),
-                const SizedBox(height: 20.0),
 
                 // Date picker widget
-                _buildDatePicker(context),
                 const SizedBox(height: 10.0),
+                _buildDatePicker(context),
 
                 // Filter button widget
                 _showFilterDialog(),
-                const SizedBox(height: 10.0),
 
                 // Data table widget
                 _buildDataTable(users),
@@ -121,28 +119,42 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
   }
 
   Widget _showFilterDialog() => AlertDialog(
-        content: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text('Selecciona los días de atraso:  '),
-            DropdownButton<int>(
-              value: filterDays,
-              onChanged: (int? value) {
-                if (value != null) {
-                  setState(() {
-                    filterDays = value;
-                  });
-                }
-              },
-              items: List.generate(
-                11,
-                (index) => DropdownMenuItem<int>(
-                  value: index,
-                  child: Text(index == 0 ? '' : '$index días'),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        elevation: 0, // Fondo transparente
+        content: Container(
+          decoration: BoxDecoration(
+            color: Colors.white, // Fondo blanco
+            borderRadius: BorderRadius.circular(10.0), // Borde redondeado
+            border: Border.all(
+              color: const Color.fromARGB(
+                  255, 0, 76, 128), // Color del borde adicional
+              width: 1.0, // Ancho del borde adicional
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('Selecciona los días:  '),
+              DropdownButton<int>(
+                value: filterDays,
+                onChanged: (int? value) {
+                  if (value != null) {
+                    setState(() {
+                      filterDays = value;
+                    });
+                  }
+                },
+                items: List.generate(
+                  11,
+                  (index) => DropdownMenuItem<int>(
+                    value: index,
+                    child: Text(index == 0 ? '' : '$index'),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
 
@@ -228,10 +240,10 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
             color: Color.fromRGBO(255, 255, 255, 1),
             width: 2.0,
           ),
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(5.0),
         ),
         color: const Color.fromARGB(255, 255, 255, 255),
-        elevation: 5,
+        elevation: 0,
         child: SizedBox(
           height: 400,
           width: 1000,
@@ -239,6 +251,9 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
             child: DataTable(
               showCheckboxColumn: false,
               columnSpacing: 7.0,
+              headingRowColor:
+                  MaterialStateProperty.all(const Color(0xFFD9DEDA)),
+
               columns: const [
                 DataColumn(label: Text('DNI')),
                 DataColumn(label: Text('NOMBRE')),
