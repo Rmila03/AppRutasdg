@@ -138,12 +138,11 @@ class _PromocionPageState extends State<PromocionPage> {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Card(
         shape: RoundedRectangleBorder(
-          side: const BorderSide(
-              color: Color.fromRGBO(255, 255, 255, 1), width: 2.0),
-          borderRadius: BorderRadius.circular(8.0),
+          side: const BorderSide(color: Color(0xFFD9DEDA)),
+          borderRadius: BorderRadius.circular(0.0),
         ),
         color: const Color.fromARGB(255, 255, 255, 255),
-        elevation: 5,
+        elevation: 0,
         child: SizedBox(
           height: 200,
           width: 600,
@@ -151,6 +150,8 @@ class _PromocionPageState extends State<PromocionPage> {
             child: DataTable(
               showCheckboxColumn: false,
               columnSpacing: 7.0,
+              headingRowColor:
+                  MaterialStateProperty.all(const Color(0xFFD9DEDA)),
               columns: const [
                 DataColumn(label: Text('N°')),
                 DataColumn(label: Text('DNI')),
