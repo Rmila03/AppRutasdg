@@ -4,7 +4,6 @@ import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
 import 'package:ruta_sdg/supervisor/dashboard_supervisor.dart';
 import 'package:ruta_sdg/supervisor/historialSupervisor.dart';
 import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
-import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
 
 class MenuSupervisor extends StatefulWidget {
   final String? name;
