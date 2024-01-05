@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
 import 'package:ruta_sdg/user.dart';
-import 'package:ruta_sdg/widgets/menu_supervisor.dart';
-import 'package:ruta_sdg/widgets/text_form_result.dart';
 
 class CarteraForm extends StatefulWidget {
   final UserData user;
@@ -19,11 +17,6 @@ class CarteraFormState extends State<CarteraForm> {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        height: 600, // Puedes ajustar este valor según tus necesidades
-        child: const MenuSupervisor(name: "CARTERA"),
-      ),
       Expanded(
         child: SingleChildScrollView(
           child: Container(
@@ -32,6 +25,19 @@ class CarteraFormState extends State<CarteraForm> {
               key: _formKey,
               child: Column(
                 children: [
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 30.0),
+                      child: Text(
+                        "PERFIL DEL SOCIO",
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.orange,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                   Row(children: [
                     Expanded(
                       child: TextForm(
@@ -74,18 +80,12 @@ class CarteraFormState extends State<CarteraForm> {
                       Expanded(
                         child: TextForm(
                           formKey: _formKey,
-                          label: "Riesgo del Socio",
+                          label: "Correo Electrónico",
                           inputType: TextInputType.none,
-                          content: "Normal",
+                          content: widget.user.email,
                         ),
                       ),
                     ],
-                  ),
-                  TextForm(
-                    formKey: _formKey,
-                    label: "Correo electrónico",
-                    inputType: TextInputType.emailAddress,
-                    content: widget.user.email,
                   ),
                   TextForm(
                     formKey: _formKey,
@@ -123,90 +123,192 @@ class CarteraFormState extends State<CarteraForm> {
                       ),
                     ],
                   ),
-                  //DropdownButtonFormField(items: , onChanged: onChanged),
-
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Cálculo de Crédito",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Color.fromARGB(255, 0, 76, 128),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Cálculo",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const TextFormResult(
-                      label: "Pago Mensual:", content: "s/. 120.50"),
-                  const TextFormResult(
-                    label: "Primera fecha de pago:",
-                    content: "12/02/2023",
-                  ),
-                  const TextFormResult(
-                      label: "Última fehca de pago", content: "12/02/2024"),
-                  const SizedBox(height: 20),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            // Validate returns true if the form is valid, or false otherwise.
-                            if (_formKey.currentState!.validate()) {
-                              // If the form is valid, display a snackbar. In the real world,
-                              // you'd often call a server or save the information in a database.
-                              /*ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );*/
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const CarteraPage()),
-                              );
-                            }
-                          },
-                          style: ButtonStyle(
-                            padding:
-                                MaterialStateProperty.all<EdgeInsetsGeometry>(
-                              const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 10), // Padding en todos los lados
-                            ),
-                            shape: MaterialStateProperty.all<OutlinedBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    8.0), // Bordes redondeados
-                                side: const BorderSide(
-                                    color: Color.fromARGB(255, 0, 76, 128),
-                                    width: 2.0), // Color y grosor del borde
-                              ),
-                            ),
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Crédito",
+                            inputType: TextInputType.number,
+                            content: "------"),
+                      ),
+                      const SizedBox(width: 30),
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Vigente",
+                            inputType: TextInputType.number,
+                            content: "o"),
+                      ),
+                      const SizedBox(width: 30),
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Candelado",
+                            inputType: TextInputType.number,
+                            content: "o"),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Riesgo del Socio",
+                            inputType: TextInputType.number,
+                            content: "NORMAL"),
+                      ),
+                      const SizedBox(width: 30),
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Tipo de Socio",
+                            inputType: TextInputType.number,
+                            content: "RECURRENTE"),
+                      ),
+                      const SizedBox(width: 30),
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Tipo de Crédito",
+                            inputType: TextInputType.number,
+                            content: "GENÉRICO"),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Tipo de Producto",
+                            inputType: TextInputType.number,
+                            content: "MYPE"),
+                      ),
+                      const SizedBox(width: 30),
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Modalidad",
+                            inputType: TextInputType.number,
+                            content: "COOPENAVIDEÑO"),
+                      ),
+                      const SizedBox(width: 30),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Crédito Total",
+                            inputType: TextInputType.number,
+                            content: "S/. 10 000"),
+                      ),
+                      const SizedBox(width: 30),
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Plazo (meses)",
+                            inputType: TextInputType.number,
+                            content: "24"),
+                      ),
+                      const SizedBox(width: 30),
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Tasa de Interés",
+                            inputType: TextInputType.number,
+                            content: "8.83 %"),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Monto de la Cuota",
+                            inputType: TextInputType.number,
+                            content: "S/. 479.16"),
+                      ),
+                      const SizedBox(width: 30),
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Primera Fecha de Pago",
+                            inputType: TextInputType.number,
+                            content: "10/01/2024"),
+                      ),
+                      const SizedBox(width: 30),
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Ultima Fecha de Pago",
+                            inputType: TextInputType.number,
+                            content: "10/01/2026"),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Saldo Vencido",
+                            inputType: TextInputType.number,
+                            content: "S/. 0"),
+                      ),
+                      const SizedBox(width: 30),
+                      Expanded(
+                        child: TextForm(
+                            formKey: _formKey,
+                            label: "Saldo de Crédito",
+                            inputType: TextInputType.number,
+                            content: "S/. 10 000"),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 30),
+                  Center(
+                    child: Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const CarteraPage()),
+                            );
+                          }
+                        },
+                        style: ButtonStyle(
+                          padding:
+                              MaterialStateProperty.all<EdgeInsetsGeometry>(
+                            const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
                           ),
-                          child: const Text(
-                            'REGRESAR',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Color.fromARGB(255, 0, 76, 128),
-                              fontWeight: FontWeight.bold,
+                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  8.0), // Bordes redondeados
+                              side: const BorderSide(
+                                  color: Color.fromARGB(255, 0, 76, 128),
+                                  width: 2.0), // Color y grosor del borde
                             ),
                           ),
                         ),
+                        child: const Text(
+                          'REGRESAR',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 0, 76, 128),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),
