@@ -1,18 +1,42 @@
-import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/supervisor/cartera/listacartera.dart';
-import 'package:ruta_sdg/user.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
+import 'package:ruta_sdg/user.dart';
 
-class CarteraPage extends StatefulWidget {
+void main() {
+  runApp(const CarteraPage());
+}
+
+class CarteraPage extends StatelessWidget {
   const CarteraPage({super.key});
 
   @override
-  State createState() => _CarteraPageState();
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: MyHomeCarteraPage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
 }
 
-class _CarteraPageState extends State<CarteraPage> {
-  String selectedMenu = 'CARTERA';
+class MyHomeCarteraPage extends StatefulWidget {
+  const MyHomeCarteraPage({super.key});
+
+  @override
+  _MyHomeCarteraPageState createState() => _MyHomeCarteraPageState();
+}
+
+class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
+    with SingleTickerProviderStateMixin {
+  String selectedOption = '';
+  DateTime selectedDate = DateTime.now();
+  List<String> menuOptions = [
+    'Juan Perez Garcia',
+    'Ruth Milagros Arce Quispe',
+    'Yolmy Milagros Cahuata Lavilla',
+    'Stiward Maldonado',
+    'Justino Ferro'
+  ];
   final List<UserData> users = [
     UserData(
         "1",
@@ -29,117 +53,143 @@ class _CarteraPageState extends State<CarteraPage> {
         "foo@gmail.com", "Av. La cultura #345", "Cusco", "Cusco", "Cusco"),
     // Agrega más usuarios según sea necesario
   ];
-
   @override
   Widget build(BuildContext context) {
+    var container = Container(
+      alignment: Alignment.bottomLeft,
+      padding: const EdgeInsets.all(8.0),
+      width: 600,
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 255, 255, 255),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: DropdownButton<String>(
+        value: selectedOption.isNotEmpty ? selectedOption : null,
+        items: menuOptions.map((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(
+              value,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 15.0,
+                fontFamily: 'Unna-Bold',
+              ),
+            ),
+          );
+        }).toList(),
+        onChanged: (String? value) {
+          setState(() {
+            selectedOption = value ?? '';
+          });
+        },
+        hint: const Text(
+          'Seleccionar opción',
+          style: TextStyle(
+            color: Color.fromARGB(255, 196, 196, 196),
+            fontSize: 15.0,
+            fontFamily: 'Unna-Bold',
+          ),
+        ),
+      ),
+    );
+
     return Scaffold(
-      body: Row(
+      body: Stack(
         children: [
-          const MenuSupervisor(name: "CARTERA"),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 20.0),
-                  const Text(
-                    'CARTERA DE ANALISTAS',
-                    style: TextStyle(
-                      color: Colors.orange,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 20.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Row(
+            children: [
+              const MenuSupervisor(name: "CARTERA"),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(height: 20.0),
                       Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16.0),
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 2.0,
-                          ),
-                        ),
-                        child: DropdownButton<String>(
-                          items: [
-                            'Juan Perez Garcia',
-                            'Ruth Milagros Arce Quispe',
-                            'Stiward Maldonado',
-                            'Justino Ferro'
-                          ].map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20.0,
-                                  fontFamily: 'Unna-Bold',
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (String? value) {
-                            // Agregar lógica para manejar la opción seleccionada
-                          },
-                          hint: const Text(
-                            'Seleccionar opción',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20.0,
-                              fontFamily: 'Unna-Bold',
-                            ),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'CARTERA DE ANALISTAS',
+                          style: TextStyle(
+                            color: Colors.orange,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
+                      const SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          container,
+                          //const SizedBox(width: 0), // Ajuste del margen derecho
+                        ],
+                      ),
+                      const SizedBox(height: 25.0),
+                      Center(
+                        child: _buildDataTable(context, "", users),
+                      )
                     ],
                   ),
-                  const SizedBox(height: 20.0),
-                  const SizedBox(height: 16.0),
-                  Center(
-                    child: DataTable(
-                      columns: const [
-                        DataColumn(label: Text('N°')),
-                        DataColumn(label: Text('DNI')),
-                        DataColumn(label: Text('NOMBRE')),
-                        DataColumn(label: Text('DIRECCIÓN')),
-                      ],
-                      rows: users.map((user) {
-                        return DataRow(
-                          onSelectChanged: (isSelected) {
-                            if (isSelected != null && isSelected) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ListaSupervisor(
-                                          tabColorLeft: const Color.fromARGB(
-                                              255, 255, 255, 255),
-                                          tabName: 'CARTERA',
-                                          user: user,
-                                        )),
-                              );
-                            }
-                          },
-                          cells: [
-                            DataCell(Text(user.number)),
-                            DataCell(Text(user.dni)),
-                            DataCell(Text("${user.name} ${user.lastName}")),
-                            DataCell(Text(user.address)),
-                          ],
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDataTable(
+      BuildContext context, String title, List<UserData> userList) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Color(0xFFD9DEDA), width: 2.0),
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        color: Colors.white,
+        elevation: 0,
+        child: SizedBox(
+          height: 400,
+          width: 1000,
+          child: SingleChildScrollView(
+            child: DataTable(
+              showCheckboxColumn: false,
+              columnSpacing: 7.0,
+              headingRowColor:
+                  MaterialStateProperty.all(const Color(0xFFD9DEDA)),
+              columns: const [
+                DataColumn(label: Text('DNI')),
+                DataColumn(label: Text('NOMBRE')),
+                DataColumn(label: Text('DIRECCIÓN')),
+              ],
+              rows: userList.map((user) {
+                return DataRow(
+                  onSelectChanged: (isSelected) {
+                    if (isSelected != null && isSelected) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ListaSupervisor(
+                            user: user,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  cells: [
+                    DataCell(Text(user.dni)),
+                    DataCell(Text("${user.name} ${user.lastName}")),
+                    DataCell(Text(user.address)),
+                  ],
+                );
+              }).toList(),
+            ),
+          ),
+        ),
       ),
     );
   }
