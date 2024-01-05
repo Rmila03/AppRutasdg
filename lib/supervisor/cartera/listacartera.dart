@@ -20,7 +20,7 @@ class ListaSupervisor extends StatefulWidget {
 class ListaSupervisorState extends State<ListaSupervisor> {
   // ignore: non_constant_identifier_names
   late Widget CasoFormWidget; // Declara la variable para la redirección
-
+  // ignore: non_constant_identifier_names
   @override
   void initState() {
     super.initState();
