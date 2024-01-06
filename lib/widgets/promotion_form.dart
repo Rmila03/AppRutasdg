@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/user.dart';
 import 'package:ruta_sdg/views/promocion.dart';
+import 'package:ruta_sdg/widgets/custom_dropdown.dart';
 import 'package:ruta_sdg/widgets/text_form_result.dart';
 
 class PromotionForm extends StatefulWidget {
@@ -110,19 +111,19 @@ class PromotionFormState extends State<PromotionForm> {
               ),
               //DropdownButtonFormField(items: , onChanged: onChanged),
               const CustomDropdown(
-                items: ['', 'Socio 1', 'Socio 2', 'Socio 3'],
+                items: ['Socio 1', 'Socio 2', 'Socio 3'],
                 label: "Tipo de Socio:",
               ),
               const CustomDropdown(
-                items: ['', 'Crédito 1', 'Crédito 2', 'Crédito 3'],
+                items: ['Crédito 1', 'Crédito 2', 'Crédito 3'],
                 label: "Tipo de Crédito:",
               ),
               const CustomDropdown(
-                items: ['', 'Producto 1', 'Producto 2', 'Producto 3'],
+                items: ['Producto 1', 'Producto 2', 'Producto 3'],
                 label: "Tipo de Producto:",
               ),
               const CustomDropdown(
-                items: ['', 'Modalidad 1', 'Modalidad 2', 'Modalidad 3'],
+                items: ['Modalidad 1', 'Modalidad 2', 'Modalidad 3'],
                 label: "Modalidad:",
               ),
               const Align(
@@ -414,86 +415,6 @@ class _TextForm extends State<TextForm> {
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-}
-
-class CustomDropdown extends StatefulWidget {
-  final List<String> items;
-  final String label;
-  const CustomDropdown({Key? key, required this.items, required this.label})
-      : super(key: key);
-
-  @override
-  CustomDropdownState createState() => CustomDropdownState();
-}
-
-class CustomDropdownState extends State<CustomDropdown> {
-  String? _selectedItem;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 120,
-            child: Text(
-              widget.label,
-              style: const TextStyle(
-                fontSize: 12,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 48,
-                  color: Colors.white,
-                  child: DropdownButtonFormField<String>(
-                    value: _selectedItem,
-                    dropdownColor: Colors.white,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 208, 208, 208),
-                          width: 2.0,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 208, 208, 208),
-                          width: 2.0,
-                        ),
-                      ),
-                    ),
-                    items: widget.items
-                        .map<DropdownMenuItem<String>>(
-                          (String value) => DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value,
-                                style: const TextStyle(fontSize: 12)),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedItem = newValue;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }
 
