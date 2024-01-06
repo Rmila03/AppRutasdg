@@ -40,18 +40,135 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
   ];
   final List<UserData> users = [
     UserData(
-        "1",
-        "Ruth Milagros",
-        "Arce Quispe",
-        "12345678",
-        "978563412",
-        'abcd@gmail.com',
-        "Jr. Jose Carlos Mariategui #345",
-        "Cusco",
-        "Cusco",
-        "Cusco"),
-    UserData("2", "Yolmy Milagros", "Cahuata Lavilla", "98765432", "978563412",
-        "foo@gmail.com", "Av. La cultura #345", "Cusco", "Cusco", "Cusco"),
+      "1",
+      "Aracely Milagros",
+      "Conchoy Paucar",
+      "96543025",
+      "978563412",
+      'abcd@gmail.com',
+      "Jr. Jose Carlos Mariategui #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
+    UserData(
+      "2",
+      "Ana",
+      "Cortez Quispe",
+      "98765432",
+      "978563412",
+      "foo@gmail.com",
+      "Av. La cultura #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
+    UserData(
+      "3",
+      "Glina ",
+      "Puma Huamaní",
+      "70236598",
+      "978563412",
+      'abcd@gmail.com',
+      "Jr. Jose Carlos Mariategui #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime(2024, 1, 7),
+    ),
+    UserData(
+      "4",
+      "Roswell",
+      "Pando Muñoz",
+      "36402598",
+      "978563412",
+      'abcd@gmail.com',
+      "Jr. Jose Carlos Mariategui #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime(2024, 1, 6),
+    ),
+    UserData(
+      "5",
+      "Yoshimori",
+      "Lavilla Quispe",
+      "32597322",
+      "978563412",
+      'abcd@gmail.com',
+      "Jr. Jose Carlos Mariategui #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
+    UserData(
+      "6",
+      "Mishel",
+      "Turpo Meza",
+      "23014586",
+      "978563412",
+      'abcd@gmail.com',
+      "Jr. Jose Carlos Mariategui #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime(2024, 1, 7),
+    ),
+    UserData(
+      "7",
+      "Anyi",
+      "Mujica Hermoza",
+      "35987645",
+      "978563412",
+      'abcd@gmail.com',
+      "Jr. Jose Carlos Mariategui #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
+    UserData(
+      "8",
+      "Milagros",
+      "Moreno Sarayasi",
+      "15798642",
+      "978563412",
+      'abcd@gmail.com',
+      "Jr. Jose Carlos Mariategui #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime(2024, 1, 10),
+    ),
+    UserData(
+      "9",
+      "Julia",
+      "Ramos Gutierrez",
+      "36501263",
+      "978563412",
+      "foo@gmail.com",
+      "Av. La cultura #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
+    UserData(
+      "10",
+      "Margoire",
+      "Chirinos Vilca",
+      "54698230",
+      "978563412",
+      "foo@gmail.com",
+      "Av. La cultura #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
     // Agrega más usuarios según sea necesario
   ];
   bool isFloatingPageVisible = false;
@@ -78,6 +195,8 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
 
   @override
   Widget build(BuildContext context) {
+    List<UserData> usersAssignedToToday = [];
+    List<UserData> usersNotAssignedToToday = [];
     var container = Container(
       alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(8.0),
@@ -116,6 +235,45 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         ),
       ),
     );
+    List<String> selectedUsersIds = [];
+
+    switch (selectedOption) {
+      case 'Juan Perez Garcia':
+        selectedUsersIds = ['1', '4'];
+        break;
+      case 'Ruth Milagros Arce Quispe':
+        selectedUsersIds = ['3', '5'];
+        break;
+      case 'Yolmy Milagros Cahuata Lavilla':
+        selectedUsersIds = ['2', '8'];
+        break;
+      case 'Stiward Maldonado':
+        selectedUsersIds = ['6', '10'];
+        break;
+      case 'Justino Ferro':
+        selectedUsersIds = ['7', '9'];
+        break;
+      default:
+        // Handle default case if needed
+        break;
+    }
+
+    //List<UserData> filteredUsers = users.where((user) {return selectedUsersIds.contains(user.number);
+    //}).toList();
+    // List<UserData> usersAssignedToToday = [];
+    //List<UserData> usersNotAssignedToToday = [];
+
+    // Filtrar usuarios asignados y no asignados a la fecha seleccionada
+    for (UserData user in users) {
+      if (selectedUsersIds.contains(user.number)) {
+        // Verificar si el usuario está asignado a la fecha de hoy
+        if (userIsAssignedToToday(user)) {
+          usersAssignedToToday.add(user);
+        } else {
+          usersNotAssignedToToday.add(user);
+        }
+      }
+    }
 
     return Scaffold(
       body: Stack(
@@ -212,7 +370,8 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                       ),
                       const SizedBox(height: 25.0),
                       Center(
-                        child: _buildDataTable("", users),
+                        child: _buildDataTable(
+                            selectedOption, usersAssignedToToday),
                       )
                     ],
                   ),
@@ -239,7 +398,13 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                     child: SizedBox(
                       width: 600,
                       height: 800,
-                      child: FloatingPage(userList: users),
+                      child: FloatingPage(
+                        userList: usersNotAssignedToToday,
+                        onPlusIconPressed: (UserData user) {
+                          _handlePlusIconPressed(user);
+                          _toggleFloatingPage();
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -285,8 +450,14 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                     DataCell(Text("${user.name} ${user.lastName}")),
                     DataCell(Text(user.address)),
                     const DataCell(Text("Promoción")),
-                    const DataCell(
-                      Icon(FontAwesomeIcons.trash, color: Color(0xFF0E813C)),
+                    DataCell(
+                      IconButton(
+                        icon: const Icon(FontAwesomeIcons.trash,
+                            color: Color(0xFF0E813C)),
+                        onPressed: () {
+                          _handleTrashIconPressed(user);
+                        },
+                      ),
                     ),
                   ],
                 );
@@ -296,6 +467,25 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         ),
       ),
     );
+  }
+
+  void _handlePlusIconPressed(UserData user) {
+    setState(() {
+      user.assignedDate = DateTime.now();
+    });
+    _toggleFloatingPage();
+  }
+
+  void _handleTrashIconPressed(UserData user) {
+    setState(() {
+      user.assignedDate = DateTime.now().add(const Duration(days: 1));
+    });
+  }
+
+  bool userIsAssignedToToday(UserData user) {
+    // Lógica para verificar si el usuario está asignado a la fecha de hoy
+    return user.assignedDate != null &&
+        user.assignedDate!.toLocal().isAtSameMomentAs(selectedDate);
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -346,8 +536,13 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
 
 class FloatingPage extends StatelessWidget {
   final List<UserData> userList;
+  final Function(UserData) onPlusIconPressed;
 
-  const FloatingPage({super.key, required this.userList});
+  const FloatingPage({
+    super.key,
+    required this.userList,
+    required this.onPlusIconPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -381,7 +576,12 @@ class FloatingPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16.0),
-          Center(child: SearchAndUserList(userList: userList)),
+          Center(
+            child: SearchAndUserList(
+              userList: userList,
+              onPlusIconPressed: onPlusIconPressed,
+            ),
+          ),
         ],
       ),
     );
@@ -390,8 +590,12 @@ class FloatingPage extends StatelessWidget {
 
 class SearchAndUserList extends StatefulWidget {
   final List<UserData> userList;
-
-  const SearchAndUserList({super.key, required this.userList});
+  final Function(UserData) onPlusIconPressed;
+  const SearchAndUserList({
+    super.key,
+    required this.userList,
+    required this.onPlusIconPressed,
+  });
 
   @override
   _SearchAndUserListState createState() => _SearchAndUserListState();
@@ -407,6 +611,10 @@ class _SearchAndUserListState extends State<SearchAndUserList> {
     filteredUsers = widget.userList;
     _searchController = TextEditingController();
     _searchController.addListener(_onSearchChanged);
+  }
+
+  void _handlePlusIconPressed(UserData user) {
+    widget.onPlusIconPressed(user); // Pasa el usuario al método externo
   }
 
   void _onSearchChanged() {
@@ -453,9 +661,19 @@ class _SearchAndUserListState extends State<SearchAndUserList> {
                 ),
                 Container(
                   margin: const EdgeInsets.only(right: 20),
-                  child: const Icon(
-                    FontAwesomeIcons.plus,
-                    color: Color(0xFF0E813C),
+                  child: IconButton(
+                    icon: const Icon(FontAwesomeIcons.plus,
+                        color: Color(0xFF0E813C)),
+                    onPressed: () {
+                      _handlePlusIconPressed(user);
+                      // Añade esta línea para notificar a la página principal
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('${user.name} añadido correctamente.'),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],

@@ -51,21 +51,10 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
         "Cusco"),
     UserData("2", "Yolmy Milagros", "Cahuata Lavilla", "98765432", "978563412",
         "foo@gmail.com", "Av. La cultura #345", "Cusco", "Cusco", "Cusco"),
+    UserData("3", "Juan Jaime", "Pando Muñoz", "98159874", "98159874",
+        "foo@gmail.com", "Av. Sol de Oro #345", "Cusco", "Cusco", "Cusco"),
     // Agrega más usuarios según sea necesario
   ];
-  bool isFloatingPageVisible = false;
-  late AnimationController _animationController;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     var container = Container(
@@ -119,7 +108,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20.0),
+                      const SizedBox(height: 30.0),
                       Container(
                         alignment: Alignment.center,
                         child: const Text(
@@ -205,50 +194,5 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
         ),
       ),
     );
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2022),
-      lastDate: DateTime(2025),
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: ThemeData.light().copyWith(
-            primaryColor: const Color.fromARGB(255, 4, 56, 99),
-            hintColor: const Color.fromARGB(255, 140, 178, 210),
-            colorScheme: const ColorScheme.light(
-              primary: Color.fromARGB(255, 4, 56, 99),
-            ),
-            buttonTheme:
-                const ButtonThemeData(textTheme: ButtonTextTheme.primary),
-          ),
-          child: child!,
-        );
-      },
-    );
-
-    if (pickedDate != null) {
-      setState(() {
-        selectedDate = pickedDate!;
-      });
-    } else {
-      pickedDate = DateTime.now();
-      setState(() {
-        selectedDate = pickedDate!;
-      });
-    }
-  }
-
-  void _toggleFloatingPage() {
-    if (isFloatingPageVisible) {
-      _animationController.reverse();
-    } else {
-      _animationController.forward();
-    }
-    setState(() {
-      isFloatingPageVisible = !isFloatingPageVisible;
-    });
   }
 }

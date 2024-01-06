@@ -92,7 +92,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
     return const Text(
       'REPORTES',
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
         fontFamily: 'Montserrat',
@@ -173,7 +173,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                         ),
                   ),
                   suffixIcon: IconButton(
-                    icon: const Icon(Icons.search),
+                    icon: const Icon(Icons.clear_outlined),
                     color: const Color.fromARGB(255, 0, 76, 128),
                     onPressed: () {
                       searchController.clear();
@@ -245,7 +245,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
             color: Color.fromRGBO(255, 255, 255, 1),
             width: 2.0,
           ),
-          borderRadius: BorderRadius.circular(5.0),
+          borderRadius: BorderRadius.circular(0.0),
         ),
         color: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
@@ -275,8 +275,22 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
     final DateTime picked = (await showDatePicker(
           context: context,
           initialDate: selectedDate,
-          firstDate: DateTime(2000),
-          lastDate: DateTime(2101),
+          firstDate: DateTime(2022),
+          lastDate: DateTime(2025),
+          builder: (BuildContext context, Widget? child) {
+            return Theme(
+              data: ThemeData.light().copyWith(
+                primaryColor: const Color.fromARGB(255, 4, 56, 99),
+                hintColor: const Color.fromARGB(255, 140, 178, 210),
+                colorScheme: const ColorScheme.light(
+                  primary: Color.fromARGB(255, 4, 56, 99),
+                ),
+                buttonTheme:
+                    const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+              ),
+              child: child!,
+            );
+          },
         )) ??
         selectedDate;
     if (picked != selectedDate && mounted) {

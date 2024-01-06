@@ -86,7 +86,7 @@ class _HistorialSupervisorContentState
     return const Text(
       'HISTORIAL DE CAMBIOS',
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
         fontFamily: 'Montserrat',
@@ -203,13 +203,29 @@ class _HistorialSupervisorContentState
   }
 
   Future<void> _selectDate(BuildContext context) async {
-    final DateTime picked = (await showDatePicker(
+    DateTime picked = (await showDatePicker(
           context: context,
           initialDate: selectedDate,
-          firstDate: DateTime(2000),
-          lastDate: DateTime(2101),
+          firstDate: DateTime(2022),
+          lastDate: DateTime(2025),
+          builder: (BuildContext context, Widget? child) {
+            return Theme(
+              data: ThemeData.light().copyWith(
+                primaryColor: const Color.fromARGB(255, 4, 56, 99),
+                hintColor: const Color.fromARGB(255, 140, 178, 210),
+                colorScheme: const ColorScheme.light(
+                  primary: Color.fromARGB(255, 4, 56, 99),
+                ),
+                buttonTheme: const ButtonThemeData(
+                  textTheme: ButtonTextTheme.primary,
+                ),
+              ),
+              child: child!,
+            );
+          },
         )) ??
         selectedDate;
+
     if (picked != selectedDate && mounted) {
       setState(() {
         selectedDate = picked;

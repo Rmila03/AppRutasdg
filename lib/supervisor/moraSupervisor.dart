@@ -102,7 +102,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
                 _buildTitle(),
 
                 // Date picker widget
-                const SizedBox(height: 10.0),
+                const SizedBox(height: 5.0),
                 _buildDatePicker(context),
 
                 // Filter button widget
@@ -119,25 +119,30 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
   }
 
   Widget _showFilterDialog() => AlertDialog(
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        elevation: 0, // Fondo transparente
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         content: Container(
           decoration: BoxDecoration(
-            color: Colors.white, // Fondo blanco
-            borderRadius: BorderRadius.circular(10.0), // Borde redondeado
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10.0),
             border: Border.all(
-              color: const Color.fromARGB(
-                  255, 0, 76, 128), // Color del borde adicional
-              width: 1.0, // Ancho del borde adicional
+              color: const Color(0xFFD9DEDA),
+              width: 2.0,
             ),
           ),
-          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Selecciona los días:  '),
+              Text(
+                'Selecciona días:',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
               DropdownButton<int>(
                 value: filterDays,
+                focusColor: Colors.transparent,
                 onChanged: (int? value) {
                   if (value != null) {
                     setState(() {
@@ -149,7 +154,19 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
                   11,
                   (index) => DropdownMenuItem<int>(
                     value: index,
-                    child: Text(index == 0 ? '' : '$index'),
+                    child: Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 5.0), // Ajusta el margen horizontal
+                      child: Text(
+                        index == 0 ? '' : '$index',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -162,7 +179,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
     return const Text(
       'SOCIOS EN MORA',
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
         fontFamily: 'Montserrat',
@@ -269,13 +286,29 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
   }
 
   Future<void> _selectDate(BuildContext context) async {
-    final DateTime picked = (await showDatePicker(
+    DateTime picked = (await showDatePicker(
           context: context,
           initialDate: selectedDate,
-          firstDate: DateTime(2000),
-          lastDate: DateTime(2101),
+          firstDate: DateTime(2022),
+          lastDate: DateTime(2025),
+          builder: (BuildContext context, Widget? child) {
+            return Theme(
+              data: ThemeData.light().copyWith(
+                primaryColor: const Color.fromARGB(255, 4, 56, 99),
+                hintColor: const Color.fromARGB(255, 140, 178, 210),
+                colorScheme: const ColorScheme.light(
+                  primary: Color.fromARGB(255, 4, 56, 99),
+                ),
+                buttonTheme: const ButtonThemeData(
+                  textTheme: ButtonTextTheme.primary,
+                ),
+              ),
+              child: child!,
+            );
+          },
         )) ??
         selectedDate;
+
     if (picked != selectedDate && mounted) {
       setState(() {
         selectedDate = picked;

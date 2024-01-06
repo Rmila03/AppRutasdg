@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
 import 'package:ruta_sdg/user.dart';
 
 class CarteraForm extends StatefulWidget {
@@ -20,7 +19,7 @@ class CarteraFormState extends State<CarteraForm> {
       Expanded(
         child: SingleChildScrollView(
           child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+            margin: const EdgeInsets.symmetric(horizontal: 90),
             child: Form(
               key: _formKey,
               child: Column(
@@ -47,7 +46,7 @@ class CarteraFormState extends State<CarteraForm> {
                         content: widget.user.name,
                       ),
                     ),
-                    const SizedBox(width: 15),
+                    const SizedBox(width: 50),
                     Expanded(
                       child: TextForm(
                         formKey: _formKey,
@@ -125,29 +124,39 @@ class CarteraFormState extends State<CarteraForm> {
                   ),
                   Row(
                     children: [
-                      Expanded(
-                        child: TextForm(
-                            formKey: _formKey,
-                            label: "Crédito",
-                            inputType: TextInputType.number,
-                            content: "------"),
+                      const Text(
+                        "Crédito",
+                      ),
+                      const SizedBox(width: 30),
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 150),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8.0),
+                              child: const Icon(
+                                Icons.radio_button_unchecked,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            const Text("Vigente"),
+                          ],
+                        ),
                       ),
                       const SizedBox(width: 30),
                       Expanded(
-                        child: TextForm(
-                            formKey: _formKey,
-                            label: "Vigente",
-                            inputType: TextInputType.number,
-                            content: "o"),
-                      ),
-                      const SizedBox(width: 30),
-                      Expanded(
-                        child: TextForm(
-                            formKey: _formKey,
-                            label: "Candelado",
-                            inputType: TextInputType.number,
-                            content: "o"),
-                      ),
+                          child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8.0),
+                            child: const Icon(
+                              Icons.circle,
+                              color: Colors.orange,
+                            ),
+                          ),
+                          const Text("Vencido"),
+                        ],
+                      )),
                     ],
                   ),
                   Row(
@@ -271,45 +280,6 @@ class CarteraFormState extends State<CarteraForm> {
                     ],
                   ),
                   const SizedBox(width: 30),
-                  Center(
-                    child: Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const CarteraPage()),
-                            );
-                          }
-                        },
-                        style: ButtonStyle(
-                          padding:
-                              MaterialStateProperty.all<EdgeInsetsGeometry>(
-                            const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
-                          ),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  8.0), // Bordes redondeados
-                              side: const BorderSide(
-                                  color: Color.fromARGB(255, 0, 76, 128),
-                                  width: 2.0), // Color y grosor del borde
-                            ),
-                          ),
-                        ),
-                        child: const Text(
-                          'REGRESAR',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Color.fromARGB(255, 0, 76, 128),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -317,57 +287,6 @@ class CarteraFormState extends State<CarteraForm> {
         ),
       ),
     ]);
-  }
-}
-
-class InputTextForm extends StatelessWidget {
-  final String label;
-  final String? percentage;
-  const InputTextForm({
-    super.key,
-    required this.label,
-    this.percentage = "",
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            label,
-            style: const TextStyle(
-              fontSize: 12,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: TextFormField(
-            keyboardType: TextInputType.number,
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.grey[300],
-              contentPadding: const EdgeInsets.symmetric(vertical: 4),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0), // Bordes redondeados
-                borderSide: BorderSide.none, // Sin borde visible
-              ),
-              focusedBorder: OutlineInputBorder(
-                // Borde cuando está enfocado
-                borderRadius: BorderRadius.circular(10.0),
-                // ignore: prefer_const_constructors
-                borderSide: BorderSide(
-                    color: Colors.white, width: 0), // Grosor del borde
-              ),
-              // Puedes añadir más propiedades de estilo según tus necesidades
-            ),
-          ),
-        ),
-      ],
-    );
   }
 }
 
@@ -403,107 +322,19 @@ class _TextForm extends State<TextForm> {
           controller: _controller,
           enabled: false,
           keyboardType: widget.inputType,
-          cursorColor: Colors.black,
           decoration: const InputDecoration(
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
+              borderSide: BorderSide(color: Color.fromARGB(255, 102, 102, 102)),
             ),
-            labelStyle: TextStyle(color: Colors.red),
           ),
           style: const TextStyle(color: Colors.black),
         ),
         Text(
           widget.label,
           style: const TextStyle(
-            fontSize: 12,
-          ),
+              fontSize: 12, color: Color.fromARGB(255, 102, 102, 102)),
         ),
       ],
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-}
-
-class CustomDropdown extends StatefulWidget {
-  final List<String> items;
-  final String label;
-  const CustomDropdown({super.key, required this.items, required this.label});
-
-  @override
-  CustomDropdownState createState() => CustomDropdownState();
-}
-
-class CustomDropdownState extends State<CustomDropdown> {
-  String? _selectedItem;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 120,
-            child: Text(
-              widget.label,
-              style: const TextStyle(
-                fontSize: 12,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 48,
-                  color: Colors.white,
-                  child: DropdownButtonFormField<String>(
-                    value: _selectedItem,
-                    dropdownColor: Colors.white,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 208, 208, 208),
-                          width: 2.0,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 208, 208, 208),
-                          width: 2.0,
-                        ),
-                      ),
-                    ),
-                    items: widget.items
-                        .map<DropdownMenuItem<String>>(
-                          (String value) => DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value,
-                                style: const TextStyle(fontSize: 12)),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedItem = newValue;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
