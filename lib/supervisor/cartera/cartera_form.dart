@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
 import 'package:ruta_sdg/user.dart';
 
 class CarteraForm extends StatefulWidget {
@@ -20,7 +19,7 @@ class CarteraFormState extends State<CarteraForm> {
       Expanded(
         child: SingleChildScrollView(
           child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+            margin: const EdgeInsets.symmetric(horizontal: 90),
             child: Form(
               key: _formKey,
               child: Column(
@@ -47,7 +46,7 @@ class CarteraFormState extends State<CarteraForm> {
                         content: widget.user.name,
                       ),
                     ),
-                    const SizedBox(width: 15),
+                    const SizedBox(width: 50),
                     Expanded(
                       child: TextForm(
                         formKey: _formKey,
@@ -125,29 +124,39 @@ class CarteraFormState extends State<CarteraForm> {
                   ),
                   Row(
                     children: [
-                      Expanded(
-                        child: TextForm(
-                            formKey: _formKey,
-                            label: "Crédito",
-                            inputType: TextInputType.number,
-                            content: "------"),
+                      const Text(
+                        "Crédito",
+                      ),
+                      const SizedBox(width: 30),
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 150),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8.0),
+                              child: const Icon(
+                                Icons.radio_button_unchecked,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            const Text("Vigente"),
+                          ],
+                        ),
                       ),
                       const SizedBox(width: 30),
                       Expanded(
-                        child: TextForm(
-                            formKey: _formKey,
-                            label: "Vigente",
-                            inputType: TextInputType.number,
-                            content: "o"),
-                      ),
-                      const SizedBox(width: 30),
-                      Expanded(
-                        child: TextForm(
-                            formKey: _formKey,
-                            label: "Candelado",
-                            inputType: TextInputType.number,
-                            content: "o"),
-                      ),
+                          child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8.0),
+                            child: const Icon(
+                              Icons.circle,
+                              color: Colors.orange,
+                            ),
+                          ),
+                          const Text("Vencido"),
+                        ],
+                      )),
                     ],
                   ),
                   Row(
@@ -271,45 +280,6 @@ class CarteraFormState extends State<CarteraForm> {
                     ],
                   ),
                   const SizedBox(width: 30),
-                  Center(
-                    child: Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const CarteraPage()),
-                            );
-                          }
-                        },
-                        style: ButtonStyle(
-                          padding:
-                              MaterialStateProperty.all<EdgeInsetsGeometry>(
-                            const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
-                          ),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  8.0), // Bordes redondeados
-                              side: const BorderSide(
-                                  color: Color.fromARGB(255, 0, 76, 128),
-                                  width: 2.0), // Color y grosor del borde
-                            ),
-                          ),
-                        ),
-                        child: const Text(
-                          'REGRESAR',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Color.fromARGB(255, 0, 76, 128),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),

@@ -51,6 +51,8 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
         "Cusco"),
     UserData("2", "Yolmy Milagros", "Cahuata Lavilla", "98765432", "978563412",
         "foo@gmail.com", "Av. La cultura #345", "Cusco", "Cusco", "Cusco"),
+    UserData("3", "Juan Jaime", "Pando Muñoz", "98159874", "98159874",
+        "foo@gmail.com", "Av. Sol de Oro #345", "Cusco", "Cusco", "Cusco"),
     // Agrega más usuarios según sea necesario
   ];
   @override
@@ -106,7 +108,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 40.0),
+                      const SizedBox(height: 20.0),
                       Container(
                         alignment: Alignment.center,
                         child: const Text(

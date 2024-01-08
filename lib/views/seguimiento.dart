@@ -164,12 +164,11 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               child: Card(
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      width: 2.0), // Borde blanco
+                      color: Color(0xFFD9DEDA), width: 2.0), // Borde blanco
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 color: const Color.fromARGB(255, 255, 255, 255),
-                elevation: 5,
+                elevation: 0,
                 child: SizedBox(
                   height: 200, // Establece la altura deseada
                   width: 600,
@@ -178,6 +177,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                       showCheckboxColumn: false,
                       //dataRowHeight: 50.0,
                       columnSpacing: 7.0,
+                      headingRowColor:
+                          MaterialStateProperty.all(const Color(0xFFD9DEDA)),
                       columns: const [
                         DataColumn(label: Text('N°')),
                         DataColumn(label: Text('DNI')),
