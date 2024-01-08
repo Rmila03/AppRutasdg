@@ -86,7 +86,7 @@ class _HistorialSupervisorContentState
     return const Text(
       'HISTORIAL DE CAMBIOS',
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
         fontFamily: 'Montserrat',

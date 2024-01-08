@@ -92,7 +92,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
     return const Text(
       'REPORTES',
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
         fontFamily: 'Montserrat',

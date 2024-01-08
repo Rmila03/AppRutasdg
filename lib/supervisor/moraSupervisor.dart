@@ -160,7 +160,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
                           horizontal: 5.0), // Ajusta el margen horizontal
                       child: Text(
                         index == 0 ? '' : '$index',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Colors.black,
                           fontWeight: FontWeight.normal,
@@ -179,7 +179,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
     return const Text(
       'SOCIOS EN MORA',
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
         fontFamily: 'Montserrat',
