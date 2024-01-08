@@ -287,7 +287,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20.0),
+                      const SizedBox(height: 40.0),
                       Container(
                         alignment: Alignment.center,
                         child: const Text(
@@ -404,6 +404,13 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                           _handlePlusIconPressed(user);
                           _toggleFloatingPage();
                         },
+                        onListsUpdated: (List<UserData> updatedUsers,
+                            List<UserData> updatedFilteredUsers) {
+                          setState(() {
+                            usersNotAssignedToToday = updatedUsers;
+                            // Puedes utilizar updatedFilteredUsers si es necesario
+                          });
+                        },
                       ),
                     ),
                   ),
@@ -471,7 +478,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
 
   void _handlePlusIconPressed(UserData user) {
     setState(() {
-      user.assignedDate = DateTime.now();
+      user.assignedDate = DateTime(2024, 1, 8);
     });
     _toggleFloatingPage();
   }
@@ -537,12 +544,14 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
 class FloatingPage extends StatelessWidget {
   final List<UserData> userList;
   final Function(UserData) onPlusIconPressed;
+  final Function(List<UserData>, List<UserData>) onListsUpdated;
 
   const FloatingPage({
-    super.key,
+    Key? key,
     required this.userList,
     required this.onPlusIconPressed,
-  });
+    required this.onListsUpdated,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -576,10 +585,13 @@ class FloatingPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16.0),
-          Center(
-            child: SearchAndUserList(
-              userList: userList,
-              onPlusIconPressed: onPlusIconPressed,
+          Expanded(
+            child: SingleChildScrollView(
+              child: SearchAndUserList(
+                userList: userList,
+                onPlusIconPressed: onPlusIconPressed,
+                onListsUpdated: onListsUpdated,
+              ),
             ),
           ),
         ],
@@ -591,11 +603,14 @@ class FloatingPage extends StatelessWidget {
 class SearchAndUserList extends StatefulWidget {
   final List<UserData> userList;
   final Function(UserData) onPlusIconPressed;
+  final Function(List<UserData>, List<UserData>) onListsUpdated;
+
   const SearchAndUserList({
-    super.key,
+    Key? key,
     required this.userList,
     required this.onPlusIconPressed,
-  });
+    required this.onListsUpdated,
+  }) : super(key: key);
 
   @override
   _SearchAndUserListState createState() => _SearchAndUserListState();
@@ -614,7 +629,7 @@ class _SearchAndUserListState extends State<SearchAndUserList> {
   }
 
   void _handlePlusIconPressed(UserData user) {
-    widget.onPlusIconPressed(user); // Pasa el usuario al método externo
+    widget.onPlusIconPressed(user);
   }
 
   void _onSearchChanged() {
@@ -625,6 +640,9 @@ class _SearchAndUserListState extends State<SearchAndUserList> {
             user.lastName.toLowerCase().contains(searchText);
       }).toList();
     });
+
+    // Devuelve las listas actualizadas a la clase principal
+    widget.onListsUpdated(widget.userList, filteredUsers);
   }
 
   @override
@@ -644,41 +662,50 @@ class _SearchAndUserListState extends State<SearchAndUserList> {
         ),
         const SizedBox(height: 16.0),
         // Lista de usuarios
-        for (final user in filteredUsers)
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    '${user.name} ${user.lastName}',
-                    style: const TextStyle(
-                      fontSize: 16.0,
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: filteredUsers.length,
+          itemBuilder: (context, index) {
+            final user = filteredUsers[index];
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      '${user.name} ${user.lastName}',
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(right: 20),
-                  child: IconButton(
-                    icon: const Icon(FontAwesomeIcons.plus,
-                        color: Color(0xFF0E813C)),
-                    onPressed: () {
-                      _handlePlusIconPressed(user);
-                      // Añade esta línea para notificar a la página principal
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('${user.name} añadido correctamente.'),
-                        ),
-                      );
-                    },
+                  Container(
+                    margin: const EdgeInsets.only(right: 20),
+                    child: IconButton(
+                      icon: const Icon(
+                        FontAwesomeIcons.plus,
+                        color: Color(0xFF0E813C),
+                      ),
+                      onPressed: () {
+                        _handlePlusIconPressed(user);
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              '${user.name} añadido correctamente.',
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
+                ],
+              ),
+            );
+          },
+        ),
       ],
     );
   }

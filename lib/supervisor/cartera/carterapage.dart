@@ -108,7 +108,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 30.0),
+                      const SizedBox(height: 20.0),
                       Container(
                         alignment: Alignment.center,
                         child: const Text(

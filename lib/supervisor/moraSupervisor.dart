@@ -160,7 +160,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
                           horizontal: 5.0), // Ajusta el margen horizontal
                       child: Text(
                         index == 0 ? '' : '$index',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Colors.black,
                           fontWeight: FontWeight.normal,
