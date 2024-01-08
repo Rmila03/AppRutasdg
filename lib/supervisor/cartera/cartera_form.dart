@@ -35,10 +35,10 @@ class CarteraFormState extends State<CarteraForm> {
                   icon: const Icon(Icons.arrow_back),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 370.0, vertical: 20),
+              const Expanded(
                 child: Text(
                   "PERFIL DEL SOCIO",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 25,
                     color: Colors.orange,
@@ -143,12 +143,13 @@ class CarteraFormState extends State<CarteraForm> {
                       ),
                       Row(
                         children: [
-                          const Text(
-                            "Crédito",
+                          const Expanded(
+                            child: Text(
+                              "Crédito",
+                              textAlign: TextAlign.left,
+                            ),
                           ),
-                          const SizedBox(width: 30),
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 150),
+                          Expanded(
                             child: Row(
                               children: [
                                 Container(
@@ -162,20 +163,20 @@ class CarteraFormState extends State<CarteraForm> {
                               ],
                             ),
                           ),
-                          const SizedBox(width: 30),
                           Expanded(
-                              child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(8.0),
-                                child: const Icon(
-                                  Icons.circle,
-                                  color: Colors.orange,
+                            child: Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: const Icon(
+                                    Icons.circle,
+                                    color: Colors.orange,
+                                  ),
                                 ),
-                              ),
-                              const Text("Vencido"),
-                            ],
-                          )),
+                                const Text("Vencido"),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                       Row(

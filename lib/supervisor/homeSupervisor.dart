@@ -275,200 +275,206 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
       }
     }
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          Row(
-            children: [
-              const MenuSupervisor(name: "PLAN DEL DÍA"),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 40.0),
-                      Container(
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'PLAN DEL DÍA',
-                          style: TextStyle(
-                            color: Color(0xFF0E813C),
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Unna-Bold',
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20.0),
-                      const Text(
-                        'Ramón Perez García',
-                        style: TextStyle(
-                          color: Colors.orange,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Unna-Bold',
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                      const SizedBox(height: 20.0),
-                      Row(
-                        children: [
-                          IconButton(
-                            icon: const Icon(
-                              FontAwesomeIcons.calendarDay,
-                              color: Color.fromARGB(255, 4, 56, 99),
-                            ),
-                            onPressed: () {
-                              _selectDate(context);
-                            },
-                          ),
-                          const SizedBox(width: 10),
-                          Text(
-                            DateFormat('dd/MM/yyyy').format(selectedDate),
-                            style: const TextStyle(
-                              color: Color.fromARGB(255, 4, 56, 99),
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          container,
-                          GestureDetector(
-                            onTap: () {
-                              _toggleFloatingPage();
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.only(right: 100),
-                              padding: const EdgeInsets.fromLTRB(16.0, 16.0,
-                                  16.0, 16.0), // Ajuste del margen derecho
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF0E813C),
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              child: const Row(
-                                children: [
-                                  Icon(Icons.add, color: Colors.white),
-                                  Text(
-                                    'AÑADIR',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          //const SizedBox(width: 0), // Ajuste del margen derecho
-                        ],
-                      ),
-                      const SizedBox(height: 25.0),
-                      Center(
-                        child: _buildDataTable(
-                            selectedOption, usersAssignedToToday),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          if (isFloatingPageVisible)
-            Stack(
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Row(
               children: [
-                Positioned.fill(
-                  child: GestureDetector(
-                    onTap: () {
-                      _toggleFloatingPage();
-                    },
-                    child: Container(
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                  ),
-                ),
-                Center(
-                  child: SlideTransition(
-                    position: _offsetAnimation,
-                    child: SizedBox(
-                      width: 600,
-                      height: 800,
-                      child: FloatingPage(
-                        userList: usersNotAssignedToToday,
-                        onPlusIconPressed: (UserData user) {
-                          _handlePlusIconPressed(user);
-                          _toggleFloatingPage();
-                        },
-                        onListsUpdated: (List<UserData> updatedUsers,
-                            List<UserData> updatedFilteredUsers) {
-                          setState(() {
-                            usersNotAssignedToToday = updatedUsers;
-                            // Puedes utilizar updatedFilteredUsers si es necesario
-                          });
-                        },
+                const MenuSupervisor(name: "PLAN DEL DÍA"),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 40.0),
+                          Container(
+                            alignment: Alignment.center,
+                            child: const Text(
+                              'PLAN DEL DÍA',
+                              style: TextStyle(
+                                color: Color(0xFF0E813C),
+                                fontSize: 25.0,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Unna-Bold',
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20.0),
+                          const Text(
+                            'Ramón Perez García',
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Unna-Bold',
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
+                          const SizedBox(height: 20.0),
+                          Row(
+                            children: [
+                              IconButton(
+                                icon: const Icon(
+                                  FontAwesomeIcons.calendarDay,
+                                  color: Color.fromARGB(255, 4, 56, 99),
+                                ),
+                                onPressed: () {
+                                  _selectDate(context);
+                                },
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                DateFormat('dd/MM/yyyy').format(selectedDate),
+                                style: const TextStyle(
+                                  color: Color.fromARGB(255, 4, 56, 99),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              container,
+                              GestureDetector(
+                                onTap: () {
+                                  _toggleFloatingPage();
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(right: 100),
+                                  padding: const EdgeInsets.fromLTRB(16.0, 16.0,
+                                      16.0, 16.0), // Ajuste del margen derecho
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF0E813C),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: const Row(
+                                    children: [
+                                      Icon(Icons.add, color: Colors.white),
+                                      Text(
+                                        'AÑADIR',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              //const SizedBox(width: 0), // Ajuste del margen derecho
+                            ],
+                          ),
+                          const SizedBox(height: 25.0),
+                          Center(
+                            child: _buildDataTable(
+                                selectedOption, usersAssignedToToday),
+                          )
+                        ],
                       ),
                     ),
                   ),
                 ),
               ],
             ),
-        ],
+            if (isFloatingPageVisible)
+              Stack(
+                children: [
+                  Positioned.fill(
+                    child: GestureDetector(
+                      onTap: () {
+                        _toggleFloatingPage();
+                      },
+                      child: Container(
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: SlideTransition(
+                      position: _offsetAnimation,
+                      child: SizedBox(
+                        width: 600,
+                        height: 800,
+                        child: FloatingPage(
+                          userList: usersNotAssignedToToday,
+                          onPlusIconPressed: (UserData user) {
+                            _handlePlusIconPressed(user);
+                            _toggleFloatingPage();
+                          },
+                          onListsUpdated: (List<UserData> updatedUsers,
+                              List<UserData> updatedFilteredUsers) {
+                            setState(() {
+                              usersNotAssignedToToday = updatedUsers;
+                              // Puedes utilizar updatedFilteredUsers si es necesario
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildDataTable(String title, List<UserData> userList) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(color: Color(0xFFD9DEDA), width: 2.0),
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        color: Colors.white,
-        elevation: 0,
-        child: SizedBox(
-          height: 400,
-          width: 1000,
-          child: SingleChildScrollView(
-            child: DataTable(
-              showCheckboxColumn: false,
-              columnSpacing: 7.0,
-              headingRowColor:
-                  MaterialStateProperty.all(const Color(0xFFD9DEDA)),
-              columns: const [
-                DataColumn(label: Text('DNI')),
-                DataColumn(label: Text('NOMBRE')),
-                DataColumn(label: Text('DIRECCIÓN')),
-                DataColumn(label: Text('MODALIDAD')),
-                DataColumn(label: Text('  ')),
-              ],
-              rows: userList.asMap().entries.map((entry) {
-                UserData user = entry.value;
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            side: const BorderSide(color: Color(0xFFD9DEDA), width: 2.0),
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          color: Colors.white,
+          elevation: 0,
+          child: SizedBox(
+            height: 300,
+            width: 1000,
+            child: SingleChildScrollView(
+              child: DataTable(
+                showCheckboxColumn: false,
+                columnSpacing: 7.0,
+                headingRowColor:
+                    MaterialStateProperty.all(const Color(0xFFD9DEDA)),
+                columns: const [
+                  DataColumn(label: Text('DNI')),
+                  DataColumn(label: Text('NOMBRE')),
+                  DataColumn(label: Text('DIRECCIÓN')),
+                  DataColumn(label: Text('MODALIDAD')),
+                  DataColumn(label: Text('  ')),
+                ],
+                rows: userList.asMap().entries.map((entry) {
+                  UserData user = entry.value;
 
-                return DataRow(
-                  cells: [
-                    DataCell(Text(user.dni)),
-                    DataCell(Text("${user.name} ${user.lastName}")),
-                    DataCell(Text(user.address)),
-                    const DataCell(Text("Promoción")),
-                    DataCell(
-                      IconButton(
-                        icon: const Icon(FontAwesomeIcons.trash,
-                            color: Color(0xFF0E813C)),
-                        onPressed: () {
-                          _handleTrashIconPressed(user);
-                        },
+                  return DataRow(
+                    cells: [
+                      DataCell(Text(user.dni)),
+                      DataCell(Text("${user.name} ${user.lastName}")),
+                      DataCell(Text(user.address)),
+                      const DataCell(Text("Promoción")),
+                      DataCell(
+                        IconButton(
+                          icon: const Icon(FontAwesomeIcons.trash,
+                              color: Color(0xFF0E813C)),
+                          onPressed: () {
+                            _handleTrashIconPressed(user);
+                          },
+                        ),
                       ),
-                    ),
-                  ],
-                );
-              }).toList(),
+                    ],
+                  );
+                }).toList(),
+              ),
             ),
           ),
         ),

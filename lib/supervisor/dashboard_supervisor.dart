@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -20,7 +18,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
     ChartData('Cumplidos', 10, Colors.orange),
     ChartData('Sin cumplir', 2, Colors.green),
   ];
-  final ScrollController controller = ScrollController();
+  //final ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
