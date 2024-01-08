@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/supervisor/cartera/cartera_form.dart';
-import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
 import "package:ruta_sdg/user.dart";
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 
@@ -33,21 +32,6 @@ class ListaSupervisorState extends State<ListaSupervisor> {
         body: Row(
           children: [
             const MenuSupervisor(name: "CARTERA"),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const CarteraPage(), // Reemplaza "OtraPantalla" con el nombre de tu pantalla de destino
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.arrow_back),
-              ),
-            ),
             Expanded(
               child: casoFormWidget,
             ),
