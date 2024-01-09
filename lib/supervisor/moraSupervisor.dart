@@ -90,27 +90,29 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
 
           // Expanded section for the main content
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                // Other widgets...
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  // Other widgets...
 
-                // Title widget
-                // Container with margin before the table title
-                const SizedBox(height: 50.0), // Añade un espacio en blanco
-                _buildTitle(),
+                  // Title widget
+                  // Container with margin before the table title
+                  const SizedBox(height: 50.0), // Añade un espacio en blanco
+                  _buildTitle(),
 
-                // Date picker widget
-                const SizedBox(height: 5.0),
-                _buildDatePicker(context),
+                  // Date picker widget
+                  const SizedBox(height: 5.0),
+                  _buildDatePicker(context),
 
-                // Filter button widget
-                _showFilterDialog(),
+                  // Filter button widget
+                  _showFilterDialog(),
 
-                // Data table widget
-                _buildDataTable(users),
-              ],
+                  // Data table widget
+                  _buildDataTable(users),
+                ],
+              ),
             ),
           ),
         ],
@@ -262,7 +264,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
         color: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         child: SizedBox(
-          height: 400,
+          height: 300,
           width: 1000,
           child: SingleChildScrollView(
             child: DataTable(

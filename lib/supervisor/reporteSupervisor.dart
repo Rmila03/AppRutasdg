@@ -58,29 +58,31 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
 
           // Expanded section for the main content
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                // Other widgets...
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  // Other widgets...
 
-                // Title widget
-                const SizedBox(height: 50.0),
-                _buildTitle(),
-                const SizedBox(height: 20.0),
+                  // Title widget
+                  const SizedBox(height: 50.0),
+                  _buildTitle(),
+                  const SizedBox(height: 20.0),
 
-                // Date picker widget
-                _buildDatePicker(context),
-                const SizedBox(height: 10.0),
+                  // Date picker widget
+                  _buildDatePicker(context),
+                  const SizedBox(height: 10.0),
 
-                // Search box widget
-                _buildSearchBox(),
+                  // Search box widget
+                  _buildSearchBox(),
 
-                const SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
 
-                // Data table widget
-                _buildDataTable(filteredUsers),
-              ],
+                  // Data table widget
+                  _buildDataTable(filteredUsers),
+                ],
+              ),
             ),
           ),
         ],
@@ -250,7 +252,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
         color: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         child: SizedBox(
-          height: 400,
+          height: 300,
           width: 1000,
           child: SingleChildScrollView(
             child: DataTable(

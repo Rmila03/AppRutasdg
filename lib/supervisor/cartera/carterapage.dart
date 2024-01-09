@@ -48,19 +48,125 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
         "Jr. Jose Carlos Mariategui #345",
         "Cusco",
         "Cusco",
-        "Cusco"),
+        "Cusco",
+        assignedDate: DateTime.now()),
     UserData("2", "Yolmy Milagros", "Cahuata Lavilla", "98765432", "978563412",
-        "foo@gmail.com", "Av. La cultura #345", "Cusco", "Cusco", "Cusco"),
-    UserData("3", "Juan Jaime", "Pando Muñoz", "98159874", "98159874",
-        "foo@gmail.com", "Av. Sol de Oro #345", "Cusco", "Cusco", "Cusco"),
+        "foo@gmail.com", "Av. La cultura #345", "Cusco", "Cusco", "Cusco",
+        assignedDate: DateTime.now()),
+    UserData(
+      "3",
+      "Juan Jaime",
+      "Pando Muñoz",
+      "98159874",
+      "98159874",
+      "foo@gmail.com",
+      "Av. Sol de Oro #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
+    UserData(
+      "4",
+      "Jaja Jaime",
+      "Pando Muñoz",
+      "98159874",
+      "98159874",
+      "foo@gmail.com",
+      "Av. Sol de Oro #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
+    UserData(
+      "5",
+      "Jose Jaime",
+      "Pando Muñoz",
+      "98159874",
+      "98159874",
+      "foo@gmail.com",
+      "Av. Sol de Oro #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
+    UserData(
+      "6",
+      "Carlos Jaime",
+      "Pando Muñoz",
+      "98159874",
+      "98159874",
+      "foo@gmail.com",
+      "Av. Sol de Oro #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
+    UserData(
+      "7",
+      "Carla Jaime",
+      "Pando Muñoz",
+      "98159874",
+      "98159874",
+      "foo@gmail.com",
+      "Av. Sol de Oro #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
+    UserData(
+      "8",
+      "Juan Jaime",
+      "Pando Muñoz",
+      "98159874",
+      "98159874",
+      "foo@gmail.com",
+      "Av. Sol de Oro #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
+    UserData(
+      "9",
+      "Roswell Jaime",
+      "Pando Muñoz",
+      "98159874",
+      "98159874",
+      "foo@gmail.com",
+      "Av. Sol de Oro #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
+    UserData(
+      "10",
+      "Jacinto Jaime",
+      "Pando Muñoz",
+      "98159874",
+      "98159874",
+      "foo@gmail.com",
+      "Av. Sol de Oro #345",
+      "Cusco",
+      "Cusco",
+      "Cusco",
+      assignedDate: DateTime.now(),
+    ),
+
     // Agrega más usuarios según sea necesario
   ];
   @override
   Widget build(BuildContext context) {
+    List<UserData> usersAssignedToToday = [];
+    List<UserData> usersNotAssignedToToday = [];
     var container = Container(
       alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(8.0),
-      width: 600,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(8.0),
@@ -96,6 +202,39 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
       ),
     );
 
+    List<String> selectedUsersIds = [];
+
+    switch (selectedOption) {
+      case 'Juan Perez Garcia':
+        selectedUsersIds = ['1'];
+        break;
+      case 'Ruth Milagros Arce Quispe':
+        selectedUsersIds = ['1', '2', '3'];
+        break;
+      case 'Yolmy Milagros Cahuata Lavilla':
+        selectedUsersIds = ['4', '5'];
+        break;
+      case 'Stiward Maldonado':
+        selectedUsersIds = ['6', '7'];
+        break;
+      case 'Justino Ferro':
+        selectedUsersIds = ['8', '9', '10'];
+        break;
+      default:
+        // Handle default case if needed
+        break;
+    }
+    for (UserData user in users) {
+      if (selectedUsersIds.contains(user.number)) {
+        // Verificar si el usuario está asignado a la fecha de hoy
+        if (userIsAssignedToToday(user)) {
+          usersAssignedToToday.add(user);
+        } else {
+          usersNotAssignedToToday.add(user);
+        }
+      }
+    }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -103,39 +242,42 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
             children: [
               const MenuSupervisor(name: "CARTERA"),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20.0),
-                      Container(
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'CARTERA DE ANALISTAS',
-                          style: TextStyle(
-                            color: Colors.orange,
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 20.0),
+                        Container(
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'CARTERA DE ANALISTAS',
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          container,
-                          //const SizedBox(width: 0), // Ajuste del margen derecho
-                        ],
-                      ),
-                      const SizedBox(height: 25.0),
-                      Center(
-                        child: _buildDataTable(context, "", users),
-                      )
-                    ],
+                        const SizedBox(height: 20.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            container,
+                            //const SizedBox(width: 0), // Ajuste del margen derecho
+                          ],
+                        ),
+                        const SizedBox(height: 25.0),
+                        Center(
+                          child: _buildDataTable(
+                              selectedOption, usersAssignedToToday),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ],
@@ -143,8 +285,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
     );
   }
 
-  Widget _buildDataTable(
-      BuildContext context, String title, List<UserData> userList) {
+  Widget _buildDataTable(String title, List<UserData> userList) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
@@ -194,5 +335,11 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
         ),
       ),
     );
+  }
+
+  bool userIsAssignedToToday(UserData user) {
+    // Lógica para verificar si el usuario está asignado a la fecha de hoy
+    return user.assignedDate != null &&
+        user.assignedDate!.toLocal().isAtSameMomentAs(selectedDate);
   }
 }
