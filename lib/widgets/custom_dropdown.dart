@@ -6,6 +6,7 @@ class CustomDropdown extends StatefulWidget {
   final String? hint;
   final Color? borderColor;
   final double? lenItem;
+  final Function(String?)? onChanged;
   const CustomDropdown({
     super.key,
     required this.items,
@@ -13,6 +14,7 @@ class CustomDropdown extends StatefulWidget {
     this.hint,
     this.borderColor,
     this.lenItem,
+    this.onChanged,
   });
 
   @override
@@ -53,8 +55,9 @@ class CustomDropdownState extends State<CustomDropdown> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 208, 208, 208),
+                        borderSide: BorderSide(
+                          color: widget.borderColor ??
+                              const Color.fromARGB(255, 208, 208, 208),
                           width: 2.0,
                         ),
                       ),
@@ -83,6 +86,7 @@ class CustomDropdownState extends State<CustomDropdown> {
                       setState(() {
                         _selectedItem = newValue;
                       });
+                      widget.onChanged!(newValue);
                     },
                     hint: Text(
                       widget.hint ?? '',

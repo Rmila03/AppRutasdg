@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -20,7 +19,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
     ChartData('Cumplidos', 10, Colors.orange),
     ChartData('Sin cumplir', 2, Colors.green),
   ];
-  final ScrollController controller = ScrollController();
+  String selectedItem = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,17 +47,23 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                       ),
                     ),
                     const SizedBox(height: 20.0),
-                    const SizedBox(
+                    SizedBox(
                       width: 300,
                       child: CustomDropdown(
-                        items: [
+                        items: const [
                           'Juan Perez Garcia',
                           'Ruth Milagros Arce Quispe',
                           'Stiward Maldonado',
-                          'Justino Ferro'
+                          'Justino Ferro',
+                          'Arled Vallenas'
                         ],
                         borderColor: Colors.green,
                         lenItem: 15,
+                        onChanged: (String? nuevoItem) {
+                          setState(() {
+                            selectedItem = nuevoItem ?? '';
+                          });
+                        },
                       ),
                     ),
                     const SizedBox(height: 16.0),
@@ -67,8 +72,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                       color: Colors.green, // Color de fondo del Container
                       padding: const EdgeInsets.all(
                           20.0), // Padding alrededor del texto
-                      child: const Text(
-                        'ARCE, ARLED',
+                      child: Text(
+                        selectedItem.toUpperCase(),
                         style: TextStyle(
                           color: Colors.white, // Color del texto
                           fontSize: 16.0,
@@ -199,7 +204,7 @@ class Pie extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 40),
                         child: Text(
-                          "${chartData[0].y}",
+                          "${chartData[0].y.toInt()}",
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: Colors.black,
@@ -246,7 +251,7 @@ class Pie extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 40),
                         child: Text(
-                          "${chartData[1].y}",
+                          "${chartData[1].y.toInt()}",
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: Colors.black,
