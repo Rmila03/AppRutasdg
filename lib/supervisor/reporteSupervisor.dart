@@ -66,7 +66,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                   // Other widgets...
 
                   // Title widget
-                  const SizedBox(height: 50.0),
+                  const SizedBox(height: 0.0),
                   _buildTitle(),
                   const SizedBox(height: 20.0),
 
