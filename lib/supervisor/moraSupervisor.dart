@@ -99,7 +99,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
 
                 // Title widget
                 // Container with margin before the table title
-                const SizedBox(height: 0.0), // Añade un espacio en blanco
+                const SizedBox(height: 40.0), // Añade un espacio en blanco
                 _buildTitle(),
 
                 // Date picker widget
