@@ -9,7 +9,7 @@ import 'package:ruta_sdg/widgets/tabbar.dart';
 import 'package:ruta_sdg/listasocio.dart';
 
 class RecuperacionPage extends StatefulWidget {
-  const RecuperacionPage({Key? key}) : super(key: key);
+  const RecuperacionPage({super.key});
 
   @override
   State createState() => _RecuperacionPageState();

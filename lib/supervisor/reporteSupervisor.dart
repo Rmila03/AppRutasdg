@@ -7,7 +7,7 @@ class ReporteSupervisorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ReporteSupervisorContent();
+    return const ReporteSupervisorContent();
   }
 }
 

@@ -8,7 +8,7 @@ import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 
 class PromocionPage extends StatefulWidget {
-  const PromocionPage({Key? key}) : super(key: key);
+  const PromocionPage({super.key});
 
   @override
   State createState() => _PromocionPageState();

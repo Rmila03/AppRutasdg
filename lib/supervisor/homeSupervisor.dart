@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/user.dart';
+//import 'package:tooltip/tooltip.dart';
 
 void main() {
   runApp(const HomeSupervisorPage());
@@ -283,13 +284,13 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
               children: [
                 const MenuSupervisor(name: "PLAN DEL DÍA"),
                 Expanded(
-                  //child: SingleChildScrollView(
+                  // child: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 25.0),
+                        const SizedBox(height: 40.0),
                         Container(
                           alignment: Alignment.center,
                           child: const Text(
@@ -378,7 +379,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                       ],
                     ),
                   ),
-                  //),
+                  // ),
                 ),
               ],
             ),
@@ -553,11 +554,11 @@ class FloatingPage extends StatelessWidget {
   final Function(List<UserData>, List<UserData>) onListsUpdated;
 
   const FloatingPage({
-    Key? key,
+    super.key,
     required this.userList,
     required this.onPlusIconPressed,
     required this.onListsUpdated,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -612,11 +613,11 @@ class SearchAndUserList extends StatefulWidget {
   final Function(List<UserData>, List<UserData>) onListsUpdated;
 
   const SearchAndUserList({
-    Key? key,
+    super.key,
     required this.userList,
     required this.onPlusIconPressed,
     required this.onListsUpdated,
-  }) : super(key: key);
+  });
 
   @override
   _SearchAndUserListState createState() => _SearchAndUserListState();
@@ -678,12 +679,30 @@ class _SearchAndUserListState extends State<SearchAndUserList> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 20),
-                    child: Text(
-                      '${user.name} ${user.lastName}',
-                      style: const TextStyle(
-                        fontSize: 16.0,
+                  Tooltip(
+                    message: 'Nombre: ${user.name}${" "}${user.lastName}\n'
+                        'DNI: ${user.dni}\n'
+                        'Celular: ${user.cellphone}\n'
+                        'Email: ${user.email}\n'
+                        'Dirección: ${user.address}\n'
+                        'Distrito: ${user.district}\n'
+                        'Provincia: ${user.province}\n'
+                        'Región: ${user.region}',
+                    decoration: const BoxDecoration(
+                      color: Colors.white, // Color de fondo del Tooltip
+                    ),
+                    textStyle: const TextStyle(
+                      color: Colors.black, // Color del texto dentro del Tooltip
+                    ),
+                    preferBelow: false,
+                    verticalOffset:
+                        20, // Ajusta la posición vertical del Tooltip
+
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        '${user.name} ${user.lastName}',
+                        style: const TextStyle(fontSize: 16.0),
                       ),
                     ),
                   ),

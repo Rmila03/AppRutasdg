@@ -167,13 +167,13 @@ class CustomTextContainer extends StatelessWidget {
   final Color shadowColor;
 
   const CustomTextContainer({
-    Key? key,
+    super.key,
     required this.text,
     required this.leftIcon,
     this.rightIcon = FontAwesomeIcons.greaterThan,
     this.shadowColor =
         const Color.fromRGBO(0, 0, 0, 0.3), // Valor predeterminado
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
