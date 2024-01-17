@@ -136,7 +136,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Selecciona días:',
                 style: TextStyle(
                   fontSize: 18,

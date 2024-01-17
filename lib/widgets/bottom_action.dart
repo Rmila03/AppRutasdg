@@ -11,12 +11,12 @@ class BottomAction extends StatelessWidget {
   final double iconSize;
 
   const BottomAction({
-    Key? key,
+    super.key,
     required this.label,
     required this.icon,
     required this.iconColor,
     required this.iconSize,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

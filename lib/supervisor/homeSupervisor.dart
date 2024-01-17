@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/user.dart';
+//import 'package:tooltip/tooltip.dart';
 
 void main() {
   runApp(const HomeSupervisorPage());
@@ -283,102 +284,102 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
               children: [
                 const MenuSupervisor(name: "PLAN DEL DÍA"),
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 40.0),
-                          Container(
-                            alignment: Alignment.center,
-                            child: const Text(
-                              'PLAN DEL DÍA',
-                              style: TextStyle(
-                                color: Color(0xFF0E813C),
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Unna-Bold',
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 20.0),
-                          const Text(
-                            'Ramón Perez García',
+                  // child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 40.0),
+                        Container(
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'PLAN DEL DÍA',
                             style: TextStyle(
-                              color: Colors.orange,
-                              fontSize: 18.0,
+                              color: Color(0xFF0E813C),
+                              fontSize: 25.0,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Unna-Bold',
                             ),
-                            textAlign: TextAlign.start,
                           ),
-                          const SizedBox(height: 20.0),
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: const Icon(
-                                  FontAwesomeIcons.calendarDay,
-                                  color: Color.fromARGB(255, 4, 56, 99),
-                                ),
-                                onPressed: () {
-                                  _selectDate(context);
-                                },
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                DateFormat('dd/MM/yyyy').format(selectedDate),
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 4, 56, 99),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
+                        ),
+                        const SizedBox(height: 20.0),
+                        const Text(
+                          'Ramón Perez García',
+                          style: TextStyle(
+                            color: Colors.orange,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Unna-Bold',
                           ),
-                          const SizedBox(height: 20.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              container,
-                              GestureDetector(
-                                onTap: () {
-                                  _toggleFloatingPage();
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.only(right: 100),
-                                  padding: const EdgeInsets.fromLTRB(16.0, 16.0,
-                                      16.0, 16.0), // Ajuste del margen derecho
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF0E813C),
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: const Row(
-                                    children: [
-                                      Icon(Icons.add, color: Colors.white),
-                                      Text(
-                                        'AÑADIR',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                          textAlign: TextAlign.start,
+                        ),
+                        const SizedBox(height: 20.0),
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                FontAwesomeIcons.calendarDay,
+                                color: Color.fromARGB(255, 4, 56, 99),
+                              ),
+                              onPressed: () {
+                                _selectDate(context);
+                              },
+                            ),
+                            const SizedBox(width: 10),
+                            Text(
+                              DateFormat('dd/MM/yyyy').format(selectedDate),
+                              style: const TextStyle(
+                                color: Color.fromARGB(255, 4, 56, 99),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 20.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            container,
+                            GestureDetector(
+                              onTap: () {
+                                _toggleFloatingPage();
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 100),
+                                padding: const EdgeInsets.fromLTRB(16.0, 16.0,
+                                    16.0, 16.0), // Ajuste del margen derecho
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF0E813C),
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                child: const Row(
+                                  children: [
+                                    Icon(Icons.add, color: Colors.white),
+                                    Text(
+                                      'AÑADIR',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              //const SizedBox(width: 0), // Ajuste del margen derecho
-                            ],
-                          ),
-                          const SizedBox(height: 25.0),
-                          Center(
-                            child: _buildDataTable(
-                                selectedOption, usersAssignedToToday),
-                          )
-                        ],
-                      ),
+                            ),
+                            //const SizedBox(width: 0), // Ajuste del margen derecho
+                          ],
+                        ),
+                        const SizedBox(height: 25.0),
+                        Center(
+                          child: _buildDataTable(
+                              selectedOption, usersAssignedToToday),
+                        )
+                      ],
                     ),
                   ),
+                  // ),
                 ),
               ],
             ),
@@ -553,11 +554,11 @@ class FloatingPage extends StatelessWidget {
   final Function(List<UserData>, List<UserData>) onListsUpdated;
 
   const FloatingPage({
-    Key? key,
+    super.key,
     required this.userList,
     required this.onPlusIconPressed,
     required this.onListsUpdated,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -612,11 +613,11 @@ class SearchAndUserList extends StatefulWidget {
   final Function(List<UserData>, List<UserData>) onListsUpdated;
 
   const SearchAndUserList({
-    Key? key,
+    super.key,
     required this.userList,
     required this.onPlusIconPressed,
     required this.onListsUpdated,
-  }) : super(key: key);
+  });
 
   @override
   _SearchAndUserListState createState() => _SearchAndUserListState();
@@ -678,12 +679,30 @@ class _SearchAndUserListState extends State<SearchAndUserList> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 20),
-                    child: Text(
-                      '${user.name} ${user.lastName}',
-                      style: const TextStyle(
-                        fontSize: 16.0,
+                  Tooltip(
+                    message: 'Nombre: ${user.name}${" "}${user.lastName}\n'
+                        'DNI: ${user.dni}\n'
+                        'Celular: ${user.cellphone}\n'
+                        'Email: ${user.email}\n'
+                        'Dirección: ${user.address}\n'
+                        'Distrito: ${user.district}\n'
+                        'Provincia: ${user.province}\n'
+                        'Región: ${user.region}',
+                    decoration: const BoxDecoration(
+                      color: Colors.white, // Color de fondo del Tooltip
+                    ),
+                    textStyle: const TextStyle(
+                      color: Colors.black, // Color del texto dentro del Tooltip
+                    ),
+                    preferBelow: false,
+                    verticalOffset:
+                        20, // Ajusta la posición vertical del Tooltip
+
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        '${user.name} ${user.lastName}',
+                        style: const TextStyle(fontSize: 16.0),
                       ),
                     ),
                   ),

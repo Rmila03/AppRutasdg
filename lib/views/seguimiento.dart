@@ -8,7 +8,7 @@ import 'package:ruta_sdg/widgets/tabbar.dart';
 import 'package:ruta_sdg/listasocio.dart';
 
 class SeguimientoPage extends StatefulWidget {
-  const SeguimientoPage({Key? key}) : super(key: key);
+  const SeguimientoPage({super.key});
 
   @override
   State createState() => _SeguimientoPageState();
