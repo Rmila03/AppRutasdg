@@ -283,102 +283,102 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
               children: [
                 const MenuSupervisor(name: "PLAN DEL DÍA"),
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 40.0),
-                          Container(
-                            alignment: Alignment.center,
-                            child: const Text(
-                              'PLAN DEL DÍA',
-                              style: TextStyle(
-                                color: Color(0xFF0E813C),
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Unna-Bold',
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 20.0),
-                          const Text(
-                            'Ramón Perez García',
+                  //child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 25.0),
+                        Container(
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'PLAN DEL DÍA',
                             style: TextStyle(
-                              color: Colors.orange,
-                              fontSize: 18.0,
+                              color: Color(0xFF0E813C),
+                              fontSize: 25.0,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Unna-Bold',
                             ),
-                            textAlign: TextAlign.start,
                           ),
-                          const SizedBox(height: 20.0),
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: const Icon(
-                                  FontAwesomeIcons.calendarDay,
-                                  color: Color.fromARGB(255, 4, 56, 99),
-                                ),
-                                onPressed: () {
-                                  _selectDate(context);
-                                },
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                DateFormat('dd/MM/yyyy').format(selectedDate),
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 4, 56, 99),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
+                        ),
+                        const SizedBox(height: 20.0),
+                        const Text(
+                          'Ramón Perez García',
+                          style: TextStyle(
+                            color: Colors.orange,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Unna-Bold',
                           ),
-                          const SizedBox(height: 20.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              container,
-                              GestureDetector(
-                                onTap: () {
-                                  _toggleFloatingPage();
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.only(right: 100),
-                                  padding: const EdgeInsets.fromLTRB(16.0, 16.0,
-                                      16.0, 16.0), // Ajuste del margen derecho
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF0E813C),
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: const Row(
-                                    children: [
-                                      Icon(Icons.add, color: Colors.white),
-                                      Text(
-                                        'AÑADIR',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                          textAlign: TextAlign.start,
+                        ),
+                        const SizedBox(height: 20.0),
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                FontAwesomeIcons.calendarDay,
+                                color: Color.fromARGB(255, 4, 56, 99),
+                              ),
+                              onPressed: () {
+                                _selectDate(context);
+                              },
+                            ),
+                            const SizedBox(width: 10),
+                            Text(
+                              DateFormat('dd/MM/yyyy').format(selectedDate),
+                              style: const TextStyle(
+                                color: Color.fromARGB(255, 4, 56, 99),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 20.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            container,
+                            GestureDetector(
+                              onTap: () {
+                                _toggleFloatingPage();
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 100),
+                                padding: const EdgeInsets.fromLTRB(16.0, 16.0,
+                                    16.0, 16.0), // Ajuste del margen derecho
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF0E813C),
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                child: const Row(
+                                  children: [
+                                    Icon(Icons.add, color: Colors.white),
+                                    Text(
+                                      'AÑADIR',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              //const SizedBox(width: 0), // Ajuste del margen derecho
-                            ],
-                          ),
-                          const SizedBox(height: 25.0),
-                          Center(
-                            child: _buildDataTable(
-                                selectedOption, usersAssignedToToday),
-                          )
-                        ],
-                      ),
+                            ),
+                            //const SizedBox(width: 0), // Ajuste del margen derecho
+                          ],
+                        ),
+                        const SizedBox(height: 25.0),
+                        Center(
+                          child: _buildDataTable(
+                              selectedOption, usersAssignedToToday),
+                        )
+                      ],
                     ),
                   ),
+                  //),
                 ),
               ],
             ),
@@ -438,7 +438,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
           color: Colors.white,
           elevation: 0,
           child: SizedBox(
-            height: 300,
+            height: 250,
             width: 1000,
             child: SingleChildScrollView(
               child: DataTable(

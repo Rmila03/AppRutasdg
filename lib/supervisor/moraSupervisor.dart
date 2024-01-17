@@ -90,29 +90,29 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
 
           // Expanded section for the main content
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  // Other widgets...
+            //child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                // Other widgets...
 
-                  // Title widget
-                  // Container with margin before the table title
-                  const SizedBox(height: 0.0), // Añade un espacio en blanco
-                  _buildTitle(),
+                // Title widget
+                // Container with margin before the table title
+                const SizedBox(height: 0.0), // Añade un espacio en blanco
+                _buildTitle(),
 
-                  // Date picker widget
-                  const SizedBox(height: 5.0),
-                  _buildDatePicker(context),
+                // Date picker widget
+                const SizedBox(height: 5.0),
+                _buildDatePicker(context),
 
-                  // Filter button widget
-                  _showFilterDialog(),
+                // Filter button widget
+                _showFilterDialog(),
 
-                  // Data table widget
-                  _buildDataTable(users),
-                ],
-              ),
+                // Data table widget
+                _buildDataTable(users),
+              ],
+              //),
             ),
           ),
         ],
