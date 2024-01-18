@@ -242,40 +242,40 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
             children: [
               const MenuSupervisor(name: "CARTERA"),
               Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 20.0),
-                        Container(
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'CARTERA DE ANALISTAS',
-                            style: TextStyle(
-                              color: Colors.orange,
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                //child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 25.0),
+                      Container(
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'CARTERA DE ANALISTAS',
+                          style: TextStyle(
+                            color: Colors.orange,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 20.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            container,
-                            //const SizedBox(width: 0), // Ajuste del margen derecho
-                          ],
-                        ),
-                        const SizedBox(height: 25.0),
-                        Center(
-                          child: _buildDataTable(
-                              selectedOption, usersAssignedToToday),
-                        )
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          container,
+                          //const SizedBox(width: 0), // Ajuste del margen derecho
+                        ],
+                      ),
+                      const SizedBox(height: 25.0),
+                      Center(
+                        child: _buildDataTable(
+                            selectedOption, usersAssignedToToday),
+                      )
+                    ],
                   ),
+                  //),
                 ),
               )
             ],

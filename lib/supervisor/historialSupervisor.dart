@@ -55,28 +55,28 @@ class _HistorialSupervisorContentState
         children: [
           MenuSupervisor(name: selectedMenu),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start, // Cambiado a start
-                children: [
-                  const SizedBox(height: 0.0), // Añade un espacio en blanco
-                  buildTitle(),
-                  const SizedBox(height: 20.0),
-                  buildDatePicker(),
-                  const SizedBox(height: 20.0),
-                  for (var cambio in cambiosDelDia) ...[
-                    buildAlarmInfo(
-                      cambio.fecha,
-                      cambio.nombre,
-                      cambio.descripcion,
-                      mostrarBotonVerTodo: true,
-                    ),
-                    const SizedBox(height: 10.0),
-                  ],
-                  buildAllEventsButton(),
+            //child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start, // Cambiado a start
+              children: [
+                const SizedBox(height: 40.0), // Añade un espacio en blanco
+                buildTitle(),
+                const SizedBox(height: 20.0),
+                buildDatePicker(),
+                const SizedBox(height: 20.0),
+                for (var cambio in cambiosDelDia) ...[
+                  buildAlarmInfo(
+                    cambio.fecha,
+                    cambio.nombre,
+                    cambio.descripcion,
+                    mostrarBotonVerTodo: true,
+                  ),
+                  const SizedBox(height: 10.0),
                 ],
-              ),
+                buildAllEventsButton(),
+              ],
+              //),
             ),
           ),
         ],
