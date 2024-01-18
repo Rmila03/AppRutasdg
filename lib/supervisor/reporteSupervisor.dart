@@ -7,7 +7,7 @@ class ReporteSupervisorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ReporteSupervisorContent();
+    return const ReporteSupervisorContent();
   }
 }
 
@@ -58,31 +58,31 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
 
           // Expanded section for the main content
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  // Other widgets...
+            //child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                // Other widgets...
 
-                  // Title widget
-                  const SizedBox(height: 0.0),
-                  _buildTitle(),
-                  const SizedBox(height: 20.0),
+                // Title widget
+                const SizedBox(height: 40.0),
+                _buildTitle(),
+                const SizedBox(height: 20.0),
 
-                  // Date picker widget
-                  _buildDatePicker(context),
-                  const SizedBox(height: 10.0),
+                // Date picker widget
+                _buildDatePicker(context),
+                const SizedBox(height: 10.0),
 
-                  // Search box widget
-                  _buildSearchBox(),
+                // Search box widget
+                _buildSearchBox(),
 
-                  const SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
 
-                  // Data table widget
-                  _buildDataTable(filteredUsers),
-                ],
-              ),
+                // Data table widget
+                _buildDataTable(filteredUsers),
+              ],
+              // ),
             ),
           ),
         ],
