@@ -562,47 +562,130 @@ class FloatingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 800,
-      width: 600,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(40.0),
-        border: Border.all(
-          color: const Color(0xFF0E813C),
-          width: 3.0,
+    return DefaultTabController(
+      length: 2,
+      child: Container(
+        height: 800,
+        width: 600,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(40.0),
+          border: Border.all(
+            color: const Color(0xFF0E813C),
+            width: 3.0,
+          ),
+        ),
+        child: Column(
+          children: [
+            const SizedBox(height: 20.0),
+            Container(
+              padding: const EdgeInsets.all(15.0),
+              decoration: BoxDecoration(
+                color: const Color(0xFF0E813C),
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: const Text(
+                '   LISTA DE SOCIOS   ',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            const TabBar(
+              labelColor: Colors.black,
+              unselectedLabelColor: Colors.grey,
+              tabs: [
+                Tab(text: 'General'),
+                Tab(text: 'Sugerencias'),
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  _buildGeneralTab(),
+                  _buildSugerenciasTab(),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
-      child: Column(
-        children: [
-          const SizedBox(height: 20.0),
-          Container(
-            padding: const EdgeInsets.all(15.0),
-            decoration: BoxDecoration(
-              color: const Color(0xFF0E813C),
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            child: const Text(
-              '   LISTA DE SOCIOS   ',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(height: 16.0),
-          Expanded(
-            child: SingleChildScrollView(
-              child: SearchAndUserList(
-                userList: userList,
-                onPlusIconPressed: onPlusIconPressed,
-                onListsUpdated: onListsUpdated,
-              ),
-            ),
-          ),
-        ],
+    );
+  }
+
+  Widget _buildGeneralTab() {
+    return SingleChildScrollView(
+      child: SearchAndUserList(
+        userList: userList,
+        onPlusIconPressed: onPlusIconPressed,
+        onListsUpdated: onListsUpdated,
       ),
+    );
+  }
+
+  Widget _buildSugerenciasTab() {
+    return ListView.builder(
+      itemCount: userList.length,
+      itemBuilder: (context, index) {
+        final user = userList[index];
+        return ListTile(
+          title: Tooltip(
+            message: 'Nombre: ${user.name} ${user.lastName}\n'
+                'DNI: ${user.dni}\n'
+                'Celular: ${user.cellphone}\n'
+                'Email: ${user.email}\n'
+                'Dirección: ${user.address}\n'
+                'Distrito: ${user.district}\n'
+                'Provincia: ${user.province}\n'
+                'Región: ${user.region}',
+            decoration: const BoxDecoration(
+              color: Colors.white,
+            ),
+            textStyle: const TextStyle(
+              color: Colors.black,
+            ),
+            preferBelow: false,
+            verticalOffset: 20,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${user.name} ${user.lastName}',
+                  style: const TextStyle(fontSize: 16.0),
+                ),
+                const SizedBox(height: 8.0),
+                const Text(
+                  'Motivo: Cambio de ciudad',
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Color.fromARGB(255, 9, 104, 47),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          trailing: IconButton(
+            icon: const Icon(
+              FontAwesomeIcons.plus,
+              color: Color(0xFF0E813C),
+            ),
+            onPressed: () {
+              onPlusIconPressed(user);
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    '${user.name} añadido correctamente.',
+                  ),
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }
@@ -689,7 +772,8 @@ class _SearchAndUserListState extends State<SearchAndUserList> {
                         'Provincia: ${user.province}\n'
                         'Región: ${user.region}',
                     decoration: const BoxDecoration(
-                      color: Colors.white, // Color de fondo del Tooltip
+                      color: Colors.white,
+                      // Color de fondo del Tooltip
                     ),
                     textStyle: const TextStyle(
                       color: Colors.black, // Color del texto dentro del Tooltip
