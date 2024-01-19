@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
 import 'package:ruta_sdg/user.dart';
+//import 'package:ruta_sdg/widgets/promotion_form.dart';
+import 'package:ruta_sdg/widgets/radio_button_custom.dart';
 
 class CarteraForm extends StatefulWidget {
   final UserData user;
@@ -14,11 +16,58 @@ class CarteraForm extends StatefulWidget {
 
 class CarteraFormState extends State<CarteraForm> {
   final _formKey = GlobalKey<FormState>();
+  String selectedOption = '';
   bool vigenteSelected = true;
   bool vencidoSelected = false;
-
+  int show = 0;
+  int valorSeleccionado = 0;
+  List<String> menuOptions = [
+    'Crédito 1',
+    'Crédito 2',
+    'Crédito 3',
+    'Crédito 4'
+  ];
   @override
   Widget build(BuildContext context) {
+    List<UserData> userAssingnedToToday = [];
+    List<UserData> userNotAssingnedToToday = [];
+    var container = Container(
+      alignment: Alignment.bottomLeft,
+      padding: const EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 255, 255, 255),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: DropdownButton<String>(
+        value: selectedOption.isNotEmpty ? selectedOption : null,
+        items: menuOptions.map((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(
+              value,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 15.0,
+                fontFamily: 'Unna-Bold',
+              ),
+            ),
+          );
+        }).toList(),
+        onChanged: (String? value) {
+          setState(() {
+            selectedOption = value ?? '';
+          });
+        },
+        hint: const Text(
+          'Seleccionar opción',
+          style: TextStyle(
+            color: Color.fromARGB(255, 196, 196, 196),
+            fontSize: 15.0,
+            fontFamily: 'Unna-Bold',
+          ),
+        ),
+      ),
+    );
     return SafeArea(
       child: Column(
         children: [
@@ -65,22 +114,19 @@ class CarteraFormState extends State<CarteraForm> {
                         child: Text(
                           "DATOS PERSONALES",
                           style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 20,
                               color: Color.fromARGB(255, 0, 76, 128),
                               fontWeight: FontWeight.bold),
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(16.0),
-                        margin: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.only(bottom: 20, top: 15),
                         decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 250, 250, 250),
+                          //color: Colors.white,
+                          borderRadius: BorderRadius.circular(20.0),
                           border: Border.all(
-                            color: const Color.fromARGB(255, 0, 76, 128),
-                          ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(40.0),
-                            bottomRight: Radius.circular(40.0),
+                            color: const Color.fromARGB(255, 210, 210, 210),
                           ),
                         ),
                         child: Column(
@@ -88,6 +134,50 @@ class CarteraFormState extends State<CarteraForm> {
                             Row(
                               children: [
                                 Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 15),
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Apellido Paterno",
+                                      inputType: TextInputType.text,
+                                      content: widget.user.lastName,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 15),
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Apellido Materno",
+                                      inputType: TextInputType.text,
+                                      content: widget.user.lastName,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  /*Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  margin: const EdgeInsets.only(
+                                      top: 10, bottom: 10),
+                                  decoration: BoxDecoration(
+                                    //color: Colors.white,
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    border: Border.all(
+                                      color: const Color.fromARGB(
+                                          255, 210, 210, 210),
+                                    ),
+
+                                    boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 5,
+                                          blurRadius: 7,
+                                          offset: const Offset(0, 1),
+                                        ),
+                                      ],
+                                  ),*/
                                   child: TextForm(
                                     formKey: _formKey,
                                     label: "Nombres",
@@ -95,79 +185,162 @@ class CarteraFormState extends State<CarteraForm> {
                                     content: widget.user.name,
                                   ),
                                 ),
-                                const SizedBox(width: 50),
-                                Expanded(
-                                  child: TextForm(
-                                    formKey: _formKey,
-                                    label: "Apellidos",
-                                    inputType: TextInputType.text,
-                                    content: widget.user.lastName,
-                                  ),
-                                ),
                               ],
                             ),
                             Row(
                               children: [
+                                const Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 15),
+                                    child: Text(
+                                      "Tipo de Documento : DNI",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 15),
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Nro Documento",
+                                      inputType: TextInputType.number,
+                                      content: widget.user.dni,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 15),
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Sexo",
+                                      inputType: TextInputType.number,
+                                      content: widget.user.sexo,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 15),
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Edad",
+                                      inputType: TextInputType.number,
+                                      content: widget.user.edad,
+                                    ),
+                                  ),
+                                ),
                                 Expanded(
                                   child: TextForm(
                                     formKey: _formKey,
-                                    label: "DNI",
+                                    label: "Fecha de Naciemiento",
                                     inputType: TextInputType.number,
-                                    content: widget.user.dni,
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Expanded(
-                                  child: TextForm(
-                                    formKey: _formKey,
-                                    label: "Celular",
-                                    inputType: TextInputType.phone,
-                                    content: widget.user.cellphone,
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Expanded(
-                                  child: TextForm(
-                                    formKey: _formKey,
-                                    label: "Correo Electrónico",
-                                    inputType: TextInputType.none,
-                                    content: widget.user.email,
+                                    content: widget.user.fechaNacimiento,
                                   ),
                                 ),
                               ],
                             ),
-                            TextForm(
-                              formKey: _formKey,
-                              label: "Dirección",
-                              inputType: TextInputType.text,
-                              content: widget.user.address,
+                            Padding(
+                              padding: const EdgeInsets.only(right: 400),
+                              child: TextForm(
+                                formKey: _formKey,
+                                label: "Dirección",
+                                inputType: TextInputType.text,
+                                content: widget.user.address,
+                              ),
                             ),
                             Row(
                               children: [
                                 Expanded(
-                                  child: TextForm(
-                                    formKey: _formKey,
-                                    label: "Distrito",
-                                    inputType: TextInputType.number,
-                                    content: widget.user.district,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 15),
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Distrito",
+                                      inputType: TextInputType.number,
+                                      content: widget.user.district,
+                                    ),
                                   ),
                                 ),
-                                const SizedBox(width: 15),
                                 Expanded(
-                                  child: TextForm(
-                                    formKey: _formKey,
-                                    label: "Provincia",
-                                    inputType: TextInputType.phone,
-                                    content: widget.user.province,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 15),
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Provincia",
+                                      inputType: TextInputType.phone,
+                                      content: widget.user.province,
+                                    ),
                                   ),
                                 ),
-                                const SizedBox(width: 15),
                                 Expanded(
                                   child: TextForm(
                                     formKey: _formKey,
                                     label: "Departamento",
                                     inputType: TextInputType.none,
                                     content: widget.user.region,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "DATOS DE CONTACTO",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 0, 76, 128),
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.only(top: 15, bottom: 15),
+                        decoration: BoxDecoration(
+                          //color: Colors.white,
+                          borderRadius: BorderRadius.circular(20.0),
+                          border: Border.all(
+                            color: const Color.fromARGB(255, 210, 210, 210),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: Padding(
+                                  padding: const EdgeInsets.only(right: 15),
+                                  child: TextForm(
+                                    formKey: _formKey,
+                                    label: "Teléfono",
+                                    inputType: TextInputType.phone,
+                                    content: widget.user.cellphone,
+                                  ),
+                                )),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 15),
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Celular Personal  ",
+                                      inputType: TextInputType.phone,
+                                      content: widget.user.cellphone,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: TextForm(
+                                    formKey: _formKey,
+                                    label: "Correo Electrónico",
+                                    inputType: TextInputType.none,
+                                    content: widget.user.email,
                                   ),
                                 ),
                               ],
@@ -182,82 +355,405 @@ class CarteraFormState extends State<CarteraForm> {
                           child: Text(
                             "INFORMACIÓN DE CRÉDITO (S)",
                             style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 20,
                                 color: Color.fromARGB(255, 0, 76, 128),
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 150),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    vigenteSelected = !vigenteSelected;
-                                    vencidoSelected = false;
-                                  });
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Icon(
-                                        vigenteSelected
-                                            ? Icons.radio_button_checked
-                                            : Icons.radio_button_unchecked,
-                                        color: Colors.orange,
-                                      ),
-                                    ),
-                                    const Text("Vigente"),
-                                  ],
-                                ),
-                              ),
+                      RadioButtonCustom(
+                          option1: "Vigente",
+                          option2: "Vencidos",
+                          onValueChanged: (int newValue) {
+                            setState(() {
+                              valorSeleccionado = newValue;
+                              show = newValue;
+                            });
+                          }),
+                      Visibility(
+                        visible: (show == 1),
+                        child: Container(
+                          padding: const EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.symmetric(vertical: 10.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: const Color.fromARGB(255, 210, 210, 210),
                             ),
-                            Expanded(
-                              child: InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    vencidoSelected = !vencidoSelected;
-                                    vigenteSelected = false;
-                                  });
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Icon(
-                                        vencidoSelected
-                                            ? Icons.radio_button_checked
-                                            : Icons.radio_button_unchecked,
-                                        color: Colors.orange,
-                                      ),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Riesgo del Socio",
+                                      inputType: TextInputType.number,
+                                      content: widget.user.riesgoSocio,
                                     ),
-                                    const Text("Vencido(s)"),
-                                  ],
+                                  ),
+                                  const SizedBox(width: 15),
+                                  Expanded(
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Tipo de Socio",
+                                      inputType: TextInputType.number,
+                                      content: widget.user.tipoSocio,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 15),
+                                  Expanded(
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Tipo de Crédito",
+                                      inputType: TextInputType.number,
+                                      content: widget.user.tipoCredito,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Tipo de Producto",
+                                      inputType: TextInputType.number,
+                                      content: widget.user.tipoProducto,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 15),
+                                  Expanded(
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Modalidad",
+                                      inputType: TextInputType.number,
+                                      content: widget.user.modalidad,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 15),
+                                  Expanded(
+                                    child: TextForm(
+                                      formKey: _formKey,
+                                      label: "Nombre de Prestamo",
+                                      inputType: TextInputType.number,
+                                      content: widget.user.nombrePrestamo,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TextForm(
+                                        formKey: _formKey,
+                                        label: "Crédito Total",
+                                        inputType: TextInputType.number,
+                                        content:
+                                            "S/. ${widget.user.creditoTotal}"),
+                                  ),
+                                  const SizedBox(width: 30),
+                                  Expanded(
+                                    child: TextForm(
+                                        formKey: _formKey,
+                                        label: "Plazo ",
+                                        inputType: TextInputType.number,
+                                        content: "${widget.user.plazo} meses"),
+                                  ),
+                                  const SizedBox(width: 30),
+                                  Expanded(
+                                    child: TextForm(
+                                        formKey: _formKey,
+                                        label: "Tasa de Interés",
+                                        inputType: TextInputType.number,
+                                        content:
+                                            "${widget.user.tasaInteres} %"),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TextForm(
+                                        formKey: _formKey,
+                                        label: "Fecha de Aprobación de Crédito",
+                                        inputType: TextInputType.number,
+                                        content: widget.user.fechaAprobacion),
+                                  ),
+                                  const SizedBox(width: 30),
+                                  Expanded(
+                                    child: TextForm(
+                                        formKey: _formKey,
+                                        label: "Primera Fecha de Pago",
+                                        inputType: TextInputType.number,
+                                        content: "10/01/2024 duda"),
+                                  ),
+                                  const SizedBox(width: 30),
+                                  Expanded(
+                                    child: TextForm(
+                                        formKey: _formKey,
+                                        label: "Ultima Fecha de Pago",
+                                        inputType: TextInputType.number,
+                                        content: widget.user.ultimaFechaPago),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TextForm(
+                                        formKey: _formKey,
+                                        label: "Monto de la Cuota",
+                                        inputType: TextInputType.number,
+                                        content:
+                                            "S/. ${widget.user.montoCuota}"),
+                                  ),
+                                  const SizedBox(width: 30),
+                                  Expanded(
+                                    child: TextForm(
+                                        formKey: _formKey,
+                                        label: "Saldo Vencido",
+                                        inputType: TextInputType.number,
+                                        content:
+                                            "S/. ${widget.user.saldoVencido}"),
+                                  ),
+                                  const SizedBox(width: 30),
+                                  Expanded(
+                                    child: TextForm(
+                                        formKey: _formKey,
+                                        label: "Saldo de Crédito",
+                                        inputType: TextInputType.number,
+                                        content:
+                                            "S/. ${widget.user.saldoCredito}"),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: (show == 2),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [container],
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(10.0),
+                              margin: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color:
+                                      const Color.fromARGB(255, 210, 210, 210),
                                 ),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          margin:
+                                              const EdgeInsets.only(right: 15),
+                                          decoration: BoxDecoration(
+                                            //color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                            border: Border.all(
+                                              color: const Color.fromARGB(
+                                                  255, 210, 210, 210),
+                                            ),
+                                          ),
+                                          child: TextForm(
+                                            formKey: _formKey,
+                                            label: "Riesgo del Socio",
+                                            inputType: TextInputType.number,
+                                            content: widget.user.riesgoSocio,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 15),
+                                          decoration: BoxDecoration(
+                                            //color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                            border: Border.all(
+                                              color: const Color.fromARGB(
+                                                  255, 210, 210, 210),
+                                            ),
+                                          ),
+                                          child: TextForm(
+                                            formKey: _formKey,
+                                            label: "Tipo de Socio",
+                                            inputType: TextInputType.number,
+                                            content: widget.user.tipoSocio,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 15),
+                                      Expanded(
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          decoration: BoxDecoration(
+                                            //color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                            border: Border.all(
+                                              color: const Color.fromARGB(
+                                                  255, 210, 210, 210),
+                                            ),
+                                          ),
+                                          child: TextForm(
+                                            formKey: _formKey,
+                                            label: "Tipo de Crédito",
+                                            inputType: TextInputType.number,
+                                            content: widget.user.tipoCredito,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: TextForm(
+                                          formKey: _formKey,
+                                          label: "Tipo de Producto",
+                                          inputType: TextInputType.number,
+                                          content: widget.user.tipoProducto,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 30),
+                                      Expanded(
+                                        child: TextForm(
+                                          formKey: _formKey,
+                                          label: "Modalidad",
+                                          inputType: TextInputType.number,
+                                          content: widget.user.modalidad,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: TextForm(
+                                          formKey: _formKey,
+                                          label: "Nombre de Prestamo",
+                                          inputType: TextInputType.number,
+                                          content: widget.user.nombrePrestamo,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: TextForm(
+                                            formKey: _formKey,
+                                            label: "Crédito Total",
+                                            inputType: TextInputType.number,
+                                            content: widget.user.creditoTotal),
+                                      ),
+                                      const SizedBox(width: 30),
+                                      Expanded(
+                                        child: TextForm(
+                                            formKey: _formKey,
+                                            label: "Plazo (meses)",
+                                            inputType: TextInputType.number,
+                                            content: widget.user.plazo),
+                                      ),
+                                      const SizedBox(width: 30),
+                                      Expanded(
+                                        child: TextForm(
+                                            formKey: _formKey,
+                                            label: "Tasa de Interés",
+                                            inputType: TextInputType.number,
+                                            content: widget.user.tasaInteres),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: TextForm(
+                                            formKey: _formKey,
+                                            label:
+                                                "Fecha de Aprobación de Crédito",
+                                            inputType: TextInputType.number,
+                                            content:
+                                                widget.user.fechaAprobacion),
+                                      ),
+                                      const SizedBox(width: 30),
+                                      Expanded(
+                                        child: TextForm(
+                                            formKey: _formKey,
+                                            label: "Primera Fecha de Pago",
+                                            inputType: TextInputType.number,
+                                            content: "10/01/2024 dudaa"),
+                                      ),
+                                      const SizedBox(width: 30),
+                                      Expanded(
+                                        child: TextForm(
+                                            formKey: _formKey,
+                                            label: "Ultima Fecha de Pago",
+                                            inputType: TextInputType.number,
+                                            content:
+                                                widget.user.ultimaFechaPago),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: TextForm(
+                                            formKey: _formKey,
+                                            label: "Monto de la Cuota",
+                                            inputType: TextInputType.number,
+                                            content: widget.user.montoCuota),
+                                      ),
+                                      const SizedBox(width: 30),
+                                      Expanded(
+                                        child: TextForm(
+                                            formKey: _formKey,
+                                            label: "Saldo Vencido",
+                                            inputType: TextInputType.number,
+                                            content: widget.user.saldoVencido),
+                                      ),
+                                      const SizedBox(width: 30),
+                                      Expanded(
+                                        child: TextForm(
+                                            formKey: _formKey,
+                                            label: "Saldo de Crédito",
+                                            inputType: TextInputType.number,
+                                            content: widget.user.saldoCredito),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
                       ),
-                      Container(
+
+                      /*Container(
                         padding: const EdgeInsets.all(16.0),
                         margin: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 250, 250, 250),
-                          border: Border.all(
-                            color: const Color.fromARGB(255, 0, 76, 128),
-                          ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(40.0),
-                            bottomRight: Radius.circular(40.0),
-                          ),
-                        ),
+                            color: const Color.fromARGB(255, 250, 250, 250),
+                            border: Border.all(
+                              color: const Color.fromARGB(255, 0, 76, 128),
+                            ),
+                            borderRadius: BorderRadius.circular(30.0)),
                         //width: 800,
                         child: Column(
                           children: [
@@ -396,7 +892,7 @@ class CarteraFormState extends State<CarteraForm> {
                             ),
                           ],
                         ),
-                      ),
+                      ),*/
                       const SizedBox(
                         height: 30,
                       ),
