@@ -84,7 +84,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                               },
                             ),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           SizedBox(
                             width: 250,
                             child: CustomDropdown(
@@ -121,12 +121,13 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                         context: context,
                                         initialDate: DateTime.now(),
                                         locale: const Locale('es'),
-                                        headerColor:
-                                            Color.fromARGB(255, 4, 56, 99),
+                                        headerColor: const Color.fromARGB(
+                                            255, 4, 56, 99),
                                         selectedMonthTextColor: Colors.white,
                                         unselectedMonthTextColor: Colors.black,
                                         selectedMonthBackgroundColor:
-                                            Color.fromARGB(255, 4, 56, 99))
+                                            const Color.fromARGB(
+                                                255, 4, 56, 99))
                                     .then((date) {
                                   if (date != null) {
                                     setState(() {
@@ -291,8 +292,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Select Year"),
-          content: Container(
+          title: const Text("Select Year"),
+          content: SizedBox(
             // Need to use container to add size constraint.
             width: 300,
             height: 300,

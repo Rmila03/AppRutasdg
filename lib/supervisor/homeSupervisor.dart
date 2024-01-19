@@ -439,7 +439,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
           color: Colors.white,
           elevation: 0,
           child: SizedBox(
-            height: 250,
+            height: 300,
             width: 1000,
             child: SingleChildScrollView(
               child: DataTable(
