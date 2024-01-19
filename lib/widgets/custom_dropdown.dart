@@ -53,6 +53,10 @@ class CustomDropdownState extends State<CustomDropdown> {
                     value: _selectedItem,
                     dropdownColor: Colors.white,
                     decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 5,
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                         borderSide: BorderSide(

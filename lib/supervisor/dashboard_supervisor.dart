@@ -1,9 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../widgets/custom_dropdown.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class DashboardSupervisorPage extends StatefulWidget {
   const DashboardSupervisorPage({super.key});
@@ -19,118 +22,302 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
     ChartData('Sin cumplir', 2, Colors.green),
   ];
   String selectedItem = '';
+  String opcionFecha = '';
+  String dia = '', mes = '', anio = '';
+  DateTime _selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Row(
-        children: [
-          const MenuSupervisor(name: "DASHBOARD"),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 20.0),
-                    const Center(
-                      child: Text(
-                        'DASHBOARD',
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 20.0,
-                          fontFamily: 'Unna-Bold',
-                          fontWeight: FontWeight.bold,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('es', ''),
+      ],
+      home: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Row(
+          children: [
+            const MenuSupervisor(name: "DASHBOARD"),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20.0),
+                      const Center(
+                        child: Text(
+                          'DASHBOARD',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 20.0,
+                            fontFamily: 'Unna-Bold',
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    SizedBox(
-                      width: 300,
-                      child: CustomDropdown(
-                        items: const [
-                          'Juan Perez Garcia',
-                          'Ruth Milagros Arce Quispe',
-                          'Stiward Maldonado',
-                          'Justino Ferro',
-                          'Arled Vallenas'
-                        ],
-                        borderColor: Colors.green,
-                        lenItem: 15,
-                        onChanged: (String? nuevoItem) {
-                          setState(() {
-                            selectedItem = nuevoItem ?? '';
-                          });
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 16.0),
-                    Container(
-                      width: double.infinity,
-                      color: Colors.green, // Color de fondo del Container
-                      padding: const EdgeInsets.all(
-                          20.0), // Padding alrededor del texto
-                      child: Text(
-                        selectedItem.toUpperCase(),
-                        style: TextStyle(
-                          color: Colors.white, // Color del texto
-                          fontSize: 16.0,
-                          fontFamily: 'Unna-Bold',
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.green,
-                          width: 2.0,
-                        ),
-                      ),
-                      child: Column(
+                      const SizedBox(height: 20.0),
+                      Row(
                         children: [
-                          const Row(
-                            children: [
-                              Expanded(
-                                child: CardDinero(
-                                  name: "SALDO DE CARTERA",
-                                  monto: 24000,
-                                  color: Colors.orange,
-                                ),
-                              ),
-                              Expanded(
-                                child: CardDinero(
-                                  name: "MONTO RECUPERADO",
-                                  monto: 14000,
-                                  color: Colors.blue,
-                                ),
-                              ),
-                              Expanded(
-                                child: CardDinero(
-                                  name: "SALDO VENCIDO",
-                                  monto: 24000,
-                                  color: Colors.red,
-                                ),
-                              )
-                            ],
+                          SizedBox(
+                            width: 300,
+                            child: CustomDropdown(
+                              items: const [
+                                'Juan Perez Garcia',
+                                'Ruth Milagros Arce Quispe',
+                                'Stiward Maldonado',
+                                'Justino Ferro',
+                                'Arled Vallenas'
+                              ],
+                              borderColor: Colors.green,
+                              lenItem: 15,
+                              onChanged: (String? nuevoItem) {
+                                setState(() {
+                                  selectedItem = nuevoItem ?? '';
+                                });
+                              },
+                            ),
                           ),
-                          const BarGraph(
-                            cantidadPromocion: 15,
-                            cantidadSeguimiento: 40,
-                            cantidadRecuperacion: 50,
+                          SizedBox(width: 10),
+                          SizedBox(
+                            width: 250,
+                            child: CustomDropdown(
+                              items: const [
+                                'Dia',
+                                'Mes',
+                                'Año',
+                              ],
+                              borderColor: Colors.green,
+                              lenItem: 15,
+                              hint: 'Seleccione el tipo de fecha',
+                              onChanged: (String? Item) {
+                                setState(() {
+                                  opcionFecha = Item ?? '';
+                                });
+                              },
+                            ),
                           ),
-                          Pie(chartData: chartData),
+
+                          if (opcionFecha == 'Año')
+                            IconButton(
+                              icon: const Icon(
+                                FontAwesomeIcons.calendarDay,
+                                color: Color.fromARGB(255, 4, 56, 99),
+                              ),
+                              onPressed: () {
+                                _pickYear(context);
+                              },
+                            ),
+                          if (opcionFecha == 'Mes')
+                            IconButton(
+                              onPressed: () {
+                                showMonthPicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        locale: const Locale('es'),
+                                        headerColor:
+                                            Color.fromARGB(255, 4, 56, 99),
+                                        selectedMonthTextColor: Colors.white,
+                                        unselectedMonthTextColor: Colors.black,
+                                        selectedMonthBackgroundColor:
+                                            Color.fromARGB(255, 4, 56, 99))
+                                    .then((date) {
+                                  if (date != null) {
+                                    setState(() {
+                                      _selectedDate = date;
+                                    });
+                                  }
+                                });
+                              },
+                              icon: const Icon(
+                                FontAwesomeIcons.calendarDay,
+                                color: Color.fromARGB(255, 4, 56, 99),
+                              ),
+                            ),
+                          if (opcionFecha == 'Dia')
+                            IconButton(
+                              icon: const Icon(
+                                FontAwesomeIcons.calendarDay,
+                                color: Color.fromARGB(255, 4, 56, 99),
+                              ),
+                              onPressed: () {
+                                showDatePicker(
+                                  context: context,
+                                  builder:
+                                      (BuildContext context, Widget? child) {
+                                    return Theme(
+                                      data: ThemeData.fallback(),
+                                      child: child!,
+                                    );
+                                  },
+                                  //locale: const Locale("es"),
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1920),
+                                  lastDate: DateTime(2100),
+                                ).then((date) {
+                                  setState(() {
+                                    _selectedDate = date!;
+                                  });
+                                });
+                                //_selectDate(context);
+                              },
+                            ),
+                          const SizedBox(width: 10),
+                          Text(
+                            DateFormat('dd/MM/yyyy').format(_selectedDate),
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 4, 56, 99),
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+
+                          //DatePicker(initialMode: DatePickerMode.year),
                         ],
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 16.0),
+                      Container(
+                        width: double.infinity,
+                        color: Colors.green, // Color de fondo del Container
+                        padding: const EdgeInsets.all(
+                            20.0), // Padding alrededor del texto
+                        child: Text(
+                          selectedItem.toUpperCase(),
+                          style: const TextStyle(
+                            color: Colors.white, // Color del texto
+                            fontSize: 16.0,
+                            fontFamily: 'Unna-Bold',
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.green,
+                            width: 2.0,
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            const Row(
+                              children: [
+                                Expanded(
+                                  child: CardDinero(
+                                    name: "SALDO DE CARTERA",
+                                    monto: 24000,
+                                    color: Colors.orange,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CardDinero(
+                                    name: "MONTO RECUPERADO",
+                                    monto: 14000,
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CardDinero(
+                                    name: "SALDO VENCIDO",
+                                    monto: 24000,
+                                    color: Colors.red,
+                                  ),
+                                )
+                              ],
+                            ),
+                            const BarGraph(
+                              cantidadPromocion: 15,
+                              cantidadSeguimiento: 40,
+                              cantidadRecuperacion: 50,
+                            ),
+                            Pie(chartData: chartData),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+    );
+  }
+
+  Future<void> _selectDate(BuildContext contex) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      locale: const Locale('es'),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: const Color.fromARGB(255, 4, 56, 99),
+            hintColor: const Color.fromARGB(255, 140, 178, 210),
+            colorScheme: const ColorScheme.light(
+              primary: Color.fromARGB(255, 4, 56, 99),
+            ),
+            buttonTheme:
+                const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null) {
+      setState(() {
+        _selectedDate = picked!;
+      });
+    } else {
+      picked = DateTime.now();
+      setState(() {
+        _selectedDate = picked!;
+      });
+    }
+  }
+
+  void _pickYear(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Select Year"),
+          content: Container(
+            // Need to use container to add size constraint.
+            width: 300,
+            height: 300,
+            child: YearPicker(
+              firstDate: DateTime(DateTime.now().year - 100, 1),
+              lastDate: DateTime(DateTime.now().year + 100, 1),
+              initialDate: DateTime.now(),
+              // save the selected date to _selectedDate DateTime variable.
+              // It's used to set the previous selected date when
+              // re-showing the dialog.
+              selectedDate: _selectedDate,
+              onChanged: (DateTime dateTime) {
+                // close the dialog when year is selected.
+                setState(() {
+                  _selectedDate = dateTime;
+                });
+                Navigator.pop(context);
+
+                // Do something with the dateTime selected.
+                // Remember that you need to use dateTime.year to get the year
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }
