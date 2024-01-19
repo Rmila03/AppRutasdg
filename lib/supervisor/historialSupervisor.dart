@@ -60,7 +60,7 @@ class _HistorialSupervisorContentState
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start, // Cambiado a start
               children: [
-                const SizedBox(height: 40.0), // Añade un espacio en blanco
+                const SizedBox(height: 0.0), // Añade un espacio en blanco
                 buildTitle(),
                 const SizedBox(height: 20.0),
                 buildDatePicker(),
