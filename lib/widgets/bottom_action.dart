@@ -3,6 +3,7 @@ import 'package:ruta_sdg/views/home.dart';
 import 'package:ruta_sdg/views/notificaciones.dart';
 import 'package:ruta_sdg/views/reportes.dart';
 import 'package:ruta_sdg/listasocio.dart';
+import 'package:ruta_sdg/views/sugerencias.dart';
 
 class BottomAction extends StatelessWidget {
   final String label;
@@ -40,6 +41,13 @@ class BottomAction extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => const ReportePage(title: ''),
+            ),
+          );
+        } else if (label == "Sugerencias") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SugerenciaPage(title: ''),
             ),
           );
         } else if (label == "Nuevo") {

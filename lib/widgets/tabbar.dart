@@ -26,6 +26,12 @@ class TabBarBottom extends StatelessWidget {
           iconSize: 18.0,
         ),
         BottomAction(
+          label: "Sugerencias",
+          icon: FontAwesomeIcons.plus,
+          iconColor: Color.fromARGB(255, 4, 54, 95),
+          iconSize: 18.0,
+        ),
+        BottomAction(
           label: "Reportes",
           icon: FontAwesomeIcons.newspaper,
           iconColor: Color.fromARGB(255, 4, 54, 95),
