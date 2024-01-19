@@ -29,8 +29,8 @@ class CarteraFormState extends State<CarteraForm> {
   ];
   @override
   Widget build(BuildContext context) {
-    List<UserData> userAssingnedToToday = [];
-    List<UserData> userNotAssingnedToToday = [];
+    //List<UserData> userAssingnedToToday = [];
+    //List<UserData> userNotAssingnedToToday = [];
     var container = Container(
       alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(8.0),
