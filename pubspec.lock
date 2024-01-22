@@ -229,10 +229,10 @@ packages:
     dependency: "direct main"
     description:
       name: fl_chart
-      sha256: "5a74434cc83bf64346efb562f1a06eefaf1bcb530dc3d96a104f631a1eff8d79"
+      sha256: fe6fec7d85975a99c73b9515a69a6e291364accfa0e4a5b3ce6de814d74b9a1c
       url: "https://pub.dev"
     source: hosted
-    version: "0.65.0"
+    version: "0.66.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -329,10 +329,10 @@ packages:
     dependency: transitive
     description:
       name: google_maps_flutter_ios
-      sha256: b644d205c235f85dc60e22f46172a868b1cd642afd5a52b3808c789e461b025a
+      sha256: c89556ed0338fcb4b843c9fcdafac7ad2df601c8b41286d82f0727f7f66434e4
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.1"
+    version: "2.3.6"
   google_maps_flutter_platform_interface:
     dependency: transitive
     description:
@@ -670,18 +670,18 @@ packages:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_charts
-      sha256: "5f868f5a82380ef1b3de416b7812e1ac7acce6a629f9281618adee81d90716cc"
+      sha256: "7bd20c8352919e042bafca6cd8765519f410d3abf0529d3ddab6333110665dc7"
       url: "https://pub.dev"
     source: hosted
-    version: "21.2.10"
+    version: "24.1.46+1"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
-      sha256: "8db8f55c77f56968681447d3837c10f27a9e861e238a898fda116c7531def979"
+      sha256: "205a4dda469ffd1b579cc9400a9b6df266c049cf9401da53944060c0515ea91e"
       url: "https://pub.dev"
     source: hosted
-    version: "21.2.10"
+    version: "24.1.46"
   term_glyph:
     dependency: transitive
     description:
@@ -763,5 +763,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.2.3 <4.0.0"
-  flutter: ">=3.16.6"
+  dart: ">=3.2.0 <4.0.0"
+  flutter: ">=3.16.0"
