@@ -5,7 +5,7 @@ import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 
 class SugerenciaPage extends StatefulWidget {
-  const SugerenciaPage({Key? key, required this.title}) : super(key: key);
+  const SugerenciaPage({super.key, required this.title});
   final String title;
 
   @override
