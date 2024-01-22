@@ -23,7 +23,9 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
   ];
   String selectedItem = '';
   String opcionFecha = '';
-  String dia = '', mes = '', anio = '';
+  DateTime day = DateTime.now();
+  DateTime month = DateTime.now();
+  DateTime year = DateTime.now();
   DateTime _selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
@@ -130,7 +132,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                     .then((date) {
                                   if (date != null) {
                                     setState(() {
-                                      _selectedDate = date;
+                                      month = date;
                                     });
                                   }
                                 });
@@ -162,7 +164,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                   lastDate: DateTime(2100),
                                 ).then((date) {
                                   setState(() {
-                                    _selectedDate = date!;
+                                    day = date!;
                                   });
                                 });
                                 //_selectDate(context);
@@ -303,11 +305,11 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
               // save the selected date to _selectedDate DateTime variable.
               // It's used to set the previous selected date when
               // re-showing the dialog.
-              selectedDate: _selectedDate,
+              selectedDate: year,
               onChanged: (DateTime dateTime) {
                 // close the dialog when year is selected.
                 setState(() {
-                  _selectedDate = dateTime;
+                  year = dateTime;
                 });
                 Navigator.pop(context);
 

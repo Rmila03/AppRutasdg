@@ -36,13 +36,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_maps_flutter: ^2.5.0
   google_maps_flutter_web: ^0.5.4+2
-  http: ^1.1.0
+  http: ^1.2.0
   json_serializable: ^6.7.1
   json_annotation: ^4.8.1
   intl: ^0.18.1
   fl_chart: ^0.65.0
   syncfusion_flutter_charts: ^21.2.4
   month_picker_dialog: ^2.4.0
+  flutter_google_maps_webservices: ^1.1.1
+  image: ^4.1.4
 
 
 dev_dependencies:
