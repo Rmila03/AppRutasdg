@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
+import 'package:ruta_sdg/analista.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ReporteSupervisorPage extends StatelessWidget {
@@ -19,33 +20,20 @@ class ReporteSupervisorContent extends StatefulWidget {
       _ReporteSupervisorContentState();
 }
 
-class UserData {
-  String id;
-  String name;
-  String dni;
-  int daysLate;
-
-  UserData(this.id, this.name, this.dni, this.daysLate);
-}
-
 class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
   String selectedMenu = 'REPORTES';
   DateTime selectedDate = DateTime.now();
   TextEditingController searchController = TextEditingController();
   FocusNode searchFocusNode = FocusNode();
-  List<UserData> users = [
-    UserData("1", "Ruth Milagros", "12345678", 5),
-    UserData("2", "Yolmy Milagros", "98765432", 8),
-    // Agrega más usuarios según sea necesario
-  ];
 
-  List<UserData> filteredUsers = [];
+  final List<Analista> analistas = getAnalistas();
+  List<Analista> filteredUsers = [];
 
   @override
   void initState() {
     super.initState();
     selectedDate = DateTime.now();
-    filteredUsers = users;
+    filteredUsers = analistas;
   }
 
   @override
@@ -221,7 +209,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
     );
   }
 
-  Widget _buildDataTable(List<UserData> userList) {
+  Widget _buildDataTable(List<Analista> userList) {
     List<DataRow> rows = userList.map((user) {
       return DataRow(
         cells: [
@@ -236,7 +224,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                     // Agrega aquí la lógica de descarga para este usuario
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                     width:
                         10), // Espacio entre el icono de descarga y el nuevo icono
                 IconButton(
@@ -318,7 +306,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
 
   void _updateSearchResults(String query) {
     setState(() {
-      filteredUsers = users
+      filteredUsers = analistas
           .where(
               (user) => user.name.toLowerCase().contains(query.toLowerCase()))
           .toList();

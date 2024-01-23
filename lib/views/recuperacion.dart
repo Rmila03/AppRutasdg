@@ -170,7 +170,9 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
                         DataColumn(label: Text('Nombre')),
                         DataColumn(label: Text('')),
                       ],
-                      rows: socios.map((user) {
+                      rows: socios
+                          .where((user) => user.tipoGrupo == 'Recuperación')
+                          .map((user) {
                         return DataRow(
                           onSelectChanged: (isSelected) {
                             if (isSelected != null && isSelected) {
