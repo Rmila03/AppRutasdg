@@ -12,8 +12,9 @@ class Analista {
   final String district;
   final String province;
   final String region;
-
   final String idSupervisor;
+  final double? latitud;
+  final double? longitud;
   Analista(
       this.idAnalista,
       this.name,
@@ -28,7 +29,9 @@ class Analista {
       this.district,
       this.province,
       this.region,
-      this.idSupervisor);
+      this.idSupervisor,
+      this.latitud,
+      this.longitud);
 }
 
 List<Analista> getAnalistas() {
@@ -47,7 +50,9 @@ List<Analista> getAnalistas() {
         "Cusco",
         "Cusco",
         "Cusco",
-        "1"),
+        "1",
+        -13.454647,
+        -73.24232414),
     Analista(
         "2",
         "Ana",
@@ -62,7 +67,9 @@ List<Analista> getAnalistas() {
         "Cusco",
         "Cusco",
         "Cusco",
-        "2"),
+        "2",
+        -13.522147660278955,
+        -71.96345536845845),
     Analista(
         "3",
         "Glina ",
@@ -77,7 +84,9 @@ List<Analista> getAnalistas() {
         "Cusco",
         "Cusco",
         "Cusco",
-        "3"),
+        "3",
+        -13.622147660278955,
+        -71.76345536845845),
     Analista(
         "4",
         "Roswell",
@@ -92,7 +101,9 @@ List<Analista> getAnalistas() {
         "Cusco",
         "Cusco",
         "Cusco",
-        "2"),
+        "2",
+        -13.482147660278955,
+        -71.36345536845845),
     Analista(
         "5",
         "Yoshimori",
@@ -107,7 +118,9 @@ List<Analista> getAnalistas() {
         "Cusco",
         "Cusco",
         "Cusco",
-        "4"),
+        "4",
+        -13.5121476278955,
+        -71.953455368445),
     Analista(
         "6",
         "Mishel",
@@ -122,7 +135,9 @@ List<Analista> getAnalistas() {
         "Cusco",
         "Cusco",
         "Cusco",
-        "1"),
+        "1",
+        -13.5021476655,
+        -71.94345536845),
     Analista(
         "7",
         "Anyi",
@@ -137,7 +152,9 @@ List<Analista> getAnalistas() {
         "Cusco",
         "Cusco",
         "Cusco",
-        "6"),
+        "6",
+        -13.54214880278955,
+        -71.923436845845),
     Analista(
         "8",
         "Milagros",
@@ -152,7 +169,9 @@ List<Analista> getAnalistas() {
         "Cusco",
         "Cusco",
         "Cusco",
-        "3"),
+        "3",
+        -13.4921660278955,
+        -71.363536845845),
     Analista(
         "9",
         "Julia",
@@ -167,7 +186,9 @@ List<Analista> getAnalistas() {
         "Cusco",
         "Cusco",
         "Cusco",
-        "2"),
+        "2",
+        -13.5622160278955,
+        -71.36845845),
     Analista(
         "10",
         "Mario",
@@ -182,7 +203,9 @@ List<Analista> getAnalistas() {
         "Cusco",
         "Cusco",
         "Cusco",
-        "4"),
+        "4",
+        -13.5221470955,
+        -71.966845845),
   ];
   return analistas;
 }
