@@ -244,11 +244,3 @@ class _PromocionPageState extends State<PromocionPage> {
     );
   }
 }
-
-/*class Socio {
-  final String number;
-  final String dni;
-  final String name;
-
-  Socio(this.number, this.dni, this.name);
-}*/
