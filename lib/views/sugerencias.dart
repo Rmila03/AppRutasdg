@@ -90,7 +90,7 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
             const SizedBox(height: 16),
             Expanded(
               child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
+                scrollDirection: Axis.vertical, // Cambiado a Axis.vertical
                 child: DataTable(
                   headingRowColor: MaterialStateColor.resolveWith(
                       (states) => const Color.fromARGB(255, 0, 76, 128)),
@@ -112,8 +112,9 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
                       label: Text('', style: TextStyle(color: Colors.white)),
                     ),
                   ],
-                  rows:
-                      searchResults.map((user) => buildDataRow(user)).toList(),
+                  rows: (searchResults.isEmpty ? socios : searchResults)
+                      .map((user) => buildDataRow(user))
+                      .toList(),
                 ),
               ),
             ),
