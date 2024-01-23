@@ -103,7 +103,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
         break;
     }
     for (Socio socio in socios) {
-      if (selectedSociosIds.contains(socio.number)) {
+      if (selectedSociosIds.contains(socio.idSocio)) {
         // Verificar si el usuario está asignado a la fecha de hoy
         if (socioIsAssignedToToday(socio)) {
           sociosAssignedToToday.add(socio);

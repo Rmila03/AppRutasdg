@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/socio.dart';
+import 'package:ruta_sdg/analista.dart';
 //import 'package:tooltip/tooltip.dart';
 
 void main() {
@@ -32,13 +33,8 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     with SingleTickerProviderStateMixin {
   String selectedOption = '';
   DateTime selectedDate = DateTime.now();
-  List<String> menuOptions = [
-    'Juan Perez Garcia',
-    'Ruth Milagros Arce Quispe',
-    'Yolmy Milagros Cahuata Lavilla',
-    'Stiward Maldonado',
-    'Justino Ferro'
-  ];
+  List<Analista> analistas = getAnalistas();
+  List<String> menuOptions = [];
   final List<Socio> socios = getSocios();
   bool isFloatingPageVisible = false;
   late AnimationController _animationController;
@@ -76,11 +72,11 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
       ),
       child: DropdownButton<String>(
         value: selectedOption.isNotEmpty ? selectedOption : null,
-        items: menuOptions.map((String value) {
+        items: analistas.map((Analista analista) {
           return DropdownMenuItem<String>(
-            value: value,
+            value: analista.idAnalista,
             child: Text(
-              value,
+              '${analista.name} ${analista.lastName}',
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
@@ -95,7 +91,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
           });
         },
         hint: const Text(
-          'Seleccionar opción',
+          'Seleccionar analista',
           style: TextStyle(
             color: Color.fromARGB(255, 196, 196, 196),
             fontSize: 15.0,
@@ -104,23 +100,41 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         ),
       ),
     );
+
     List<String> selectedSociosIds = [];
 
     switch (selectedOption) {
-      case 'Juan Perez Garcia':
-        selectedSociosIds = ['1', '4'];
+      case '1':
+        selectedSociosIds = SociosPorAnalista(analistaId: '1', socios: socios);
         break;
-      case 'Ruth Milagros Arce Quispe':
-        selectedSociosIds = ['3', '5'];
+      case '2':
+        selectedSociosIds = SociosPorAnalista(analistaId: '2', socios: socios);
         break;
-      case 'Yolmy Milagros Cahuata Lavilla':
-        selectedSociosIds = ['2', '8'];
+      case '3':
+        selectedSociosIds = SociosPorAnalista(analistaId: '3', socios: socios);
         break;
-      case 'Stiward Maldonado':
-        selectedSociosIds = ['6', '10'];
+      case '4':
+        selectedSociosIds = SociosPorAnalista(analistaId: '4', socios: socios);
         break;
-      case 'Justino Ferro':
-        selectedSociosIds = ['7', '9'];
+      case '5':
+        selectedSociosIds = SociosPorAnalista(analistaId: '5', socios: socios);
+        break;
+      case '6':
+        selectedSociosIds = SociosPorAnalista(analistaId: '6', socios: socios);
+        break;
+      case '7':
+        selectedSociosIds = SociosPorAnalista(analistaId: '7', socios: socios);
+        break;
+      case '8':
+        selectedSociosIds = SociosPorAnalista(analistaId: '8', socios: socios);
+        break;
+      case '9':
+        selectedSociosIds = SociosPorAnalista(analistaId: '9', socios: socios);
+        break;
+
+      // Repite este bloque para cada analista (hasta el '10')
+      case '10':
+        selectedSociosIds = SociosPorAnalista(analistaId: '10', socios: socios);
         break;
       default:
         // Handle default case if needed
@@ -134,8 +148,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
 
     // Filtrar usuarios asignados y no asignados a la fecha seleccionada
     for (Socio socio in socios) {
-      if (selectedSociosIds.contains(socio.number)) {
-        // Verificar si el usuario está asignado a la fecha de hoy
+      if (selectedSociosIds.contains(socio.idSocio)) {
         if (socioIsAssignedToToday(socio)) {
           sociosAssignedToToday.add(socio);
         } else {
@@ -143,7 +156,6 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         }
       }
     }
-
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -152,7 +164,6 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
               children: [
                 const MenuSupervisor(name: "PLAN DEL DÍA"),
                 Expanded(
-                  // child: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
@@ -216,8 +227,8 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                               },
                               child: Container(
                                 margin: const EdgeInsets.only(right: 100),
-                                padding: const EdgeInsets.fromLTRB(16.0, 16.0,
-                                    16.0, 16.0), // Ajuste del margen derecho
+                                padding: const EdgeInsets.fromLTRB(
+                                    16.0, 16.0, 16.0, 16.0),
                                 decoration: BoxDecoration(
                                   color: const Color(0xFF0E813C),
                                   borderRadius: BorderRadius.circular(20.0),
@@ -236,7 +247,6 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                 ),
                               ),
                             ),
-                            //const SizedBox(width: 0), // Ajuste del margen derecho
                           ],
                         ),
                         const SizedBox(height: 25.0),
@@ -247,7 +257,6 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                       ],
                     ),
                   ),
-                  // ),
                 ),
               ],
             ),
@@ -280,7 +289,6 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                               List<Socio> updatedFilteredSocios) {
                             setState(() {
                               sociosNotAssignedToToday = updatedSocios;
-                              // Puedes utilizar updatedFilteredUsers si es necesario
                             });
                           },
                         ),
@@ -293,6 +301,16 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         ),
       ),
     );
+  }
+
+  List<String> SociosPorAnalista({
+    required String analistaId,
+    required List<Socio> socios,
+  }) {
+    return socios
+        .where((socio) => socio.idAnalista == analistaId)
+        .map((socio) => socio.idSocio)
+        .toList();
   }
 
   Widget _buildDataTable(String title, List<Socio> socioList) {
@@ -330,7 +348,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                       DataCell(Text(socio.dni)),
                       DataCell(Text("${socio.name} ${socio.lastName}")),
                       DataCell(Text(socio.address)),
-                      const DataCell(Text("Promoción")),
+                      DataCell(Text(socio.tipoGrupo)),
                       DataCell(
                         IconButton(
                           icon: const Icon(FontAwesomeIcons.trash,

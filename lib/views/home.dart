@@ -101,7 +101,7 @@ class MapScreen extends State {
         color = await createCustomMarker(114, 175, 76);
       }
       final marker = Marker(
-        markerId: MarkerId(user.number),
+        markerId: MarkerId(user.idSocio),
         position: LatLng(locationData['latitud'], locationData['longitud']),
         infoWindow: InfoWindow(
           title: user.name,

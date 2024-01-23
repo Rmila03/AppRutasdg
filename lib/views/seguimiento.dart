@@ -186,7 +186,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                             }
                           },
                           cells: [
-                            DataCell(Text(user.number)),
+                            DataCell(Text(user.idSocio)),
                             DataCell(Text(user.dni)),
                             DataCell(Text("${user.name} ${user.lastName}")),
                             const DataCell(Icon(Icons.check)),
