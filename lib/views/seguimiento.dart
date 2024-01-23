@@ -148,18 +148,19 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               child: Card(
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(
-                      color: Color(0xFFD9DEDA), width: 2.0), // Borde blanco
+                    color: Color(0xFFD9DEDA),
+                    width: 2.0,
+                  ),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 color: const Color.fromARGB(255, 255, 255, 255),
                 elevation: 0,
                 child: SizedBox(
-                  height: 200, // Establece la altura deseada
+                  height: 200,
                   width: 600,
                   child: SingleChildScrollView(
                     child: DataTable(
                       showCheckboxColumn: false,
-                      //dataRowHeight: 50.0,
                       columnSpacing: 7.0,
                       headingRowColor:
                           MaterialStateProperty.all(const Color(0xFFD9DEDA)),
@@ -169,19 +170,22 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                         DataColumn(label: Text('Nombre')),
                         DataColumn(label: Text('')),
                       ],
-                      rows: socios.map((user) {
+                      rows: socios
+                          .where((user) => user.tipoGrupo == 'Seguimiento')
+                          .map((user) {
                         return DataRow(
                           onSelectChanged: (isSelected) {
                             if (isSelected != null && isSelected) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ListaSocio(
-                                          tabColorLeft: const Color.fromARGB(
-                                              255, 4, 58, 6),
-                                          tabName: 'SEGUIMIENTO',
-                                          socio: user,
-                                        )),
+                                  builder: (context) => ListaSocio(
+                                    tabColorLeft:
+                                        const Color.fromARGB(255, 4, 58, 6),
+                                    tabName: 'SEGUIMIENTO',
+                                    socio: user,
+                                  ),
+                                ),
                               );
                             }
                           },
@@ -198,6 +202,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 ),
               ),
             ),
+
 //////////////////////
           ],
         ),
