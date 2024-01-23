@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/supervisor/cartera/cartera_form.dart';
-import "package:ruta_sdg/user.dart";
+import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 
 class ListaSupervisor extends StatefulWidget {
-  final UserData user;
+  final Socio socio;
 
   const ListaSupervisor({
     Key? key,
-    required this.user,
+    required this.socio,
   }) : super(key: key);
 
   @override
@@ -21,7 +21,7 @@ class ListaSupervisorState extends State<ListaSupervisor> {
   @override
   void initState() {
     super.initState();
-    casoFormWidget = CarteraForm(user: widget.user);
+    casoFormWidget = CarteraForm(socio: widget.socio);
   }
 
   @override

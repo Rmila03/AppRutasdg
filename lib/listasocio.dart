@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import "package:ruta_sdg/user.dart";
+import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/widgets/header.dart';
 import "package:ruta_sdg/widgets/navigation_drawer.dart";
 import 'package:ruta_sdg/widgets/tabbar.dart';
@@ -11,12 +11,12 @@ import "package:ruta_sdg/widgets/nuevo_form.dart";
 class ListaSocio extends StatefulWidget {
   final Color tabColorLeft;
   final String tabName;
-  final UserData? user;
+  final Socio? socio;
   const ListaSocio({
     super.key,
     required this.tabColorLeft,
     required this.tabName,
-    this.user,
+    this.socio,
   });
 
   @override
@@ -33,15 +33,15 @@ class ListaSocioState extends State<ListaSocio> {
     // Asigna la redirección según el valor de tabName
     if (widget.tabName == 'PROMOCIÓN') {
       CasoFormWidget = PromotionForm(
-        user: widget.user!,
+        socio: widget.socio!,
       );
     } else if (widget.tabName == 'SEGUIMIENTO') {
       CasoFormWidget = SeguimientoForm(
-        user: widget.user!,
+        socio: widget.socio!,
       );
     } else if (widget.tabName == 'RECUPERACIÓN') {
       CasoFormWidget = RecuperacionForm(
-        user: widget.user!,
+        socio: widget.socio!,
       );
     } else if (widget.tabName == 'NUEVO') {
       CasoFormWidget = const NuevoForm();

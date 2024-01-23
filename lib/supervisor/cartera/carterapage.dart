@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/supervisor/cartera/listacartera.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
-import 'package:ruta_sdg/user.dart';
+import 'package:ruta_sdg/socio.dart';
 
 void main() {
   runApp(const CarteraPage());
@@ -37,314 +37,11 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
     'Stiward Maldonado',
     'Justino Ferro'
   ];
-  final List<UserData> users = [
-    UserData(
-      "1",
-      "Ruth Milagros",
-      "Arce Quispe",
-      "12345678",
-      "Femenino",
-      "20",
-      "03/02/2002",
-      "978563412",
-      'abcd@gmail.com',
-      "Jr. Jose Carlos Mariategui #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "CAMPAÑA",
-      "CONSUMO",
-      "INSTITUCIONAL",
-      "COOPENAVIDEÑO",
-      "CONSUMO NO REVOLVENTE",
-      "40 000",
-      "60",
-      "15.25",
-      "24/12/2018",
-      "16/012024",
-      "972.27",
-      "0",
-      "40 000",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "2",
-      "Yolmy Milagros",
-      "Cahuata Lavilla",
-      "98765432",
-      "Femenino",
-      "22",
-      "25/10/2002",
-      "978563412",
-      "foo@gmail.com",
-      "Av. La cultura #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "RECURRENTE",
-      "COMERCIAL",
-      "MININEGOCIO",
-      "GENÉRICO",
-      "CRÉDITOS A PEQUEÑAS EMPRESAS",
-      "27 000",
-      "36",
-      "32.15",
-      "9/06/2018",
-      "10/06/2021",
-      "1148.27",
-      "6 025,59",
-      "23 974,41",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "3",
-      "Juan Jaime",
-      "Pando Muñoz",
-      "98159874",
-      "Masculino",
-      "20",
-      "03/02/2002",
-      "98159874",
-      "foo@gmail.com",
-      "Av. Sol de Oro #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "CAMPAÑA",
-      "CONSUMO",
-      "INSTITUCIONAL",
-      "COOPENAVIDEÑO",
-      "CONSUMO NO REVOLVENTE",
-      "40 000",
-      "60",
-      "15.25",
-      "24/12/2018",
-      "16/012024",
-      "972.27",
-      "0",
-      "40 000",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "4",
-      "Jaja Jaime",
-      "Pando Muñoz",
-      "98159874",
-      "Masculino",
-      "22",
-      "03/02/2002",
-      "98159874",
-      "foo@gmail.com",
-      "Av. Sol de Oro #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "RECURRENTE",
-      "COMERCIAL",
-      "MININEGOCIO",
-      "GENÉRICO",
-      "CRÉDITOS A PEQUEÑAS EMPRESAS",
-      "27 000",
-      "36",
-      "32.15",
-      "9/06/2018",
-      "10/06/2021",
-      "1148.27",
-      "6 025,59",
-      "23 974,41",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "5",
-      "Jose Jaime",
-      "Pando Muñoz",
-      "98159874",
-      "Masculino",
-      "20",
-      "03/02/2002",
-      "98159874",
-      "foo@gmail.com",
-      "Av. Sol de Oro #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "CAMPAÑA",
-      "CONSUMO",
-      "INSTITUCIONAL",
-      "COOPENAVIDEÑO",
-      "CONSUMO NO REVOLVENTE",
-      "40 000",
-      "60",
-      "15.25",
-      "24/12/2018",
-      "16/012024",
-      "972.27",
-      "0",
-      "40 000",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "6",
-      "Carlos Jaime",
-      "Pando Muñoz",
-      "98159874",
-      "Masculino",
-      "20",
-      "03/02/2002",
-      "98159874",
-      "foo@gmail.com",
-      "Av. Sol de Oro #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "RECURRENTE",
-      "COMERCIAL",
-      "MININEGOCIO",
-      "GENÉRICO",
-      "CRÉDITOS A PEQUEÑAS EMPRESAS",
-      "27 000",
-      "36",
-      "32.15",
-      "9/06/2018",
-      "10/06/2021",
-      "1148.27",
-      "6 025,59",
-      "23 974,41",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "7",
-      "Carla Jaime",
-      "Pando Muñoz",
-      "98159874",
-      "Masculino",
-      "20",
-      "03/02/2002",
-      "98159874",
-      "foo@gmail.com",
-      "Av. Sol de Oro #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "CAMPAÑA",
-      "CONSUMO",
-      "INSTITUCIONAL",
-      "COOPENAVIDEÑO",
-      "CONSUMO NO REVOLVENTE",
-      "40 000",
-      "60",
-      "15.25",
-      "24/12/2018",
-      "16/012024",
-      "972.27",
-      "0",
-      "40 000",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "8",
-      "Juan Jaime",
-      "Pando Muñoz",
-      "98159874",
-      "Masculino",
-      "20",
-      "03/02/2002",
-      "98159874",
-      "foo@gmail.com",
-      "Av. Sol de Oro #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "RECURRENTE",
-      "COMERCIAL",
-      "MININEGOCIO",
-      "GENÉRICO",
-      "CRÉDITOS A PEQUEÑAS EMPRESAS",
-      "27 000",
-      "36",
-      "32.15",
-      "9/06/2018",
-      "10/06/2021",
-      "1148.27",
-      "6 025,59",
-      "23 974,41",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "9",
-      "Roswell Jaime",
-      "Pando Muñoz",
-      "98159874",
-      "Masculino",
-      "20",
-      "03/02/2002",
-      "98159874",
-      "foo@gmail.com",
-      "Av. Sol de Oro #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "CAMPAÑA",
-      "CONSUMO",
-      "INSTITUCIONAL",
-      "COOPENAVIDEÑO",
-      "CONSUMO NO REVOLVENTE",
-      "40 000",
-      "60",
-      "15.25",
-      "24/12/2018",
-      "16/012024",
-      "972.27",
-      "0",
-      "40 000",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "10",
-      "Jacinto Jaime",
-      "Pando Muñoz",
-      "98159874",
-      "Masculino",
-      "20",
-      "03/02/2002",
-      "98159874",
-      "foo@gmail.com",
-      "Av. Sol de Oro #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "CAMPAÑA",
-      "CONSUMO",
-      "INSTITUCIONAL",
-      "COOPENAVIDEÑO",
-      "CONSUMO NO REVOLVENTE",
-      "40 000",
-      "60",
-      "15.25",
-      "24/12/2018",
-      "16/012024",
-      "972.27",
-      "0",
-      "40 000",
-      assignedDate: DateTime.now(),
-    ),
-
-    // Agrega más usuarios según sea necesario
-  ];
+  final List<Socio> socios = getSocios();
   @override
   Widget build(BuildContext context) {
-    List<UserData> usersAssignedToToday = [];
-    List<UserData> usersNotAssignedToToday = [];
+    List<Socio> sociosAssignedToToday = [];
+    List<Socio> sociosNotAssignedToToday = [];
     var container = Container(
       alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(8.0),
@@ -383,35 +80,35 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
       ),
     );
 
-    List<String> selectedUsersIds = [];
+    List<String> selectedSociosIds = [];
 
     switch (selectedOption) {
       case 'Juan Perez Garcia':
-        selectedUsersIds = ['1'];
+        selectedSociosIds = ['1'];
         break;
       case 'Ruth Milagros Arce Quispe':
-        selectedUsersIds = ['1', '2', '3'];
+        selectedSociosIds = ['1', '2', '3'];
         break;
       case 'Yolmy Milagros Cahuata Lavilla':
-        selectedUsersIds = ['4', '5'];
+        selectedSociosIds = ['4', '5'];
         break;
       case 'Stiward Maldonado':
-        selectedUsersIds = ['6', '7'];
+        selectedSociosIds = ['6', '7'];
         break;
       case 'Justino Ferro':
-        selectedUsersIds = ['8', '9', '10'];
+        selectedSociosIds = ['8', '9', '10'];
         break;
       default:
         // Handle default case if needed
         break;
     }
-    for (UserData user in users) {
-      if (selectedUsersIds.contains(user.number)) {
+    for (Socio socio in socios) {
+      if (selectedSociosIds.contains(socio.number)) {
         // Verificar si el usuario está asignado a la fecha de hoy
-        if (userIsAssignedToToday(user)) {
-          usersAssignedToToday.add(user);
+        if (socioIsAssignedToToday(socio)) {
+          sociosAssignedToToday.add(socio);
         } else {
-          usersNotAssignedToToday.add(user);
+          sociosNotAssignedToToday.add(socio);
         }
       }
     }
@@ -452,7 +149,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                       const SizedBox(height: 25.0),
                       Center(
                         child: _buildDataTable(
-                            selectedOption, usersAssignedToToday),
+                            selectedOption, sociosAssignedToToday),
                       )
                     ],
                   ),
@@ -466,7 +163,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
     );
   }
 
-  Widget _buildDataTable(String title, List<UserData> userList) {
+  Widget _buildDataTable(String title, List<Socio> socioList) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
@@ -490,7 +187,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                 DataColumn(label: Text('NOMBRE')),
                 DataColumn(label: Text('DIRECCIÓN')),
               ],
-              rows: userList.map((user) {
+              rows: socioList.map((socio) {
                 return DataRow(
                   onSelectChanged: (isSelected) {
                     if (isSelected != null && isSelected) {
@@ -498,16 +195,16 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                         context,
                         MaterialPageRoute(
                           builder: (context) => ListaSupervisor(
-                            user: user,
+                            socio: socio,
                           ),
                         ),
                       );
                     }
                   },
                   cells: [
-                    DataCell(Text(user.dni)),
-                    DataCell(Text("${user.name} ${user.lastName}")),
-                    DataCell(Text(user.address)),
+                    DataCell(Text(socio.dni)),
+                    DataCell(Text("${socio.name} ${socio.lastName}")),
+                    DataCell(Text(socio.address)),
                   ],
                 );
               }).toList(),
@@ -518,9 +215,9 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
     );
   }
 
-  bool userIsAssignedToToday(UserData user) {
+  bool socioIsAssignedToToday(Socio socio) {
     // Lógica para verificar si el usuario está asignado a la fecha de hoy
-    return user.assignedDate != null &&
-        user.assignedDate!.toLocal().isAtSameMomentAs(selectedDate);
+    return socio.assignedDate != null &&
+        socio.assignedDate!.toLocal().isAtSameMomentAs(selectedDate);
   }
 }

@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ruta_sdg/user.dart';
+import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/widgets/bottom_action.dart';
 import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 import 'package:ruta_sdg/views/promocion.dart';
 import 'dart:ui' as ui;
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 //import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
 
@@ -23,46 +22,16 @@ class HomePage extends StatefulWidget {
 }
 
 class MapScreen extends State {
-  //final geocoding =
-  ///  GoogleMapsGeocoding(apiKey: "AIzaSyCsdQUlFvilJeVnvmeALlD8k28kq3i1-d4");
-  //Future<void> _geo(GoogleMapController controller) async {
-  // GeocodingResponse response = await geocoding
-  //   .searchByAddress("1600 Amphitheatre Parkway, Mountain View, CA");
-  // }
-
-//final geocoding = GoogleMapsGeocoding(apiKey: "<API_KEY>", httpClient: BrowserClient());
-//final geocoding = GoogleMapsGeocoding(baseUrl: "http://myProxy.com");
-  Future<List<UserData>> getUsers() async {
-    final List<UserData> users = [
-      UserData(
-          "1",
-          "Ruth Milagros",
-          "Arce Quispe",
-          "12345678",
-          "978563412",
-          'abcd@gmail.com',
-          "Jr. Jose Carlos Mariategui #345",
-          "Cusco",
-          "Cusco",
-          "Cusco"),
-      UserData(
-          "2",
-          "Yolmy Milagros",
-          "Cahuata Lavilla",
-          "98765432",
-          "978563412",
-          "foo@gmail.com",
-          "Av. La cultura #345",
-          "Cusco",
-          "Cusco",
-          "Cusco"),
-    ];
-    return users;
+  String groupSelected = "All";
+  Color colorButton = const Color.fromARGB(255, 4, 54, 95);
+  Future<List<Socio>> getSociosGroup() async {
+    final socios = getSocios();
+    if (groupSelected == "All") return socios;
+    return socios.where((socio) => socio.tipoGrupo == groupSelected).toList();
   }
 
   Future<Map<String, dynamic>> fetchData(String direccion) async {
     String encoded = Uri.encodeQueryComponent(direccion);
-    print(encoded);
     final response = await http.get(Uri.parse(
         'https://maps.googleapis.com/maps/api/geocode/json?address=${encoded}&key=AIzaSyB5C0RjRYWGrgft5JsGNN69xwqXhtLMzWU'));
 
@@ -103,7 +72,7 @@ class MapScreen extends State {
           color: Color.fromARGB(255, r, g, b),
         ));
     textPainter.layout();
-    textPainter.paint(canvas, Offset(0.0, 0.0));
+    textPainter.paint(canvas, const Offset(0.0, 0.0));
     final picture = pictureRecorder.endRecording();
     final image = await picture.toImage(48, 48);
     final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
@@ -111,16 +80,26 @@ class MapScreen extends State {
   }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
-    final users = await getUsers();
+    _updateMarkers();
+  }
+
+  Future<void> _updateMarkers() async {
+    final users = await getSociosGroup();
     final newMarkers = <Marker>{};
 
     await Future.wait(users.map((user) async {
-      //Marker mark = await _addMarker(user);
-      BitmapDescriptor markerColor = await createCustomMarker(0, 76, 128);
+      BitmapDescriptor color = await createCustomMarker(255, 0, 0);
       Map<String, dynamic> locationData = await fetchData(
           "${user.address} ${user.district} ${user.province} ${user.region} Peru");
-      print(locationData);
-      print(user.name);
+      if (user.tipoGrupo == 'Promoción') {
+        color = await createCustomMarker(255, 152, 12);
+      }
+      if (user.tipoGrupo == 'Seguimiento') {
+        color = await createCustomMarker(4, 58, 6);
+      }
+      if (user.tipoGrupo == 'Recuperación') {
+        color = await createCustomMarker(114, 175, 76);
+      }
       final marker = Marker(
         markerId: MarkerId(user.number),
         position: LatLng(locationData['latitud'], locationData['longitud']),
@@ -128,10 +107,11 @@ class MapScreen extends State {
           title: user.name,
           snippet: locationData['address'],
         ),
-        icon: markerColor,
+        icon: color,
       );
       newMarkers.add(marker);
     }));
+
     setState(() {
       _markers.clear();
       _markers.addAll(Map.fromIterable(newMarkers,
@@ -283,29 +263,63 @@ class MapScreen extends State {
               const SizedBox(
                 height: 15,
               ),
-              const Row(
+              Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   BottomAction(
-                    label: "Promoción",
-                    icon: FontAwesomeIcons.bagShopping,
-                    iconColor: Color.fromARGB(255, 4, 54, 95),
-                    iconSize: 30.0,
-                  ),
+                      label: "Promoción",
+                      icon: FontAwesomeIcons.bagShopping,
+                      iconColor: groupSelected == "Promoción"
+                          ? Colors.orange
+                          : const Color.fromARGB(255, 4, 54, 95),
+                      iconSize: 30.0,
+                      onTapCallback: () {
+                        setState(() {
+                          if (groupSelected == "Promoción") {
+                            groupSelected = "All";
+                          } else {
+                            groupSelected = "Promoción";
+                          }
+                          _updateMarkers();
+                        });
+                      }),
                   BottomAction(
-                    label: "Seguimiento",
-                    icon: FontAwesomeIcons.bagShopping,
-                    iconColor: Color.fromARGB(255, 4, 54, 95),
-                    iconSize: 30.0,
-                  ),
+                      label: "Seguimiento",
+                      icon: FontAwesomeIcons.bagShopping,
+                      iconColor: groupSelected == "Seguimiento"
+                          ? const Color.fromARGB(255, 4, 58, 6)
+                          : const Color.fromARGB(255, 4, 54, 95),
+                      iconSize: 30.0,
+                      onTapCallback: () {
+                        setState(() {
+                          if (groupSelected == "Seguimiento") {
+                            groupSelected = "All";
+                          } else {
+                            groupSelected = "Seguimiento";
+                          }
+
+                          _updateMarkers();
+                        });
+                      }),
                   BottomAction(
-                    label: "Recuperación",
-                    icon: FontAwesomeIcons.bagShopping,
-                    iconColor: Color.fromARGB(255, 4, 54, 95),
-                    iconSize: 30.0,
-                  ),
-                  BottomAction(
+                      label: "Recuperación",
+                      icon: FontAwesomeIcons.bagShopping,
+                      iconColor: groupSelected == "Recuperación"
+                          ? const Color.fromARGB(255, 114, 175, 76)
+                          : const Color.fromARGB(255, 4, 54, 95),
+                      iconSize: 30.0,
+                      onTapCallback: () {
+                        setState(() {
+                          if (groupSelected == "Recuperación") {
+                            groupSelected = "All";
+                          } else {
+                            groupSelected = "Recuperación";
+                          }
+                          _updateMarkers();
+                        });
+                      }),
+                  const BottomAction(
                     label: "Nuevo",
                     icon: FontAwesomeIcons.bagShopping,
                     iconColor: Color.fromARGB(255, 4, 54, 95),
@@ -323,8 +337,8 @@ class MapScreen extends State {
                 child: GoogleMap(
                   onMapCreated: _onMapCreated,
                   initialCameraPosition: const CameraPosition(
-                    target: LatLng(-33.86, 151.20),
-                    zoom: 2,
+                    target: LatLng(-13.530757, -71.9395927),
+                    zoom: 13,
                   ),
                   markers: _markers.values.toSet(),
                 ),

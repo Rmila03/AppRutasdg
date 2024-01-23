@@ -10,6 +10,7 @@ class BottomAction extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final double iconSize;
+  final VoidCallback? onTapCallback;
 
   const BottomAction({
     super.key,
@@ -17,51 +18,53 @@ class BottomAction extends StatelessWidget {
     required this.icon,
     required this.iconColor,
     required this.iconSize,
+    this.onTapCallback,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        // Lógica que se ejecuta al hacer clic en el ícono
-        if (label == "Inicio") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
-          );
-        } else if (label == "Notificaciones") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const NotificacionPage(title: ''),
-            ),
-          );
-        } else if (label == "Reportes") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ReportePage(title: ''),
-            ),
-          );
-        } else if (label == "Sugerencias") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const SugerenciaPage(title: ''),
-            ),
-          );
-        } else if (label == "Nuevo") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ListaSocio(
-                tabColorLeft: Colors.orange,
-                tabName: 'NUEVO',
-              ),
-            ),
-          );
-        }
-      },
+      onTap: onTapCallback ??
+          () {
+            // Lógica que se ejecuta al hacer clic en el ícono
+            if (label == "Inicio") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+              );
+            } else if (label == "Notificaciones") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificacionPage(title: ''),
+                ),
+              );
+            } else if (label == "Reportes") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ReportePage(title: ''),
+                ),
+              );
+            } else if (label == "Sugerencias") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SugerenciaPage(title: ''),
+                ),
+              );
+            } else if (label == "Nuevo") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ListaSocio(
+                    tabColorLeft: Colors.orange,
+                    tabName: 'NUEVO',
+                  ),
+                ),
+              );
+            }
+          },
       child: Column(
         children: [
           Padding(

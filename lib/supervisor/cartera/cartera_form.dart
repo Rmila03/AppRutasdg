@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
-import 'package:ruta_sdg/user.dart';
+import 'package:ruta_sdg/socio.dart';
 //import 'package:ruta_sdg/widgets/promotion_form.dart';
 import 'package:ruta_sdg/widgets/radio_button_custom.dart';
 
 class CarteraForm extends StatefulWidget {
-  final UserData user;
-  const CarteraForm({super.key, required this.user});
+  final Socio socio;
+  const CarteraForm({super.key, required this.socio});
 
   @override
   CarteraFormState createState() {
@@ -29,8 +29,8 @@ class CarteraFormState extends State<CarteraForm> {
   ];
   @override
   Widget build(BuildContext context) {
-    //List<UserData> userAssingnedToToday = [];
-    //List<UserData> userNotAssingnedToToday = [];
+    //List<Socio> socioAssingnedToToday = [];
+    //List<Socio> socioNotAssingnedToToday = [];
     var container = Container(
       alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(8.0),
@@ -141,7 +141,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       formKey: _formKey,
                                       label: "Apellido Paterno",
                                       inputType: TextInputType.text,
-                                      content: widget.user.lastName,
+                                      content: widget.socio.lastName,
                                     ),
                                   ),
                                 ),
@@ -152,7 +152,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       formKey: _formKey,
                                       label: "Apellido Materno",
                                       inputType: TextInputType.text,
-                                      content: widget.user.lastName,
+                                      content: widget.socio.lastName,
                                     ),
                                   ),
                                 ),
@@ -185,7 +185,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       formKey: _formKey,
                                       label: "Nombres",
                                       inputType: TextInputType.text,
-                                      content: widget.user.name,
+                                      content: widget.socio.name,
                                     ),
                                   ),
                                 ),
@@ -212,7 +212,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       formKey: _formKey,
                                       label: "Nro Documento",
                                       inputType: TextInputType.number,
-                                      content: widget.user.dni,
+                                      content: widget.socio.dni,
                                     ),
                                   ),
                                 ),
@@ -223,7 +223,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       formKey: _formKey,
                                       label: "Sexo",
                                       inputType: TextInputType.number,
-                                      content: widget.user.sexo,
+                                      content: widget.socio.sexo,
                                     ),
                                   ),
                                 ),
@@ -234,7 +234,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       formKey: _formKey,
                                       label: "Edad",
                                       inputType: TextInputType.number,
-                                      content: widget.user.edad,
+                                      content: widget.socio.edad,
                                     ),
                                   ),
                                 ),
@@ -245,7 +245,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       formKey: _formKey,
                                       label: "Fecha de Naciemiento",
                                       inputType: TextInputType.number,
-                                      content: widget.user.fechaNacimiento,
+                                      content: widget.socio.fechaNacimiento,
                                     ),
                                   ),
                                 ),
@@ -257,7 +257,7 @@ class CarteraFormState extends State<CarteraForm> {
                                 formKey: _formKey,
                                 label: "Dirección",
                                 inputType: TextInputType.text,
-                                content: widget.user.address,
+                                content: widget.socio.address,
                               ),
                             ),
                             Row(
@@ -269,7 +269,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       formKey: _formKey,
                                       label: "Distrito",
                                       inputType: TextInputType.number,
-                                      content: widget.user.district,
+                                      content: widget.socio.district,
                                     ),
                                   ),
                                 ),
@@ -280,7 +280,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       formKey: _formKey,
                                       label: "Provincia",
                                       inputType: TextInputType.phone,
-                                      content: widget.user.province,
+                                      content: widget.socio.province,
                                     ),
                                   ),
                                 ),
@@ -291,7 +291,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       formKey: _formKey,
                                       label: "Departamento",
                                       inputType: TextInputType.none,
-                                      content: widget.user.region,
+                                      content: widget.socio.region,
                                     ),
                                   ),
                                 ),
@@ -332,7 +332,7 @@ class CarteraFormState extends State<CarteraForm> {
                                     formKey: _formKey,
                                     label: "Teléfono",
                                     inputType: TextInputType.phone,
-                                    content: widget.user.cellphone,
+                                    content: widget.socio.cellphone,
                                   ),
                                 )),
                                 Expanded(
@@ -342,7 +342,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       formKey: _formKey,
                                       label: "Celular Personal  ",
                                       inputType: TextInputType.phone,
-                                      content: widget.user.cellphone,
+                                      content: widget.socio.cellphone,
                                     ),
                                   ),
                                 ),
@@ -355,7 +355,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       formKey: _formKey,
                                       label: "Correo Electrónico",
                                       inputType: TextInputType.none,
-                                      content: widget.user.email,
+                                      content: widget.socio.email,
                                     ),
                                   ),
                                 ),
@@ -412,7 +412,7 @@ class CarteraFormState extends State<CarteraForm> {
                                         formKey: _formKey,
                                         label: "Riesgo del Socio",
                                         inputType: TextInputType.number,
-                                        content: widget.user.riesgoSocio,
+                                        content: widget.socio.riesgoSocio,
                                       ),
                                     ),
                                   ),
@@ -425,7 +425,7 @@ class CarteraFormState extends State<CarteraForm> {
                                         formKey: _formKey,
                                         label: "Tipo de Socio",
                                         inputType: TextInputType.number,
-                                        content: widget.user.tipoSocio,
+                                        content: widget.socio.tipoSocio,
                                       ),
                                     ),
                                   ),
@@ -438,7 +438,7 @@ class CarteraFormState extends State<CarteraForm> {
                                         formKey: _formKey,
                                         label: "Tipo de Crédito",
                                         inputType: TextInputType.number,
-                                        content: widget.user.tipoCredito,
+                                        content: widget.socio.tipoCredito,
                                       ),
                                     ),
                                   ),
@@ -455,7 +455,7 @@ class CarteraFormState extends State<CarteraForm> {
                                         formKey: _formKey,
                                         label: "Tipo de Producto",
                                         inputType: TextInputType.number,
-                                        content: widget.user.tipoProducto,
+                                        content: widget.socio.tipoProducto,
                                       ),
                                     ),
                                   ),
@@ -468,7 +468,7 @@ class CarteraFormState extends State<CarteraForm> {
                                         formKey: _formKey,
                                         label: "Modalidad",
                                         inputType: TextInputType.number,
-                                        content: widget.user.modalidad,
+                                        content: widget.socio.modalidad,
                                       ),
                                     ),
                                   ),
@@ -481,7 +481,7 @@ class CarteraFormState extends State<CarteraForm> {
                                         formKey: _formKey,
                                         label: "Nombre de Prestamo",
                                         inputType: TextInputType.number,
-                                        content: widget.user.nombrePrestamo,
+                                        content: widget.socio.nombrePrestamo,
                                       ),
                                     ),
                                   ),
@@ -499,7 +499,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           label: "Crédito Total",
                                           inputType: TextInputType.number,
                                           content:
-                                              "S/. ${widget.user.creditoTotal}"),
+                                              "S/. ${widget.socio.creditoTotal}"),
                                     ),
                                   ),
                                   Expanded(
@@ -512,7 +512,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           label: "Plazo ",
                                           inputType: TextInputType.number,
                                           content:
-                                              "${widget.user.plazo} meses"),
+                                              "${widget.socio.plazo} meses"),
                                     ),
                                   ),
                                   Expanded(
@@ -525,7 +525,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           label: "Tasa de Interés",
                                           inputType: TextInputType.number,
                                           content:
-                                              "${widget.user.tasaInteres} %"),
+                                              "${widget.socio.tasaInteres} %"),
                                     ),
                                   ),
                                 ],
@@ -542,7 +542,8 @@ class CarteraFormState extends State<CarteraForm> {
                                           label:
                                               "Fecha de Aprobación de Crédito",
                                           inputType: TextInputType.number,
-                                          content: widget.user.fechaAprobacion),
+                                          content:
+                                              widget.socio.fechaAprobacion),
                                     ),
                                   ),
                                   Expanded(
@@ -566,7 +567,8 @@ class CarteraFormState extends State<CarteraForm> {
                                           formKey: _formKey,
                                           label: "Ultima Fecha de Pago",
                                           inputType: TextInputType.number,
-                                          content: widget.user.ultimaFechaPago),
+                                          content:
+                                              widget.socio.ultimaFechaPago),
                                     ),
                                   ),
                                 ],
@@ -583,7 +585,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           label: "Monto de la Cuota",
                                           inputType: TextInputType.number,
                                           content:
-                                              "S/. ${widget.user.montoCuota}"),
+                                              "S/. ${widget.socio.montoCuota}"),
                                     ),
                                   ),
                                   Expanded(
@@ -596,7 +598,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           label: "Saldo Vencido",
                                           inputType: TextInputType.number,
                                           content:
-                                              "S/. ${widget.user.saldoVencido}"),
+                                              "S/. ${widget.socio.saldoVencido}"),
                                     ),
                                   ),
                                   Expanded(
@@ -609,7 +611,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           label: "Saldo de Crédito",
                                           inputType: TextInputType.number,
                                           content:
-                                              "S/. ${widget.user.saldoCredito}"),
+                                              "S/. ${widget.socio.saldoCredito}"),
                                     ),
                                   ),
                                 ],
@@ -652,7 +654,7 @@ class CarteraFormState extends State<CarteraForm> {
                                             formKey: _formKey,
                                             label: "Riesgo del Socio",
                                             inputType: TextInputType.number,
-                                            content: widget.user.riesgoSocio,
+                                            content: widget.socio.riesgoSocio,
                                           ),
                                         ),
                                       ),
@@ -664,7 +666,7 @@ class CarteraFormState extends State<CarteraForm> {
                                             formKey: _formKey,
                                             label: "Tipo de Socio",
                                             inputType: TextInputType.number,
-                                            content: widget.user.tipoSocio,
+                                            content: widget.socio.tipoSocio,
                                           ),
                                         ),
                                       ),
@@ -676,7 +678,7 @@ class CarteraFormState extends State<CarteraForm> {
                                             formKey: _formKey,
                                             label: "Tipo de Crédito",
                                             inputType: TextInputType.number,
-                                            content: widget.user.tipoCredito,
+                                            content: widget.socio.tipoCredito,
                                           ),
                                         ),
                                       ),
@@ -692,7 +694,7 @@ class CarteraFormState extends State<CarteraForm> {
                                             formKey: _formKey,
                                             label: "Tipo de Producto",
                                             inputType: TextInputType.number,
-                                            content: widget.user.tipoProducto,
+                                            content: widget.socio.tipoProducto,
                                           ),
                                         ),
                                       ),
@@ -704,7 +706,7 @@ class CarteraFormState extends State<CarteraForm> {
                                             formKey: _formKey,
                                             label: "Modalidad",
                                             inputType: TextInputType.number,
-                                            content: widget.user.modalidad,
+                                            content: widget.socio.modalidad,
                                           ),
                                         ),
                                       ),
@@ -716,7 +718,8 @@ class CarteraFormState extends State<CarteraForm> {
                                             formKey: _formKey,
                                             label: "Nombre de Prestamo",
                                             inputType: TextInputType.number,
-                                            content: widget.user.nombrePrestamo,
+                                            content:
+                                                widget.socio.nombrePrestamo,
                                           ),
                                         ),
                                       ),
@@ -733,7 +736,7 @@ class CarteraFormState extends State<CarteraForm> {
                                               label: "Crédito Total",
                                               inputType: TextInputType.number,
                                               content:
-                                                  widget.user.creditoTotal),
+                                                  widget.socio.creditoTotal),
                                         ),
                                       ),
                                       Expanded(
@@ -744,7 +747,7 @@ class CarteraFormState extends State<CarteraForm> {
                                               formKey: _formKey,
                                               label: "Plazo (meses)",
                                               inputType: TextInputType.number,
-                                              content: widget.user.plazo),
+                                              content: widget.socio.plazo),
                                         ),
                                       ),
                                       Expanded(
@@ -755,7 +758,8 @@ class CarteraFormState extends State<CarteraForm> {
                                               formKey: _formKey,
                                               label: "Tasa de Interés",
                                               inputType: TextInputType.number,
-                                              content: widget.user.tasaInteres),
+                                              content:
+                                                  widget.socio.tasaInteres),
                                         ),
                                       ),
                                     ],
@@ -772,7 +776,7 @@ class CarteraFormState extends State<CarteraForm> {
                                                   "Fecha de Aprobación de Crédito",
                                               inputType: TextInputType.number,
                                               content:
-                                                  widget.user.fechaAprobacion),
+                                                  widget.socio.fechaAprobacion),
                                         ),
                                       ),
                                       Expanded(
@@ -795,7 +799,7 @@ class CarteraFormState extends State<CarteraForm> {
                                               label: "Ultima Fecha de Pago",
                                               inputType: TextInputType.number,
                                               content:
-                                                  widget.user.ultimaFechaPago),
+                                                  widget.socio.ultimaFechaPago),
                                         ),
                                       ),
                                     ],
@@ -810,7 +814,7 @@ class CarteraFormState extends State<CarteraForm> {
                                               formKey: _formKey,
                                               label: "Monto de la Cuota",
                                               inputType: TextInputType.number,
-                                              content: widget.user.montoCuota),
+                                              content: widget.socio.montoCuota),
                                         ),
                                       ),
                                       Expanded(
@@ -822,7 +826,7 @@ class CarteraFormState extends State<CarteraForm> {
                                               label: "Saldo Vencido",
                                               inputType: TextInputType.number,
                                               content:
-                                                  widget.user.saldoVencido),
+                                                  widget.socio.saldoVencido),
                                         ),
                                       ),
                                       Expanded(
@@ -834,7 +838,7 @@ class CarteraFormState extends State<CarteraForm> {
                                               label: "Saldo de Crédito",
                                               inputType: TextInputType.number,
                                               content:
-                                                  widget.user.saldoCredito),
+                                                  widget.socio.saldoCredito),
                                         ),
                                       ),
                                     ],

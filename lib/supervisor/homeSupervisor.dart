@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
-import 'package:ruta_sdg/user.dart';
+import 'package:ruta_sdg/socio.dart';
 //import 'package:tooltip/tooltip.dart';
 
 void main() {
@@ -39,309 +39,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     'Stiward Maldonado',
     'Justino Ferro'
   ];
-  final List<UserData> users = [
-    UserData(
-      "1",
-      "Aracely Milagros",
-      "Conchoy Paucar",
-      "96543025",
-      "Femenino",
-      "39",
-      "03/02/1985",
-      "978563412",
-      'abcd@gmail.com',
-      "Jr. Jose Carlos Mariategui #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "CAMPAÑA",
-      "CONSUMO",
-      "INSTITUCIONAL",
-      "COOPENAVIDEÑO",
-      "CONSUMO NO REVOLVENTE",
-      "40 000",
-      "60",
-      "15.25",
-      "24/12/2018",
-      "16/012024",
-      "972.27",
-      "0",
-      "40 000",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "2",
-      "Ana",
-      "Cortez Quispe",
-      "98765432",
-      "Femenino",
-      "36",
-      "03/02/1988",
-      "978563412",
-      "foo@gmail.com",
-      "Av. La cultura #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "RECURRENTE",
-      "COMERCIAL",
-      "MININEGOCIO",
-      "GENÉRICO",
-      "CRÉDITOS A PEQUEÑAS EMPRESAS",
-      "27 000",
-      "36",
-      "32.15",
-      "9/06/2018",
-      "10/06/2021",
-      "1148.27",
-      "6 025,59",
-      "23 974,41",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "3",
-      "Glina ",
-      "Puma Huamaní",
-      "70236598",
-      "Femenino",
-      "34",
-      "03/02/1990",
-      "978563412",
-      'abcd@gmail.com',
-      "Jr. Jose Carlos Mariategui #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "CAMPAÑA",
-      "CONSUMO",
-      "INSTITUCIONAL",
-      "COOPENAVIDEÑO",
-      "CONSUMO NO REVOLVENTE",
-      "40 000",
-      "60",
-      "15.25",
-      "24/12/2018",
-      "16/012024",
-      "972.27",
-      "0",
-      "40 000",
-      assignedDate: DateTime(2024, 1, 7),
-    ),
-    UserData(
-      "4",
-      "Roswell",
-      "Pando Muñoz",
-      "36402598",
-      "Masculino",
-      "32",
-      "03/02/1992",
-      "978563412",
-      'abcd@gmail.com',
-      "Jr. Jose Carlos Mariategui #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "RECURRENTE",
-      "COMERCIAL",
-      "MININEGOCIO",
-      "GENÉRICO",
-      "CRÉDITOS A PEQUEÑAS EMPRESAS",
-      "27 000",
-      "36",
-      "32.15",
-      "9/06/2018",
-      "10/06/2021",
-      "1148.27",
-      "6 025,59",
-      "23 974,41",
-      assignedDate: DateTime(2024, 1, 6),
-    ),
-    UserData(
-      "5",
-      "Yoshimori",
-      "Lavilla Quispe",
-      "32597322",
-      "Masculino",
-      "27",
-      "03/02/1997",
-      "978563412",
-      'abcd@gmail.com',
-      "Jr. Jose Carlos Mariategui #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "RECURRENTE",
-      "COMERCIAL",
-      "MININEGOCIO",
-      "GENÉRICO",
-      "CRÉDITOS A PEQUEÑAS EMPRESAS",
-      "27 000",
-      "36",
-      "32.15",
-      "9/06/2018",
-      "10/06/2021",
-      "1148.27",
-      "6 025,59",
-      "23 974,41",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "6",
-      "Mishel",
-      "Turpo Meza",
-      "23014586",
-      "Masculino",
-      "30",
-      "03/02/1994",
-      "978563412",
-      'abcd@gmail.com',
-      "Jr. Jose Carlos Mariategui #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "CAMPAÑA",
-      "CONSUMO",
-      "INSTITUCIONAL",
-      "COOPENAVIDEÑO",
-      "CONSUMO NO REVOLVENTE",
-      "40 000",
-      "60",
-      "15.25",
-      "24/12/2018",
-      "16/012024",
-      "972.27",
-      "0",
-      "40 000",
-      assignedDate: DateTime(2024, 1, 7),
-    ),
-    UserData(
-      "7",
-      "Anyi",
-      "Mujica Hermoza",
-      "35987645",
-      "Femenino",
-      "26",
-      "03/02/1998",
-      "978563412",
-      'abcd@gmail.com',
-      "Jr. Jose Carlos Mariategui #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "RECURRENTE",
-      "COMERCIAL",
-      "MININEGOCIO",
-      "GENÉRICO",
-      "CRÉDITOS A PEQUEÑAS EMPRESAS",
-      "27 000",
-      "36",
-      "32.15",
-      "9/06/2018",
-      "10/06/2021",
-      "1148.27",
-      "6 025,59",
-      "23 974,41",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "8",
-      "Milagros",
-      "Moreno Sarayasi",
-      "15798642",
-      "Femenino",
-      "29",
-      "03/02/1995",
-      "978563412",
-      'abcd@gmail.com',
-      "Jr. Jose Carlos Mariategui #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "RECURRENTE",
-      "COMERCIAL",
-      "MININEGOCIO",
-      "GENÉRICO",
-      "CRÉDITOS A PEQUEÑAS EMPRESAS",
-      "27 000",
-      "36",
-      "32.15",
-      "9/06/2018",
-      "10/06/2021",
-      "1148.27",
-      "6 025,59",
-      "23 974,41",
-      assignedDate: DateTime(2024, 1, 10),
-    ),
-    UserData(
-      "9",
-      "Julia",
-      "Ramos Gutierrez",
-      "36501263",
-      "Femenino",
-      "32",
-      "03/02/1992",
-      "978563412",
-      "foo@gmail.com",
-      "Av. La cultura #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "CAMPAÑA",
-      "CONSUMO",
-      "INSTITUCIONAL",
-      "COOPENAVIDEÑO",
-      "CONSUMO NO REVOLVENTE",
-      "40 000",
-      "60",
-      "15.25",
-      "24/12/2018",
-      "16/012024",
-      "972.27",
-      "0",
-      "40 000",
-      assignedDate: DateTime.now(),
-    ),
-    UserData(
-      "10",
-      "Margoire",
-      "Chirinos Vilca",
-      "54698230",
-      "Masculino",
-      "32",
-      "03/02/1992",
-      "978563412",
-      "foo@gmail.com",
-      "Av. La cultura #345",
-      "Cusco",
-      "Cusco",
-      "Cusco",
-      "NORMAL",
-      "RECURRENTE",
-      "COMERCIAL",
-      "MININEGOCIO",
-      "GENÉRICO",
-      "CRÉDITOS A PEQUEÑAS EMPRESAS",
-      "27 000",
-      "36",
-      "32.15",
-      "9/06/2018",
-      "10/06/2021",
-      "1148.27",
-      "6 025,59",
-      "23 974,41",
-      assignedDate: DateTime.now(),
-    ),
-    // Agrega más usuarios según sea necesario
-  ];
+  final List<Socio> socios = getSocios();
   bool isFloatingPageVisible = false;
   late AnimationController _animationController;
   late Animation<Offset> _offsetAnimation;
@@ -366,8 +64,8 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
 
   @override
   Widget build(BuildContext context) {
-    List<UserData> usersAssignedToToday = [];
-    List<UserData> usersNotAssignedToToday = [];
+    List<Socio> sociosAssignedToToday = [];
+    List<Socio> sociosNotAssignedToToday = [];
     var container = Container(
       alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(8.0),
@@ -406,42 +104,42 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         ),
       ),
     );
-    List<String> selectedUsersIds = [];
+    List<String> selectedSociosIds = [];
 
     switch (selectedOption) {
       case 'Juan Perez Garcia':
-        selectedUsersIds = ['1', '4'];
+        selectedSociosIds = ['1', '4'];
         break;
       case 'Ruth Milagros Arce Quispe':
-        selectedUsersIds = ['3', '5'];
+        selectedSociosIds = ['3', '5'];
         break;
       case 'Yolmy Milagros Cahuata Lavilla':
-        selectedUsersIds = ['2', '8'];
+        selectedSociosIds = ['2', '8'];
         break;
       case 'Stiward Maldonado':
-        selectedUsersIds = ['6', '10'];
+        selectedSociosIds = ['6', '10'];
         break;
       case 'Justino Ferro':
-        selectedUsersIds = ['7', '9'];
+        selectedSociosIds = ['7', '9'];
         break;
       default:
         // Handle default case if needed
         break;
     }
 
-    //List<UserData> filteredUsers = users.where((user) {return selectedUsersIds.contains(user.number);
+    //List<Socio> filteredUsers = users.where((user) {return selectedUsersIds.contains(user.number);
     //}).toList();
-    // List<UserData> usersAssignedToToday = [];
-    //List<UserData> usersNotAssignedToToday = [];
+    // List<Socio> usersAssignedToToday = [];
+    //List<Socio> usersNotAssignedToToday = [];
 
     // Filtrar usuarios asignados y no asignados a la fecha seleccionada
-    for (UserData user in users) {
-      if (selectedUsersIds.contains(user.number)) {
+    for (Socio socio in socios) {
+      if (selectedSociosIds.contains(socio.number)) {
         // Verificar si el usuario está asignado a la fecha de hoy
-        if (userIsAssignedToToday(user)) {
-          usersAssignedToToday.add(user);
+        if (socioIsAssignedToToday(socio)) {
+          sociosAssignedToToday.add(socio);
         } else {
-          usersNotAssignedToToday.add(user);
+          sociosNotAssignedToToday.add(socio);
         }
       }
     }
@@ -544,7 +242,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                         const SizedBox(height: 25.0),
                         Center(
                           child: _buildDataTable(
-                              selectedOption, usersAssignedToToday),
+                              selectedOption, sociosAssignedToToday),
                         )
                       ],
                     ),
@@ -573,15 +271,15 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                         width: 600,
                         height: 800,
                         child: FloatingPage(
-                          userList: usersNotAssignedToToday,
-                          onPlusIconPressed: (UserData user) {
-                            _handlePlusIconPressed(user);
+                          socioList: sociosNotAssignedToToday,
+                          onPlusIconPressed: (Socio socio) {
+                            _handlePlusIconPressed(socio);
                             _toggleFloatingPage();
                           },
-                          onListsUpdated: (List<UserData> updatedUsers,
-                              List<UserData> updatedFilteredUsers) {
+                          onListsUpdated: (List<Socio> updatedSocios,
+                              List<Socio> updatedFilteredSocios) {
                             setState(() {
-                              usersNotAssignedToToday = updatedUsers;
+                              sociosNotAssignedToToday = updatedSocios;
                               // Puedes utilizar updatedFilteredUsers si es necesario
                             });
                           },
@@ -597,7 +295,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     );
   }
 
-  Widget _buildDataTable(String title, List<UserData> userList) {
+  Widget _buildDataTable(String title, List<Socio> socioList) {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -624,21 +322,21 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                   DataColumn(label: Text('MODALIDAD')),
                   DataColumn(label: Text('  ')),
                 ],
-                rows: userList.asMap().entries.map((entry) {
-                  UserData user = entry.value;
+                rows: socioList.asMap().entries.map((entry) {
+                  Socio socio = entry.value;
 
                   return DataRow(
                     cells: [
-                      DataCell(Text(user.dni)),
-                      DataCell(Text("${user.name} ${user.lastName}")),
-                      DataCell(Text(user.address)),
+                      DataCell(Text(socio.dni)),
+                      DataCell(Text("${socio.name} ${socio.lastName}")),
+                      DataCell(Text(socio.address)),
                       const DataCell(Text("Promoción")),
                       DataCell(
                         IconButton(
                           icon: const Icon(FontAwesomeIcons.trash,
                               color: Color(0xFF0E813C)),
                           onPressed: () {
-                            _handleTrashIconPressed(user);
+                            _handleTrashIconPressed(socio);
                           },
                         ),
                       ),
@@ -653,23 +351,23 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     );
   }
 
-  void _handlePlusIconPressed(UserData user) {
+  void _handlePlusIconPressed(Socio socio) {
     setState(() {
-      user.assignedDate = DateTime(2024, 1, 8);
+      socio.assignedDate = DateTime(2024, 1, 8);
     });
     _toggleFloatingPage();
   }
 
-  void _handleTrashIconPressed(UserData user) {
+  void _handleTrashIconPressed(Socio socio) {
     setState(() {
-      user.assignedDate = DateTime.now().add(const Duration(days: 1));
+      socio.assignedDate = DateTime.now().add(const Duration(days: 1));
     });
   }
 
-  bool userIsAssignedToToday(UserData user) {
+  bool socioIsAssignedToToday(Socio socio) {
     // Lógica para verificar si el usuario está asignado a la fecha de hoy
-    return user.assignedDate != null &&
-        user.assignedDate!.toLocal().isAtSameMomentAs(selectedDate);
+    return socio.assignedDate != null &&
+        socio.assignedDate!.toLocal().isAtSameMomentAs(selectedDate);
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -719,13 +417,13 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
 }
 
 class FloatingPage extends StatelessWidget {
-  final List<UserData> userList;
-  final Function(UserData) onPlusIconPressed;
-  final Function(List<UserData>, List<UserData>) onListsUpdated;
+  final List<Socio> socioList;
+  final Function(Socio) onPlusIconPressed;
+  final Function(List<Socio>, List<Socio>) onListsUpdated;
 
   const FloatingPage({
     super.key,
-    required this.userList,
+    required this.socioList,
     required this.onPlusIconPressed,
     required this.onListsUpdated,
   });
@@ -788,8 +486,8 @@ class FloatingPage extends StatelessWidget {
 
   Widget _buildGeneralTab() {
     return SingleChildScrollView(
-      child: SearchAndUserList(
-        userList: userList,
+      child: SearchAndSocioList(
+        socioList: socioList,
         onPlusIconPressed: onPlusIconPressed,
         onListsUpdated: onListsUpdated,
       ),
@@ -798,19 +496,19 @@ class FloatingPage extends StatelessWidget {
 
   Widget _buildSugerenciasTab() {
     return ListView.builder(
-      itemCount: userList.length,
+      itemCount: socioList.length,
       itemBuilder: (context, index) {
-        final user = userList[index];
+        final socio = socioList[index];
         return ListTile(
           title: Tooltip(
-            message: 'Nombre: ${user.name} ${user.lastName}\n'
-                'DNI: ${user.dni}\n'
-                'Celular: ${user.cellphone}\n'
-                'Email: ${user.email}\n'
-                'Dirección: ${user.address}\n'
-                'Distrito: ${user.district}\n'
-                'Provincia: ${user.province}\n'
-                'Región: ${user.region}',
+            message: 'Nombre: ${socio.name} ${socio.lastName}\n'
+                'DNI: ${socio.dni}\n'
+                'Celular: ${socio.cellphone}\n'
+                'Email: ${socio.email}\n'
+                'Dirección: ${socio.address}\n'
+                'Distrito: ${socio.district}\n'
+                'Provincia: ${socio.province}\n'
+                'Región: ${socio.region}',
             decoration: const BoxDecoration(
               color: Colors.white,
             ),
@@ -823,7 +521,7 @@ class FloatingPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${user.name} ${user.lastName}',
+                  '${socio.name} ${socio.lastName}',
                   style: const TextStyle(fontSize: 16.0),
                 ),
                 const SizedBox(height: 8.0),
@@ -843,12 +541,12 @@ class FloatingPage extends StatelessWidget {
               color: Color(0xFF0E813C),
             ),
             onPressed: () {
-              onPlusIconPressed(user);
+              onPlusIconPressed(socio);
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
-                    '${user.name} añadido correctamente.',
+                    '${socio.name} añadido correctamente.',
                   ),
                 ),
               );
@@ -860,49 +558,49 @@ class FloatingPage extends StatelessWidget {
   }
 }
 
-class SearchAndUserList extends StatefulWidget {
-  final List<UserData> userList;
-  final Function(UserData) onPlusIconPressed;
-  final Function(List<UserData>, List<UserData>) onListsUpdated;
+class SearchAndSocioList extends StatefulWidget {
+  final List<Socio> socioList;
+  final Function(Socio) onPlusIconPressed;
+  final Function(List<Socio>, List<Socio>) onListsUpdated;
 
-  const SearchAndUserList({
+  const SearchAndSocioList({
     super.key,
-    required this.userList,
+    required this.socioList,
     required this.onPlusIconPressed,
     required this.onListsUpdated,
   });
 
   @override
-  _SearchAndUserListState createState() => _SearchAndUserListState();
+  _SearchAndSocioListState createState() => _SearchAndSocioListState();
 }
 
-class _SearchAndUserListState extends State<SearchAndUserList> {
+class _SearchAndSocioListState extends State<SearchAndSocioList> {
   late TextEditingController _searchController;
-  List<UserData> filteredUsers = [];
+  List<Socio> filteredSocios = [];
 
   @override
   void initState() {
     super.initState();
-    filteredUsers = widget.userList;
+    filteredSocios = widget.socioList;
     _searchController = TextEditingController();
     _searchController.addListener(_onSearchChanged);
   }
 
-  void _handlePlusIconPressed(UserData user) {
-    widget.onPlusIconPressed(user);
+  void _handlePlusIconPressed(Socio socio) {
+    widget.onPlusIconPressed(socio);
   }
 
   void _onSearchChanged() {
     String searchText = _searchController.text.toLowerCase();
     setState(() {
-      filteredUsers = widget.userList.where((user) {
-        return user.name.toLowerCase().contains(searchText) ||
-            user.lastName.toLowerCase().contains(searchText);
+      filteredSocios = widget.socioList.where((socio) {
+        return socio.name.toLowerCase().contains(searchText) ||
+            socio.lastName.toLowerCase().contains(searchText);
       }).toList();
     });
 
     // Devuelve las listas actualizadas a la clase principal
-    widget.onListsUpdated(widget.userList, filteredUsers);
+    widget.onListsUpdated(widget.socioList, filteredSocios);
   }
 
   @override
@@ -924,23 +622,23 @@ class _SearchAndUserListState extends State<SearchAndUserList> {
         // Lista de usuarios
         ListView.builder(
           shrinkWrap: true,
-          itemCount: filteredUsers.length,
+          itemCount: filteredSocios.length,
           itemBuilder: (context, index) {
-            final user = filteredUsers[index];
+            final socio = filteredSocios[index];
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Tooltip(
-                    message: 'Nombre: ${user.name}${" "}${user.lastName}\n'
-                        'DNI: ${user.dni}\n'
-                        'Celular: ${user.cellphone}\n'
-                        'Email: ${user.email}\n'
-                        'Dirección: ${user.address}\n'
-                        'Distrito: ${user.district}\n'
-                        'Provincia: ${user.province}\n'
-                        'Región: ${user.region}',
+                    message: 'Nombre: ${socio.name}${" "}${socio.lastName}\n'
+                        'DNI: ${socio.dni}\n'
+                        'Celular: ${socio.cellphone}\n'
+                        'Email: ${socio.email}\n'
+                        'Dirección: ${socio.address}\n'
+                        'Distrito: ${socio.district}\n'
+                        'Provincia: ${socio.province}\n'
+                        'Región: ${socio.region}',
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       // Color de fondo del Tooltip
@@ -955,7 +653,7 @@ class _SearchAndUserListState extends State<SearchAndUserList> {
                     child: Container(
                       margin: const EdgeInsets.only(left: 10),
                       child: Text(
-                        '${user.name} ${user.lastName}',
+                        '${socio.name} ${socio.lastName}',
                         style: const TextStyle(fontSize: 16.0),
                       ),
                     ),
@@ -968,12 +666,12 @@ class _SearchAndUserListState extends State<SearchAndUserList> {
                         color: Color(0xFF0E813C),
                       ),
                       onPressed: () {
-                        _handlePlusIconPressed(user);
+                        _handlePlusIconPressed(socio);
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              '${user.name} añadido correctamente.',
+                              '${socio.name} añadido correctamente.',
                             ),
                           ),
                         );

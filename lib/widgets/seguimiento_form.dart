@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/user.dart';
+import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/views/seguimiento.dart';
 import 'package:ruta_sdg/widgets/text_form_result.dart';
 
 class SeguimientoForm extends StatefulWidget {
-  final UserData user;
-  const SeguimientoForm({super.key, required this.user});
+  final Socio socio;
+  const SeguimientoForm({super.key, required this.socio});
 
   @override
   SeguimientoFormState createState() {
@@ -28,13 +28,13 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                 formKey: _formKey,
                 label: "Nombres",
                 inputType: TextInputType.text,
-                content: widget.user.name,
+                content: widget.socio.name,
               ),
               TextForm(
                 formKey: _formKey,
                 label: "Apellido Paterno",
                 inputType: TextInputType.text,
-                content: widget.user.lastName,
+                content: widget.socio.lastName,
               ),
               Row(
                 children: [
@@ -43,7 +43,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                       formKey: _formKey,
                       label: "DNI",
                       inputType: TextInputType.number,
-                      content: widget.user.dni,
+                      content: widget.socio.dni,
                     ),
                   ),
                   const SizedBox(width: 15),
@@ -52,7 +52,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                       formKey: _formKey,
                       label: "Celular",
                       inputType: TextInputType.phone,
-                      content: widget.user.cellphone,
+                      content: widget.socio.cellphone,
                     ),
                   ),
                   const SizedBox(width: 15),
@@ -70,13 +70,13 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                 formKey: _formKey,
                 label: "Correo electrónico",
                 inputType: TextInputType.emailAddress,
-                content: widget.user.email,
+                content: widget.socio.email,
               ),
               TextForm(
                 formKey: _formKey,
                 label: "Dirección",
                 inputType: TextInputType.text,
-                content: widget.user.address,
+                content: widget.socio.address,
               ),
               Row(
                 children: [
@@ -85,7 +85,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                       formKey: _formKey,
                       label: "Distrito",
                       inputType: TextInputType.number,
-                      content: widget.user.district,
+                      content: widget.socio.district,
                     ),
                   ),
                   const SizedBox(width: 15),
@@ -94,7 +94,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                       formKey: _formKey,
                       label: "Provincia",
                       inputType: TextInputType.phone,
-                      content: widget.user.province,
+                      content: widget.socio.province,
                     ),
                   ),
                   const SizedBox(width: 15),
@@ -103,7 +103,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                       formKey: _formKey,
                       label: "Departamento",
                       inputType: TextInputType.none,
-                      content: widget.user.region,
+                      content: widget.socio.region,
                     ),
                   ),
                 ],
