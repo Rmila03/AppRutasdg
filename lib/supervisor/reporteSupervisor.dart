@@ -228,11 +228,25 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
           DataCell(Text(user.dni)),
           DataCell(Text(user.name)),
           DataCell(
-            IconButton(
-              icon: const Icon(Icons.download),
-              onPressed: () {
-                // Agrega aquí la lógica de descarga para este usuario
-              },
+            Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.download),
+                  onPressed: () {
+                    // Agrega aquí la lógica de descarga para este usuario
+                  },
+                ),
+                SizedBox(
+                    width:
+                        10), // Espacio entre el icono de descarga y el nuevo icono
+                IconButton(
+                  icon: const Icon(Icons
+                      .visibility), // Puedes cambiar el icono según tus necesidades
+                  onPressed: () {
+                    // Agrega aquí la lógica para el nuevo icono de "ver"
+                  },
+                ),
+              ],
             ),
           ),
         ],

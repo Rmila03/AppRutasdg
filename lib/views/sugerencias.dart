@@ -5,7 +5,7 @@ import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 
 class SugerenciaPage extends StatefulWidget {
-  const SugerenciaPage({super.key, required this.title});
+  const SugerenciaPage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -19,7 +19,6 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
   TextEditingController searchController = TextEditingController();
 
   void searchUsers(String query) {
-    // Filtra la lista de usuarios por nombre
     setState(() {
       searchResults = socios
           .where(
@@ -28,71 +27,105 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
     });
   }
 
+  DataRow buildDataRow(Socio user) {
+    return DataRow(
+      cells: [
+        DataCell(
+          Text(
+            "${user.name} ${user.lastName}",
+            style: const TextStyle(fontSize: 14),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        DataCell(Text(user.tipoGrupo, style: const TextStyle(fontSize: 14))),
+        DataCell(
+          IconButton(
+            onPressed: () {
+              // Lógica para añadir al usuario
+            },
+            icon: const Icon(Icons.add, color: Color.fromARGB(255, 4, 56, 99)),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: const BottomAppBar(
-          child: TabBarBottom(),
-        ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+    return Scaffold(
+      bottomNavigationBar: const BottomAppBar(
+        child: TabBarBottom(),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            const SizedBox(
+                height: 16), // Añade un espacio debajo del encabezado
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 8.0), // Ajusta el margen izquierdo
                 child: TextField(
                   controller: searchController,
                   onChanged: searchUsers,
-                  style: const TextStyle(color: Color.fromARGB(255, 0, 7, 12)),
+                  style: const TextStyle(
+                    color: Colors.black,
+                  ),
                   decoration: const InputDecoration(
                     hintText: 'Buscar por nombre',
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: Icon(Icons.search, color: Colors.grey),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 4, 56, 99),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
                   ),
                 ),
               ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: DataTable(
-                    columns: const [
-                      DataColumn(label: Text('Nombre')),
-                      DataColumn(label: Text('DNI')),
-                      DataColumn(label: Text('')),
-                    ],
-                    rows: searchResults.map((user) {
-                      return DataRow(
-                        cells: [
-                          DataCell(Text(user.name)),
-                          DataCell(Text(user.dni)),
-                          DataCell(
-                            ElevatedButton(
-                              onPressed: () {
-                                // Lógica para añadir al usuario
-                                // Puedes implementar la lógica según tus necesidades
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromARGB(
-                                    255, 0, 76, 128), // Color azul
-                              ),
-                              child: const Text('Añadir',
-                                  style: TextStyle(color: Colors.white)),
-                            ),
-                          ),
-                        ],
-                      );
-                    }).toList(),
-                  ),
+            ),
+            const SizedBox(height: 16),
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  headingRowColor: MaterialStateColor.resolveWith(
+                      (states) => const Color.fromARGB(255, 0, 76, 128)),
+                  columnSpacing: 10.0, // Ajusta la distancia entre las columnas
+                  columns: const [
+                    DataColumn(
+                      label: Text('NOMBRE',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    ),
+                    DataColumn(
+                      label: Text('MODALIDAD',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    ),
+                    DataColumn(
+                      label: Text('', style: TextStyle(color: Colors.white)),
+                    ),
+                  ],
+                  rows:
+                      searchResults.map((user) => buildDataRow(user)).toList(),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        appBar: AppBar(
-          title: const Header(),
-          backgroundColor: const Color.fromARGB(255, 0, 76, 128),
-          iconTheme: const IconThemeData(color: Colors.white),
-        ),
-        drawer: const MenuDrawer(),
       ),
+      appBar: AppBar(
+        title: const Header(),
+        backgroundColor: const Color.fromARGB(255, 0, 76, 128),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      drawer: const MenuDrawer(),
     );
   }
 }
