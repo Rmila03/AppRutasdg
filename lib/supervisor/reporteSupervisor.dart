@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ruta_sdg/analista.dart';
+import 'package:ruta_sdg/socio.dart';
+import 'package:ruta_sdg/supervisor/reportes_page.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/analista.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -25,8 +28,8 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
   DateTime selectedDate = DateTime.now();
   TextEditingController searchController = TextEditingController();
   FocusNode searchFocusNode = FocusNode();
-
   final List<Analista> analistas = getAnalistas();
+
   List<Analista> filteredUsers = [];
 
   @override
@@ -224,7 +227,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                     // Agrega aquí la lógica de descarga para este usuario
                   },
                 ),
-                const SizedBox(
+                SizedBox(
                     width:
                         10), // Espacio entre el icono de descarga y el nuevo icono
                 IconButton(
@@ -232,6 +235,13 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                       .visibility), // Puedes cambiar el icono según tus necesidades
                   onPressed: () {
                     // Agrega aquí la lógica para el nuevo icono de "ver"
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ReportesForm(),
+                      ),
+                    );
                   },
                 ),
               ],
