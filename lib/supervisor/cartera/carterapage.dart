@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ruta_sdg/analista.dart';
 import 'package:ruta_sdg/supervisor/cartera/listacartera.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/socio.dart';
@@ -30,14 +31,10 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
     with SingleTickerProviderStateMixin {
   String selectedOption = '';
   DateTime selectedDate = DateTime.now();
-  List<String> menuOptions = [
-    'Juan Perez Garcia',
-    'Ruth Milagros Arce Quispe',
-    'Yolmy Milagros Cahuata Lavilla',
-    'Stiward Maldonado',
-    'Justino Ferro'
-  ];
+
+  List<Analista> analistas = getAnalistas();
   final List<Socio> socios = getSocios();
+
   @override
   Widget build(BuildContext context) {
     List<Socio> sociosAssignedToToday = [];
@@ -51,11 +48,11 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
       ),
       child: DropdownButton<String>(
         value: selectedOption.isNotEmpty ? selectedOption : null,
-        items: menuOptions.map((String value) {
+        items: analistas.map((Analista analista) {
           return DropdownMenuItem<String>(
-            value: value,
+            value: analista.idAnalista,
             child: Text(
-              value,
+              '${analista.name} ${analista.lastName}',
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
@@ -70,7 +67,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
           });
         },
         hint: const Text(
-          'Seleccionar opción',
+          'Seleccionar analista',
           style: TextStyle(
             color: Color.fromARGB(255, 196, 196, 196),
             fontSize: 15.0,
@@ -83,20 +80,37 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
     List<String> selectedSociosIds = [];
 
     switch (selectedOption) {
-      case 'Juan Perez Garcia':
-        selectedSociosIds = ['1'];
+      case '1':
+        selectedSociosIds = SociosPorAnalista(analistaId: '1', socios: socios);
         break;
-      case 'Ruth Milagros Arce Quispe':
-        selectedSociosIds = ['1', '2', '3'];
+      case '2':
+        selectedSociosIds = SociosPorAnalista(analistaId: '2', socios: socios);
         break;
-      case 'Yolmy Milagros Cahuata Lavilla':
-        selectedSociosIds = ['4', '5'];
+      case '3':
+        selectedSociosIds = SociosPorAnalista(analistaId: '3', socios: socios);
         break;
-      case 'Stiward Maldonado':
-        selectedSociosIds = ['6', '7'];
+      case '4':
+        selectedSociosIds = SociosPorAnalista(analistaId: '4', socios: socios);
         break;
-      case 'Justino Ferro':
-        selectedSociosIds = ['8', '9', '10'];
+      case '5':
+        selectedSociosIds = SociosPorAnalista(analistaId: '5', socios: socios);
+        break;
+      case '6':
+        selectedSociosIds = SociosPorAnalista(analistaId: '6', socios: socios);
+        break;
+      case '7':
+        selectedSociosIds = SociosPorAnalista(analistaId: '7', socios: socios);
+        break;
+      case '8':
+        selectedSociosIds = SociosPorAnalista(analistaId: '8', socios: socios);
+        break;
+      case '9':
+        selectedSociosIds = SociosPorAnalista(analistaId: '9', socios: socios);
+        break;
+
+      // Repite este bloque para cada analista (hasta el '10')
+      case '10':
+        selectedSociosIds = SociosPorAnalista(analistaId: '10', socios: socios);
         break;
       default:
         // Handle default case if needed
@@ -161,6 +175,16 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
         ],
       ),
     );
+  }
+
+  List<String> SociosPorAnalista({
+    required String analistaId,
+    required List<Socio> socios,
+  }) {
+    return socios
+        .where((socio) => socio.idAnalista == analistaId)
+        .map((socio) => socio.idSocio)
+        .toList();
   }
 
   Widget _buildDataTable(String title, List<Socio> socioList) {

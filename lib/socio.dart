@@ -65,7 +65,7 @@ class Socio {
 List<Socio> getSocios() {
   final List<Socio> socios = [
     Socio(
-      "11",
+      "1",
       "Luisa",
       "Gomez Soto",
       "74589632",
@@ -97,7 +97,7 @@ List<Socio> getSocios() {
       "4",
     ),
     Socio(
-      "12",
+      "2",
       "Carlos",
       "Hernandez Chambi",
       "58963214",
@@ -129,7 +129,7 @@ List<Socio> getSocios() {
       "3",
     ),
     Socio(
-      "13",
+      "3",
       "Elena",
       "Valencia Rodriguez",
       "46821579",
@@ -161,7 +161,7 @@ List<Socio> getSocios() {
       "2",
     ),
     Socio(
-      "14",
+      "4",
       "Alejandro",
       "Torres Flores",
       "85236974",
@@ -193,7 +193,7 @@ List<Socio> getSocios() {
       "5",
     ),
     Socio(
-      "15",
+      "5",
       "Fabiola",
       "Paredes Quispe",
       "65987412",
@@ -225,7 +225,7 @@ List<Socio> getSocios() {
       "3",
     ),
     Socio(
-      "16",
+      "6",
       "Hugo",
       "Salas Quispe",
       "78563214",
@@ -257,7 +257,7 @@ List<Socio> getSocios() {
       "1",
     ),
     Socio(
-      "17",
+      "7",
       "Karen",
       "Martinez Huaman",
       "98741236",
@@ -289,7 +289,7 @@ List<Socio> getSocios() {
       "6",
     ),
     Socio(
-      "18",
+      "8",
       "Oscar",
       "Hurtado Mamani",
       "45632178",
@@ -321,7 +321,7 @@ List<Socio> getSocios() {
       "2",
     ),
     Socio(
-      "19",
+      "9",
       "Rosa",
       "Torres Quispe",
       "87456213",
@@ -353,7 +353,7 @@ List<Socio> getSocios() {
       "5",
     ),
     Socio(
-      "20",
+      "10",
       "Miguel",
       "Soto Mamani",
       "69874512",
@@ -385,7 +385,7 @@ List<Socio> getSocios() {
       "1",
     ),
     Socio(
-      "21",
+      "11",
       "Gloria",
       "Quispe Condori",
       "58741236",
@@ -417,7 +417,7 @@ List<Socio> getSocios() {
       "3",
     ),
     Socio(
-      "22",
+      "12",
       "Adrian",
       "Chavez Gutierrez",
       "98567412",
@@ -449,7 +449,7 @@ List<Socio> getSocios() {
       "6",
     ),
     Socio(
-      "23",
+      "13",
       "Natalia",
       "Perez Huaman",
       "69874125",
@@ -481,7 +481,7 @@ List<Socio> getSocios() {
       "2",
     ),
     Socio(
-      "24",
+      "14",
       "Ricardo",
       "Ramos Quispe",
       "58741236",
@@ -513,7 +513,7 @@ List<Socio> getSocios() {
       "5",
     ),
     Socio(
-        "25",
+        "15",
         "Fernando",
         "Sánchez Torres",
         "78451236",
@@ -544,7 +544,7 @@ List<Socio> getSocios() {
         "Promoción",
         "5"),
     Socio(
-        "26",
+        "16",
         "Camila",
         "Gutierrez Salas",
         "65987123",
@@ -575,7 +575,7 @@ List<Socio> getSocios() {
         "Recuperación",
         "6"),
     Socio(
-        "27",
+        "17",
         "Hugo",
         "Montoya Rojas",
         "47896521",
@@ -606,7 +606,7 @@ List<Socio> getSocios() {
         "Seguimiento",
         "7"),
     Socio(
-        "28",
+        "18",
         "Lorena",
         "Ramirez Cáceres",
         "63214587",
@@ -637,7 +637,7 @@ List<Socio> getSocios() {
         "Promoción",
         "8"),
     Socio(
-        "29",
+        "19",
         "Diego",
         "Pérez Mendoza",
         "57489621",
@@ -668,7 +668,7 @@ List<Socio> getSocios() {
         "Recuperación",
         "9"),
     Socio(
-        "30",
+        "20",
         "Valeria",
         "Torres Medina",
         "68975412",
@@ -699,7 +699,7 @@ List<Socio> getSocios() {
         "Seguimiento",
         "10"),
     Socio(
-        "31",
+        "11",
         "Gustavo",
         "Chavez Quispe",
         "74589621",
@@ -730,7 +730,7 @@ List<Socio> getSocios() {
         "Promoción",
         "1"),
     Socio(
-        "32",
+        "22",
         "Carla",
         "Salas Huamani",
         "63214587",
@@ -761,7 +761,7 @@ List<Socio> getSocios() {
         "Recuperación",
         "2"),
     Socio(
-        "33",
+        "23",
         "Felipe",
         "Mamani Condori",
         "57489621",
@@ -792,7 +792,7 @@ List<Socio> getSocios() {
         "Seguimiento",
         "3"),
     Socio(
-        "34",
+        "24",
         "Luz",
         "Torres Rojas",
         "68975412",
@@ -823,7 +823,7 @@ List<Socio> getSocios() {
         "Promoción",
         "4"),
     Socio(
-        "35",
+        "25",
         "Gabriel",
         "Paredes Condori",
         "74589621",
@@ -854,7 +854,7 @@ List<Socio> getSocios() {
         "Recuperación",
         "5"),
     Socio(
-        "36",
+        "26",
         "Renata",
         "Ramirez Cáceres",
         "63214587",
@@ -885,7 +885,7 @@ List<Socio> getSocios() {
         "Seguimiento",
         "6"),
     Socio(
-        "37",
+        "27",
         "Javier",
         "Mamani Condori",
         "57489621",
@@ -916,7 +916,7 @@ List<Socio> getSocios() {
         "Promoción",
         "7"),
     Socio(
-        "38",
+        "28",
         "Vanessa",
         "Torres Rojas",
         "68975412",
@@ -947,7 +947,7 @@ List<Socio> getSocios() {
         "Recuperación",
         "8"),
     Socio(
-        "39",
+        "29",
         "Miguel",
         "Sánchez Torres",
         "78451236",
@@ -978,7 +978,7 @@ List<Socio> getSocios() {
         "Seguimiento",
         "9"),
     Socio(
-        "40",
+        "30",
         "Natalia",
         "Gutierrez Salas",
         "65987123",

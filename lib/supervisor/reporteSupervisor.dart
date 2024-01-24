@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ruta_sdg/analista.dart';
+import 'package:ruta_sdg/socio.dart';
+import 'package:ruta_sdg/supervisor/reportes_page.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -19,33 +22,21 @@ class ReporteSupervisorContent extends StatefulWidget {
       _ReporteSupervisorContentState();
 }
 
-class UserData {
-  String id;
-  String name;
-  String dni;
-  int daysLate;
-
-  UserData(this.id, this.name, this.dni, this.daysLate);
-}
-
 class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
   String selectedMenu = 'REPORTES';
   DateTime selectedDate = DateTime.now();
   TextEditingController searchController = TextEditingController();
   FocusNode searchFocusNode = FocusNode();
-  List<UserData> users = [
-    UserData("1", "Ruth Milagros", "12345678", 5),
-    UserData("2", "Yolmy Milagros", "98765432", 8),
-    // Agrega más usuarios según sea necesario
-  ];
+  List<Analista> analistas = getAnalistas();
+  List<Socio> socios = getSocios();
 
-  List<UserData> filteredUsers = [];
+  List<Analista> filteredUsers = [];
 
   @override
   void initState() {
     super.initState();
     selectedDate = DateTime.now();
-    filteredUsers = users;
+    filteredUsers = analistas;
   }
 
   @override
@@ -221,12 +212,12 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
     );
   }
 
-  Widget _buildDataTable(List<UserData> userList) {
-    List<DataRow> rows = userList.map((user) {
+  Widget _buildDataTable(List<Analista> userList) {
+    List<DataRow> rows = userList.map((analista) {
       return DataRow(
         cells: [
-          DataCell(Text(user.dni)),
-          DataCell(Text(user.name)),
+          DataCell(Text(analista.dni)),
+          DataCell(Text(analista.name)),
           DataCell(
             Row(
               children: [
@@ -236,14 +227,19 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                     // Agrega aquí la lógica de descarga para este usuario
                   },
                 ),
-                SizedBox(
-                    width:
-                        10), // Espacio entre el icono de descarga y el nuevo icono
+                const SizedBox(width: 10),
                 IconButton(
                   icon: const Icon(Icons
                       .visibility), // Puedes cambiar el icono según tus necesidades
                   onPressed: () {
                     // Agrega aquí la lógica para el nuevo icono de "ver"
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ReportesForm(),
+                      ),
+                    );
                   },
                 ),
               ],
@@ -318,7 +314,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
 
   void _updateSearchResults(String query) {
     setState(() {
-      filteredUsers = users
+      filteredUsers = analistas
           .where(
               (user) => user.name.toLowerCase().contains(query.toLowerCase()))
           .toList();
