@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../widgets/custom_dropdown.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:ruta_sdg/analista.dart';
 
 class DashboardSupervisorPage extends StatefulWidget {
   const DashboardSupervisorPage({super.key});
@@ -70,13 +71,10 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                           SizedBox(
                             width: 300,
                             child: CustomDropdown(
-                              items: const [
-                                'Juan Perez Garcia',
-                                'Ruth Milagros Arce Quispe',
-                                'Stiward Maldonado',
-                                'Justino Ferro',
-                                'Arled Vallenas'
-                              ],
+                              items: getAnalistas()
+                                  .map((objeto) =>
+                                      '${objeto.name} ${objeto.lastName}')
+                                  .toList(),
                               borderColor: Colors.green,
                               lenItem: 15,
                               onChanged: (String? nuevoItem) {

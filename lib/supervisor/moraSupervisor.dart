@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
+import 'package:ruta_sdg/socio.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MoraSupervisorPage extends StatelessWidget {
@@ -22,57 +23,14 @@ class MoraSupervisorContent extends StatefulWidget {
   _MoraSupervisorContentState createState() => _MoraSupervisorContentState();
 }
 
-class UserData {
-  String id;
-  String name;
-  String lastName;
-  String dni;
-  String phoneNumber;
-  String email;
-  String address;
-  String city;
-  String department;
-  String district;
-  int daysLate;
-
-  UserData(
-    this.id,
-    this.name,
-    this.lastName,
-    this.dni,
-    this.phoneNumber,
-    this.email,
-    this.address,
-    this.city,
-    this.department,
-    this.district,
-    this.daysLate,
-  );
-}
-
 class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
   String selectedMenu = 'MORA';
   DateTime selectedDate = DateTime.now();
 
   String selectedOption = '';
 
-  final List<UserData> users = [
-    UserData(
-        "1",
-        "Ruth Milagros",
-        "Arce Quispe",
-        "12345678",
-        "978563412",
-        'abcd@gmail.com',
-        "Jr. Jose Carlos Mariategui #345",
-        "Cusco",
-        "Cusco",
-        "Cusco",
-        5),
-    UserData("2", "Yolmy Milagros", "Cahuata Lavilla", "98765432", "978563412",
-        "foo@gmail.com", "Av. La cultura #345", "Cusco", "Cusco", "Cusco", 8),
-    // Agrega más usuarios según sea necesario
-  ];
+  final List<Socio> socios = getSocios();
+  List<Socio> searchResults = [];
 
   @override
   void initState() {
@@ -110,7 +68,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
                 _showFilterDialog(),
 
                 // Data table widget
-                _buildDataTable(users),
+                _buildDataTable(socios),
               ],
               //),
             ),
@@ -235,8 +193,8 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
     });
   }
 
-  Widget _buildDataTable(List<UserData> userList) {
-    List<UserData> filteredUsers = userList
+  Widget _buildDataTable(List<Socio> userList) {
+    List<Socio> filteredUsers = userList
         .where((user) => filterDays == 0 || user.daysLate == filterDays)
         .toList();
 
