@@ -231,17 +231,10 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                     width:
                         10), // Espacio entre el icono de descarga y el nuevo icono
                 IconButton(
-                  icon: const Icon(Icons
-                      .visibility), // Puedes cambiar el icono según tus necesidades
+                  icon: const Icon(Icons.visibility),
                   onPressed: () {
                     // Agrega aquí la lógica para el nuevo icono de "ver"
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ReportesForm(),
-                      ),
-                    );
+                    _navigateToReportesForm(context, user.idAnalista);
                   },
                 ),
               ],
@@ -277,10 +270,19 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                 DataColumn(label: Text('NOMBRE')),
                 DataColumn(label: Text('DESCARGAR')),
               ],
-              rows: rows, // Usar la variable rows en lugar de userList
+              rows: rows,
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void _navigateToReportesForm(BuildContext context, String idAnalista) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ReportesForm(idAnalista: idAnalista),
       ),
     );
   }

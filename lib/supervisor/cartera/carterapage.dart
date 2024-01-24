@@ -241,7 +241,6 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
 
   bool socioIsAssignedToToday(Socio socio) {
     // Lógica para verificar si el usuario está asignado a la fecha de hoy
-    return socio.assignedDate != null &&
-        socio.assignedDate!.toLocal().isAtSameMomentAs(selectedDate);
+    return true;
   }
 }

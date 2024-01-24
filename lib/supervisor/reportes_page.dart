@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ruta_sdg/supervisor/reporteSupervisor.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
-
-void main() {
-  runApp(MyApp());
-}
+import 'package:ruta_sdg/analista.dart';
 
 class MyApp extends StatelessWidget {
+  final String idAnalista;
+
+  // Añade el constructor para recibir idAnalista
+  const MyApp({Key? key, required this.idAnalista}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ReportesForm(),
+      home: ReportesForm(idAnalista: idAnalista), // Pasa idAnalista aquí
     );
   }
 }
 
 class ReportesForm extends StatefulWidget {
-  const ReportesForm({Key? key}) : super(key: key);
+  final String idAnalista;
+
+  const ReportesForm({Key? key, required this.idAnalista}) : super(key: key);
 
   @override
   ReportesFormState createState() => ReportesFormState();
@@ -39,6 +44,9 @@ class ReportesFormState extends State<ReportesForm> {
         usersNotAssignedToToday.add(user);
       }
     }
+
+    // Filtra los socios por el ID del analista
+    List<Socio> sociosAsociados = getSociosForAnalista(widget.idAnalista);
 
     return Scaffold(
       body: Stack(
@@ -90,18 +98,19 @@ class ReportesFormState extends State<ReportesForm> {
                             child: _DataTable(),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 100),
+                            padding: const EdgeInsets.only(left: 300),
                             child: Image.asset(
                               'assets/xD.png',
                               height: 100.0,
                             ),
-                          ),
+                          )
                         ],
                       ),
+                      const SizedBox(height: 30),
                       Expanded(
                         child: SingleChildScrollView(
                           child: Center(
-                            child: _buildDataTable(usersAssignedToToday),
+                            child: _buildDataTable(sociosAsociados),
                           ),
                         ),
                       ),
@@ -117,6 +126,10 @@ class ReportesFormState extends State<ReportesForm> {
   }
 
   Widget _DataTable() {
+    // Obtener nombre del analista y fecha actual en formato "dd/MM/yyyy"
+    String nombreAnalista = getAnalistaName(widget.idAnalista);
+    String fechaActual = DateFormat('dd/MM/yyyy').format(selectedDate);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
@@ -127,7 +140,7 @@ class ReportesFormState extends State<ReportesForm> {
         color: Colors.white,
         elevation: 0,
         child: SizedBox(
-          height: 100,
+          height: 200,
           width: 400,
           child: SingleChildScrollView(
             child: DataTable(
@@ -138,15 +151,16 @@ class ReportesFormState extends State<ReportesForm> {
               columns: const [
                 DataColumn(label: Text('HOJA DE RUTA DIARIA')),
               ],
-              rows: const [
+              rows: [
                 DataRow(cells: [
-                  DataCell(Text('ANALISTA:')),
+                  DataCell(Text('ANALISTA: $nombreAnalista')),
                 ]),
                 DataRow(cells: [
-                  DataCell(Text('FECHA:')),
+                  DataCell(Text('FECHA: $fechaActual')),
                 ]),
                 DataRow(cells: [
-                  DataCell(Text('AGENCIA:')),
+                  DataCell(Text(
+                      'AGENCIA: Cusco')), // Puedes cambiar 'Cusco' según tus necesidades
                 ]),
               ],
             ),
@@ -154,6 +168,19 @@ class ReportesFormState extends State<ReportesForm> {
         ),
       ),
     );
+  }
+
+  String getAnalistaName(String idAnalista) {
+    // Lógica para obtener el nombre del analista según el id
+    Analista analista = getAnalistaById(idAnalista);
+    return '${analista.name} ${analista.lastName}';
+  }
+
+  Analista getAnalistaById(String idAnalista) {
+    // Implementa la lógica para obtener el objeto Analista según el id
+    // Puedes usar una función similar a getSociosForAnalista o adaptarla según tus necesidades
+    return getAnalistas()
+        .firstWhere((analista) => analista.idAnalista == idAnalista);
   }
 
   Widget _buildDataTable(List<Socio> socioList) {
@@ -205,6 +232,14 @@ class ReportesFormState extends State<ReportesForm> {
         ),
       ),
     );
+  }
+
+  List<Socio> getSociosForAnalista(String idAnalista) {
+    // Esta función debería devolver la lista de socios asociados al idAnalista
+    // Puedes implementar la lógica de filtrado según tu estructura de datos
+    return getSocios()
+        .where((socio) => socio.idAnalista == idAnalista)
+        .toList();
   }
 
   bool userIsAssignedToToday(Socio user) {
