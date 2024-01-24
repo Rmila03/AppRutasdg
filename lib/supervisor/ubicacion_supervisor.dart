@@ -186,7 +186,7 @@ class _UbicacionSupervisorPage extends State {
                                   onMapCreated: _onMapCreated,
                                   initialCameraPosition: const CameraPosition(
                                     target: LatLng(-13.530757, -71.9395927),
-                                    zoom: 11,
+                                    zoom: 14,
                                   ),
                                   markers: _markers.values.toSet(),
                                 ),
