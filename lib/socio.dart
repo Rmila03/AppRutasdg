@@ -29,6 +29,7 @@ class Socio {
   DateTime? assignedDate;
   final String tipoGrupo;
   final String idAnalista;
+  final int daysLate;
   Socio(
       this.idSocio,
       this.name,
@@ -59,6 +60,7 @@ class Socio {
       this.saldoCredito,
       this.tipoGrupo,
       this.idAnalista,
+      this.daysLate,
       {this.assignedDate});
 }
 
@@ -95,6 +97,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 1, 23),
       "Promoción",
       "4",
+      4,
     ),
     Socio(
       "2",
@@ -127,6 +130,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 1, 24),
       "Recuperación",
       "3",
+      3,
     ),
     Socio(
       "3",
@@ -159,6 +163,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 1, 25),
       "Promoción",
       "2",
+      5,
     ),
     Socio(
       "4",
@@ -191,6 +196,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 1, 26),
       "Seguimiento",
       "5",
+      8,
     ),
     Socio(
       "5",
@@ -223,6 +229,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 1, 27),
       "Recuperación",
       "3",
+      6,
     ),
     Socio(
       "6",
@@ -255,6 +262,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 1, 28),
       "Promoción",
       "1",
+      9,
     ),
     Socio(
       "7",
@@ -287,6 +295,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 1, 29),
       "Seguimiento",
       "6",
+      10,
     ),
     Socio(
       "8",
@@ -319,6 +328,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 1, 30),
       "Recuperación",
       "2",
+      2,
     ),
     Socio(
       "9",
@@ -351,6 +361,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 1, 31),
       "Promoción",
       "5",
+      1,
     ),
     Socio(
       "10",
@@ -383,6 +394,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 2, 1),
       "Seguimiento",
       "1",
+      5,
     ),
     Socio(
       "11",
@@ -415,6 +427,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 2, 2),
       "Recuperación",
       "3",
+      9,
     ),
     Socio(
       "12",
@@ -447,6 +460,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 2, 3),
       "Promoción",
       "6",
+      6,
     ),
     Socio(
       "13",
@@ -479,6 +493,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 2, 4),
       "Seguimiento",
       "2",
+      2,
     ),
     Socio(
       "14",
@@ -511,6 +526,7 @@ List<Socio> getSocios() {
       assignedDate: DateTime(2024, 2, 5),
       "Recuperación",
       "5",
+      5,
     ),
     Socio(
         "15",
@@ -542,7 +558,8 @@ List<Socio> getSocios() {
         "30 000",
         assignedDate: DateTime.now(),
         "Promoción",
-        "5"),
+        "5",
+        4),
     Socio(
         "16",
         "Camila",
@@ -573,7 +590,8 @@ List<Socio> getSocios() {
         "25 000",
         assignedDate: DateTime(2024, 1, 23),
         "Recuperación",
-        "6"),
+        "6",
+        4),
     Socio(
         "17",
         "Hugo",
@@ -604,7 +622,8 @@ List<Socio> getSocios() {
         "35 000",
         assignedDate: DateTime.now(),
         "Seguimiento",
-        "7"),
+        "7",
+        7),
     Socio(
         "18",
         "Lorena",
@@ -635,7 +654,8 @@ List<Socio> getSocios() {
         "28 000",
         assignedDate: DateTime.now(),
         "Promoción",
-        "8"),
+        "8",
+        8),
     Socio(
         "19",
         "Diego",
@@ -666,7 +686,8 @@ List<Socio> getSocios() {
         "30 000",
         assignedDate: DateTime.now(),
         "Recuperación",
-        "9"),
+        "9",
+        7),
     Socio(
         "20",
         "Valeria",
@@ -697,7 +718,8 @@ List<Socio> getSocios() {
         "32 000",
         assignedDate: DateTime.now(),
         "Seguimiento",
-        "10"),
+        "10",
+        10),
     Socio(
         "11",
         "Gustavo",
@@ -728,7 +750,8 @@ List<Socio> getSocios() {
         "25 000",
         assignedDate: DateTime.now(),
         "Promoción",
-        "1"),
+        "1",
+        9),
     Socio(
         "22",
         "Carla",
@@ -759,38 +782,41 @@ List<Socio> getSocios() {
         "28 000",
         assignedDate: DateTime.now(),
         "Recuperación",
-        "2"),
+        "2",
+        2),
     Socio(
-        "23",
-        "Felipe",
-        "Mamani Condori",
-        "57489621",
-        "Masculino",
-        "35",
-        "18/12/1986",
-        "935714869",
-        "felipe@gmail.com",
-        "Av. El Sol 147",
-        "San Sebastian",
-        "Cusco",
-        "Cusco",
-        "NORMAL",
-        "RECURRENTE",
-        "COMERCIAL",
-        "MININEGOCIO",
-        "GENÉRICO",
-        "CRÉDITOS A PEQUEÑAS EMPRESAS",
-        "30 000",
-        "48",
-        "19.75",
-        "10/10/2021",
-        "10/04/2024",
-        "968.40",
-        "0",
-        "30 000",
-        assignedDate: DateTime.now(),
-        "Seguimiento",
-        "3"),
+      "23",
+      "Felipe",
+      "Mamani Condori",
+      "57489621",
+      "Masculino",
+      "35",
+      "18/12/1986",
+      "935714869",
+      "felipe@gmail.com",
+      "Av. El Sol 147",
+      "San Sebastian",
+      "Cusco",
+      "Cusco",
+      "NORMAL",
+      "RECURRENTE",
+      "COMERCIAL",
+      "MININEGOCIO",
+      "GENÉRICO",
+      "CRÉDITOS A PEQUEÑAS EMPRESAS",
+      "30 000",
+      "48",
+      "19.75",
+      "10/10/2021",
+      "10/04/2024",
+      "968.40",
+      "0",
+      "30 000",
+      assignedDate: DateTime.now(),
+      "Seguimiento",
+      "3",
+      5,
+    ),
     Socio(
         "24",
         "Luz",
@@ -821,7 +847,8 @@ List<Socio> getSocios() {
         "32 000",
         assignedDate: DateTime.now(),
         "Promoción",
-        "4"),
+        "4",
+        6),
     Socio(
         "25",
         "Gabriel",
@@ -852,7 +879,8 @@ List<Socio> getSocios() {
         "25 000",
         assignedDate: DateTime.now(),
         "Recuperación",
-        "5"),
+        "5",
+        3),
     Socio(
         "26",
         "Renata",
@@ -883,7 +911,8 @@ List<Socio> getSocios() {
         "28 000",
         assignedDate: DateTime.now(),
         "Seguimiento",
-        "6"),
+        "6",
+        1),
     Socio(
         "27",
         "Javier",
@@ -914,7 +943,8 @@ List<Socio> getSocios() {
         "30 000",
         assignedDate: DateTime.now(),
         "Promoción",
-        "7"),
+        "7",
+        10),
     Socio(
         "28",
         "Vanessa",
@@ -945,7 +975,8 @@ List<Socio> getSocios() {
         "32 000",
         assignedDate: DateTime.now(),
         "Recuperación",
-        "8"),
+        "8",
+        8),
     Socio(
         "29",
         "Miguel",
@@ -976,7 +1007,8 @@ List<Socio> getSocios() {
         "30 000",
         assignedDate: DateTime.now(),
         "Seguimiento",
-        "9"),
+        "9",
+        6),
     Socio(
         "30",
         "Natalia",
@@ -1007,7 +1039,8 @@ List<Socio> getSocios() {
         "25 000",
         assignedDate: DateTime(2024, 1, 24),
         "Promoción",
-        "10"),
+        "10",
+        1),
   ];
   return socios;
 }
