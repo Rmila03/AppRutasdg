@@ -332,8 +332,8 @@ class MapScreen extends State {
                 width: 10,
               ),
               SizedBox(
-                height: 500,
-                width: 500,
+                height: 400,
+                width: 300,
                 child: GoogleMap(
                   onMapCreated: _onMapCreated,
                   initialCameraPosition: const CameraPosition(
