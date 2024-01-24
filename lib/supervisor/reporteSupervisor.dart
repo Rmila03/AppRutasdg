@@ -3,6 +3,7 @@ import 'package:ruta_sdg/analista.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/supervisor/reportes_page.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
+import 'package:ruta_sdg/analista.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ReporteSupervisorPage extends StatelessWidget {
@@ -27,8 +28,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
   DateTime selectedDate = DateTime.now();
   TextEditingController searchController = TextEditingController();
   FocusNode searchFocusNode = FocusNode();
-  List<Analista> analistas = getAnalistas();
-  List<Socio> socios = getSocios();
+  final List<Analista> analistas = getAnalistas();
 
   List<Analista> filteredUsers = [];
 
@@ -213,11 +213,11 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
   }
 
   Widget _buildDataTable(List<Analista> userList) {
-    List<DataRow> rows = userList.map((analista) {
+    List<DataRow> rows = userList.map((user) {
       return DataRow(
         cells: [
-          DataCell(Text(analista.dni)),
-          DataCell(Text(analista.name)),
+          DataCell(Text(user.dni)),
+          DataCell(Text(user.name)),
           DataCell(
             Row(
               children: [
@@ -227,7 +227,9 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                     // Agrega aquí la lógica de descarga para este usuario
                   },
                 ),
-                const SizedBox(width: 10),
+                SizedBox(
+                    width:
+                        10), // Espacio entre el icono de descarga y el nuevo icono
                 IconButton(
                   icon: const Icon(Icons
                       .visibility), // Puedes cambiar el icono según tus necesidades

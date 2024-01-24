@@ -6,6 +6,7 @@ import 'package:ruta_sdg/supervisor/historialSupervisor.dart';
 import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
 import 'package:ruta_sdg/supervisor/moraSupervisor.dart';
 import 'package:ruta_sdg/supervisor/reporteSupervisor.dart';
+import 'package:ruta_sdg/supervisor/ubicacion_supervisor.dart';
 
 class MenuSupervisor extends StatefulWidget {
   final String? name;
@@ -24,6 +25,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
     'DASHBOARD': const DashboardSupervisorPage(),
     'MORA': const MoraSupervisorPage(),
     'HISTORIAL': const HistorialSupervisorPage(),
+    'UBICACIÓN': const UbicacionSupervisorPage(),
     'CERRAR SESIÓN': const Login(title: ''),
     // Agrega las demás pantallas según sea necesario
   };
@@ -71,6 +73,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
           buildMenuItem('DASHBOARD'),
           buildMenuItem('MORA'),
           buildMenuItem('HISTORIAL'),
+          buildMenuItem('UBICACIÓN'),
           buildMenuItem('CERRAR SESIÓN'),
         ],
       ),

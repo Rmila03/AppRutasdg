@@ -142,7 +142,9 @@ class _PromocionPageState extends State<PromocionPage> {
                 DataColumn(label: Text('Nombre')),
                 DataColumn(label: Text('')),
               ],
-              rows: userList.map((user) {
+              rows: userList
+                  .where((user) => user.tipoGrupo == 'Promoción')
+                  .map((user) {
                 return DataRow(
                   onSelectChanged: (isSelected) {
                     if (isSelected != null && isSelected) {
@@ -244,11 +246,3 @@ class _PromocionPageState extends State<PromocionPage> {
     );
   }
 }
-
-/*class Socio {
-  final String number;
-  final String dni;
-  final String name;
-
-  Socio(this.number, this.dni, this.name);
-}*/
