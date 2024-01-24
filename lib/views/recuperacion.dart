@@ -155,7 +155,7 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
                 color: const Color.fromARGB(255, 255, 255, 255),
                 elevation: 0,
                 child: SizedBox(
-                  height: 200, // Establece la altura deseada
+                  height: 300, // Establece la altura deseada
                   width: 600,
                   child: SingleChildScrollView(
                     child: DataTable(
