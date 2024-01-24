@@ -167,13 +167,6 @@ class Tab extends StatelessWidget {
               fontFamily: 'Rockwell Extra Bold',
               fontWeight: FontWeight.w800,
               color: Colors.black,
-              shadows: [
-                Shadow(
-                  offset: Offset(2.0, 2.0),
-                  blurRadius: 3.0,
-                  color: Colors.grey,
-                ),
-              ],
             ),
           ),
         ),
