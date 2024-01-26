@@ -97,13 +97,24 @@ class ReportesFormState extends State<ReportesForm> {
                             padding: const EdgeInsets.only(left: 30),
                             child: _DataTable(),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 300),
-                            child: Image.asset(
-                              'assets/xD.png',
-                              height: 100.0,
-                            ),
-                          )
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 100),
+                                child: Image.asset(
+                                  'assets/primer.png',
+                                  height: 100.0,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 100),
+                                child: Image.asset(
+                                  'assets/segundo.png',
+                                  height: 100,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                       const SizedBox(height: 30),
