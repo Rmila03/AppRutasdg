@@ -156,7 +156,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 color: const Color.fromARGB(255, 255, 255, 255),
                 elevation: 0,
                 child: SizedBox(
-                  height: 200,
+                  height: 300,
                   width: 600,
                   child: SingleChildScrollView(
                     child: DataTable(
