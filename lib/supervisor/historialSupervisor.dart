@@ -31,11 +31,11 @@ class _HistorialSupervisorContentState
 
   // Lista de Cambios para cada fecha
   List<Cambio> cambios = [
-    Cambio(DateTime(2024, 1, 1), "Socio 1", "Descripción Cambio 1"),
+    Cambio(DateTime.now(), "Socio 1", "Descripción Cambio 1"),
     Cambio(DateTime(2024, 1, 1), "Socio 2", "Descripción Cambio 2"),
     Cambio(DateTime(2024, 1, 2), "Socio 3", "Descripción Cambio 3"),
     Cambio(DateTime(2024, 1, 2), "Socio 4", "Descripción Cambio 4"),
-    Cambio(DateTime(2024, 1, 3), "Socio 5", "Descripción Cambio 5"),
+    Cambio(DateTime.now(), "Socio 5", "Descripción Cambio 5"),
     Cambio(DateTime(2024, 1, 3), "Socio 6", "Descripción Cambio 6"),
     // Agrega más Cambios según sea necesario
   ];

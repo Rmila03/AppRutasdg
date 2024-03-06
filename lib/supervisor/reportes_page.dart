@@ -169,7 +169,7 @@ class ReportesFormState extends State<ReportesForm> {
                 DataRow(cells: [
                   DataCell(Text('FECHA: $fechaActual')),
                 ]),
-                DataRow(cells: [
+                const DataRow(cells: [
                   DataCell(Text(
                       'AGENCIA: Cusco')), // Puedes cambiar 'Cusco' según tus necesidades
                 ]),
