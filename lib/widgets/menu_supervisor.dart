@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ruta_sdg/main.dart';
 import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
 import 'package:ruta_sdg/supervisor/dashboard_supervisor.dart';
-import 'package:ruta_sdg/supervisor/historialSupervisor.dart';
+import 'package:ruta_sdg/supervisor/notificacionesSupervisor.dart';
 import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
 import 'package:ruta_sdg/supervisor/moraSupervisor.dart';
 import 'package:ruta_sdg/supervisor/reporteSupervisor.dart';
@@ -24,7 +24,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
     'CARTERA': const CarteraPage(),
     'DASHBOARD': const DashboardSupervisorPage(),
     'MORA': const MoraSupervisorPage(),
-    'HISTORIAL': const HistorialSupervisorPage(),
+    'NOTIFICACIONES': const NotificacionesSupervisorPage(),
     'UBICACIÓN': const UbicacionSupervisorPage(),
     'CERRAR SESIÓN': const Login(title: ''),
     // Agrega las demás pantallas según sea necesario
@@ -72,7 +72,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
           buildMenuItem('CARTERA'),
           buildMenuItem('DASHBOARD'),
           buildMenuItem('MORA'),
-          buildMenuItem('HISTORIAL'),
+          buildMenuItem('NOTIFICACIONES'),
           buildMenuItem('UBICACIÓN'),
           buildMenuItem('CERRAR SESIÓN'),
         ],

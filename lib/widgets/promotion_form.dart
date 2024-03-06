@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/views/promocion.dart';
+import 'package:ruta_sdg/widgets/act_datos.dart';
 import 'package:ruta_sdg/widgets/custom_dropdown.dart';
 import 'package:ruta_sdg/widgets/text_form_result.dart';
 
@@ -196,6 +197,7 @@ class PromotionFormState extends State<PromotionForm> {
               ),
               const TextFormResult(
                   label: "Última fehca de pago", content: "12/02/2024"),
+              const ActualizarCustom(),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
@@ -251,8 +253,17 @@ class PromotionFormState extends State<PromotionForm> {
                   ),
                 ),
               ),
+              Container(
+                alignment: Alignment.centerLeft,
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: const Text(
+                  '¿El socio esta interesado?',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
               const RadioButtonCustom(),
-              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

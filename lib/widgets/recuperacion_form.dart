@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/views/recuperacion.dart';
+import 'package:ruta_sdg/widgets/act_datos.dart';
 import 'package:ruta_sdg/widgets/radio_button_custom.dart';
 import 'package:ruta_sdg/widgets/text_form_result.dart';
 
@@ -130,17 +131,6 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                 content: "COOPENAVIDEÑO",
               ),
 
-              RadioButtonCustom(
-                option1: "SE ENCONTRÓ",
-                option2: "NO SE ENCONTRÓ",
-                onValueChanged: (int newValue) {
-                  setState(() {
-                    valorSeleccionado = newValue;
-                    show = newValue;
-                  });
-                },
-              ),
-              const SizedBox(height: 15),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -232,6 +222,18 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                 ],
               ),
               const SizedBox(height: 15),
+              RadioButtonCustom(
+                option1: "SE ENCONTRÓ",
+                option2: "NO SE ENCONTRÓ",
+                onValueChanged: (int newValue) {
+                  setState(() {
+                    valorSeleccionado = newValue;
+                    show = newValue;
+                  });
+                },
+              ),
+              const SizedBox(height: 15),
+
               Visibility(
                 visible: (show == 1),
                 child: const Column(
@@ -252,7 +254,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                   ],
                 ),
               ),
-              Visibility(
+              /*Visibility(
                 visible: (show == 2 || show == 1),
                 child: Column(
                   children: [
@@ -310,8 +312,58 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                     ),
                   ],
                 ),
-              ),
+              ),*/
 
+              const ActualizarCustom(),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        offset: const Offset(0, 2),
+                        blurRadius: 4,
+                      ),
+                    ],
+                  ),
+                  child: const Text(
+                    "FEEDBACK",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 0, 76, 128),
+                    ),
+                  ),
+                ),
+              ),
+              TextField(
+                maxLines: 2,
+                keyboardType: TextInputType.multiline,
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(10.0), // Bordes redondeados
+                    borderSide: const BorderSide(
+                      color: Color.fromARGB(255, 0, 76, 128),
+                      width: 2.0, // Grosor del borde al tener foco
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(10.0), // Bordes redondeados
+                    borderSide: const BorderSide(
+                      color:
+                          Colors.grey, // Color del borde cuando no tiene foco
+                      width: 1.0, // Grosor del borde cuando no tiene foco
+                    ),
+                  ),
+                ),
+              ),
               const SizedBox(height: 20),
               Visibility(
                 visible: (show != 0),

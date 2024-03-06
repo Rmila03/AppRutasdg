@@ -53,7 +53,7 @@ class ReportesFormState extends State<ReportesForm> {
         children: [
           Row(
             children: [
-              const MenuSupervisor(name: "REPORTES"),
+              //const MenuSupervisor(name: "REPORTES"),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -97,27 +97,17 @@ class ReportesFormState extends State<ReportesForm> {
                             padding: const EdgeInsets.only(left: 30),
                             child: _DataTable(),
                           ),
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 100),
-                                child: Image.asset(
-                                  'assets/primer.png',
-                                  height: 100.0,
-                                ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 50),
+                              child: Image.asset(
+                                'assets/xD.png',
+                                height: 150.0,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 100),
-                                child: Image.asset(
-                                  'assets/segundo.png',
-                                  height: 100,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 30),
                       Expanded(
                         child: SingleChildScrollView(
                           child: Center(
@@ -142,7 +132,7 @@ class ReportesFormState extends State<ReportesForm> {
     String fechaActual = DateFormat('dd/MM/yyyy').format(selectedDate);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Card(
         shape: const RoundedRectangleBorder(
           side:
@@ -151,17 +141,19 @@ class ReportesFormState extends State<ReportesForm> {
         color: Colors.white,
         elevation: 0,
         child: SizedBox(
-          height: 200,
+          height: 130,
           width: 400,
           child: SingleChildScrollView(
             child: DataTable(
               showCheckboxColumn: false,
-              columnSpacing: 7.0,
+              columnSpacing: 0,
+              headingRowHeight: 25,
               headingRowColor: MaterialStateProperty.all(
                   const Color.fromARGB(255, 255, 255, 255)),
               columns: const [
                 DataColumn(label: Text('HOJA DE RUTA DIARIA')),
               ],
+              dataRowHeight: 25,
               rows: [
                 DataRow(cells: [
                   DataCell(Text('ANALISTA: $nombreAnalista')),
@@ -195,6 +187,87 @@ class ReportesFormState extends State<ReportesForm> {
   }
 
   Widget _buildDataTable(List<Socio> socioList) {
+    Set<String> tiposSet = {};
+    Set<String> opcionesSet = {};
+
+    for (var socio in socioList) {
+      tiposSet.add(socio.clasificacionSocio);
+      opcionesSet.add(socio.tipoGrupo);
+    }
+
+    List<String> tipos = tiposSet.toList();
+    List<String> opciones = opcionesSet.toList();
+    tipos.insert(0, 'TODOS');
+    opciones.insert(0, 'TODOS');
+
+    String selectedTipo = 'TODOS';
+    String selectedOpcion = 'TODOS';
+    var tipoContainer = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: DropdownButton<String>(
+        value: selectedTipo,
+        items: tipos.map((String tipo) {
+          return DropdownMenuItem<String>(
+            value: tipo,
+            child: Text(
+              tipo,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 15.0,
+                fontFamily: 'Unna-Bold',
+              ),
+            ),
+          );
+        }).toList(),
+        onChanged: (String? value) {
+          setState(() {
+            selectedTipo = value ?? '';
+          });
+        },
+        hint: const Text(
+          'TIPO DE SOCIO',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 15.0,
+            fontFamily: 'Unna-Bold',
+          ),
+        ),
+      ),
+    );
+
+    var opcionContainer = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: DropdownButton<String>(
+        value: selectedOpcion,
+        items: opciones.map((String opcion) {
+          return DropdownMenuItem<String>(
+            value: opcion,
+            child: Text(
+              opcion,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 15.0,
+                fontFamily: 'Unna-Bold',
+              ),
+            ),
+          );
+        }).toList(),
+        onChanged: (String? value) {
+          setState(() {
+            selectedOpcion = value ?? '';
+          });
+        },
+        hint: const Text(
+          'ESTADO DE SOCIO',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 15.0,
+            fontFamily: 'Unna-Bold',
+          ),
+        ),
+      ),
+    );
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
@@ -204,39 +277,50 @@ class ReportesFormState extends State<ReportesForm> {
         color: Colors.white,
         elevation: 0,
         child: SizedBox(
-          height: 400,
-          width: 1000,
+          height: 150,
+          width: 1200,
           child: SingleChildScrollView(
             child: DataTable(
               showCheckboxColumn: false,
               columnSpacing: 7.0,
+              headingRowHeight: 50,
               headingRowColor: MaterialStateProperty.all(
-                  const Color.fromARGB(255, 255, 255, 255)),
-              columns: const [
-                DataColumn(label: Text('Hora')),
-                DataColumn(label: Text('Apellidos y Nombres')),
-                DataColumn(label: Text('DNI')),
-                DataColumn(label: Text('Celular')),
-                DataColumn(label: Text('Dirección')),
-                DataColumn(label: Text('Motivo de Visita')),
-                DataColumn(label: Text('Resultados de Visita (Analista)')),
+                const Color.fromARGB(255, 255, 255, 255),
+              ),
+              dataRowHeight: 30,
+              columns: [
+                const DataColumn(label: Text('Hora')),
+                const DataColumn(label: Text('Apellidos y Nombres')),
+                const DataColumn(label: Text('DNI')),
+                const DataColumn(label: Text('Celular')),
+                const DataColumn(label: Text('Dirección')),
+                DataColumn(label: tipoContainer),
+                DataColumn(label: opcionContainer),
+                const DataColumn(
+                  label: Text('Resultados de Visita (Analista)'),
+                ),
               ],
-              rows: socioList.expand((socio) {
-                return [
-                  DataRow(
-                    cells: [
-                      const DataCell(Text("15:25")),
-                      DataCell(
-                        Text('${socio.lastName}, ${socio.name}'),
-                      ),
-                      DataCell(Text(socio.dni)),
-                      DataCell(Text(socio.cellphone)),
-                      DataCell(Text(socio.address)),
-                      const DataCell(Text("Socio - mora")),
-                      const DataCell(Text("Feedback")),
-                    ],
-                  ),
-                ];
+              rows: socioList
+                  /*.where((socio) =>
+                    (selectedTipo == 'TODOS' ||
+                        socio.clasificacionSocio == selectedTipo) &&
+                    (selectedOpcion == 'TODOS' ||
+                        socio.tipoGrupo == selectedOpcion))*/
+                  .map((socio) {
+                return DataRow(
+                  cells: [
+                    const DataCell(Text("Hora")),
+                    DataCell(
+                      Text('${socio.lastName}, ${socio.name}'),
+                    ),
+                    DataCell(Text(socio.dni)),
+                    DataCell(Text(socio.cellphone)),
+                    DataCell(Text(socio.address)),
+                    DataCell(Text(socio.clasificacionSocio)),
+                    DataCell(Text(socio.tipoGrupo)),
+                    const DataCell(Text("Feedback")),
+                  ],
+                );
               }).toList(),
             ),
           ),
@@ -254,8 +338,7 @@ class ReportesFormState extends State<ReportesForm> {
   }
 
   bool userIsAssignedToToday(Socio user) {
-    return user.assignedDate != null &&
-        user.assignedDate!.toLocal().isAtSameMomentAs(selectedDate);
+    return true;
   }
 }
 
@@ -265,18 +348,18 @@ class TextForm extends StatefulWidget {
   final String content;
 
   const TextForm({
-    Key? key,
+    super.key,
     required this.label,
     required this.inputType,
     required this.content,
-  }) : super(key: key);
+  });
 
   @override
   _TextForm createState() => _TextForm();
 }
 
 class _TextForm extends State<TextForm> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -310,4 +393,19 @@ class _TextForm extends State<TextForm> {
       ],
     );
   }
+}
+
+class clasificacionSocio {
+  final String nuevo;
+
+  DateTime? assignedDate;
+  clasificacionSocio(this.nuevo, {this.assignedDate});
+}
+
+List<clasificacionSocio> getclasificacion() {
+  final List<clasificacionSocio> clasificacion = [
+    clasificacionSocio('NUEVO'),
+    clasificacionSocio('REFERIDO ')
+  ];
+  return clasificacion;
 }
