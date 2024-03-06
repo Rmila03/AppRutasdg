@@ -457,16 +457,16 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
             borderRadius: BorderRadius.circular(10),
             // Bordes redondeados
             border: Border.all(
-              color: const Color.fromRGBO(20, 153, 74, 1), // Color del borde
+              color: const Color.fromRGBO(160, 218, 183, 1), // Color del borde
               width: 3, // Grosor del borde
             ),
-            color: const Color.fromRGBO(20, 153, 74, 1),
+            color: const Color.fromRGBO(160, 218, 183, 1),
           ),
           child: const Center(
             child: Text(
               '¿Necesita actualizar dato(s)?',
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.bold),
             ),
@@ -490,7 +490,7 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
                   width: 1.5, // Grosor del borde
                 ),
                 color: selectedButton == 1
-                    ? const Color.fromRGBO(160, 218, 183, 1)
+                    ? const Color.fromRGBO(150, 158, 153, 1)
                     : Colors.white,
               ),
               child: const Center(
@@ -525,7 +525,7 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
                     width: 1.5, // Grosor del borde
                   ),
                   color: selectedButton == 2
-                      ? const Color.fromARGB(255, 250, 162, 29)
+                      ? const Color.fromRGBO(150, 158, 153, 1)
                       : Colors.white,
                 ),
                 child: const Center(
@@ -579,7 +579,7 @@ class _Encontro extends State<Encontro> {
                     width: 1.5, // Grosor del borde
                   ),
                   color: selectedButton == 1
-                      ? const Color.fromRGBO(160, 218, 183, 1)
+                      ? const Color.fromRGBO(150, 158, 153, 1)
                       : Colors.white,
                 ),
                 child: const Center(
@@ -611,7 +611,7 @@ class _Encontro extends State<Encontro> {
                   width: 1.5, // Grosor del borde
                 ),
                 color: selectedButton == 2
-                    ? const Color.fromARGB(255, 250, 162, 29)
+                    ? const Color.fromRGBO(150, 158, 153, 1)
                     : Colors.white,
               ),
               child: const Center(
