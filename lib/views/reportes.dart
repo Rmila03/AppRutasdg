@@ -179,8 +179,9 @@ class FechaGestureDetector extends StatelessWidget {
                   height: 24,
                   width: 100,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
-                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 225, 228, 233)),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   padding: const EdgeInsets.all(0.0),
                   alignment: Alignment.center,
@@ -194,7 +195,7 @@ class FechaGestureDetector extends StatelessWidget {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 20.0, top: 20),
+                padding: EdgeInsets.only(left: 18.0, top: 18),
                 child: Icon(
                   Icons.calendar_today,
                   color: Color.fromARGB(255, 4, 56, 99),
@@ -250,7 +251,7 @@ class FechaContent extends StatelessWidget {
                 const Icon(
                   Icons.picture_as_pdf,
                   color: Colors.red,
-                  size: 40,
+                  size: 30,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
@@ -271,7 +272,7 @@ class FechaContent extends StatelessWidget {
           child: Icon(
             Icons.download_sharp,
             color: Color.fromARGB(255, 0, 76, 128),
-            size: 35,
+            size: 30,
           ),
         ),
       ],
