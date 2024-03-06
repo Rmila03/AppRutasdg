@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/socio.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ruta_sdg/analista.dart';
 
 class MoraSupervisorPage extends StatelessWidget {
-  // ignore: use_key_in_widget_constructors
-  const MoraSupervisorPage({Key? key});
+  const MoraSupervisorPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
-    return MoraSupervisorContent();
+    return const MoraSupervisorContent();
   }
 }
 
 class MoraSupervisorContent extends StatefulWidget {
-  // ignore: use_key_in_widget_constructors
-  const MoraSupervisorContent({Key? key});
+  const MoraSupervisorContent({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _MoraSupervisorContentState createState() => _MoraSupervisorContentState();
 }
 
@@ -27,15 +23,30 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
   String selectedMenu = 'MORA';
   DateTime selectedDate = DateTime.now();
 
-  String selectedOption = '';
-
-  final List<Socio> socios = getSocios();
-  List<Socio> searchResults = [];
+  String selectedAnalistaId = '';
+  List<Socio> socios = getSocios();
+  int filterDays = 0;
 
   @override
   void initState() {
     super.initState();
     selectedDate = DateTime.now();
+    selectedAnalistaId = getAnalistas().first.idAnalista;
+    updateSocios(selectedAnalistaId);
+  }
+
+  void updateSocios(String analistaId) {
+    setState(() {
+      socios = getSociosByAnalistaId(analistaId);
+    });
+  }
+
+  List<Socio> getSociosByAnalistaId(String analistaId) {
+    return getSocios()
+        .where((socio) =>
+            socio.idAnalista == analistaId &&
+            (filterDays == 0 || socio.daysLate == filterDays))
+        .toList();
   }
 
   @override
@@ -48,29 +59,23 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
 
           // Expanded section for the main content
           Expanded(
-            //child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                // Other widgets...
-
-                // Title widget
-                // Container with margin before the table title
-                const SizedBox(height: 40.0), // Añade un espacio en blanco
+                const SizedBox(height: 40.0),
                 _buildTitle(),
 
-                // Date picker widget
-                const SizedBox(height: 5.0),
-                _buildDatePicker(context),
-
-                // Filter button widget
-                _showFilterDialog(),
+                // Filter widgets
+                const SizedBox(height: 20.0),
+                _buildAnalistaFilter(),
+                const SizedBox(height: 20.0),
+                _buildDiasFilter(),
 
                 // Data table widget
+                const SizedBox(height: 20.0),
                 _buildDataTable(socios),
               ],
-              //),
             ),
           ),
         ],
@@ -78,62 +83,120 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
     );
   }
 
-  Widget _showFilterDialog() => AlertDialog(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        content: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10.0),
-            border: Border.all(
-              color: const Color(0xFFD9DEDA),
-              width: 2.0,
-            ),
+  Widget _buildAnalistaFilter() {
+    return Center(
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 210),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(
+            color: const Color(0xFFD9DEDA),
+            width: 2.0,
           ),
-          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Selecciona días:',
-                style: TextStyle(
-                  fontSize: 18,
-                ),
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              'Analista:',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
               ),
-              DropdownButton<int>(
-                value: filterDays,
-                focusColor: Colors.transparent,
-                onChanged: (int? value) {
-                  if (value != null) {
-                    setState(() {
-                      filterDays = value;
-                    });
-                  }
-                },
-                items: List.generate(
-                  11,
-                  (index) => DropdownMenuItem<int>(
-                    value: index,
-                    child: Container(
-                      alignment: Alignment.center,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 5.0), // Ajusta el margen horizontal
-                      child: Text(
-                        index == 0 ? '' : '$index',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                          fontWeight: FontWeight.normal,
-                        ),
+            ),
+            const SizedBox(
+                width: 10), // Espacio entre el texto y el DropdownButton
+            DropdownButton<String>(
+              value: selectedAnalistaId,
+              onChanged: (String? newValue) {
+                if (newValue != null) {
+                  setState(() {
+                    selectedAnalistaId = newValue;
+                    updateSocios(selectedAnalistaId);
+                  });
+                }
+              },
+              items: getAnalistas().map((analista) {
+                return DropdownMenuItem<String>(
+                  value: analista.idAnalista,
+                  child: Text(
+                    analista.name,
+                    style: const TextStyle(
+                      fontSize:
+                          15, // Tamaño de fuente igual al del texto "Analista"
+                      fontWeight: FontWeight.normal, // Eliminar la negrita
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDiasFilter() {
+    return Center(
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 210),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(
+            color: const Color(0xFFD9DEDA),
+            width: 2.0,
+          ),
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              'Días de Mora:',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(width: 10),
+            DropdownButton<int>(
+              value: filterDays,
+              focusColor: Colors.transparent,
+              onChanged: (int? value) {
+                if (value != null) {
+                  setState(() {
+                    filterDays = value;
+                    updateSocios(selectedAnalistaId);
+                  });
+                }
+              },
+              items: List.generate(
+                11,
+                (index) => DropdownMenuItem<int>(
+                  value: index,
+                  child: Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: Text(
+                      index == 0 ? 'Todos' : '$index',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 
   Widget _buildTitle() {
     return const Text(
@@ -147,58 +210,8 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
     );
   }
 
-  Widget _buildDatePicker(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.only(
-              left: 50.0), // Añade sangría al lado izquierdo
-          child: IconButton(
-            icon: const Icon(
-              FontAwesomeIcons.calendarDay,
-            ),
-            color: const Color.fromARGB(255, 0, 76, 128),
-            onPressed: () {
-              _selectDate(context);
-            },
-          ),
-        ),
-        const SizedBox(width: 10.0),
-        GestureDetector(
-          onTap: () {
-            _selectDate(context);
-          },
-          child: Container(
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: const Color.fromARGB(255, 0, 76, 128)),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: Text(
-              selectedDate.toLocal().toString().split(' ')[0],
-              style: const TextStyle(fontSize: 16.0),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  int filterDays = 0;
-
-  void setFilterDays(int value) {
-    setState(() {
-      filterDays = value;
-    });
-  }
-
   Widget _buildDataTable(List<Socio> userList) {
-    List<Socio> filteredUsers = userList
-        .where((user) => filterDays == 0 || user.daysLate == filterDays)
-        .toList();
-
-    List<DataRow> rows = filteredUsers.map((user) {
+    List<DataRow> rows = userList.map((user) {
       return DataRow(
         cells: [
           DataCell(Text(user.dni)),
@@ -230,49 +243,17 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
               columnSpacing: 7.0,
               headingRowColor:
                   MaterialStateProperty.all(const Color(0xFFD9DEDA)),
-
               columns: const [
                 DataColumn(label: Text('DNI')),
                 DataColumn(label: Text('NOMBRE')),
                 DataColumn(label: Text('DIRECCIÓN')),
                 DataColumn(label: Text('DÍAS DE ATRASO')),
               ],
-              rows: rows, // Usar la variable rows en lugar de userList
+              rows: rows,
             ),
           ),
         ),
       ),
     );
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    DateTime picked = (await showDatePicker(
-          context: context,
-          initialDate: selectedDate,
-          firstDate: DateTime(2022),
-          lastDate: DateTime(2025),
-          builder: (BuildContext context, Widget? child) {
-            return Theme(
-              data: ThemeData.light().copyWith(
-                primaryColor: const Color.fromARGB(255, 4, 56, 99),
-                hintColor: const Color.fromARGB(255, 140, 178, 210),
-                colorScheme: const ColorScheme.light(
-                  primary: Color.fromARGB(255, 4, 56, 99),
-                ),
-                buttonTheme: const ButtonThemeData(
-                  textTheme: ButtonTextTheme.primary,
-                ),
-              ),
-              child: child!,
-            );
-          },
-        )) ??
-        selectedDate;
-
-    if (picked != selectedDate && mounted) {
-      setState(() {
-        selectedDate = picked;
-      });
-    }
   }
 }
