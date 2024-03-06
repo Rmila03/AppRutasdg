@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/analista.dart';
-import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/supervisor/reportes_page.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
-import 'package:ruta_sdg/analista.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ReporteSupervisorPage extends StatelessWidget {

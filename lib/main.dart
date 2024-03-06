@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ruta_sdg/conexcion_api.dart';
 import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
 import 'package:ruta_sdg/views/home.dart';
 
@@ -299,6 +300,31 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ],
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromARGB(253, 24, 131, 42),
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  minimumSize: const Size(180, 50),
+                ),
+                onPressed: () {
+                  setState(() {
+                    showError = false;
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ShowData(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'Mostrar Datos de la API',
+                  style: TextStyle(fontSize: 15, color: Colors.black),
                 ),
               ),
             ],
