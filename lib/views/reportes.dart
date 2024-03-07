@@ -139,7 +139,7 @@ class _FechaSelectorState extends State<FechaSelector> {
           const Padding(
             padding: EdgeInsets.only(left: 10.0, top: 20),
             child: Text(
-              "Hoja de ruta generada :  ",
+              "Reporte generado :  ",
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.normal,
@@ -197,7 +197,7 @@ class FechaGestureDetector extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(left: 18.0, top: 18),
                 child: Icon(
-                  Icons.calendar_today,
+                  FontAwesomeIcons.calendarDay,
                   color: Color.fromARGB(255, 4, 56, 99),
                 ),
               ),
@@ -229,9 +229,8 @@ class FechaContent extends StatelessWidget {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text(
-                      "Hoja de ruta del ${dateFormat.format(selectedDate)}"),
-                  content: const Text("Contenido de la Hoja de Ruta"),
+                  title: Text("Reporte del ${dateFormat.format(selectedDate)}"),
+                  content: const Text("Contenido del reporte"),
                   actions: [
                     TextButton(
                       child: const Text("Cerrar"),
@@ -256,7 +255,7 @@ class FechaContent extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: Text(
-                    "Hoja de ruta del ${dateFormat.format(selectedDate)}",
+                    "Reporte del ${dateFormat.format(selectedDate)}",
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.normal,
@@ -271,7 +270,7 @@ class FechaContent extends StatelessWidget {
           padding: EdgeInsets.only(left: 20.0, top: 20),
           child: Icon(
             Icons.download_sharp,
-            color: Color.fromARGB(255, 0, 76, 128),
+            color: Color.fromARGB(255, 4, 56, 99),
             size: 30,
           ),
         ),

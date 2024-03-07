@@ -32,11 +32,11 @@ class _CarteraPageState extends State<CarteraPage> {
   DataRow buildDataRow(Socio user) {
     return DataRow(
       cells: [
-        DataCell(Text(user.dni, style: const TextStyle(fontSize: 14))),
+        DataCell(Text(user.dni, style: const TextStyle(fontSize: 13))),
         DataCell(
           Text(
             "${user.name} ${user.lastName}",
-            style: const TextStyle(fontSize: 14),
+            style: const TextStyle(fontSize: 13),
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -70,6 +70,9 @@ class _CarteraPageState extends State<CarteraPage> {
                   ),
                   decoration: const InputDecoration(
                     hintText: 'Buscar socio',
+                    hintStyle: TextStyle(
+                      fontSize: 15,
+                    ),
                     prefixIcon: Icon(Icons.search, color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(

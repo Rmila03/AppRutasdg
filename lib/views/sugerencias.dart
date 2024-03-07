@@ -31,11 +31,11 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
   DataRow buildDataRow(Socio user) {
     return DataRow(
       cells: [
-        DataCell(Text(user.dni, style: const TextStyle(fontSize: 14))),
+        DataCell(Text(user.dni, style: const TextStyle(fontSize: 13))),
         DataCell(
           Text(
             "${user.name} ${user.lastName}",
-            style: const TextStyle(fontSize: 14),
+            style: const TextStyle(fontSize: 13),
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -49,8 +49,12 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
                 maxWidth: 200, // Máximo ancho del campo
               ),
               child: Text(
-                motivos[user] ?? 'Haga clic para agregar motivo',
-                style: const TextStyle(fontSize: 14),
+                motivos[user] ?? "agregar",
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w600,
+                ),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -115,7 +119,7 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
               width: MediaQuery.of(context).size.width * 0.9,
               child: Padding(
                 padding: const EdgeInsets.only(
-                    left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
+                    left: 8.0, right: 8.0, top: 5.0, bottom: 5.0),
                 child: TextField(
                   controller: searchController,
                   onChanged: searchUsers,
@@ -124,7 +128,13 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
                   ),
                   decoration: const InputDecoration(
                     hintText: 'Buscar socio',
-                    prefixIcon: Icon(Icons.search, color: Colors.grey),
+                    hintStyle: TextStyle(
+                      fontSize: 15,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.grey,
+                    ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Color.fromARGB(255, 4, 56, 99),
@@ -142,7 +152,7 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
+                  padding: const EdgeInsets.only(left: 8.0),
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(
