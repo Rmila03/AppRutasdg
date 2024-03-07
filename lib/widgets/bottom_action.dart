@@ -4,6 +4,7 @@ import 'package:ruta_sdg/views/notificaciones.dart';
 import 'package:ruta_sdg/views/reportes.dart';
 import 'package:ruta_sdg/listasocio.dart';
 import 'package:ruta_sdg/views/sugerencias.dart';
+import 'package:ruta_sdg/views/cartera.dart';
 
 class BottomAction extends StatelessWidget {
   final String label;
@@ -37,6 +38,13 @@ class BottomAction extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const NotificacionPage(title: ''),
+                ),
+              );
+            } else if (label == "Cartera") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CarteraPage(title: ''),
                 ),
               );
             } else if (label == "Reportes") {

@@ -20,8 +20,8 @@ class TabBarBottom extends StatelessWidget {
           iconSize: 18.0,
         ),
         BottomAction(
-          label: "Buscar",
-          icon: FontAwesomeIcons.magnifyingGlass,
+          label: "Cartera",
+          icon: FontAwesomeIcons.folderOpen,
           iconColor: Color.fromARGB(255, 4, 54, 95),
           iconSize: 18.0,
         ),

@@ -17,6 +17,7 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
   List<Socio> searchResults = [];
 
   TextEditingController searchController = TextEditingController();
+  Map<Socio, String> motivos = {};
 
   void searchUsers(String query) {
     setState(() {
@@ -30,6 +31,7 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
   DataRow buildDataRow(Socio user) {
     return DataRow(
       cells: [
+        DataCell(Text(user.dni, style: const TextStyle(fontSize: 14))),
         DataCell(
           Text(
             "${user.name} ${user.lastName}",
@@ -37,16 +39,62 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        DataCell(Text(user.tipoGrupo, style: const TextStyle(fontSize: 14))),
         DataCell(
-          IconButton(
-            onPressed: () {
-              // Lógica para añadir al usuario
+          GestureDetector(
+            onTap: () {
+              _showMotivoDialog(user);
             },
-            icon: const Icon(Icons.add, color: Color.fromARGB(255, 4, 56, 99)),
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: 200, // Máximo ancho del campo
+              ),
+              child: Text(
+                motivos[user] ?? 'Haga clic para agregar motivo',
+                style: const TextStyle(fontSize: 14),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ),
         ),
       ],
+    );
+  }
+
+  void _showMotivoDialog(Socio socio) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        String motivo = motivos[socio] ?? '';
+        return AlertDialog(
+          title: const Text('Agregar motivo'),
+          content: TextField(
+            onChanged: (value) {
+              motivo = value;
+            },
+            controller: TextEditingController(text: motivo),
+            decoration: const InputDecoration(
+              hintText: 'Ingrese el motivo',
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  motivos[socio] = motivo;
+                });
+                Navigator.pop(context);
+              },
+              child: const Text('Aceptar'),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -58,14 +106,16 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
       ),
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(
-                height: 16), // Añade un espacio debajo del encabezado
+              height: 20,
+            ),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
+              width: MediaQuery.of(context).size.width * 0.9,
               child: Padding(
                 padding: const EdgeInsets.only(
-                    left: 8.0), // Ajusta el margen izquierdo
+                    left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
                 child: TextField(
                   controller: searchController,
                   onChanged: searchUsers,
@@ -73,7 +123,7 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
                     color: Colors.black,
                   ),
                   decoration: const InputDecoration(
-                    hintText: 'Buscar por nombre',
+                    hintText: 'Buscar socio',
                     prefixIcon: Icon(Icons.search, color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -90,31 +140,46 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
             const SizedBox(height: 16),
             Expanded(
               child: SingleChildScrollView(
-                scrollDirection: Axis.vertical, // Cambiado a Axis.vertical
-                child: DataTable(
-                  headingRowColor: MaterialStateColor.resolveWith(
-                      (states) => const Color.fromARGB(255, 0, 76, 128)),
-                  columnSpacing: 10.0, // Ajusta la distancia entre las columnas
-                  columns: const [
-                    DataColumn(
-                      label: Text('NOMBRE',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white)),
+                scrollDirection: Axis.vertical,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color(0xFFD9D9D9),
+                      ),
                     ),
-                    DataColumn(
-                      label: Text('MODALIDAD',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white)),
+                    child: DataTable(
+                      columnSpacing: 10.0,
+                      headingRowColor: MaterialStateColor.resolveWith(
+                          (states) => const Color(0xFFD9D9D9)),
+                      dataRowColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.white),
+                      columns: const [
+                        DataColumn(
+                          label: Text('DNI',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Color.fromARGB(255, 0, 0, 0))),
+                        ),
+                        DataColumn(
+                          label: Text('Nombres y Apellidos',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Color.fromARGB(255, 0, 0, 0))),
+                        ),
+                        DataColumn(
+                          label: Text('Motivo',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Color.fromARGB(255, 0, 0, 0))),
+                        ),
+                      ],
+                      rows: (searchResults.isEmpty ? socios : searchResults)
+                          .map((user) => buildDataRow(user))
+                          .toList(),
                     ),
-                    DataColumn(
-                      label: Text('', style: TextStyle(color: Colors.white)),
-                    ),
-                  ],
-                  rows: (searchResults.isEmpty ? socios : searchResults)
-                      .map((user) => buildDataRow(user))
-                      .toList(),
+                  ),
                 ),
               ),
             ),
