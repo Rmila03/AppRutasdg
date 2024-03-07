@@ -69,50 +69,9 @@ class _PromocionPageState extends State<PromocionPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          _buildCarteraBox(title),
           _buildDataTable(title, userList),
           // Puedes agregar más contenido específico de la pestaña aquí
         ],
-      ),
-    );
-  }
-
-  Widget _buildCarteraBox(String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Card(
-        elevation: 5,
-        shadowColor: const Color.fromARGB(255, 5, 5, 5),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          side: BorderSide(
-            color: Colors.grey.withOpacity(0.5),
-            width: 1.0,
-          ),
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: const Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontSize: 18,
-              color: Colors.orange,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
       ),
     );
   }
@@ -122,24 +81,23 @@ class _PromocionPageState extends State<PromocionPage> {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Card(
         shape: RoundedRectangleBorder(
-          side: const BorderSide(color: Color(0xFFD9DEDA)),
+          side: const BorderSide(color: Color(0xFFD9D9D9)),
           borderRadius: BorderRadius.circular(0.0),
         ),
         color: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         child: SizedBox(
-          height: 300,
+          height: 500,
           width: 600,
           child: SingleChildScrollView(
             child: DataTable(
               showCheckboxColumn: false,
               columnSpacing: 7.0,
               headingRowColor:
-                  MaterialStateProperty.all(const Color(0xFFD9DEDA)),
+                  MaterialStateProperty.all(const Color(0xFFD9D9D9)),
               columns: const [
-                DataColumn(label: Text('N°')),
                 DataColumn(label: Text('DNI')),
-                DataColumn(label: Text('Nombre')),
+                DataColumn(label: Text('Nombres y Apellidos')),
                 DataColumn(label: Text('')),
               ],
               rows: userList
@@ -161,7 +119,6 @@ class _PromocionPageState extends State<PromocionPage> {
                     }
                   },
                   cells: [
-                    DataCell(Text(user.idSocio)),
                     DataCell(Text(user.dni)),
                     DataCell(Text("${user.name} ${user.lastName}")),
                     const DataCell(Icon(Icons.check)),
