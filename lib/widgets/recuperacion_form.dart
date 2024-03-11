@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/views/recuperacion.dart';
 import 'package:ruta_sdg/widgets/act_datos.dart';
+import 'package:ruta_sdg/widgets/custom_dropdown.dart';
 import 'package:ruta_sdg/widgets/radio_button_custom.dart';
 import 'package:ruta_sdg/widgets/text_form_result.dart';
 
@@ -18,6 +19,7 @@ class RecuperacionForm extends StatefulWidget {
 class RecuperacionFormState extends State<RecuperacionForm> {
   final _formKey = GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
+  bool _isSelected = false;
   int show = 0;
   int valorSeleccionado = 0;
   @override
@@ -29,197 +31,275 @@ class RecuperacionFormState extends State<RecuperacionForm> {
           key: _formKey,
           child: Column(
             children: [
-              TextForm(
-                formKey: _formKey,
-                label: "Nombres",
-                inputType: TextInputType.text,
-                content: widget.socio.name,
-              ),
-              TextForm(
-                formKey: _formKey,
-                label: "Apellido Paterno",
-                inputType: TextInputType.text,
-                content: widget.socio.lastName,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextForm(
-                      formKey: _formKey,
-                      label: "DNI",
-                      inputType: TextInputType.number,
-                      content: widget.socio.dni,
+              Container(
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(244, 244, 244, 1),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      spreadRadius: 2,
+                      blurRadius: 3,
+                      offset: Offset(1.0, 3.0),
                     ),
-                  ),
-                  const SizedBox(width: 15),
-                  Expanded(
-                    child: TextForm(
-                      formKey: _formKey,
-                      label: "Celular",
-                      inputType: TextInputType.phone,
-                      content: widget.socio.cellphone,
-                    ),
-                  ),
-                  const SizedBox(width: 15),
-                  Expanded(
-                    child: TextForm(
-                      formKey: _formKey,
-                      label: "Riesgo del Socio",
-                      inputType: TextInputType.none,
-                      content: "Normal",
-                    ),
-                  ),
-                ],
-              ),
-              TextForm(
-                formKey: _formKey,
-                label: "Correo electrónico",
-                inputType: TextInputType.emailAddress,
-                content: widget.socio.email,
-              ),
-              TextForm(
-                formKey: _formKey,
-                label: "Dirección",
-                inputType: TextInputType.text,
-                content: widget.socio.address,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextForm(
-                      formKey: _formKey,
-                      label: "Distrito",
-                      inputType: TextInputType.number,
-                      content: widget.socio.district,
-                    ),
-                  ),
-                  const SizedBox(width: 15),
-                  Expanded(
-                    child: TextForm(
-                      formKey: _formKey,
-                      label: "Provincia",
-                      inputType: TextInputType.phone,
-                      content: widget.socio.province,
-                    ),
-                  ),
-                  const SizedBox(width: 15),
-                  Expanded(
-                    child: TextForm(
-                      formKey: _formKey,
-                      label: "Departamento",
-                      inputType: TextInputType.none,
-                      content: widget.socio.region,
-                    ),
-                  ),
-                ],
-              ),
-              //DropdownButtonFormField(items: , onChanged: onChanged),
-              const TextFormResult(
-                label: "Tipo de Socio:",
-                content: "CAMPAÑA",
-              ),
-              const TextFormResult(
-                label: "Tipo de Crédito:",
-                content: "CONSUMO",
-              ),
-              const TextFormResult(
-                label: "Tipo de Producto:",
-                content: "INDEPENDIENTE",
-              ),
-              const TextFormResult(
-                label: "Modalidad:",
-                content: "COOPENAVIDEÑO",
-              ),
-
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "N° Visitas: 3",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
+                  ],
                 ),
-              ),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      const Expanded(
-                        child: Column(
-                          children: [
-                            TextFormResult(
-                                label: "Crédito", content: "S/. 10000.00"),
-                            TextFormResult(
-                                label: "Monto a pagar", content: "S/. 1150.53"),
-                            TextFormResult(
-                                label: "Cuota a Pagar", content: "8"),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                          ),
-                          child: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30.0),
-                              color: Colors.grey[300],
-                            ),
-                            child: const Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(Icons.insert_drive_file_rounded,
-                                    size: 30, color: Colors.black),
-                                SizedBox(height: 5),
-                                Text(
-                                  'Mas detalles',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 8),
-                                ),
-                              ],
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        const Expanded(
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'DATOS DEL SOCIO',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 0, 76, 128),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Expanded(
-                        child: TextFormResult(
-                            label: "Fecha de CPAnt",
-                            content: "12 de noviembre del 2023"),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 20),
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            shape: const RoundedRectangleBorder(
-                              side: BorderSide.none, // Borde transparente
-                              borderRadius: BorderRadius.zero, // Bordes cero
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          height: 20,
+                          width: 70,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              color: const Color.fromARGB(255, 0, 76, 128),
+                              width: 1,
                             ),
                           ),
                           child: const Text(
-                            'Ver más',
-                            style: TextStyle(color: Colors.black, fontSize: 12),
+                            'RIESGO',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 0, 76, 128),
+                              fontSize: 8,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    TextForm(
+                      formKey: _formKey,
+                      label: "Nombres",
+                      inputType: TextInputType.text,
+                      content: widget.socio.name,
+                    ),
+                    TextForm(
+                      formKey: _formKey,
+                      label: "Apellido Paterno",
+                      inputType: TextInputType.text,
+                      content: widget.socio.lastName,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextForm(
+                            formKey: _formKey,
+                            label: "DNI",
+                            inputType: TextInputType.number,
+                            content: widget.socio.dni,
+                          ),
+                        ),
+                        Expanded(
+                          child: TextForm(
+                            formKey: _formKey,
+                            label: "Celular",
+                            inputType: TextInputType.phone,
+                            content: widget.socio.cellphone,
+                          ),
+                        ),
+                        Expanded(
+                          child: TextForm(
+                            formKey: _formKey,
+                            label: "Riesgo del Socio",
+                            inputType: TextInputType.none,
+                            content: "Normal",
+                          ),
+                        ),
+                      ],
+                    ),
+                    TextForm(
+                      formKey: _formKey,
+                      label: "Correo electrónico",
+                      inputType: TextInputType.emailAddress,
+                      content: widget.socio.email,
+                    ),
+                    TextForm(
+                      formKey: _formKey,
+                      label: "Dirección",
+                      inputType: TextInputType.text,
+                      content: widget.socio.address,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextForm(
+                            formKey: _formKey,
+                            label: "Distrito",
+                            inputType: TextInputType.number,
+                            content: widget.socio.district,
+                          ),
+                        ),
+                        const SizedBox(width: 15),
+                        Expanded(
+                          child: TextForm(
+                            formKey: _formKey,
+                            label: "Provincia",
+                            inputType: TextInputType.phone,
+                            content: widget.socio.province,
+                          ),
+                        ),
+                        const SizedBox(width: 15),
+                        Expanded(
+                          child: TextForm(
+                            formKey: _formKey,
+                            label: "Departamento",
+                            inputType: TextInputType.none,
+                            content: widget.socio.region,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(244, 244, 244, 1),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      spreadRadius: 2,
+                      blurRadius: 3,
+                      offset: Offset(1.0, 3.0),
+                    ),
+                  ],
+                ),
+                child: Column(children: [
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    alignment: Alignment.centerLeft,
+                    child: const Text(
+                      "DATOS DEL CRÉDITO",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color.fromARGB(255, 0, 76, 128),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const TextFormResult(
+                    label: "Tipo de socio:",
+                    content: "GENERICO",
+                  ),
+                  const TextFormResult(
+                    label: "Tipo de crédito:",
+                    content: "CONSUMO",
+                  ),
+                  const TextFormResult(
+                    label: "Tipo de producto:",
+                    content: "INDEPENDIENTE",
+                  ),
+                  const TextFormResult(
+                    label: "Modalidad:",
+                    content: "COOPENAVIDEÑO",
+                  ),
+                ]),
+              ),
+              Container(
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(244, 244, 244, 1),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      spreadRadius: 2,
+                      blurRadius: 3,
+                      offset: Offset(1.0, 3.0),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsetsDirectional.only(bottom: 10),
+                      child: const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "CRÉDITO ACTUAL",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 0, 76, 128),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    Column(
+                      children: [
+                        const Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  TextFormResult(
+                                      label: "Crédito",
+                                      content: "S/. 10000.00"),
+                                  TextFormResult(
+                                      label: "Monto a pagar",
+                                      content: "S/. 1150.53"),
+                                  TextFormResult(
+                                      label: "Cuota a Pagar", content: "8"),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Expanded(
+                              child: TextFormResult(
+                                  label: "Fecha de CPAnt",
+                                  content: "12 de noviembre del 2023"),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(left: 20),
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  shape: const RoundedRectangleBorder(
+                                    side: BorderSide.none, // Borde transparente
+                                    borderRadius:
+                                        BorderRadius.zero, // Bordes cero
+                                  ),
+                                ),
+                                child: const Text(
+                                  'Ver más',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 12),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 15),
               RadioButtonCustom(
@@ -233,24 +313,42 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                 },
               ),
               const SizedBox(height: 15),
-
               Visibility(
                 visible: (show == 1),
-                child: const Column(
+                child: Column(
                   children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "COMPROMISO DE PAGO",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Color.fromARGB(255, 0, 76, 128),
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: const Color.fromRGBO(244, 244, 244, 1),
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.grey,
+                            spreadRadius: 2,
+                            blurRadius: 3,
+                            offset: Offset(1.0, 3.0),
+                          ),
+                        ],
                       ),
-                    ),
-                    TextFormInto(label: "Fecha de cancelación: "),
-                    TextFormInto(label: "Método de pago: ")
+                      child: const Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "COMPROMISO DE PAGO",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Color.fromARGB(255, 0, 76, 128),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          TextFormInto(label: "Fecha de cancelación: "),
+                          TextFormInto(label: "Método de pago: "),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -315,71 +413,143 @@ class RecuperacionFormState extends State<RecuperacionForm> {
               ),*/
 
               const ActualizarCustom(),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        offset: const Offset(0, 2),
-                        blurRadius: 4,
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(244, 244, 244, 1),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      spreadRadius: 2,
+                      blurRadius: 3,
+                      offset: Offset(1.0, 3.0),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        const Expanded(
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "OBSERVACIONES",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 0, 76, 128),
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _isSelected = !_isSelected;
+                            });
+                          },
+                          child: Container(
+                            alignment: Alignment.centerRight,
+                            width: 80,
+                            height: 20,
+                            decoration: BoxDecoration(
+                              color: _isSelected
+                                  ? const Color.fromARGB(255, 4, 54, 95)
+                                  : const Color.fromRGBO(244, 244, 244, 1),
+                              border: Border.all(
+                                color: const Color.fromARGB(255, 4, 54, 95),
+                              ),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Center(
+                              child: Text(
+                                _isSelected ? 'SIN UBICAR' : 'SIN UBICAR',
+                                style: TextStyle(
+                                  color: _isSelected
+                                      ? Colors.white
+                                      : const Color.fromARGB(255, 0, 76, 128),
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        TextField(
+                          maxLines: 2,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 105, 105, 105),
+                                width: 1.0,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 105, 105, 105),
+                                width: 1.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        //padding: const EdgeInsets.symmetric(horizontal: 8),
+                        margin: const EdgeInsets.only(top: 10),
+                        child: const Text(
+                          "FEEDBACK",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Color.fromARGB(255, 0, 76, 128),
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
-                  child: const Text(
-                    "FEEDBACK",
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 76, 128),
                     ),
-                  ),
+                    TextField(
+                      maxLines: 2,
+                      keyboardType: TextInputType.multiline,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 105, 105, 105),
+                            width: 1.0,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 105, 105, 105),
+                            width: 1.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              TextField(
-                maxLines: 2,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Bordes redondeados
-                    borderSide: const BorderSide(
-                      color: Color.fromARGB(255, 0, 76, 128),
-                      width: 2.0, // Grosor del borde al tener foco
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Bordes redondeados
-                    borderSide: const BorderSide(
-                      color:
-                          Colors.grey, // Color del borde cuando no tiene foco
-                      width: 1.0, // Grosor del borde cuando no tiene foco
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
               Visibility(
                 visible: (show != 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
+                    Align(
+                      alignment: Alignment.center,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Validate returns true if the form is valid, or false otherwise.
                           if (_formKey.currentState!.validate()) {
-                            // If the form is valid, display a snackbar. In the real world,
-                            // you'd often call a server or save the information in a database.
-                            /*ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Processing Data')),
-                            );*/
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -388,29 +558,31 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                             );
                           }
                         },
-                        style: ButtonStyle(
-                          padding:
-                              MaterialStateProperty.all<EdgeInsetsGeometry>(
-                            const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 10), // Padding en todos los lados
-                          ),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  8.0), // Bordes redondeados
-                              side: const BorderSide(
-                                  color: Color.fromARGB(255, 0, 76, 128),
-                                  width: 2.0), // Color y grosor del borde
-                            ),
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color.fromRGBO(244, 244, 244, 1),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
                           ),
                         ),
-                        child: const Text(
-                          'GUARDAR',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                        child: const SizedBox(
+                          width: 100,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.save,
+                                color: Color.fromARGB(255, 0, 76, 128),
+                                size: 20,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                'GUARDAR',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Color.fromARGB(255, 0, 76, 128),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -532,63 +704,5 @@ class TextFormDate extends StatelessWidget {
         ),
       ]),
     );
-  }
-}
-
-class TextForm extends StatefulWidget {
-  final String label;
-  final TextInputType inputType;
-  final String content;
-  const TextForm({
-    super.key,
-    required GlobalKey<FormState> formKey,
-    required this.label,
-    required this.inputType,
-    required this.content,
-  });
-  _TextForm createState() => _TextForm();
-}
-
-class _TextForm extends State<TextForm> {
-  TextEditingController _controller = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _controller.text = widget.content;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        TextFormField(
-          controller: _controller,
-          enabled: false,
-          keyboardType: widget.inputType,
-          cursorColor: Colors.black,
-          decoration: const InputDecoration(
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            labelStyle: TextStyle(color: Colors.red),
-          ),
-          style: const TextStyle(color: Colors.black),
-        ),
-        Text(
-          widget.label,
-          style: const TextStyle(
-            fontSize: 12,
-          ),
-        ),
-      ],
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }
