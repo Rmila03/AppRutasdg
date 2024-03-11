@@ -479,30 +479,6 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        TextField(
-                          maxLines: 2,
-                          keyboardType: TextInputType.multiline,
-                          decoration: InputDecoration(
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: const BorderSide(
-                                color: Color.fromARGB(255, 105, 105, 105),
-                                width: 1.0,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: const BorderSide(
-                                color: Color.fromARGB(255, 105, 105, 105),
-                                width: 1.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Container(
