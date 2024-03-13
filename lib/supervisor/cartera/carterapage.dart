@@ -3,6 +3,7 @@ import 'package:ruta_sdg/analista.dart';
 import 'package:ruta_sdg/supervisor/cartera/listacartera.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/socio.dart';
+import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 
 void main() {
   runApp(const CarteraPage());
@@ -128,11 +129,15 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
     }
 
     return Scaffold(
+      bottomNavigationBar: MediaQuery.of(context).size.width < 640
+          ? const MenuSupervisorMobile(name: "CARTERA")
+          : null,
       body: Stack(
         children: [
           Row(
             children: [
-              const MenuSupervisor(name: "CARTERA"),
+              if (MediaQuery.of(context).size.width >= 640)
+                const MenuSupervisor(name: "CARTERA"),
               Expanded(
                 //child: SingleChildScrollView(
                 child: Padding(

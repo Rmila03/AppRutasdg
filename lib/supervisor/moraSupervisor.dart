@@ -34,10 +34,14 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: MediaQuery.of(context).size.width < 640
+          ? MenuSupervisorMobile(name: selectedMenu)
+          : null,
       body: Row(
         children: [
           // Left side menu
-          MenuSupervisor(name: selectedMenu),
+          if (MediaQuery.of(context).size.width >= 640)
+            MenuSupervisor(name: selectedMenu),
 
           // Expanded section for the main content
           Expanded(

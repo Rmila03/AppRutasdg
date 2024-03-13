@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 
 class HistorialSupervisorPage extends StatelessWidget {
   // ignore: use_key_in_widget_constructors
@@ -51,9 +52,13 @@ class _HistorialSupervisorContentState
     List<Cambio> cambiosDelDia = obtenerCambiosDelDia(selectedDate);
 
     return Scaffold(
+      bottomNavigationBar: MediaQuery.of(context).size.width < 640
+          ? MenuSupervisorMobile(name: selectedMenu)
+          : null,
       body: Row(
         children: [
-          MenuSupervisor(name: selectedMenu),
+          if (MediaQuery.of(context).size.width >= 640)
+            MenuSupervisor(name: selectedMenu),
           Expanded(
             //child: SingleChildScrollView(
             child: Column(
