@@ -77,7 +77,7 @@ class _MenuSupervisorMobileState extends State<MenuSupervisorMobile> {
         BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.bell), label: "Notificaciones"),
         BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.bell), label: "Ubicacion"),
+            icon: Icon(FontAwesomeIcons.mapLocation), label: "Ubicacion"),
         BottomNavigationBarItem(
             icon: Icon(Icons.radio_button_off), label: "Cerrar Sesión")
       ],

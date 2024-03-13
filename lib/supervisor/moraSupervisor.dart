@@ -36,7 +36,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: MediaQuery.of(context).size.width < 640
-          ? MenuSupervisorMobile(name: selectedMenu)
+          ? const MenuSupervisorMobile(name: "MORA")
           : null,
       body: Row(
         children: [
