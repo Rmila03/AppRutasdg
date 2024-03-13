@@ -16,7 +16,7 @@ class _ShowDataState extends State<ShowData> {
 
     if (response.statusCode == 200) {
       // Si la solicitud es exitosa, devuelve el cuerpo de la respuesta
-      Map<String, dynamic> data = json.decode(response.body);
+      json.decode(response.body);
       print("----------------------------------");
       //print(data['results'][0]['formatted_address']);
       //print(data['results'][0]['geometry']);

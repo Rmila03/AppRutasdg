@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
@@ -39,7 +41,18 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
   bool isFloatingPageVisible = false;
   late AnimationController _animationController;
   late Animation<Offset> _offsetAnimation;
-
+  List<String> districts = [
+    'District 1',
+    'District 2',
+    'District 3'
+  ]; // Example districts list
+  final List<String> numbers =
+      List.generate(11, (index) => (index).toString()); // Numbers from 1 to 10
+  int selectedPromotion = 0;
+  int selectedAmpliation = 0;
+  int selectedTracking = 0;
+  int selectedRecovery = 0;
+  String selectedDistrict = '';
   @override
   void initState() {
     super.initState();
@@ -176,23 +189,12 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                           child: const Text(
                             'PLAN DEL DÍA',
                             style: TextStyle(
-                              color: Color(0xFF0E813C),
+                              color: Color.fromARGB(255, 4, 56, 99),
                               fontSize: 25.0,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Unna-Bold',
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 20.0),
-                        const Text(
-                          'Ramón Perez García',
-                          style: TextStyle(
-                            color: Colors.orange,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Unna-Bold',
-                          ),
-                          textAlign: TextAlign.start,
                         ),
                         const SizedBox(height: 20.0),
                         Row(
@@ -222,35 +224,145 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             container,
-                            GestureDetector(
-                              onTap: () {
-                                _toggleFloatingPage();
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.only(right: 100),
-                                padding: const EdgeInsets.fromLTRB(
-                                    16.0, 16.0, 16.0, 16.0),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF0E813C),
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: const Row(
-                                  children: [
-                                    Icon(Icons.add, color: Colors.white),
-                                    Text(
-                                      'AÑADIR',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                         const SizedBox(height: 25.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            _buildSquareWithIcon(
+                              FontAwesomeIcons.mapLocation,
+                              "Distrito",
+                              _buildDistrictSelector(
+                                districts: districts,
+                                selectedDistrict: selectedDistrict,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    selectedDistrict = value ?? '';
+                                  });
+                                },
+                              ),
+                              null,
+                            ),
+                            _buildSquareWithIcon(
+                              FontAwesomeIcons.bullhorn,
+                              "Promoción",
+                              _buildNumberSelector(
+                                selectedNumber: selectedPromotion,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    selectedPromotion = value ?? 0;
+                                  });
+                                },
+                              ),
+                              null,
+                            ),
+                            _buildSquareWithIcon(
+                              FontAwesomeIcons.personCirclePlus,
+                              "Ampliación",
+                              _buildNumberSelector(
+                                selectedNumber: selectedAmpliation,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    selectedAmpliation = value ?? 0;
+                                  });
+                                },
+                              ),
+                              null,
+                            ),
+                            _buildSquareWithIcon(
+                              FontAwesomeIcons.fileCircleCheck,
+                              "Seguimiento",
+                              _buildNumberSelector(
+                                selectedNumber: selectedTracking,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    selectedTracking = value ?? 0;
+                                  });
+                                },
+                              ),
+                              null,
+                            ),
+                            _buildSquareWithIcon(
+                              FontAwesomeIcons.wallet,
+                              "Recuperación",
+                              _buildNumberSelector(
+                                selectedNumber: selectedRecovery,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    selectedRecovery = value ?? 0;
+                                  });
+                                },
+                              ),
+                              null,
+                            ),
+                            Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    _toggleFloatingPage();
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(16.0),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          const Color.fromARGB(255, 4, 56, 99),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    child: const Row(
+                                      children: [
+                                        Icon(FontAwesomeIcons.userPlus,
+                                            color: Colors.white),
+                                        SizedBox(
+                                          width: 10.0,
+                                        ),
+                                        Text(
+                                          '  AÑADIR ',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 15.0),
+                                GestureDetector(
+                                  onTap: () {
+                                    // Aquí puedes agregar la lógica para generar
+                                    // Por ejemplo, puedes llamar a una función _handleGeneratePressed()
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(16.0),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          const Color.fromARGB(255, 4, 56, 99),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    child: const Row(
+                                      children: [
+                                        Icon(FontAwesomeIcons.circleCheck,
+                                            color: Colors.white),
+                                        SizedBox(
+                                          width: 9.0,
+                                        ), // Espacio entre el icono y el texto
+                                        Text(
+                                          ' GENERAR',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 20.0),
                         Center(
                           child: _buildDataTable(
                               selectedOption, sociosAssignedToToday),
@@ -304,6 +416,111 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     );
   }
 
+  Widget _buildSquareWithIcon(
+    IconData icon,
+    String text,
+    Widget selector,
+    Function(dynamic)? onChanged,
+  ) {
+    return Container(
+      width: 180,
+      height: 120,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: const Color.fromARGB(255, 4, 56, 99),
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            color: const Color.fromARGB(255, 4, 56, 99),
+          ),
+          const SizedBox(height: 5),
+          Text(
+            text,
+            style: const TextStyle(
+              color: Color.fromARGB(255, 4, 56, 99),
+              fontSize: 15.0,
+              fontFamily: 'Unna-Bold',
+            ),
+          ),
+          const SizedBox(height: 5),
+          selector,
+        ],
+      ),
+    );
+  }
+
+  // Widget para construir el selector de distrito
+  Widget _buildDistrictSelector({
+    required List<String> districts,
+    required String selectedDistrict,
+    required ValueChanged<String?> onChanged, // Cambiado a String?
+  }) {
+    return DropdownButton<String>(
+      value: selectedDistrict.isNotEmpty ? selectedDistrict : null,
+      items: districts.map((district) {
+        return DropdownMenuItem<String>(
+          value: district,
+          child: Text(
+            district,
+            style: const TextStyle(
+              color: Color.fromARGB(255, 4, 56, 99),
+              fontSize: 15.0,
+              fontFamily: 'Unna-Bold',
+            ),
+          ),
+        );
+      }).toList(),
+      onChanged: onChanged,
+      hint: const Text(
+        'Seleccionar distrito',
+        style: TextStyle(
+          color: Color.fromARGB(255, 196, 196, 196),
+          fontSize: 15.0,
+          fontFamily: 'Unna-Bold',
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNumberSelector({
+    required int selectedNumber,
+    required ValueChanged<int?> onChanged,
+  }) {
+    return DropdownButton<int>(
+      value: selectedNumber == 0
+          ? 0
+          : selectedNumber, // Si selectedNumber es 0, establece el valor en null
+      items: List.generate(11, (index) {
+        return DropdownMenuItem<int>(
+          value: index,
+          child: Text(
+            '$index',
+            style: const TextStyle(
+              color: Color.fromARGB(255, 4, 56, 99),
+              fontSize: 15.0,
+              fontFamily: 'Unna-Bold',
+            ),
+          ),
+        );
+      }),
+      onChanged: onChanged,
+      hint: const Text(
+        'Seleccionar número',
+        style: TextStyle(
+          color: Color.fromARGB(255, 196, 196, 196),
+          fontSize: 15.0,
+          fontFamily: 'Unna-Bold',
+        ),
+      ),
+    );
+  }
+
   List<String> SociosPorAnalista({
     required String analistaId,
     required List<Socio> socios,
@@ -326,8 +543,8 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
           color: Colors.white,
           elevation: 0,
           child: SizedBox(
-            height: 300,
-            width: 1000,
+            height: 400,
+            width: 1300,
             child: SingleChildScrollView(
               child: DataTable(
                 showCheckboxColumn: false,
@@ -352,8 +569,10 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                       DataCell(Text(socio.tipoGrupo)),
                       DataCell(
                         IconButton(
-                          icon: const Icon(FontAwesomeIcons.trash,
-                              color: Color(0xFF0E813C)),
+                          icon: const Icon(
+                            FontAwesomeIcons.trash,
+                            color: Color.fromARGB(255, 4, 56, 99),
+                          ),
                           onPressed: () {
                             _handleTrashIconPressed(socio);
                           },
@@ -375,6 +594,23 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
       socio.assignedDate = DateTime(2024, 1, 8);
     });
     _toggleFloatingPage();
+  }
+
+  void _onDistrictChanged(dynamic value) {
+    if (value is String) {
+      // Handle district selection
+      setState(() {
+        selectedDistrict = value;
+      });
+    } else if (value is int) {
+      // Handle number selection
+      setState(() {
+        selectedPromotion = value;
+        selectedAmpliation = value;
+        selectedTracking = value;
+        selectedRecovery = value;
+      });
+    }
   }
 
   void _handleTrashIconPressed(Socio socio) {
@@ -458,7 +694,7 @@ class FloatingPage extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(40.0),
           border: Border.all(
-            color: const Color(0xFF0E813C),
+            color: const Color.fromARGB(255, 4, 56, 99),
             width: 3.0,
           ),
         ),
@@ -468,7 +704,7 @@ class FloatingPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(15.0),
               decoration: BoxDecoration(
-                color: const Color(0xFF0E813C),
+                color: const Color.fromARGB(255, 4, 56, 99),
                 borderRadius: BorderRadius.circular(30.0),
               ),
               child: const Text(
@@ -548,7 +784,7 @@ class FloatingPage extends StatelessWidget {
                   'Motivo: Cambio de ciudad',
                   style: TextStyle(
                     fontSize: 14.0,
-                    color: Color.fromARGB(255, 9, 104, 47),
+                    color: Color.fromARGB(255, 4, 56, 99),
                   ),
                 ),
               ],
@@ -557,7 +793,7 @@ class FloatingPage extends StatelessWidget {
           trailing: IconButton(
             icon: const Icon(
               FontAwesomeIcons.plus,
-              color: Color(0xFF0E813C),
+              color: Color.fromARGB(255, 4, 56, 99),
             ),
             onPressed: () {
               onPlusIconPressed(socio);
@@ -682,7 +918,7 @@ class _SearchAndSocioListState extends State<SearchAndSocioList> {
                     child: IconButton(
                       icon: const Icon(
                         FontAwesomeIcons.plus,
-                        color: Color(0xFF0E813C),
+                        color: Color.fromARGB(255, 4, 56, 99),
                       ),
                       onPressed: () {
                         _handlePlusIconPressed(socio);

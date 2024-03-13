@@ -20,7 +20,7 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: DefaultTabController(
-        length: 2,
+        length: 1,
         child: Scaffold(
           bottomNavigationBar: const BottomAppBar(
             child: TabBarBottom(),
