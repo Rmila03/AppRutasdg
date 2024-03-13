@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ruta_sdg/analista.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
+import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 
 class MoraSupervisorPage extends StatelessWidget {
   const MoraSupervisorPage({Key? key});
@@ -35,7 +36,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: MediaQuery.of(context).size.width < 640
-          ? MenuSupervisorMobile(name: selectedMenu)
+          ? const MenuSupervisorMobile(name: "MORA")
           : null,
       body: Row(
         children: [
