@@ -45,7 +45,7 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
               _showMotivoDialog(user);
             },
             child: Container(
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 maxWidth: 200, // Máximo ancho del campo
               ),
               child: Text(
