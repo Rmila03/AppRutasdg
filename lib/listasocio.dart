@@ -4,6 +4,7 @@ import 'package:ruta_sdg/widgets/header.dart';
 import "package:ruta_sdg/widgets/navigation_drawer.dart";
 import 'package:ruta_sdg/widgets/tabbar.dart';
 import "package:ruta_sdg/widgets/promotion_form.dart";
+import "package:ruta_sdg/widgets/ampliacion_form.dart";
 import "package:ruta_sdg/widgets/seguimiento_form.dart";
 import "package:ruta_sdg/widgets/recuperacion_form.dart";
 import "package:ruta_sdg/widgets/nuevo_form.dart";
@@ -35,7 +36,7 @@ class ListaSocioState extends State<ListaSocio> {
         socio: widget.socio!,
       );
     } else if (widget.tabName == 'AMPLIACIÓN') {
-      CasoFormWidget = PromotionForm(
+      CasoFormWidget = AmpliacionForm(
         socio: widget.socio!,
       );
     } else if (widget.tabName == 'SEGUIMIENTO') {

@@ -4,17 +4,17 @@ import 'package:ruta_sdg/views/promocion.dart';
 import 'package:ruta_sdg/widgets/custom_dropdown.dart';
 import 'package:ruta_sdg/widgets/text_form_result.dart';
 
-class PromotionForm extends StatefulWidget {
+class AmpliacionForm extends StatefulWidget {
   final Socio socio;
-  const PromotionForm({super.key, required this.socio});
+  const AmpliacionForm({super.key, required this.socio});
 
   @override
-  PromotionFormState createState() {
-    return PromotionFormState();
+  AmpliacionFormState createState() {
+    return AmpliacionFormState();
   }
 }
 
-class PromotionFormState extends State<PromotionForm> {
+class AmpliacionFormState extends State<AmpliacionForm> {
   final _formKey = GlobalKey<FormState>();
   bool _isSelected = false;
   bool checkVisible = false;
