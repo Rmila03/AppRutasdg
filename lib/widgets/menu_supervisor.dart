@@ -37,7 +37,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
 
   @override
   Widget build(BuildContext context) {
-    Color customColor = const Color(0xFFD9DEDA);
+    Color customColor = const Color.fromARGB(255, 0, 76, 128);
     return Container(
       width: 250,
       color: customColor,
@@ -62,25 +62,27 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',
+                    color: Colors.white,
                   ),
                 ),
               ],
             ),
           ),
-          buildMenuItem('PLAN DEL DÍA'),
-          buildMenuItem('REPORTES'),
-          buildMenuItem('CARTERA'),
-          buildMenuItem('DASHBOARD'),
-          buildMenuItem('MORA'),
-          buildMenuItem('NOTIFICACIONES'),
-          buildMenuItem('UBICACIÓN'),
-          buildMenuItem('CERRAR SESIÓN'),
+
+          buildMenuItem('PLAN DEL DÍA', Icons.note_alt_outlined),
+          buildMenuItem('REPORTES', Icons.description_outlined),
+          buildMenuItem('CARTERA', Icons.account_balance_wallet),
+          buildMenuItem('DASHBOARD', Icons.align_vertical_bottom),
+          buildMenuItem('MORA', Icons.access_alarm),
+          buildMenuItem('NOTIFICACIONES', Icons.notification_important),
+          buildMenuItem('UBICACIÓN', Icons.map_outlined),
+          buildMenuItem('CERRAR SESIÓN', Icons.logout),
         ],
       ),
     );
   }
 
-  Widget buildMenuItem(String title) {
+  Widget buildMenuItem(String title, IconData icon) {
     return InkWell(
       onTap: () {
         setState(() {
@@ -95,20 +97,33 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
         );
       },
       child: Container(
-        padding: const EdgeInsets.all(8.0),
+        width: 250,
+        height: 50,
+        padding: const EdgeInsets.symmetric(horizontal: 50.0),
         decoration: BoxDecoration(
           color: selectedMenu == title
-              ? const Color(0xFFD9DEDA)
+              ? const Color.fromARGB(255, 3, 57, 94)
               : Colors.transparent,
         ),
-        child: Text(
-          title,
-          style: TextStyle(
-            color: selectedMenu == title ? Colors.orange : Colors.black,
-            fontSize: 12.0,
-            fontFamily: 'Montserrat',
-            fontWeight: FontWeight.bold,
-          ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: Colors.white,
+            ),
+            const SizedBox(width: 8),
+            Center(
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: selectedMenu == title ? Colors.white : Colors.white,
+                  fontSize: 12.0,
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
