@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/conexcion_api.dart';
+//import 'package:ruta_sdg/conexcion_api.dart';
 import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
 import 'package:ruta_sdg/views/home.dart';
 
