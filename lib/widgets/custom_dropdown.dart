@@ -174,3 +174,63 @@ class _TextForm extends State<TextForm> {
     super.dispose();
   }
 }
+
+class InputTextForm extends StatelessWidget {
+  final String label;
+  final String? percentage;
+  const InputTextForm({
+    super.key,
+    required this.label,
+    this.percentage = "",
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            label,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Color.fromARGB(255, 0, 76, 128),
+            ),
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.only(right: 10),
+          height: 25,
+          child: Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: const Color.fromRGBO(244, 244, 244, 1),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 4),
+                    border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.circular(10.0), // Bordes redondeados
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 79, 81, 82),
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 79, 81, 82),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
