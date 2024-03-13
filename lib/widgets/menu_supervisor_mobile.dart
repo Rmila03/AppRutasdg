@@ -50,7 +50,6 @@ class _MenuSupervisorMobileState extends State<MenuSupervisorMobile> {
 
   @override
   Widget build(BuildContext context) {
-    Color customColor = const Color(0xFFD9DEDA);
     return BottomNavigationBar(
       currentIndex: _selectedIndex,
       unselectedItemColor: Colors.grey,
