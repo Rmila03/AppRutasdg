@@ -5,20 +5,16 @@ import 'package:ruta_sdg/analista.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 
 class NotificacionesSupervisorPage extends StatelessWidget {
-  const NotificacionesSupervisorPage({Key? key}) : super(key: key);
+  const NotificacionesSupervisorPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: NotificacionesSupervisorContent(),
-      ),
-    );
+    return const NotificacionesSupervisorContent();
   }
 }
 
 class NotificacionesSupervisorContent extends StatefulWidget {
-  const NotificacionesSupervisorContent({Key? key}) : super(key: key);
+  const NotificacionesSupervisorContent({Key? key});
 
   @override
   _NotificacionesSupervisorContentState createState() =>
@@ -27,15 +23,16 @@ class NotificacionesSupervisorContent extends StatefulWidget {
 
 class _NotificacionesSupervisorContentState
     extends State<NotificacionesSupervisorContent> {
-  late String selectedAnalistaId;
-  List<Socio> socios = [];
+  String selectedMenu = 'Notificaciones';
+  DateTime selectedDate = DateTime.now();
+  TextEditingController searchController = TextEditingController();
+  FocusNode searchFocusNode = FocusNode();
 
-  @override
-  void initState() {
-    super.initState();
-    selectedAnalistaId = getAnalistas().first.idAnalista;
-    updateSocios(selectedAnalistaId);
-  }
+  final List<Analista> analistas = getAnalistas();
+  final List<Socio> socios = getSocios();
+
+  List<Analista> filteredAnalista = [];
+  List<Socio> filteredSocio = [];
 
   List<Socio> getSociosByAnalistaId(String analistaId) {
     return getSocios()
@@ -45,7 +42,7 @@ class _NotificacionesSupervisorContentState
 
   void updateSocios(String analistaId) {
     setState(() {
-      socios = getSociosByAnalistaId(analistaId);
+      filteredSocio = getSociosByAnalistaId(analistaId);
     });
   }
 
@@ -60,61 +57,22 @@ class _NotificacionesSupervisorContentState
           if (MediaQuery.of(context).size.width >= 640)
             const MenuSupervisor(name: 'NOTIFICACIONES'),
           Expanded(
-            child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const SizedBox(height: 40.0),
-                  const Text(
-                    'NOTIFICACIONES DE CAMBIOS',
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      color: Color.fromARGB(255, 0, 76, 128),
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
+                  _buildTitle(),
                   const SizedBox(height: 20.0),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: DropdownButton<String>(
-                      value: selectedAnalistaId,
-                      items: getAnalistas().map((analista) {
-                        return DropdownMenuItem<String>(
-                          value: analista.idAnalista,
-                          child: Text(' ${analista.name}'),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        if (newValue != null) {
-                          setState(() {
-                            selectedAnalistaId = newValue;
-                            updateSocios(selectedAnalistaId);
-                          });
-                        }
+                  _buildSearchBox(),
+                  const SizedBox(height: 10.0),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: filteredSocio.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return _buildSocioCard(filteredSocio[index]);
                       },
-                    ),
-                  ),
-                  const SizedBox(height: 20.0),
-                  SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start, // Cambiado a start
-                      children: [
-                        for (var socio in socios) ...[
-                          buildAlarmInfo(
-                            socio.name,
-                            'Descripción Cambio', // Cambia la descripción según tus necesidades
-                            mostrarBotonVerTodo: true,
-                          ),
-                          const SizedBox(height: 10.0),
-                        ],
-                      ],
                     ),
                   ),
                 ],
@@ -126,51 +84,130 @@ class _NotificacionesSupervisorContentState
     );
   }
 
-  Widget buildAlarmInfo(String name, String description,
-      {bool mostrarBotonVerTodo = true}) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: const Color.fromARGB(255, 0, 76, 128)),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: 900.0),
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const SizedBox(width: 10.0),
-            const Icon(
-              Icons.notifications,
-              color: Colors.red,
-            ),
-            const SizedBox(width: 10.0),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  Text(description),
-                ],
-              ),
-            ),
-          ],
-        ),
+  Widget _buildTitle() {
+    return const Text(
+      'NOTIFICACIONES DE CAMBIOS',
+      style: TextStyle(
+        fontSize: 25.0,
+        color: Color.fromARGB(255, 0, 76, 128),
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Montserrat',
       ),
     );
   }
-}
 
-class Cambio {
-  final String nombreAnalista;
-  final String descripcion;
+  Widget _buildSearchBox() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width *
+                0.2, // Ajusta el tamaño del cuadro de búsqueda
+            child: DropdownButtonFormField<Analista>(
+              dropdownColor: Colors.white, // Establece el color de fondo blanco
+              focusColor: Colors
+                  .transparent, // Evita que el cuadro cambie de color al seleccionar un elemento
+              style: const TextStyle(
+                color: Colors.black,
+              ), // Establece el color del texto
+              items: analistas.map((Analista analista) {
+                return DropdownMenuItem<Analista>(
+                  value: analista,
+                  child: Text("${analista.name} ${analista.lastName}"),
+                );
+              }).toList(),
+              onChanged: (Analista? selectedAnalista) {
+                if (selectedAnalista != null) {
+                  searchController.text =
+                      "${selectedAnalista.name} ${selectedAnalista.lastName}";
+                  updateSocios(selectedAnalista.idAnalista);
+                }
+              },
+              decoration: InputDecoration(
+                labelText: 'Seleccionar Analista',
+                contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                labelStyle: const TextStyle(
+                  color: Color.fromARGB(255, 0, 76, 128),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius:
+                      BorderRadius.circular(5.0), // Ajusta el radio del borde
+                  borderSide: const BorderSide(
+                    color: Color.fromARGB(
+                        255, 0, 76, 128), // Establece el color del borde
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius:
+                      BorderRadius.circular(5.0), // Ajusta el radio del borde
+                  borderSide: const BorderSide(
+                    color: Color.fromARGB(
+                        255, 0, 76, 128), // Establece el color del borde
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-  Cambio(this.nombreAnalista, this.descripcion);
+  Widget _buildSocioCard(Socio socio) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.all(8.0), // Ajusta el espacio interno aquí
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: const Color.fromARGB(255, 0, 76, 128),
+        ),
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.notifications,
+            color: Colors.red,
+            size: 24.0,
+          ),
+          const SizedBox(width: 16.0),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Notificación de Cambio',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0,
+                    color: Color.fromARGB(255, 0, 76, 128),
+                  ),
+                ),
+                const SizedBox(height: 8.0),
+                Text(
+                  'Nombre: ${socio.name} ${socio.lastName}',
+                  style: const TextStyle(fontSize: 14.0),
+                ),
+                const Text(
+                  'Fecha de notificación:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const Text(
+                  'Descripción del cambio:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const Text(
+                  'Aquí va la descripción detallada del cambio...',
+                  style: TextStyle(fontSize: 14.0),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

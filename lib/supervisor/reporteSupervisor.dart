@@ -220,7 +220,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
       return DataRow(
         cells: [
           DataCell(Text(user.dni)),
-          DataCell(Text(user.name)),
+          DataCell(Text("${user.name} ${user.lastName}")),
           DataCell(
             Row(
               children: [
@@ -230,7 +230,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                     // Agrega aquí la lógica de descarga para este usuario
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                     width:
                         10), // Espacio entre el icono de descarga y el nuevo icono
                 IconButton(
