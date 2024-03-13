@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/views/recuperacion.dart';
-import 'package:ruta_sdg/widgets/act_datos.dart';
 import 'package:ruta_sdg/widgets/custom_dropdown.dart';
 import 'package:ruta_sdg/widgets/radio_button_custom.dart';
 import 'package:ruta_sdg/widgets/text_form_result.dart';
@@ -301,7 +300,43 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                   ],
                 ),
               ),
-              const SizedBox(height: 15),
+              Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: const Color.fromRGBO(244, 244, 244, 1),
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.grey,
+                          spreadRadius: 2,
+                          blurRadius: 3,
+                          offset: Offset(1.0, 3.0),
+                        ),
+                      ],
+                    ),
+                    child: const Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            "COMPROMISO DE PAGO",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 0, 76, 128),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        TextFormInto(label: "Fecha de cancelación: "),
+                        TextFormInto(label: "Método de pago: "),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              /*const SizedBox(height: 15),
               RadioButtonCustom(
                 option1: "SE ENCONTRÓ",
                 option2: "NO SE ENCONTRÓ",
@@ -352,7 +387,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                   ],
                 ),
               ),
-              /*Visibility(
+              Visibility(
                 visible: (show == 2 || show == 1),
                 child: Column(
                   children: [
@@ -411,8 +446,6 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                   ],
                 ),
               ),*/
-
-              const ActualizarCustom(),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 padding: const EdgeInsets.all(10),
@@ -479,6 +512,56 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                         ),
                       ],
                     ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 25,
+                          width: 90,
+                          padding: const EdgeInsets.all(3),
+                          margin: const EdgeInsets.only(right: 10, top: 10),
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 0, 76, 128),
+                            border: Border.all(
+                              color: const Color.fromARGB(255, 4, 54, 95),
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Text(
+                            'Actuzalizar datos',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsetsDirectional.only(top: 10),
+                            height: 25,
+                            child: TextField(
+                              textAlign: TextAlign.left,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 105, 105, 105),
+                                    width: 1.0,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 105, 105, 105),
+                                    width: 1.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Container(
@@ -535,7 +618,8 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: const Color.fromRGBO(244, 244, 244, 1),
+                          backgroundColor:
+                              const Color.fromRGBO(244, 244, 244, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),
@@ -634,7 +718,7 @@ class TextFormInto extends StatelessWidget {
           SizedBox(
             child: Text(
               label,
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 13),
             ),
           ),
           Expanded(
