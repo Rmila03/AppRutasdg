@@ -57,7 +57,7 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
         body: Column(
           children: [
             Container(
-              height: 100,
+              height: 60,
               padding: const EdgeInsets.only(
                 left: 20,
                 right: 5,
@@ -71,12 +71,11 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
               child: Row(
                 children: [
                   Container(
-                    margin: const EdgeInsets.all(24),
                     padding:
                         const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(5),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.3),
@@ -95,23 +94,6 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: Container(
-                      width: 80.0,
-                      height: 80.0,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          FontAwesomeIcons.user,
-                          color: Color.fromARGB(255, 0, 76, 128),
-                          size: 60.0,
-                        ),
-                      ),
-                    ),
-                  )
                 ],
               ),
             ),
