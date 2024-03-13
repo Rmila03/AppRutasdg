@@ -166,7 +166,7 @@ List<Socio> getSocios() {
       "50",
       "24 950",
       assignedDate: DateTime(2024, 1, 25),
-      "Promoción",
+      "Ampliación",
       "REFERIDO",
       "2",
       5,
