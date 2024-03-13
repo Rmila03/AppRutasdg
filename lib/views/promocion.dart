@@ -122,7 +122,7 @@ class _PromocionPageState extends State<PromocionPage> {
                         MaterialPageRoute(
                           builder: (context) => ListaSocio(
                             tabColorLeft: Colors.orange,
-                            tabName: title.toUpperCase(),
+                            tabName: tipoGrupo.toUpperCase(),
                             socio: user,
                           ),
                         ),

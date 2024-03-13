@@ -24,7 +24,6 @@ class ListaSocio extends StatefulWidget {
 }
 
 class ListaSocioState extends State<ListaSocio> {
-  // ignore: non_constant_identifier_names
   late Widget CasoFormWidget; // Declara la variable para la redirección
 
   @override
@@ -32,6 +31,10 @@ class ListaSocioState extends State<ListaSocio> {
     super.initState();
     // Asigna la redirección según el valor de tabName
     if (widget.tabName == 'PROMOCIÓN') {
+      CasoFormWidget = PromotionForm(
+        socio: widget.socio!,
+      );
+    } else if (widget.tabName == 'AMPLIACIÓN') {
       CasoFormWidget = PromotionForm(
         socio: widget.socio!,
       );
@@ -81,6 +84,7 @@ class ListaSocioState extends State<ListaSocio> {
                         ),
                       ),
                     ),
+                    // Uso seguro de CasoFormWidget
                     CasoFormWidget,
                   ],
                 ),
@@ -107,10 +111,10 @@ class Tab extends StatelessWidget {
   final String name;
 
   const Tab({
-    super.key,
+    Key? key,
     required this.colorLeft,
     required this.name,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
