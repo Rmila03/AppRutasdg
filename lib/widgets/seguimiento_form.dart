@@ -276,88 +276,49 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                         ),
                       ],
                     ),
-                    TextField(
-                      maxLines: 2,
-                      keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 105, 105, 105),
-                            width: 1.0,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 105, 105, 105),
-                            width: 1.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(244, 244, 244, 1),
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.grey,
-                      spreadRadius: 2,
-                      blurRadius: 3,
-                      offset: Offset(1.0, 3.0),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
                     Row(
                       children: [
-                        const Expanded(
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "OBSERVACIONES",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 0, 76, 128),
-                              ),
+                        Container(
+                          height: 25,
+                          width: 90,
+                          padding: const EdgeInsets.all(3),
+                          margin: const EdgeInsets.only(right: 10, top: 10),
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 0, 76, 128),
+                            border: Border.all(
+                              color: const Color.fromARGB(255, 4, 54, 95),
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Text(
+                            'Actuzalizar datos',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.white,
                             ),
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _isSelected = !_isSelected;
-                            });
-                          },
+                        Expanded(
                           child: Container(
-                            alignment: Alignment.centerRight,
-                            width: 80,
-                            height: 20,
-                            decoration: BoxDecoration(
-                              color: _isSelected
-                                  ? const Color.fromARGB(255, 4, 54, 95)
-                                  : const Color.fromRGBO(244, 244, 244, 1),
-                              border: Border.all(
-                                color: const Color.fromARGB(255, 4, 54, 95),
-                              ),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Center(
-                              child: Text(
-                                _isSelected ? 'SIN UBICAR' : 'SIN UBICAR',
-                                style: TextStyle(
-                                  color: _isSelected
-                                      ? Colors.white
-                                      : const Color.fromARGB(255, 0, 76, 128),
-                                  fontSize: 11,
+                            margin: const EdgeInsetsDirectional.only(top: 10),
+                            height: 25,
+                            child: TextField(
+                              textAlign: TextAlign.left,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 105, 105, 105),
+                                    width: 1.0,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 105, 105, 105),
+                                    width: 1.0,
+                                  ),
                                 ),
                               ),
                             ),

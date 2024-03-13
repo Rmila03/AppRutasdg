@@ -361,6 +361,56 @@ class PromotionFormState extends State<PromotionForm> {
                         ),
                       ],
                     ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 25,
+                          width: 90,
+                          padding: const EdgeInsets.all(3),
+                          margin: const EdgeInsets.only(right: 10, top: 10),
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 0, 76, 128),
+                            border: Border.all(
+                              color: const Color.fromARGB(255, 4, 54, 95),
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Text(
+                            'Actuzalizar datos',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsetsDirectional.only(top: 10),
+                            height: 25,
+                            child: TextField(
+                              textAlign: TextAlign.left,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 105, 105, 105),
+                                    width: 1.0,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 105, 105, 105),
+                                    width: 1.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Container(
@@ -443,66 +493,6 @@ class PromotionFormState extends State<PromotionForm> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class InputTextForm extends StatelessWidget {
-  final String label;
-  final String? percentage;
-  const InputTextForm({
-    super.key,
-    required this.label,
-    this.percentage = "",
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            label,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Color.fromARGB(255, 0, 76, 128),
-            ),
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.only(right: 10),
-          height: 25,
-          child: Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  keyboardType: TextInputType.number,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: const Color.fromRGBO(244, 244, 244, 1),
-                    contentPadding: const EdgeInsets.symmetric(vertical: 4),
-                    border: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.circular(10.0), // Bordes redondeados
-                      borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 79, 81, 82),
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 79, 81, 82),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

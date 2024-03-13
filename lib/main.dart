@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/conexcion_api.dart';
+//import 'package:ruta_sdg/conexcion_api.dart';
 import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
 import 'package:ruta_sdg/views/home.dart';
 
@@ -302,6 +302,7 @@ class _LoginState extends State<Login> {
                   ],
                 ),
               ),
+<<<<<<< HEAD
               /*ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(253, 24, 131, 42),
@@ -327,6 +328,8 @@ class _LoginState extends State<Login> {
                   style: TextStyle(fontSize: 15, color: Colors.black),
                 ),
               ),*/
+=======
+>>>>>>> e12fbb8ba5cca4905a74c60d4d96495f68488f95
             ],
           ),
         ),
