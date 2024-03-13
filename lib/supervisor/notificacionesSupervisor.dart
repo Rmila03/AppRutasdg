@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/analista.dart';
+import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 
 class NotificacionesSupervisorPage extends StatelessWidget {
   const NotificacionesSupervisorPage({Key? key}) : super(key: key);
@@ -51,9 +52,13 @@ class _NotificacionesSupervisorContentState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: MediaQuery.of(context).size.width < 640
+          ? const MenuSupervisorMobile(name: 'NOTIFICACIONES')
+          : null,
       body: Row(
         children: [
-          const MenuSupervisor(name: 'NOTIFICACIONES'),
+          if (MediaQuery.of(context).size.width >= 640)
+            const MenuSupervisor(name: 'NOTIFICACIONES'),
           Expanded(
             child: SingleChildScrollView(
               child: Column(

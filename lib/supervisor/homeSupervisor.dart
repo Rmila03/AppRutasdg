@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/analista.dart';
+import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 //import 'package:tooltip/tooltip.dart';
 
 void main() {
@@ -159,11 +160,15 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
 
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: MediaQuery.of(context).size.width < 640
+            ? const MenuSupervisorMobile(name: "PLAN DEL DÍA")
+            : null,
         body: Stack(
           children: [
             Row(
               children: [
-                const MenuSupervisor(name: "PLAN DEL DÍA"),
+                if (MediaQuery.of(context).size.width >= 640)
+                  const MenuSupervisor(name: "PLAN DEL DÍA"),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),

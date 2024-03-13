@@ -535,7 +535,8 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: const Color.fromRGBO(244, 244, 244, 1),
+                          backgroundColor:
+                              const Color.fromRGBO(244, 244, 244, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),

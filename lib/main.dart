@@ -302,7 +302,7 @@ class _LoginState extends State<Login> {
                   ],
                 ),
               ),
-              ElevatedButton(
+              /*ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(253, 24, 131, 42),
                   elevation: 5,
@@ -326,7 +326,7 @@ class _LoginState extends State<Login> {
                   'Mostrar Datos de la API',
                   style: TextStyle(fontSize: 15, color: Colors.black),
                 ),
-              ),
+              ),*/
             ],
           ),
         ),

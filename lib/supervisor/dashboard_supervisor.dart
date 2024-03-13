@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
+import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../widgets/custom_dropdown.dart';
@@ -43,9 +44,13 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
       ],
       home: Scaffold(
         resizeToAvoidBottomInset: false,
+        bottomNavigationBar: MediaQuery.of(context).size.width < 640
+            ? const MenuSupervisorMobile(name: "DASHBOARD")
+            : null,
         body: Row(
           children: [
-            const MenuSupervisor(name: "DASHBOARD"),
+            if (MediaQuery.of(context).size.width >= 640)
+              const MenuSupervisor(name: "DASHBOARD"),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
