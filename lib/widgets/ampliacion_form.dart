@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/socio.dart';
-import 'package:ruta_sdg/views/recuperacion.dart';
+import 'package:ruta_sdg/views/promocion.dart';
 import 'package:ruta_sdg/widgets/custom_dropdown.dart';
 import 'package:ruta_sdg/widgets/text_form_result.dart';
 
-class RecuperacionForm extends StatefulWidget {
+class PromotionForm extends StatefulWidget {
   final Socio socio;
-  const RecuperacionForm({super.key, required this.socio});
+  const PromotionForm({super.key, required this.socio});
 
   @override
-  RecuperacionFormState createState() {
-    return RecuperacionFormState();
+  PromotionFormState createState() {
+    return PromotionFormState();
   }
 }
 
-class RecuperacionFormState extends State<RecuperacionForm> {
+class PromotionFormState extends State<PromotionForm> {
   final _formKey = GlobalKey<FormState>();
-  DateTime selectedDate = DateTime.now();
   bool _isSelected = false;
-  int show = 0;
-  int valorSeleccionado = 0;
+  bool checkVisible = false;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -214,8 +212,8 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                 ]),
               ),
               Container(
-                padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(244, 244, 244, 1),
                   borderRadius: BorderRadius.circular(10),
@@ -231,220 +229,71 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                 child: Column(
                   children: [
                     Container(
-                      margin: const EdgeInsetsDirectional.only(bottom: 10),
-                      child: const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "CRÉDITO ACTUAL",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 0, 76, 128),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Column(
-                      children: [
-                        const Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  TextFormResult(
-                                      label: "Crédito",
-                                      content: "S/. 10000.00"),
-                                  TextFormResult(
-                                      label: "Monto a pagar",
-                                      content: "S/. 1150.53"),
-                                  TextFormResult(
-                                      label: "Cuota a Pagar", content: "8"),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Expanded(
-                              child: TextFormResult(
-                                  label: "Fecha de CPAnt",
-                                  content: "12 de noviembre del 2023"),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(left: 20),
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  shape: const RoundedRectangleBorder(
-                                    side: BorderSide.none, // Borde transparente
-                                    borderRadius:
-                                        BorderRadius.zero, // Bordes cero
-                                  ),
-                                ),
-                                child: const Text(
-                                  'Ver más',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 12),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(244, 244, 244, 1),
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          spreadRadius: 2,
-                          blurRadius: 3,
-                          offset: Offset(1.0, 3.0),
-                        ),
-                      ],
-                    ),
-                    child: const Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "COMPROMISO DE PAGO",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Color.fromARGB(255, 0, 76, 128),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        TextFormInto(label: "Fecha de cancelación: "),
-                        TextFormInto(label: "Método de pago: "),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              /*const SizedBox(height: 15),
-              RadioButtonCustom(
-                option1: "SE ENCONTRÓ",
-                option2: "NO SE ENCONTRÓ",
-                onValueChanged: (int newValue) {
-                  setState(() {
-                    valorSeleccionado = newValue;
-                    show = newValue;
-                  });
-                },
-              ),
-              const SizedBox(height: 15),
-              Visibility(
-                visible: (show == 1),
-                child: Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: const Color.fromRGBO(244, 244, 244, 1),
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.grey,
-                            spreadRadius: 2,
-                            blurRadius: 3,
-                            offset: Offset(1.0, 3.0),
-                          ),
-                        ],
-                      ),
-                      child: const Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              "COMPROMISO DE PAGO",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Color.fromARGB(255, 0, 76, 128),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          TextFormInto(label: "Fecha de cancelación: "),
-                          TextFormInto(label: "Método de pago: "),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Visibility(
-                visible: (show == 2 || show == 1),
-                child: Column(
-                  children: [
-                    Align(
+                      margin: const EdgeInsets.only(bottom: 10),
                       alignment: Alignment.centerLeft,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 12),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              offset: const Offset(0, 2),
-                              blurRadius: 4,
-                            ),
-                          ],
+                      child: const Text(
+                        "CÁLCULO DEL CRÉDITO",
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 0, 76, 128),
+                          fontWeight: FontWeight.bold,
                         ),
-                        child: const Text(
-                          "FEEDBACK",
+                      ),
+                    ),
+                    const Row(
+                      children: [
+                        Expanded(
+                          child: InputTextForm(
+                            label: "Crédito total",
+                          ),
+                        ),
+                        Expanded(
+                          child: InputTextForm(
+                            label: "Plazo(meses)",
+                          ),
+                        ),
+                        Expanded(
+                          child: InputTextForm(
+                            label: "Interés(%)",
+                            percentage: "%",
+                          ),
+                        ),
+                      ],
+                    ),
+                    const TextFormResult(
+                        label: "Pago Mensual:", content: "s/. 120.50"),
+                    const TextFormResult(
+                      label: "Primera fecha de pago:",
+                      content: "12/02/2023",
+                    ),
+                    const TextFormResult(
+                        label: "Última fehca de pago", content: "12/02/2024"),
+                    Row(
+                      children: [
+                        const Text(
+                          '¿ESTÁ INTERESADO?',
                           style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 10,
                             color: Color.fromARGB(255, 0, 76, 128),
                           ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    TextField(
-                      maxLines: 2,
-                      keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.circular(10.0), // Bordes redondeados
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 0, 76, 128),
-                            width: 2.0, // Grosor del borde al tener foco
-                          ),
+                        IconButton(
+                          icon: Icon(checkVisible
+                              ? Icons.check_circle
+                              : Icons.circle_outlined),
+                          iconSize: 20.0,
+                          color: checkVisible ? Colors.green : Colors.grey,
+                          onPressed: () {
+                            setState(() {
+                              checkVisible = !checkVisible;
+                            });
+                          },
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.circular(10.0), // Bordes redondeados
-                          borderSide: const BorderSide(
-                            color: Colors
-                                .grey, // Color del borde cuando no tiene foco
-                            width: 1.0, // Grosor del borde cuando no tiene foco
-                          ),
-                        ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
-              ),*/
+              ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 padding: const EdgeInsets.all(10),
@@ -598,55 +447,45 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                   ],
                 ),
               ),
-              Visibility(
-                visible: (show != 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const RecuperacionPage()),
-                            );
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromRGBO(244, 244, 244, 1),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ),
-                        child: const SizedBox(
-                          width: 100,
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.save,
-                                color: Color.fromARGB(255, 0, 76, 128),
-                                size: 20,
-                              ),
-                              SizedBox(width: 5),
-                              Text(
-                                'GUARDAR',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Color.fromARGB(255, 0, 76, 128),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+              Align(
+                alignment: Alignment.center,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PromocionPage()),
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(244, 244, 244, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                  ],
+                  ),
+                  child: const SizedBox(
+                    width: 100,
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.save,
+                          color: Color.fromARGB(255, 0, 76, 128),
+                          size: 20,
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          'GUARDAR',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 0, 76, 128),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -676,92 +515,43 @@ class InputTextForm extends StatelessWidget {
             label,
             style: const TextStyle(
               fontSize: 12,
+              color: Color.fromARGB(255, 0, 76, 128),
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: TextFormField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.grey[300],
-              contentPadding: const EdgeInsets.symmetric(vertical: 4),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0), // Bordes redondeados
-                borderSide: BorderSide.none, // Sin borde visible
+        Container(
+          padding: const EdgeInsets.only(right: 10),
+          height: 25,
+          child: Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: const Color.fromRGBO(244, 244, 244, 1),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 4),
+                    border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.circular(10.0), // Bordes redondeados
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 79, 81, 82),
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 79, 81, 82),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-
-              // Puedes añadir más propiedades de estilo según tus necesidades
-            ),
+            ],
           ),
         ),
       ],
-    );
-  }
-}
-
-class TextFormInto extends StatelessWidget {
-  final String label;
-  const TextFormInto({
-    super.key,
-    required this.label,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      child: Row(
-        children: [
-          SizedBox(
-            child: Text(
-              label,
-              style: const TextStyle(fontSize: 13),
-            ),
-          ),
-          Expanded(
-            child: TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: const Color.fromARGB(255, 240, 240, 240),
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(10.0), // Bordes redondeados
-                  borderSide: BorderSide.none, // Sin borde visible
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class TextFormDate extends StatelessWidget {
-  final String label;
-  const TextFormDate({
-    super.key,
-    required this.label,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(children: [
-        SizedBox(
-          width: 100,
-          child: Text(
-            label,
-            style: const TextStyle(
-              fontSize: 10,
-            ),
-          ),
-        ),
-      ]),
     );
   }
 }

@@ -81,35 +81,6 @@ class ListaSocioState extends State<ListaSocio> {
                         ),
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.all(24),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 2,
-                            offset: const Offset(6, 0),
-                          ),
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 2,
-                            offset: const Offset(0, 6),
-                          ),
-                        ],
-                      ),
-                      child: const Text(
-                        "DATOS DEL SOCIO",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
                     CasoFormWidget,
                   ],
                 ),
@@ -146,27 +117,22 @@ class Tab extends StatelessWidget {
     return Row(
       children: [
         Container(
-          height: 55,
-          width: 10,
-          color: colorLeft,
-        ),
-        Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 8),
-          width: 250,
-          height: 55,
-          decoration: const BoxDecoration(
+          margin: const EdgeInsets.only(left: 20, bottom: 10),
+          width: 170,
+          height: 30,
+          decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(20),
-            ),
+            borderRadius: BorderRadius.circular(10),
           ),
-          child: Text(
-            name,
-            style: const TextStyle(
-              fontSize: 23,
-              fontFamily: 'Rockwell Extra Bold',
-              fontWeight: FontWeight.w800,
-              color: Colors.black,
+          child: Center(
+            child: Text(
+              name,
+              style: const TextStyle(
+                fontSize: 18,
+                //fontFamily: 'Rockwell Extra Bold',
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
           ),
         ),

@@ -28,43 +28,39 @@ class _TextFormResult extends State<TextFormResult> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 150,
-            child: Text(
-              widget.label,
-              style: const TextStyle(
-                fontSize: 12,
-              ),
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.bottomLeft,
+          child: Text(
+            widget.label,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Color.fromARGB(255, 0, 76, 128),
             ),
           ),
-          Expanded(
-            child: TextFormField(
-              controller: _controller,
-              enabled: false,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[100],
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide.none,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: const BorderSide(color: Colors.white, width: 0),
-                ),
+        ),
+        SizedBox(
+          height: 30,
+          child: TextFormField(
+            controller: _controller,
+            enabled: false,
+            textAlign: TextAlign.center,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: const Color.fromRGBO(244, 244, 244, 1),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 1, horizontal: 10),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(
+                    width: 2.0, color: Color.fromARGB(255, 0, 76, 128)),
               ),
-              style: const TextStyle(color: Colors.black, fontSize: 13),
             ),
+            style: const TextStyle(color: Colors.black, fontSize: 13),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
