@@ -16,6 +16,8 @@ class PromocionPage extends StatefulWidget {
 
 class _PromocionPageState extends State<PromocionPage> {
   final List<Socio> socios = getSocios();
+  String _currentPageTitle = "CARTERA DE PROMOCIÓN";
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -42,6 +44,13 @@ class _PromocionPageState extends State<PromocionPage> {
                 ],
                 labelColor: const Color.fromARGB(255, 0, 76, 128),
                 indicatorColor: const Color.fromARGB(255, 0, 76, 128),
+                onTap: (index) {
+                  setState(() {
+                    _currentPageTitle = index == 0
+                        ? "CARTERA DE PROMOCIÓN"
+                        : "CARTERA DE AMPLIACIÓN";
+                  });
+                },
               ),
               Expanded(
                 child: TabBarView(
@@ -69,7 +78,7 @@ class _PromocionPageState extends State<PromocionPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          _buildDataTable(title, userList),
+          _buildDataTable(_currentPageTitle, userList),
           // Puedes agregar más contenido específico de la pestaña aquí
         ],
       ),
@@ -77,6 +86,8 @@ class _PromocionPageState extends State<PromocionPage> {
   }
 
   Widget _buildDataTable(String title, List<Socio> userList) {
+    String tipoGrupo =
+        title == "CARTERA DE PROMOCIÓN" ? "Promoción" : "Ampliación";
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Card(
@@ -101,7 +112,7 @@ class _PromocionPageState extends State<PromocionPage> {
                 DataColumn(label: Text('')),
               ],
               rows: userList
-                  .where((user) => user.tipoGrupo == 'Promoción')
+                  .where((user) => user.tipoGrupo == tipoGrupo)
                   .map((user) {
                 return DataRow(
                   onSelectChanged: (isSelected) {
@@ -111,7 +122,7 @@ class _PromocionPageState extends State<PromocionPage> {
                         MaterialPageRoute(
                           builder: (context) => ListaSocio(
                             tabColorLeft: Colors.orange,
-                            tabName: 'PROMOCIÓN',
+                            tabName: title.toUpperCase(),
                             socio: user,
                           ),
                         ),

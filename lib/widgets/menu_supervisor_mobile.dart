@@ -53,7 +53,7 @@ class _MenuSupervisorMobileState extends State<MenuSupervisorMobile> {
     return BottomNavigationBar(
       currentIndex: _selectedIndex,
       unselectedItemColor: Colors.grey,
-      selectedItemColor: Colors.indigoAccent,
+      selectedItemColor: const Color.fromARGB(255, 4, 56, 99),
       onTap: (int index) {
         setState(() {
           _selectedIndex = index;
