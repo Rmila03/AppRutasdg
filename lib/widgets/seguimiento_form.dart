@@ -43,41 +43,16 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                 ),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        const Expanded(
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'DATOS DEL SOCIO',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 0, 76, 128),
-                              ),
-                            ),
-                          ),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'DATOS DEL SOCIO',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 0, 76, 128),
                         ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          height: 20,
-                          width: 70,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                              color: const Color.fromARGB(255, 0, 76, 128),
-                              width: 1,
-                            ),
-                          ),
-                          child: const Text(
-                            'RIESGO',
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 0, 76, 128),
-                              fontSize: 8,
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     TextForm(
                       formKey: _formKey,
@@ -101,6 +76,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                             content: widget.socio.dni,
                           ),
                         ),
+                        const SizedBox(width: 15),
                         Expanded(
                           child: TextForm(
                             formKey: _formKey,
@@ -109,6 +85,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                             content: widget.socio.cellphone,
                           ),
                         ),
+                        const SizedBox(width: 15),
                         Expanded(
                           child: TextForm(
                             formKey: _formKey,

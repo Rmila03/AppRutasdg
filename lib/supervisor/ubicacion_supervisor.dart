@@ -133,7 +133,7 @@ class _UbicacionSupervisorPage extends State {
                               child: const Text(
                                 'UBICACIÓN',
                                 style: TextStyle(
-                                  color: Color(0xFF0E813C),
+                                  color: Color.fromARGB(255, 0, 76, 128),
                                   fontSize: 25.0,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Unna-Bold',
