@@ -153,7 +153,9 @@ class _HistorialSupervisorContentState
               padding: const EdgeInsets.all(8.0),
               decoration: const BoxDecoration(
                 border: Border(
-                  right: BorderSide(color: Color.fromARGB(255, 0, 76, 128)),
+                  right: BorderSide(
+                    color: Color.fromARGB(255, 0, 76, 128),
+                  ),
                 ),
               ),
               child: Text(
@@ -218,10 +220,10 @@ class _HistorialSupervisorContentState
           builder: (BuildContext context, Widget? child) {
             return Theme(
               data: ThemeData.light().copyWith(
-                primaryColor: const Color.fromARGB(255, 4, 56, 99),
+                primaryColor: const Color.fromARGB(255, 0, 76, 128),
                 hintColor: const Color.fromARGB(255, 140, 178, 210),
                 colorScheme: const ColorScheme.light(
-                  primary: Color.fromARGB(255, 4, 56, 99),
+                  primary: Color.fromARGB(255, 0, 76, 128),
                 ),
                 buttonTheme: const ButtonThemeData(
                   textTheme: ButtonTextTheme.primary,

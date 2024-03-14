@@ -84,7 +84,7 @@ class ReportesFormState extends State<ReportesForm> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 25,
-                                color: Colors.orange,
+                                color: Color.fromARGB(255, 0, 76, 128),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

@@ -23,7 +23,7 @@ class HomePage extends StatefulWidget {
 
 class MapScreen extends State {
   String groupSelected = "All";
-  Color colorButton = const Color.fromARGB(255, 4, 54, 95);
+  Color colorButton = const Color.fromARGB(255, 0, 76, 128);
   Future<List<Socio>> getSociosGroup() async {
     final socios = getSocios();
     if (groupSelected == "All") return socios;
@@ -228,7 +228,7 @@ class MapScreen extends State {
                               "PLAN DEL DIA",
                               style: TextStyle(
                                 fontSize: 18,
-                                color: Color.fromARGB(255, 4, 54, 95),
+                                color: Color.fromARGB(255, 0, 76, 128),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -251,7 +251,7 @@ class MapScreen extends State {
                       icon: FontAwesomeIcons.bagShopping,
                       iconColor: groupSelected == "Promoción"
                           ? Colors.orange
-                          : const Color.fromARGB(255, 4, 54, 95),
+                          : const Color.fromARGB(255, 0, 76, 128),
                       iconSize: 30.0,
                       onTapCallback: () {
                         setState(() {
@@ -268,7 +268,7 @@ class MapScreen extends State {
                       icon: FontAwesomeIcons.bagShopping,
                       iconColor: groupSelected == "Seguimiento"
                           ? const Color.fromARGB(255, 4, 58, 6)
-                          : const Color.fromARGB(255, 4, 54, 95),
+                          : const Color.fromARGB(255, 0, 76, 128),
                       iconSize: 30.0,
                       onTapCallback: () {
                         setState(() {
@@ -286,7 +286,7 @@ class MapScreen extends State {
                       icon: FontAwesomeIcons.bagShopping,
                       iconColor: groupSelected == "Recuperación"
                           ? const Color.fromARGB(255, 114, 175, 76)
-                          : const Color.fromARGB(255, 4, 54, 95),
+                          : const Color.fromARGB(255, 0, 76, 128),
                       iconSize: 30.0,
                       onTapCallback: () {
                         setState(() {
@@ -301,7 +301,7 @@ class MapScreen extends State {
                   const BottomAction(
                     label: "Nuevo",
                     icon: FontAwesomeIcons.bagShopping,
-                    iconColor: Color.fromARGB(255, 4, 54, 95),
+                    iconColor: Color.fromARGB(255, 0, 76, 128),
                     iconSize: 30.0,
                   ),
                 ],

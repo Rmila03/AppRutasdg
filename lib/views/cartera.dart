@@ -76,7 +76,7 @@ class _CarteraPageState extends State<CarteraPage> {
                     prefixIcon: Icon(Icons.search, color: Colors.grey),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color.fromARGB(255, 4, 56, 99),
+                        color: Color.fromARGB(255, 0, 76, 128),
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
