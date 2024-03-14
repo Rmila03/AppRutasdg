@@ -489,10 +489,10 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                             height: 20,
                             decoration: BoxDecoration(
                               color: _isSelected
-                                  ? const Color.fromARGB(255, 4, 54, 95)
+                                  ? const Color.fromARGB(255, 0, 76, 128)
                                   : const Color.fromRGBO(244, 244, 244, 1),
                               border: Border.all(
-                                color: const Color.fromARGB(255, 4, 54, 95),
+                                color: const Color.fromARGB(255, 0, 76, 128),
                               ),
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -521,7 +521,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 0, 76, 128),
                             border: Border.all(
-                              color: const Color.fromARGB(255, 4, 54, 95),
+                              color: const Color.fromARGB(255, 0, 76, 128),
                             ),
                             borderRadius: BorderRadius.circular(10),
                           ),

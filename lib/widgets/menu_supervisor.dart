@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruta_sdg/main.dart';
 import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
 import 'package:ruta_sdg/supervisor/dashboard_supervisor.dart';
@@ -75,7 +76,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
           buildMenuItem('DASHBOARD', Icons.align_vertical_bottom),
           buildMenuItem('MORA', Icons.access_alarm),
           buildMenuItem('NOTIFICACIONES', Icons.notification_important),
-          buildMenuItem('UBICACIÓN', Icons.map_outlined),
+          buildMenuItem('UBICACIÓN', FontAwesomeIcons.mapLocation),
           buildMenuItem('CERRAR SESIÓN', Icons.logout),
         ],
       ),

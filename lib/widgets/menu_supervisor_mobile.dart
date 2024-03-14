@@ -53,7 +53,7 @@ class _MenuSupervisorMobileState extends State<MenuSupervisorMobile> {
     return BottomNavigationBar(
       currentIndex: _selectedIndex,
       unselectedItemColor: Colors.grey,
-      selectedItemColor: const Color.fromARGB(255, 4, 56, 99),
+      selectedItemColor: const Color.fromARGB(255, 0, 76, 128),
       onTap: (int index) {
         setState(() {
           _selectedIndex = index;
@@ -65,21 +65,21 @@ class _MenuSupervisorMobileState extends State<MenuSupervisorMobile> {
         });
       },
       items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Plan del día"),
         BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.file), label: "Reportes"),
+            icon: Icon(Icons.note_alt_outlined), label: "Plan del día"),
         BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.wallet), label: "Cartera"),
+            icon: Icon(Icons.description_outlined), label: "Reportes"),
         BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.tableColumns), label: "Dashboard"),
+            icon: Icon(Icons.account_balance_wallet), label: "Cartera"),
         BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.clock), label: "Mora"),
+            icon: Icon(Icons.align_vertical_bottom), label: "Dashboard"),
+        BottomNavigationBarItem(icon: Icon(Icons.access_alarm), label: "Mora"),
         BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.bell), label: "Notificaciones"),
+            icon: Icon(Icons.notification_important), label: "Notificaciones"),
         BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.mapLocation), label: "Ubicacion"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.radio_button_off), label: "Cerrar Sesión")
+            icon: Icon(Icons.logout), label: "Cerrar Sesión")
       ],
     );
   }

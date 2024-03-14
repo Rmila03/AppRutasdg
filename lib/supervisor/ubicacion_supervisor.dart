@@ -17,7 +17,7 @@ class UbicacionSupervisorPage extends StatefulWidget {
 class _UbicacionSupervisorPage extends State {
   String groupSelected = "All";
   String selectedOption = '';
-  Color colorButton = const Color.fromARGB(255, 4, 54, 95);
+  Color colorButton = const Color.fromARGB(255, 0, 76, 128);
   Future<List<Analista>> getCurrentAnalistas() async {
     final analistas = getAnalistas();
     if (selectedOption == '') return analistas;
@@ -133,7 +133,7 @@ class _UbicacionSupervisorPage extends State {
                               child: const Text(
                                 'UBICACIÓN',
                                 style: TextStyle(
-                                  color: Color(0xFF0E813C),
+                                  color: Color.fromARGB(255, 0, 76, 128),
                                   fontSize: 25.0,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Unna-Bold',

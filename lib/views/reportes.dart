@@ -82,10 +82,10 @@ class _FechaSelectorState extends State<FechaSelector> {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
-            primaryColor: const Color.fromARGB(255, 4, 56, 99),
+            primaryColor: const Color.fromARGB(255, 0, 76, 128),
             hintColor: const Color.fromARGB(255, 140, 178, 210),
             colorScheme: const ColorScheme.light(
-              primary: Color.fromARGB(255, 4, 56, 99),
+              primary: Color.fromARGB(255, 0, 76, 128),
             ),
             buttonTheme:
                 const ButtonThemeData(textTheme: ButtonTextTheme.primary),
@@ -198,7 +198,7 @@ class FechaGestureDetector extends StatelessWidget {
                 padding: EdgeInsets.only(left: 18.0, top: 18),
                 child: Icon(
                   FontAwesomeIcons.calendarDay,
-                  color: Color.fromARGB(255, 4, 56, 99),
+                  color: Color.fromARGB(255, 0, 76, 128),
                 ),
               ),
             ],
@@ -270,7 +270,7 @@ class FechaContent extends StatelessWidget {
           padding: EdgeInsets.only(left: 20.0, top: 20),
           child: Icon(
             Icons.download_sharp,
-            color: Color.fromARGB(255, 4, 56, 99),
+            color: Color.fromARGB(255, 0, 76, 128),
             size: 30,
           ),
         ),

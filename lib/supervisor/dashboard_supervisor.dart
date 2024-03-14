@@ -63,7 +63,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                         child: Text(
                           'DASHBOARD',
                           style: TextStyle(
-                            color: Colors.green,
+                            color: Color.fromARGB(255, 0, 76, 128),
                             fontSize: 20.0,
                             fontFamily: 'Unna-Bold',
                             fontWeight: FontWeight.bold,
@@ -80,7 +80,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                   .map((objeto) =>
                                       '${objeto.name} ${objeto.lastName}')
                                   .toList(),
-                              borderColor: Colors.green,
+                              borderColor:
+                                  const Color.fromARGB(255, 0, 76, 128),
                               lenItem: 15,
                               onChanged: (String? nuevoItem) {
                                 setState(() {
@@ -113,7 +114,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                             IconButton(
                               icon: const Icon(
                                 FontAwesomeIcons.calendarDay,
-                                color: Color.fromARGB(255, 4, 56, 99),
+                                color: Color.fromARGB(255, 0, 76, 128),
                               ),
                               onPressed: () {
                                 _pickYear(context);
@@ -143,14 +144,14 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                               },
                               icon: const Icon(
                                 FontAwesomeIcons.calendarDay,
-                                color: Color.fromARGB(255, 4, 56, 99),
+                                color: Color.fromARGB(255, 0, 76, 128),
                               ),
                             ),
                           if (opcionFecha == 'Dia')
                             IconButton(
                               icon: const Icon(
                                 FontAwesomeIcons.calendarDay,
-                                color: Color.fromARGB(255, 4, 56, 99),
+                                color: Color.fromARGB(255, 0, 76, 128),
                               ),
                               onPressed: () {
                                 showDatePicker(
@@ -178,7 +179,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                           Text(
                             DateFormat('dd/MM/yyyy').format(_selectedDate),
                             style: const TextStyle(
-                              color: Color.fromARGB(255, 4, 56, 99),
+                              color: Color.fromARGB(255, 0, 76, 128),
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
                             ),
@@ -267,10 +268,10 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
-            primaryColor: const Color.fromARGB(255, 4, 56, 99),
+            primaryColor: const Color.fromARGB(255, 0, 76, 128),
             hintColor: const Color.fromARGB(255, 140, 178, 210),
             colorScheme: const ColorScheme.light(
-              primary: Color.fromARGB(255, 4, 56, 99),
+              primary: Color.fromARGB(255, 0, 76, 128),
             ),
             buttonTheme:
                 const ButtonThemeData(textTheme: ButtonTextTheme.primary),

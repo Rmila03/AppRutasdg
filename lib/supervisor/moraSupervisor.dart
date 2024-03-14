@@ -114,7 +114,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
                     BorderRadius.circular(5.0), // Ajusta el radio del borde
                 borderSide: const BorderSide(
                   color: Color.fromARGB(
-                      255, 0, 76, 128), // Establece el color del borde
+                      255, 4, 56, 99), // Establece el color del borde
                 ),
               ),
               focusedBorder: OutlineInputBorder(
@@ -122,7 +122,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
                     BorderRadius.circular(5.0), // Ajusta el radio del borde
                 borderSide: const BorderSide(
                   color: Color.fromARGB(
-                      255, 0, 76, 128), // Establece el color del borde
+                      255, 4, 56, 99), // Establece el color del borde
                 ),
               ),
             ),
