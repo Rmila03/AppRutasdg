@@ -151,7 +151,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                         child: const Text(
                           'CARTERA DE ANALISTAS',
                           style: TextStyle(
-                            color: Colors.orange,
+                            color: const Color.fromARGB(255, 4, 54, 95),
                             fontSize: 25.0,
                             fontWeight: FontWeight.bold,
                           ),

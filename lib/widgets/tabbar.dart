@@ -7,6 +7,9 @@ class TabBarBottom extends StatelessWidget {
     super.key,
   });
 
+  // Definimos una constante para el color común de los íconos
+  static const Color iconColor = Color.fromARGB(255, 0, 76, 128);
+
   @override
   Widget build(BuildContext context) {
     return const Row(
@@ -16,31 +19,31 @@ class TabBarBottom extends StatelessWidget {
         BottomAction(
           label: "Inicio",
           icon: FontAwesomeIcons.house,
-          iconColor: Color.fromARGB(255, 0, 76, 128),
+          iconColor: iconColor,
           iconSize: 18.0,
         ),
         BottomAction(
           label: "Cartera",
           icon: FontAwesomeIcons.folderOpen,
-          iconColor: Color.fromARGB(255, 0, 76, 128),
+          iconColor: iconColor,
           iconSize: 18.0,
         ),
         BottomAction(
           label: "Notificaciones",
           icon: FontAwesomeIcons.solidBell,
-          iconColor: Color.fromARGB(255, 0, 76, 128),
+          iconColor: iconColor,
           iconSize: 18.0,
         ),
         BottomAction(
           label: "Sugerencias",
           icon: FontAwesomeIcons.plus,
-          iconColor: Color.fromARGB(255, 0, 76, 128),
+          iconColor: iconColor,
           iconSize: 18.0,
         ),
         BottomAction(
           label: "Reportes",
           icon: FontAwesomeIcons.newspaper,
-          iconColor: Color.fromARGB(255, 0, 76, 128),
+          iconColor: iconColor,
           iconSize: 18.0,
         ),
       ],

@@ -41,12 +41,20 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
                   color: const Color.fromARGB(255, 185, 185, 185),
                   width: 1,
                 ),
-                color: selectedButton == 1 ? Colors.green : Colors.white,
+                color: selectedButton == 1
+                    ? const Color.fromARGB(255, 4, 54, 95)
+                    : Colors.white,
               ),
               child: Text(
                 widget.option1,
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.black, fontSize: 15),
+                style: TextStyle(
+                  color: selectedButton == 1
+                      ? Colors.white
+                      : Colors
+                          .black, // Cambia el color del texto según el estado del botón
+                  fontSize: 15,
+                ),
               ),
             ),
           ),
@@ -70,12 +78,20 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
                   color: const Color.fromARGB(255, 185, 185, 185),
                   width: 1,
                 ),
-                color: selectedButton == 2 ? Colors.orange : Colors.white,
+                color: selectedButton == 2
+                    ? const Color.fromARGB(255, 4, 54, 95)
+                    : Colors.white,
               ),
               child: Text(
                 widget.option2,
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.black, fontSize: 15),
+                style: TextStyle(
+                  color: selectedButton == 2
+                      ? Colors.white
+                      : Colors
+                          .black, // Cambia el color del texto según el estado del botón
+                  fontSize: 15,
+                ),
               ),
             ),
           ),

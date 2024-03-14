@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class CustomDropdown extends StatefulWidget {
   final List<String> items;
@@ -141,30 +142,27 @@ class _TextForm extends State<TextForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 10, right: 5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(
-            height: 20,
-            child: TextFormField(
-              controller: _controller,
-              enabled: false,
-              keyboardType: widget.inputType,
-              cursorColor: const Color.fromARGB(255, 0, 76, 128),
-              style: const TextStyle(color: Colors.black),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(
+          height: 40,
+          child: TextFormField(
+            controller: _controller,
+            enabled: false,
+            keyboardType: widget.inputType,
+            cursorColor: const Color.fromARGB(255, 0, 76, 128),
+            style: const TextStyle(color: Colors.black),
           ),
-          Text(
-            widget.label,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Color.fromARGB(255, 0, 76, 128),
-            ),
+        ),
+        Text(
+          widget.label,
+          style: const TextStyle(
+            fontSize: 12,
+            color: Color.fromARGB(255, 0, 76, 128),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
