@@ -212,6 +212,92 @@ class AmpliacionFormState extends State<AmpliacionForm> {
                 ]),
               ),
               Container(
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(244, 244, 244, 1),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      spreadRadius: 2,
+                      blurRadius: 3,
+                      offset: Offset(1.0, 3.0),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsetsDirectional.only(bottom: 10),
+                      child: const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "CRÉDITO ACTUAL",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 0, 76, 128),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        const Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  TextFormResult(
+                                      label: "Crédito",
+                                      content: "S/. 10000.00"),
+                                  TextFormResult(
+                                      label: "Monto a pagar",
+                                      content: "S/. 1150.53"),
+                                  TextFormResult(
+                                      label: "Cuota a Pagar", content: "8"),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Expanded(
+                              child: TextFormResult(
+                                  label: "Fecha de CPAnt",
+                                  content: "12 de noviembre del 2023"),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(left: 20),
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  shape: const RoundedRectangleBorder(
+                                    side: BorderSide.none, // Borde transparente
+                                    borderRadius:
+                                        BorderRadius.zero, // Bordes cero
+                                  ),
+                                ),
+                                child: const Text(
+                                  'Ver más',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 12),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
