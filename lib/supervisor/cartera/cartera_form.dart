@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
 import 'package:ruta_sdg/socio.dart';
+import 'package:ruta_sdg/widgets/custom_supervisor.dart';
 import 'package:ruta_sdg/widgets/radio_button_custom.dart';
 
 class CarteraForm extends StatefulWidget {
@@ -15,58 +16,16 @@ class CarteraForm extends StatefulWidget {
 
 class CarteraFormState extends State<CarteraForm> {
   final _formKey = GlobalKey<FormState>();
-  String selectedOption = '';
+
   bool vigenteSelected = true;
   bool vencidoSelected = false;
   int show = 0;
   int valorSeleccionado = 0;
-  List<String> menuOptions = [
-    'Crédito 1',
-    'Crédito 2',
-    'Crédito 3',
-    'Crédito 4'
-  ];
+
   @override
   Widget build(BuildContext context) {
     //List<Socio> socioAssingnedToToday = [];
     //List<Socio> socioNotAssingnedToToday = [];
-    var container = Container(
-      alignment: Alignment.bottomLeft,
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 255, 255, 255),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: DropdownButton<String>(
-        value: selectedOption.isNotEmpty ? selectedOption : null,
-        items: menuOptions.map((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(
-              value,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 15.0,
-                fontFamily: 'Unna-Bold',
-              ),
-            ),
-          );
-        }).toList(),
-        onChanged: (String? value) {
-          setState(() {
-            selectedOption = value ?? '';
-          });
-        },
-        hint: const Text(
-          'Seleccionar nro de crédito',
-          style: TextStyle(
-            color: Color.fromARGB(255, 196, 196, 196),
-            fontSize: 15.0,
-            fontFamily: 'Unna-Bold',
-          ),
-        ),
-      ),
-    );
     return SafeArea(
       child: Column(
         children: [
@@ -143,7 +102,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       child: Padding(
                                         padding:
                                             const EdgeInsets.only(right: 50),
-                                        child: TextForm(
+                                        child: TextFormSupervisor(
                                           formKey: _formKey,
                                           label: "Apellidos",
                                           inputType: TextInputType.text,
@@ -155,7 +114,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       child: Padding(
                                         padding:
                                             const EdgeInsets.only(right: 50),
-                                        child: TextForm(
+                                        child: TextFormSupervisor(
                                           formKey: _formKey,
                                           label: "Nombres",
                                           inputType: TextInputType.text,
@@ -167,7 +126,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       child: Padding(
                                         padding:
                                             const EdgeInsets.only(right: 30),
-                                        child: TextForm(
+                                        child: TextFormSupervisor(
                                           formKey: _formKey,
                                           label: "Nro Documento",
                                           inputType: TextInputType.number,
@@ -182,7 +141,7 @@ class CarteraFormState extends State<CarteraForm> {
                                     Expanded(
                                         child: Padding(
                                       padding: const EdgeInsets.only(right: 50),
-                                      child: TextForm(
+                                      child: TextFormSupervisor(
                                         formKey: _formKey,
                                         label: "Teléfono",
                                         inputType: TextInputType.phone,
@@ -193,7 +152,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       child: Padding(
                                         padding:
                                             const EdgeInsets.only(right: 50),
-                                        child: TextForm(
+                                        child: TextFormSupervisor(
                                           formKey: _formKey,
                                           label: "Celular Personal  ",
                                           inputType: TextInputType.phone,
@@ -206,7 +165,7 @@ class CarteraFormState extends State<CarteraForm> {
                                         padding: const EdgeInsets.only(
                                           right: 50,
                                         ),
-                                        child: TextForm(
+                                        child: TextFormSupervisor(
                                           formKey: _formKey,
                                           label: "Riesgo socio",
                                           inputType: TextInputType.none,
@@ -222,7 +181,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       child: Padding(
                                         padding:
                                             const EdgeInsets.only(right: 20),
-                                        child: TextForm(
+                                        child: TextFormSupervisor(
                                           formKey: _formKey,
                                           label: "Dirección",
                                           inputType: TextInputType.text,
@@ -234,7 +193,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       child: Padding(
                                         padding:
                                             const EdgeInsets.only(right: 30),
-                                        child: TextForm(
+                                        child: TextFormSupervisor(
                                           formKey: _formKey,
                                           label: "Correo electrónico",
                                           inputType: TextInputType.text,
@@ -250,7 +209,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       child: Padding(
                                         padding:
                                             const EdgeInsets.only(right: 50),
-                                        child: TextForm(
+                                        child: TextFormSupervisor(
                                           formKey: _formKey,
                                           label: "Distrito",
                                           inputType: TextInputType.number,
@@ -262,7 +221,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       child: Padding(
                                         padding:
                                             const EdgeInsets.only(right: 50),
-                                        child: TextForm(
+                                        child: TextFormSupervisor(
                                           formKey: _formKey,
                                           label: "Provincia",
                                           inputType: TextInputType.phone,
@@ -274,7 +233,7 @@ class CarteraFormState extends State<CarteraForm> {
                                       child: Padding(
                                         padding:
                                             const EdgeInsets.only(right: 50),
-                                        child: TextForm(
+                                        child: TextFormSupervisor(
                                           formKey: _formKey,
                                           label: "Departamento",
                                           inputType: TextInputType.none,
@@ -339,7 +298,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                             formKey: _formKey,
                                             label: "Riesgo del Socio",
                                             inputType: TextInputType.number,
@@ -352,7 +311,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                             formKey: _formKey,
                                             label: "Tipo de Socio",
                                             inputType: TextInputType.number,
@@ -365,7 +324,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                             formKey: _formKey,
                                             label: "Tipo de Crédito",
                                             inputType: TextInputType.number,
@@ -382,7 +341,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                             formKey: _formKey,
                                             label: "Tipo de Producto",
                                             inputType: TextInputType.number,
@@ -395,7 +354,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                             formKey: _formKey,
                                             label: "Modalidad",
                                             inputType: TextInputType.number,
@@ -408,7 +367,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                             formKey: _formKey,
                                             label: "Nombre de Prestamo",
                                             inputType: TextInputType.number,
@@ -426,7 +385,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                               formKey: _formKey,
                                               label: "Crédito Total",
                                               inputType: TextInputType.number,
@@ -439,7 +398,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                               formKey: _formKey,
                                               label: "Plazo ",
                                               inputType: TextInputType.number,
@@ -452,7 +411,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                               formKey: _formKey,
                                               label: "Tasa de Interés",
                                               inputType: TextInputType.number,
@@ -469,7 +428,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                               formKey: _formKey,
                                               label:
                                                   "Fecha de Aprobación de Crédito",
@@ -483,7 +442,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                               formKey: _formKey,
                                               label: "Primera Fecha de Pago",
                                               inputType: TextInputType.number,
@@ -495,7 +454,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                               formKey: _formKey,
                                               label: "Ultima Fecha de Pago",
                                               inputType: TextInputType.number,
@@ -512,7 +471,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                               formKey: _formKey,
                                               label: "Monto de la Cuota",
                                               inputType: TextInputType.number,
@@ -525,7 +484,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                               formKey: _formKey,
                                               label: "Saldo Vencido",
                                               inputType: TextInputType.number,
@@ -538,7 +497,7 @@ class CarteraFormState extends State<CarteraForm> {
                                           padding: const EdgeInsets.only(
                                             right: 50,
                                           ),
-                                          child: TextForm(
+                                          child: TextFormSupervisor(
                                               formKey: _formKey,
                                               label: "Saldo de Crédito",
                                               inputType: TextInputType.number,
@@ -555,11 +514,6 @@ class CarteraFormState extends State<CarteraForm> {
                               visible: (show == 2),
                               child: Column(
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [container],
-                                  ),
                                   Container(
                                     padding: const EdgeInsets.only(
                                         top: 10.0, bottom: 10.0, left: 30),

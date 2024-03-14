@@ -18,6 +18,7 @@ class PromotionFormState extends State<PromotionForm> {
   final _formKey = GlobalKey<FormState>();
   bool _isSelected = false;
   bool checkVisible = false;
+  bool isEditing = false;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -291,10 +292,10 @@ class PromotionFormState extends State<PromotionForm> {
                   children: [
                     Row(
                       children: [
-                        const Expanded(
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            child: const Text(
                               "OBSERVACIONES",
                               style: TextStyle(
                                 fontSize: 15,
@@ -311,15 +312,16 @@ class PromotionFormState extends State<PromotionForm> {
                             });
                           },
                           child: Container(
+                            margin: const EdgeInsets.only(bottom: 10),
                             alignment: Alignment.centerRight,
                             width: 80,
                             height: 20,
                             decoration: BoxDecoration(
                               color: _isSelected
-                                  ? const Color.fromARGB(255, 4, 54, 95)
+                                  ? const Color.fromARGB(255, 0, 76, 128)
                                   : const Color.fromRGBO(244, 244, 244, 1),
                               border: Border.all(
-                                color: const Color.fromARGB(255, 4, 54, 95),
+                                color: const Color.fromARGB(255, 0, 76, 128),
                               ),
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -340,46 +342,63 @@ class PromotionFormState extends State<PromotionForm> {
                     ),
                     Row(
                       children: [
-                        Container(
-                          height: 25,
-                          width: 90,
-                          padding: const EdgeInsets.all(3),
-                          margin: const EdgeInsets.only(right: 10, top: 10),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 0, 76, 128),
-                            border: Border.all(
-                              color: const Color.fromARGB(255, 4, 54, 95),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              isEditing =
+                                  !isEditing; // Alternar el estado de isEditing
+                            });
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: isEditing
+                                ? const Color.fromARGB(255, 0, 76, 128)
+                                : const Color.fromRGBO(244, 244, 244, 1),
+                            //padding: const EdgeInsets.all(3),
+                            alignment: Alignment.center,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              side: BorderSide(
+                                color: isEditing
+                                    ? const Color.fromARGB(255, 4, 54, 95)
+                                    : const Color.fromARGB(255, 105, 105, 105),
+                                width: 1.0,
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            minimumSize: const Size(70, 32),
                           ),
-                          child: const Text(
-                            'Actuzalizar datos',
+                          child: Text(
+                            isEditing ? 'Actualizar datos' : 'Actualizar datos',
                             style: TextStyle(
-                              fontSize: 10,
-                              color: Colors.white,
+                              fontSize: 12,
+                              color: isEditing ? Colors.white : Colors.black,
                             ),
                           ),
                         ),
                         Expanded(
                           child: Container(
-                            margin: const EdgeInsetsDirectional.only(top: 10),
+                            margin: const EdgeInsets.only(left: 10),
                             height: 25,
-                            child: TextField(
-                              textAlign: TextAlign.left,
-                              maxLines: 1,
+                            child: TextFormField(
+                              enabled: isEditing,
+                              keyboardType: TextInputType.number,
+                              textAlign: TextAlign.center,
                               decoration: InputDecoration(
+                                filled: true,
+                                fillColor:
+                                    const Color.fromRGBO(244, 244, 244, 1),
+                                contentPadding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      10.0), // Bordes redondeados
+                                  borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 79, 81, 82),
+                                  ),
+                                ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                   borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 105, 105, 105),
-                                    width: 1.0,
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 105, 105, 105),
-                                    width: 1.0,
+                                    color: Color.fromARGB(255, 79, 81, 82),
                                   ),
                                 ),
                               ),
@@ -402,22 +421,26 @@ class PromotionFormState extends State<PromotionForm> {
                         ),
                       ),
                     ),
-                    TextField(
-                      maxLines: 2,
-                      keyboardType: TextInputType.multiline,
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      textAlign: TextAlign.left,
+                      maxLines: 3,
                       decoration: InputDecoration(
+                        filled: true,
+                        fillColor: const Color.fromRGBO(244, 244, 244, 1),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 5),
+                        border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(10.0), // Bordes redondeados
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 79, 81, 82),
+                          ),
+                        ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                           borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 105, 105, 105),
-                            width: 1.0,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 105, 105, 105),
-                            width: 1.0,
+                            color: Color.fromARGB(255, 79, 81, 82),
                           ),
                         ),
                       ),

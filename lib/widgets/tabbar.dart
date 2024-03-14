@@ -8,7 +8,7 @@ class TabBarBottom extends StatelessWidget {
   });
 
   // Definimos una constante para el color común de los íconos
-  static const Color iconColor = Color.fromARGB(255, 4, 54, 95);
+  static const Color iconColor = Color.fromARGB(255, 0, 76, 128);
 
   @override
   Widget build(BuildContext context) {

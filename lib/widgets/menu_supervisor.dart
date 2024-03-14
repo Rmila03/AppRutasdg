@@ -76,10 +76,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
           buildMenuItem('DASHBOARD', Icons.align_vertical_bottom),
           buildMenuItem('MORA', Icons.access_alarm),
           buildMenuItem('NOTIFICACIONES', Icons.notification_important),
-          buildMenuItem(
-            'UBICACIÓN',
-            FontAwesomeIcons.mapLocation,
-          ),
+          buildMenuItem('UBICACIÓN', FontAwesomeIcons.mapLocation),
           buildMenuItem('CERRAR SESIÓN', Icons.logout),
         ],
       ),

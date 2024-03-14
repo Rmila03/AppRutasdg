@@ -194,7 +194,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                           child: const Text(
                             'PLAN DEL DÍA',
                             style: TextStyle(
-                              color: Color.fromARGB(255, 4, 56, 99),
+                              color: Color.fromARGB(255, 0, 76, 128),
                               fontSize: 25.0,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Unna-Bold',
@@ -207,7 +207,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                             IconButton(
                               icon: const Icon(
                                 FontAwesomeIcons.calendarDay,
-                                color: Color.fromARGB(255, 4, 56, 99),
+                                color: Color.fromARGB(255, 0, 76, 128),
                               ),
                               onPressed: () {
                                 _selectDate(context);
@@ -217,7 +217,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                             Text(
                               DateFormat('dd/MM/yyyy').format(selectedDate),
                               style: const TextStyle(
-                                color: Color.fromARGB(255, 4, 56, 99),
+                                color: Color.fromARGB(255, 0, 76, 128),
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -311,7 +311,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                     padding: const EdgeInsets.all(16.0),
                                     decoration: BoxDecoration(
                                       color:
-                                          const Color.fromARGB(255, 4, 56, 99),
+                                          const Color.fromARGB(255, 0, 76, 128),
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
                                     child: const Row(
@@ -342,7 +342,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                     padding: const EdgeInsets.all(16.0),
                                     decoration: BoxDecoration(
                                       color:
-                                          const Color.fromARGB(255, 4, 56, 99),
+                                          const Color.fromARGB(255, 0, 76, 128),
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
                                     child: const Row(
@@ -434,7 +434,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: const Color.fromARGB(255, 4, 56, 99),
+          color: const Color.fromARGB(255, 0, 76, 128),
         ),
       ),
       child: Column(
@@ -442,13 +442,13 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         children: [
           Icon(
             icon,
-            color: const Color.fromARGB(255, 4, 56, 99),
+            color: const Color.fromARGB(255, 0, 76, 128),
           ),
           const SizedBox(height: 5),
           Text(
             text,
             style: const TextStyle(
-              color: Color.fromARGB(255, 4, 56, 99),
+              color: Color.fromARGB(255, 0, 76, 128),
               fontSize: 15.0,
               fontFamily: 'Unna-Bold',
             ),
@@ -474,7 +474,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
           child: Text(
             district,
             style: const TextStyle(
-              color: Color.fromARGB(255, 4, 56, 99),
+              color: Color.fromARGB(255, 0, 76, 128),
               fontSize: 15.0,
               fontFamily: 'Unna-Bold',
             ),
@@ -507,7 +507,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
           child: Text(
             '$index',
             style: const TextStyle(
-              color: Color.fromARGB(255, 4, 56, 99),
+              color: Color.fromARGB(255, 0, 76, 128),
               fontSize: 15.0,
               fontFamily: 'Unna-Bold',
             ),
@@ -576,7 +576,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                         IconButton(
                           icon: const Icon(
                             FontAwesomeIcons.trash,
-                            color: Color.fromARGB(255, 4, 56, 99),
+                            color: Color.fromARGB(255, 0, 76, 128),
                           ),
                           onPressed: () {
                             _handleTrashIconPressed(socio);
@@ -639,10 +639,10 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
-            primaryColor: const Color.fromARGB(255, 4, 56, 99),
+            primaryColor: const Color.fromARGB(255, 0, 76, 128),
             hintColor: const Color.fromARGB(255, 140, 178, 210),
             colorScheme: const ColorScheme.light(
-              primary: Color.fromARGB(255, 4, 56, 99),
+              primary: Color.fromARGB(255, 0, 76, 128),
             ),
             buttonTheme:
                 const ButtonThemeData(textTheme: ButtonTextTheme.primary),
@@ -699,7 +699,7 @@ class FloatingPage extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(40.0),
           border: Border.all(
-            color: const Color.fromARGB(255, 4, 56, 99),
+            color: const Color.fromARGB(255, 0, 76, 128),
             width: 3.0,
           ),
         ),
@@ -709,7 +709,7 @@ class FloatingPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(15.0),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 4, 56, 99),
+                color: const Color.fromARGB(255, 0, 76, 128),
                 borderRadius: BorderRadius.circular(30.0),
               ),
               child: const Text(
@@ -789,7 +789,7 @@ class FloatingPage extends StatelessWidget {
                   'Motivo: Cambio de ciudad',
                   style: TextStyle(
                     fontSize: 14.0,
-                    color: Color.fromARGB(255, 4, 56, 99),
+                    color: Color.fromARGB(255, 0, 76, 128),
                   ),
                 ),
               ],
@@ -798,7 +798,7 @@ class FloatingPage extends StatelessWidget {
           trailing: IconButton(
             icon: const Icon(
               FontAwesomeIcons.plus,
-              color: Color.fromARGB(255, 4, 56, 99),
+              color: Color.fromARGB(255, 0, 76, 128),
             ),
             onPressed: () {
               onPlusIconPressed(socio);
@@ -923,7 +923,7 @@ class _SearchAndSocioListState extends State<SearchAndSocioList> {
                     child: IconButton(
                       icon: const Icon(
                         FontAwesomeIcons.plus,
-                        color: Color.fromARGB(255, 4, 56, 99),
+                        color: Color.fromARGB(255, 0, 76, 128),
                       ),
                       onPressed: () {
                         _handlePlusIconPressed(socio);

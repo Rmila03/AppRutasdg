@@ -137,7 +137,7 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color.fromARGB(255, 4, 56, 99),
+                        color: Color.fromARGB(255, 0, 76, 128),
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
