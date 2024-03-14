@@ -66,7 +66,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                             color: Color.fromARGB(255, 0, 76, 128),
                             fontSize: 20.0,
                             fontFamily: 'Unna-Bold',
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w900,
                           ),
                         ),
                       ),
