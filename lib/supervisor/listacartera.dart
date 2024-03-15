@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/supervisor/widgets/cartera_form.dart';
 import 'package:ruta_sdg/socio.dart';
+import 'package:ruta_sdg/supervisor/widgets/mora_form.dart';
+import 'package:ruta_sdg/supervisor/widgets/plan_dia_form.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 
 class ListaSupervisor extends StatefulWidget {
@@ -19,7 +21,7 @@ class ListaSupervisor extends StatefulWidget {
 
 class ListaSupervisorState extends State<ListaSupervisor> {
   late Widget CasoFormWidget; // Declara la variable para la redirección
-
+  late Widget MenuWidget;
   @override
   void initState() {
     super.initState();
@@ -28,6 +30,17 @@ class ListaSupervisorState extends State<ListaSupervisor> {
       CasoFormWidget = CarteraForm(
         socio: widget.socio!,
       );
+      MenuWidget = const MenuSupervisor(name: "CARTERA");
+    } else if (widget.tabName == 'PLAN DEL DÍA') {
+      CasoFormWidget = PlanDiaSupervisor(
+        socio: widget.socio!,
+      );
+      MenuWidget = const MenuSupervisor(name: "PLAN DEL DÍA");
+    } else if (widget.tabName == 'MORA') {
+      CasoFormWidget = MoraForm(
+        socio: widget.socio!,
+      );
+      MenuWidget = const MenuSupervisor(name: "MORA");
     }
   }
 
@@ -38,7 +51,7 @@ class ListaSupervisorState extends State<ListaSupervisor> {
         resizeToAvoidBottomInset: false,
         body: Row(
           children: [
-            const MenuSupervisor(name: "CARTERA"),
+            MenuWidget,
             Expanded(
               child: CasoFormWidget,
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/analista.dart';
 import 'package:ruta_sdg/socio.dart';
+import 'package:ruta_sdg/supervisor/listacartera.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 
@@ -135,6 +136,19 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
   Widget _buildDataTable(List<Socio> userList) {
     List<DataRow> rows = userList.map((user) {
       return DataRow(
+        onSelectChanged: (isSelected) {
+          if (isSelected != null && isSelected) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ListaSupervisor(
+                  tabName: "MORA",
+                  socio: user,
+                ),
+              ),
+            );
+          }
+        },
         cells: [
           DataCell(Text(user.dni)),
           DataCell(Text("${user.name} ${user.lastName}")),

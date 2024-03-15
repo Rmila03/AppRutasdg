@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:ruta_sdg/supervisor/listacartera.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/analista.dart';
@@ -563,10 +564,21 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                   DataColumn(label: Text('MODALIDAD')),
                   DataColumn(label: Text('  ')),
                 ],
-                rows: socioList.asMap().entries.map((entry) {
-                  Socio socio = entry.value;
-
+                rows: socioList.map((socio) {
                   return DataRow(
+                    onSelectChanged: (isSelected) {
+                      if (isSelected != null && isSelected) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ListaSupervisor(
+                              tabName: "PLAN DEL DÍA",
+                              socio: socio,
+                            ),
+                          ),
+                        );
+                      }
+                    },
                     cells: [
                       DataCell(Text(socio.dni)),
                       DataCell(Text("${socio.name} ${socio.lastName}")),
