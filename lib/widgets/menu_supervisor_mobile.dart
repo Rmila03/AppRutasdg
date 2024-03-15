@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruta_sdg/main.dart';
-import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
-import 'package:ruta_sdg/supervisor/dashboard_supervisor.dart';
-import 'package:ruta_sdg/supervisor/notificacionesSupervisor.dart';
-import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
-import 'package:ruta_sdg/supervisor/moraSupervisor.dart';
-import 'package:ruta_sdg/supervisor/reporteSupervisor.dart';
-import 'package:ruta_sdg/supervisor/ubicacion_supervisor.dart';
+import 'package:ruta_sdg/supervisor/views/carterapage.dart';
+import 'package:ruta_sdg/supervisor/views/dashboard_supervisor.dart';
+import 'package:ruta_sdg/supervisor/views/notificacionesSupervisor.dart';
+import 'package:ruta_sdg/supervisor/views/homeSupervisor.dart';
+import 'package:ruta_sdg/supervisor/views/moraSupervisor.dart';
+import 'package:ruta_sdg/supervisor/views/reporteSupervisor.dart';
+import 'package:ruta_sdg/supervisor/views/ubicacion_supervisor.dart';
 
 class MenuSupervisorMobile extends StatefulWidget {
   final String? name;

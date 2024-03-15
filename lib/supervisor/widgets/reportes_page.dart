@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:ruta_sdg/supervisor/reporteSupervisor.dart';
+import 'package:ruta_sdg/supervisor/views/reporteSupervisor.dart';
 import 'package:ruta_sdg/socio.dart';
 
 import 'package:ruta_sdg/analista.dart';

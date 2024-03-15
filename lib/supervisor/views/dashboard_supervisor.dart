@@ -5,7 +5,7 @@ import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../widgets/custom_dropdown.dart';
+import '../../widgets/custom_dropdown.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ruta_sdg/analista.dart';

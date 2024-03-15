@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
+import 'package:ruta_sdg/supervisor/views/carterapage.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/widgets/custom_supervisor.dart';
 import 'package:ruta_sdg/widgets/radio_button_custom.dart';

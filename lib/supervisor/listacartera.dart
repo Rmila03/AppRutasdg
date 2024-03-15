@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/supervisor/cartera/cartera_form.dart';
+import 'package:ruta_sdg/supervisor/widgets/cartera_form.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 
 class ListaSupervisor extends StatefulWidget {
-  final Socio socio;
+  final Socio? socio;
+  final String tabName;
 
   const ListaSupervisor({
-    Key? key,
-    required this.socio,
-  }) : super(key: key);
+    super.key,
+    required this.tabName,
+    this.socio,
+  });
 
   @override
   ListaSupervisorState createState() => ListaSupervisorState();
 }
 
 class ListaSupervisorState extends State<ListaSupervisor> {
-  late Widget casoFormWidget; // Declara la variable para la redirección
+  late Widget CasoFormWidget; // Declara la variable para la redirección
 
   @override
   void initState() {
     super.initState();
-    casoFormWidget = CarteraForm(socio: widget.socio);
+    // Asigna la redirección según el valor de tabName
+    if (widget.tabName == 'CARTERA') {
+      CasoFormWidget = CarteraForm(
+        socio: widget.socio!,
+      );
+    }
   }
 
   @override
@@ -33,7 +40,7 @@ class ListaSupervisorState extends State<ListaSupervisor> {
           children: [
             const MenuSupervisor(name: "CARTERA"),
             Expanded(
-              child: casoFormWidget,
+              child: CasoFormWidget,
             ),
           ],
         ),
