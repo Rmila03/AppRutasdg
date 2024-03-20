@@ -68,7 +68,7 @@ class MapScreen extends State {
         style: TextStyle(
           letterSpacing: 0.0,
           fontSize: 48.0,
-          fontFamily: iconData.fontFamily,
+          fontFamily: "Poppins",
           color: Color.fromARGB(255, r, g, b),
         ));
     textPainter.layout();
@@ -227,6 +227,7 @@ class MapScreen extends State {
                             child: const Text(
                               "PLAN DEL DIA",
                               style: TextStyle(
+                                fontFamily: "Poppins",
                                 fontSize: 18,
                                 color: Color.fromARGB(255, 0, 76, 128),
                                 fontWeight: FontWeight.bold,
