@@ -55,6 +55,7 @@ class _TextFormSupervisor extends State<TextFormSupervisor> {
             keyboardType: widget.inputType,
             cursorColor: const Color.fromARGB(255, 0, 76, 128),
             style: const TextStyle(fontFamily: "Poppins", color: Colors.black),
+            decoration: const InputDecoration(border: InputBorder.none),
           ),
         ),
       ],
