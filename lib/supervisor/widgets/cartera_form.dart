@@ -91,6 +91,7 @@ class CarteraFormState extends State<CarteraForm> {
                                 style: TextStyle(
                                     fontSize: 20,
                                     color: Color.fromARGB(255, 0, 76, 128),
+                                    fontFamily: "Poppins",
                                     fontWeight: FontWeight.bold),
                               ),
                             ),

@@ -35,6 +35,7 @@ class _TextFormSupervisor extends State<TextFormSupervisor> {
           style: const TextStyle(
             fontSize: 12,
             color: Color.fromARGB(255, 0, 76, 128),
+            fontFamily: "Poppins",
           ),
         ),
         Container(
@@ -53,7 +54,10 @@ class _TextFormSupervisor extends State<TextFormSupervisor> {
             textAlign: TextAlign.left,
             keyboardType: widget.inputType,
             cursorColor: const Color.fromARGB(255, 0, 76, 128),
-            style: const TextStyle(color: Colors.black),
+            style: const TextStyle(
+              color: Colors.black,
+              fontFamily: "Poppins",
+            ),
           ),
         ),
       ],

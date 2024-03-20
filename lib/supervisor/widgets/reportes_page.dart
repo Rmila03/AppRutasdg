@@ -151,19 +151,46 @@ class ReportesFormState extends State<ReportesForm> {
               headingRowColor: MaterialStateProperty.all(
                   const Color.fromARGB(255, 255, 255, 255)),
               columns: const [
-                DataColumn(label: Text('HOJA DE RUTA DIARIA')),
+                DataColumn(
+                  label: Text(
+                    'HOJA DE RUTA DIARIA',
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),
+                ),
               ],
               dataRowHeight: 25,
               rows: [
                 DataRow(cells: [
-                  DataCell(Text('ANALISTA: $nombreAnalista')),
+                  DataCell(
+                    Text(
+                      'ANALISTA: $nombreAnalista',
+                      style: const TextStyle(
+                        fontFamily: "Poppins",
+                      ),
+                    ),
+                  ),
                 ]),
                 DataRow(cells: [
-                  DataCell(Text('FECHA: $fechaActual')),
+                  DataCell(
+                    Text(
+                      'FECHA: $fechaActual',
+                      style: const TextStyle(
+                        fontFamily: "Poppins",
+                      ),
+                    ),
+                  ),
                 ]),
                 const DataRow(cells: [
-                  DataCell(Text(
-                      'AGENCIA: Cusco')), // Puedes cambiar 'Cusco' según tus necesidades
+                  DataCell(
+                    Text(
+                      'AGENCIA: Cusco',
+                      style: TextStyle(
+                        fontFamily: "Poppins",
+                      ),
+                    ),
+                  ), // Puedes cambiar 'Cusco' según tus necesidades
                 ]),
               ],
             ),
@@ -229,7 +256,7 @@ class ReportesFormState extends State<ReportesForm> {
           style: TextStyle(
             color: Colors.black,
             fontSize: 15.0,
-            fontFamily: 'Unna-Bold',
+            fontFamily: "Poppins",
           ),
         ),
       ),
@@ -247,7 +274,7 @@ class ReportesFormState extends State<ReportesForm> {
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
-                fontFamily: 'Unna-Bold',
+                fontFamily: "Poppins",
               ),
             ),
           );
@@ -262,7 +289,7 @@ class ReportesFormState extends State<ReportesForm> {
           style: TextStyle(
             color: Colors.black,
             fontSize: 15.0,
-            fontFamily: 'Unna-Bold',
+            fontFamily: "Poppins",
           ),
         ),
       ),
@@ -289,15 +316,55 @@ class ReportesFormState extends State<ReportesForm> {
               ),
               dataRowHeight: 30,
               columns: [
-                const DataColumn(label: Text('Hora')),
-                const DataColumn(label: Text('Apellidos y Nombres')),
-                const DataColumn(label: Text('DNI')),
-                const DataColumn(label: Text('Celular')),
-                const DataColumn(label: Text('Dirección')),
+                const DataColumn(
+                  label: Text(
+                    'Hora',
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),
+                ),
+                const DataColumn(
+                  label: Text(
+                    'Apellidos y Nombres',
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),
+                ),
+                const DataColumn(
+                  label: Text(
+                    'DNI',
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),
+                ),
+                const DataColumn(
+                  label: Text(
+                    'Celular',
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),
+                ),
+                const DataColumn(
+                  label: Text(
+                    'Dirección',
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),
+                ),
                 DataColumn(label: tipoContainer),
                 DataColumn(label: opcionContainer),
                 const DataColumn(
-                  label: Text('Resultados de Visita (Analista)'),
+                  label: Text(
+                    'Resultados de Visita (Analista)',
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),
                 ),
               ],
               rows: socioList
@@ -309,16 +376,70 @@ class ReportesFormState extends State<ReportesForm> {
                   .map((socio) {
                 return DataRow(
                   cells: [
-                    const DataCell(Text("Hora")),
-                    DataCell(
-                      Text('${socio.lastName}, ${socio.name}'),
+                    const DataCell(
+                      Text(
+                        "Hora",
+                        style: TextStyle(
+                          fontFamily: "Poppins",
+                        ),
+                      ),
                     ),
-                    DataCell(Text(socio.dni)),
-                    DataCell(Text(socio.cellphone)),
-                    DataCell(Text(socio.address)),
-                    DataCell(Text(socio.clasificacionSocio)),
-                    DataCell(Text(socio.tipoGrupo)),
-                    const DataCell(Text("Feedback")),
+                    DataCell(
+                      Text(
+                        '${socio.lastName}, ${socio.name}',
+                        style: TextStyle(
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        socio.dni,
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        socio.cellphone,
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        socio.address,
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        socio.clasificacionSocio,
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        socio.tipoGrupo,
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    ),
+                    const DataCell(
+                      Text(
+                        "Feedback",
+                        style: TextStyle(
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    ),
                   ],
                 );
               }).toList(),
@@ -339,59 +460,6 @@ class ReportesFormState extends State<ReportesForm> {
 
   bool userIsAssignedToToday(Socio user) {
     return true;
-  }
-}
-
-class TextForm extends StatefulWidget {
-  final String label;
-  final TextInputType inputType;
-  final String content;
-
-  const TextForm({
-    super.key,
-    required this.label,
-    required this.inputType,
-    required this.content,
-  });
-
-  @override
-  _TextForm createState() => _TextForm();
-}
-
-class _TextForm extends State<TextForm> {
-  final TextEditingController _controller = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _controller.text = widget.content;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        TextFormField(
-          controller: _controller,
-          enabled: false,
-          keyboardType: widget.inputType,
-          decoration: const InputDecoration(
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Color.fromARGB(255, 102, 102, 102)),
-            ),
-          ),
-          style: const TextStyle(color: Colors.black),
-        ),
-        Text(
-          widget.label,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Color.fromARGB(255, 102, 102, 102),
-          ),
-        ),
-      ],
-    );
   }
 }
 

@@ -162,6 +162,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                   contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
                   labelStyle: const TextStyle(
                     color: Color.fromARGB(255, 0, 76, 128),
+                    fontFamily: "Poppins",
                   ),
                   focusedBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(
@@ -219,8 +220,22 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
     List<DataRow> rows = userList.map((user) {
       return DataRow(
         cells: [
-          DataCell(Text(user.dni)),
-          DataCell(Text("${user.name} ${user.lastName}")),
+          DataCell(
+            Text(
+              user.dni,
+              style: const TextStyle(
+                fontFamily: "Poppins",
+              ),
+            ),
+          ),
+          DataCell(
+            Text(
+              "${user.name} ${user.lastName}",
+              style: const TextStyle(
+                fontFamily: "Poppins",
+              ),
+            ),
+          ),
           DataCell(
             Row(
               children: [
