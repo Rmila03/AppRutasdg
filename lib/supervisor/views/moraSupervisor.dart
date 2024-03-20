@@ -208,10 +208,31 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
             columnSpacing: 0.0,
             headingRowColor: MaterialStateProperty.all(const Color(0xFFD9DEDA)),
             columns: const [
-              DataColumn(label: Text('DNI')),
-              DataColumn(label: Text('NOMBRE')),
-              DataColumn(label: Text('DIRECCIÓN')),
-              DataColumn(label: Text('DÍAS DE ATRASO')),
+              DataColumn(
+                label: Text(
+                  'DNI',
+                  style: TextStyle(
+                      fontFamily: "Poppins", fontWeight: FontWeight.bold),
+                ),
+              ),
+              DataColumn(
+                  label: Text(
+                'NOMBRE',
+                style: TextStyle(
+                    fontFamily: "Poppins", fontWeight: FontWeight.bold),
+              )),
+              DataColumn(
+                  label: Text(
+                'DIRECCIÓN',
+                style: TextStyle(
+                    fontFamily: "Poppins", fontWeight: FontWeight.bold),
+              )),
+              DataColumn(
+                  label: Text(
+                'DÍAS DE ATRASO',
+                style: TextStyle(
+                    fontFamily: "Poppins", fontWeight: FontWeight.bold),
+              )),
             ],
             rows: rows,
           ),

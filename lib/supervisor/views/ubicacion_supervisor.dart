@@ -161,7 +161,7 @@ class _UbicacionSupervisorPage extends State {
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 15.0,
-                                        fontFamily: 'Unna-Bold',
+                                        fontFamily: "Poppins",
                                       ),
                                     ),
                                   );
@@ -177,7 +177,7 @@ class _UbicacionSupervisorPage extends State {
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 196, 196, 196),
                                     fontSize: 15.0,
-                                    fontFamily: 'Unna-Bold',
+                                    fontFamily: "Poppins",
                                   ),
                                 ),
                               ),
