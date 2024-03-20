@@ -111,11 +111,17 @@ class _NotificacionesSupervisorContentState
                   .transparent, // Evita que el cuadro cambie de color al seleccionar un elemento
               style: const TextStyle(
                 color: Colors.black,
+                fontFamily: "Poppins",
               ), // Establece el color del texto
               items: analistas.map((Analista analista) {
                 return DropdownMenuItem<Analista>(
                   value: analista,
-                  child: Text("${analista.name} ${analista.lastName}"),
+                  child: Text(
+                    "${analista.name} ${analista.lastName}",
+                    style: const TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),
                 );
               }).toList(),
               onChanged: (Analista? selectedAnalista) {
@@ -130,6 +136,7 @@ class _NotificacionesSupervisorContentState
                 contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
                 labelStyle: const TextStyle(
                   color: Color.fromARGB(255, 0, 76, 128),
+                  fontFamily: "Poppins",
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius:
@@ -184,24 +191,37 @@ class _NotificacionesSupervisorContentState
                     fontWeight: FontWeight.bold,
                     fontSize: 14.0,
                     color: Color.fromARGB(255, 0, 76, 128),
+                    fontFamily: "Poppins",
                   ),
                 ),
                 const SizedBox(height: 8.0),
                 Text(
                   'Nombre: ${socio.name} ${socio.lastName}',
-                  style: const TextStyle(fontSize: 14.0),
+                  style: const TextStyle(
+                    fontSize: 14.0,
+                    fontFamily: "Poppins",
+                  ),
                 ),
                 const Text(
                   'Fecha de notificación:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Poppins",
+                  ),
                 ),
                 const Text(
                   'Descripción del cambio:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Poppins",
+                  ),
                 ),
                 const Text(
                   'Aquí va la descripción detallada del cambio...',
-                  style: TextStyle(fontSize: 14.0),
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    fontFamily: "Poppins",
+                  ),
                 ),
               ],
             ),

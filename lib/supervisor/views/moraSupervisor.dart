@@ -90,7 +90,9 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
             focusColor: Colors
                 .transparent, // Evita que el cuadro cambie de color al seleccionar un elemento
             style: const TextStyle(
-                color: Colors.black), // Establece el color del texto
+              color: Colors.black,
+              fontFamily: "Poppins",
+            ), // Establece el color del texto
             items: analistas.map((Analista analista) {
               return DropdownMenuItem<Analista>(
                 value: analista,
@@ -109,6 +111,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
               contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
               labelStyle: const TextStyle(
                 color: Color.fromARGB(255, 0, 76, 128),
+                fontFamily: "Poppins",
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius:
@@ -150,10 +153,38 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
           }
         },
         cells: [
-          DataCell(Text(user.dni)),
-          DataCell(Text("${user.name} ${user.lastName}")),
-          DataCell(Text(user.address)),
-          DataCell(Text(user.daysLate.toString())),
+          DataCell(
+            Text(
+              user.dni,
+              style: const TextStyle(
+                fontFamily: "Poppins",
+              ),
+            ),
+          ),
+          DataCell(
+            Text(
+              "${user.name} ${user.lastName}",
+              style: const TextStyle(
+                fontFamily: "Poppins",
+              ),
+            ),
+          ),
+          DataCell(
+            Text(
+              user.address,
+              style: const TextStyle(
+                fontFamily: "Poppins",
+              ),
+            ),
+          ),
+          DataCell(
+            Text(
+              user.daysLate.toString(),
+              style: const TextStyle(
+                fontFamily: "Poppins",
+              ),
+            ),
+          ),
         ],
       );
     }).toList();
