@@ -111,11 +111,17 @@ class _NotificacionesSupervisorContentState
                   .transparent, // Evita que el cuadro cambie de color al seleccionar un elemento
               style: const TextStyle(
                 color: Colors.black,
+                fontFamily: "Poppins",
               ), // Establece el color del texto
               items: analistas.map((Analista analista) {
                 return DropdownMenuItem<Analista>(
                   value: analista,
-                  child: Text("${analista.name} ${analista.lastName}"),
+                  child: Text(
+                    "${analista.name} ${analista.lastName}",
+                    style: const TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),
                 );
               }).toList(),
               onChanged: (Analista? selectedAnalista) {
