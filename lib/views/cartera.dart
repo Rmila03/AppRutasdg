@@ -32,11 +32,12 @@ class _CarteraPageState extends State<CarteraPage> {
   DataRow buildDataRow(Socio user) {
     return DataRow(
       cells: [
-        DataCell(Text(user.dni, style: const TextStyle(fontSize: 13))),
+        DataCell(Text(user.dni,
+            style: const TextStyle(fontFamily: 'Poppins', fontSize: 13))),
         DataCell(
           Text(
             "${user.name} ${user.lastName}",
-            style: const TextStyle(fontSize: 13),
+            style: const TextStyle(fontFamily: 'Poppins', fontSize: 13),
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -66,11 +67,13 @@ class _CarteraPageState extends State<CarteraPage> {
                   controller: searchController,
                   onChanged: searchUsers,
                   style: const TextStyle(
+                    fontFamily: 'Poppins',
                     color: Colors.black,
                   ),
                   decoration: const InputDecoration(
                     hintText: 'Buscar socio',
                     hintStyle: TextStyle(
+                      fontFamily: 'Poppins',
                       fontSize: 15,
                     ),
                     prefixIcon: Icon(Icons.search, color: Colors.grey),
@@ -110,12 +113,14 @@ class _CarteraPageState extends State<CarteraPage> {
                           DataColumn(
                             label: Text('DNI',
                                 style: TextStyle(
+                                    fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w600,
                                     color: Color.fromARGB(255, 0, 0, 0))),
                           ),
                           DataColumn(
                             label: Text('Nombres y Apellidos',
                                 style: TextStyle(
+                                    fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w600,
                                     color: Color.fromARGB(255, 0, 0, 0))),
                           ),

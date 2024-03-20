@@ -127,7 +127,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
             ),
             child: Text(
               selectedDate.toLocal().toString().split(' ')[0],
-              style: const TextStyle(fontSize: 16.0),
+              style: const TextStyle(fontFamily: 'Poppins', fontSize: 16.0),
             ),
           ),
         ),
@@ -161,8 +161,8 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                   labelText: 'Buscar',
                   contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
                   labelStyle: const TextStyle(
+                    fontFamily: 'Poppins',
                     color: Color.fromARGB(255, 0, 76, 128),
-                    fontFamily: "Poppins",
                   ),
                   focusedBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(
@@ -199,7 +199,10 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                     itemCount: filteredUsers.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(filteredUsers[index].name),
+                        title: Text(filteredUsers[index].name,
+                            style: const TextStyle(
+                              fontFamily: 'Poppins',
+                            )),
                         onTap: () {
                           searchController.text = filteredUsers[index].name;
                           _updateSearchResults(filteredUsers[index].name);
@@ -220,22 +223,14 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
     List<DataRow> rows = userList.map((user) {
       return DataRow(
         cells: [
-          DataCell(
-            Text(
-              user.dni,
+          DataCell(Text(user.dni,
               style: const TextStyle(
-                fontFamily: "Poppins",
-              ),
-            ),
-          ),
-          DataCell(
-            Text(
-              "${user.name} ${user.lastName}",
+                fontFamily: 'Poppins',
+              ))),
+          DataCell(Text("${user.name} ${user.lastName}",
               style: const TextStyle(
-                fontFamily: "Poppins",
-              ),
-            ),
-          ),
+                fontFamily: 'Poppins',
+              ))),
           DataCell(
             Row(
               children: [
@@ -284,9 +279,24 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
               headingRowColor:
                   MaterialStateProperty.all(const Color(0xFFD9DEDA)),
               columns: const [
-                DataColumn(label: Text('DNI')),
-                DataColumn(label: Text('NOMBRE')),
-                DataColumn(label: Text('DESCARGAR')),
+                DataColumn(
+                    label: Text('DNI',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.bold,
+                        ))),
+                DataColumn(
+                    label: Text('NOMBRE',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.bold,
+                        ))),
+                DataColumn(
+                    label: Text('DESCARGAR',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.bold,
+                        ))),
               ],
               rows: rows,
             ),

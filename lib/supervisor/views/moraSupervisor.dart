@@ -74,7 +74,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
         fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Poppins',
       ),
     );
   }
@@ -90,9 +90,8 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
             focusColor: Colors
                 .transparent, // Evita que el cuadro cambie de color al seleccionar un elemento
             style: const TextStyle(
-              color: Colors.black,
-              fontFamily: "Poppins",
-            ), // Establece el color del texto
+                fontFamily: 'Poppins',
+                color: Colors.black), // Establece el color del texto
             items: analistas.map((Analista analista) {
               return DropdownMenuItem<Analista>(
                 value: analista,
@@ -110,8 +109,8 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
               labelText: 'Seleccionar Analista',
               contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
               labelStyle: const TextStyle(
+                fontFamily: 'Poppins',
                 color: Color.fromARGB(255, 0, 76, 128),
-                fontFamily: "Poppins",
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius:
@@ -153,38 +152,22 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
           }
         },
         cells: [
-          DataCell(
-            Text(
-              user.dni,
+          DataCell(Text(user.dni,
               style: const TextStyle(
-                fontFamily: "Poppins",
-              ),
-            ),
-          ),
-          DataCell(
-            Text(
-              "${user.name} ${user.lastName}",
+                fontFamily: 'Poppins',
+              ))),
+          DataCell(Text("${user.name} ${user.lastName}",
               style: const TextStyle(
-                fontFamily: "Poppins",
-              ),
-            ),
-          ),
-          DataCell(
-            Text(
-              user.address,
+                fontFamily: 'Poppins',
+              ))),
+          DataCell(Text(user.address,
               style: const TextStyle(
-                fontFamily: "Poppins",
-              ),
-            ),
-          ),
-          DataCell(
-            Text(
-              user.daysLate.toString(),
+                fontFamily: 'Poppins',
+              ))),
+          DataCell(Text(user.daysLate.toString(),
               style: const TextStyle(
-                fontFamily: "Poppins",
-              ),
-            ),
-          ),
+                fontFamily: 'Poppins',
+              ))),
         ],
       );
     }).toList();
@@ -209,30 +192,29 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
             headingRowColor: MaterialStateProperty.all(const Color(0xFFD9DEDA)),
             columns: const [
               DataColumn(
-                label: Text(
-                  'DNI',
-                  style: TextStyle(
-                      fontFamily: "Poppins", fontWeight: FontWeight.bold),
-                ),
-              ),
+                  label: Text('DNI',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                      ))),
               DataColumn(
-                  label: Text(
-                'NOMBRE',
-                style: TextStyle(
-                    fontFamily: "Poppins", fontWeight: FontWeight.bold),
-              )),
+                  label: Text('NOMBRE',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                      ))),
               DataColumn(
-                  label: Text(
-                'DIRECCIÓN',
-                style: TextStyle(
-                    fontFamily: "Poppins", fontWeight: FontWeight.bold),
-              )),
+                  label: Text('DIRECCIÓN',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                      ))),
               DataColumn(
-                  label: Text(
-                'DÍAS DE ATRASO',
-                style: TextStyle(
-                    fontFamily: "Poppins", fontWeight: FontWeight.bold),
-              )),
+                  label: Text('DÍAS DE ATRASO',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                      ))),
             ],
             rows: rows,
           ),
