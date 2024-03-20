@@ -85,7 +85,12 @@ class BottomAction extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(2.0),
-            child: Text(label),
+            child: Text(
+              label,
+              style: const TextStyle(
+                fontFamily: "Poppins",
+              ),
+            ),
           ),
         ],
       ),
