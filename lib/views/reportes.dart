@@ -123,6 +123,7 @@ class _FechaSelectorState extends State<FechaSelector> {
                 child: Text(
                   "FECHA :  ",
                   style: TextStyle(
+                    fontFamily: 'Poppins',
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
                   ),
@@ -141,6 +142,7 @@ class _FechaSelectorState extends State<FechaSelector> {
             child: Text(
               "Reporte generado :  ",
               style: TextStyle(
+                fontFamily: 'Poppins',
                 fontSize: 15,
                 fontWeight: FontWeight.normal,
               ),
@@ -188,6 +190,7 @@ class FechaGestureDetector extends StatelessWidget {
                   child: Text(
                     dateFormat.format(selectedDate),
                     style: const TextStyle(
+                      fontFamily: 'Poppins',
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                     ),
@@ -257,6 +260,7 @@ class FechaContent extends StatelessWidget {
                   child: Text(
                     "Reporte del ${dateFormat.format(selectedDate)}",
                     style: const TextStyle(
+                      fontFamily: 'Poppins',
                       fontSize: 15,
                       fontWeight: FontWeight.normal,
                     ),
@@ -296,6 +300,7 @@ class MapButton extends StatelessWidget {
             Text(
               name,
               style: const TextStyle(
+                fontFamily: 'Poppins',
                 fontSize: 14,
                 color: Color.fromARGB(255, 0, 76, 128),
               ),
@@ -314,13 +319,13 @@ class CustomTextContainer extends StatelessWidget {
   final Color shadowColor;
 
   const CustomTextContainer({
-    Key? key,
+    super.key,
     required this.text,
     required this.leftIcon,
     this.rightIcon = FontAwesomeIcons.greaterThan,
     this.shadowColor =
         const Color.fromRGBO(0, 0, 0, 0.3), // Valor predeterminado
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -355,6 +360,7 @@ class CustomTextContainer extends StatelessWidget {
                 text,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
+                  fontFamily: 'Poppins',
                   fontSize: 18,
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontWeight: FontWeight.bold,

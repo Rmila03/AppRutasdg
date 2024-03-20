@@ -37,6 +37,7 @@ class CustomDropdownState extends State<CustomDropdown> {
                   child: Text(
                     widget.label ?? '',
                     style: const TextStyle(
+                      fontFamily: 'Poppins',
                       fontSize: 12,
                       color: Color.fromARGB(255, 0, 76, 128),
                     ),
@@ -87,7 +88,9 @@ class CustomDropdownState extends State<CustomDropdown> {
                             value: value,
                             child: Text(
                               value,
-                              style: TextStyle(fontSize: widget.lenItem ?? 12),
+                              style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: widget.lenItem ?? 12),
                             ),
                           ),
                         )
@@ -103,7 +106,7 @@ class CustomDropdownState extends State<CustomDropdown> {
                       style: const TextStyle(
                         color: Color.fromARGB(255, 0, 76, 128),
                         fontSize: 15.0,
-                        fontFamily: 'Unna-Bold',
+                        fontFamily: 'Poppins',
                       ),
                     ),
                   ),
@@ -152,12 +155,13 @@ class _TextForm extends State<TextForm> {
             enabled: false,
             keyboardType: widget.inputType,
             cursorColor: const Color.fromARGB(255, 0, 76, 128),
-            style: const TextStyle(color: Colors.black),
+            style: const TextStyle(fontFamily: 'Poppins', color: Colors.black),
           ),
         ),
         Text(
           widget.label,
           style: const TextStyle(
+            fontFamily: 'Poppins',
             fontSize: 12,
             color: Color.fromARGB(255, 0, 76, 128),
           ),
@@ -191,6 +195,7 @@ class InputTextForm extends StatelessWidget {
           child: Text(
             label,
             style: const TextStyle(
+              fontFamily: 'Poppins',
               fontSize: 12,
               color: Color.fromARGB(255, 0, 76, 128),
             ),

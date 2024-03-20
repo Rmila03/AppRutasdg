@@ -31,11 +31,12 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
   DataRow buildDataRow(Socio user) {
     return DataRow(
       cells: [
-        DataCell(Text(user.dni, style: const TextStyle(fontSize: 13))),
+        DataCell(Text(user.dni,
+            style: const TextStyle(fontFamily: 'Poppins', fontSize: 13))),
         DataCell(
           Text(
             "${user.name} ${user.lastName}",
-            style: const TextStyle(fontSize: 13),
+            style: const TextStyle(fontFamily: 'Poppins', fontSize: 13),
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -51,6 +52,7 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
               child: Text(
                 motivos[user] ?? "agregar",
                 style: const TextStyle(
+                  fontFamily: 'Poppins',
                   fontSize: 12,
                   color: Colors.grey,
                   fontWeight: FontWeight.w600,
@@ -124,6 +126,7 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
                   controller: searchController,
                   onChanged: searchUsers,
                   style: const TextStyle(
+                    fontFamily: 'Poppins',
                     color: Colors.black,
                   ),
                   decoration: const InputDecoration(
@@ -169,18 +172,21 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
                         DataColumn(
                           label: Text('DNI',
                               style: TextStyle(
+                                  fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w600,
                                   color: Color.fromARGB(255, 0, 0, 0))),
                         ),
                         DataColumn(
                           label: Text('Nombres y Apellidos',
                               style: TextStyle(
+                                  fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w600,
                                   color: Color.fromARGB(255, 0, 0, 0))),
                         ),
                         DataColumn(
                           label: Text('Motivo',
                               style: TextStyle(
+                                  fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w600,
                                   color: Color.fromARGB(255, 0, 0, 0))),
                         ),
