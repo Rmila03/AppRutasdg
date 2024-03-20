@@ -62,7 +62,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
                   style: TextStyle(
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
+                    fontFamily: "Poppins",
                     color: Colors.white,
                   ),
                 ),
@@ -119,7 +119,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
                 style: TextStyle(
                   color: selectedMenu == title ? Colors.white : Colors.white,
                   fontSize: 12.0,
-                  fontFamily: 'Montserrat',
+                  fontFamily: "Poppins",
                   fontWeight: FontWeight.bold,
                 ),
               ),

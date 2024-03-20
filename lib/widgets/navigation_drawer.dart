@@ -21,7 +21,7 @@ class MenuDrawer extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 25.0,
                     color: Color.fromARGB(255, 255, 255, 255),
-                    fontFamily: 'Roboto',
+                    fontFamily: "Poppins",
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -29,6 +29,7 @@ class MenuDrawer extends StatelessWidget {
               accountEmail: Text(
                 "ramonp123@coopacsdg.com",
                 style: TextStyle(
+                  fontFamily: "Poppins",
                   fontSize: 14.0,
                   color: Color.fromARGB(255, 255, 255, 255),
                 ),
@@ -39,7 +40,7 @@ class MenuDrawer extends StatelessWidget {
               leading: const Icon(Icons.home),
               title: const Text(
                 'Inicio',
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(fontFamily: "Poppins", fontSize: 20.0),
               ),
               onTap: () {
                 Navigator.push(context,
@@ -50,7 +51,7 @@ class MenuDrawer extends StatelessWidget {
               leading: const Icon(Icons.newspaper),
               title: const Text(
                 'Notificaciones',
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(fontFamily: "Poppins", fontSize: 20.0),
               ),
               onTap: () {
                 Navigator.push(
@@ -67,7 +68,7 @@ class MenuDrawer extends StatelessWidget {
               leading: const Icon(Icons.settings),
               title: const Text(
                 'Configuración',
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(fontFamily: "Poppins", fontSize: 20.0),
               ),
               onTap: () {
                 Navigator.pop(context);
@@ -77,7 +78,7 @@ class MenuDrawer extends StatelessWidget {
               leading: const Icon(Icons.picture_as_pdf_rounded),
               title: const Text(
                 'Reporte',
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(fontFamily: "Poppins", fontSize: 20.0),
               ),
               onTap: () {
                 Navigator.push(
@@ -94,7 +95,7 @@ class MenuDrawer extends StatelessWidget {
               leading: const Icon(Icons.help),
               title: const Text(
                 'Ayuda o Soporte',
-                style: TextStyle(fontSize: 20.0),
+                style: TextStyle(fontFamily: "Poppins", fontSize: 20.0),
               ),
               onTap: () {
                 Navigator.pop(context);
@@ -116,7 +117,7 @@ class MenuDrawer extends StatelessWidget {
                 leading: Icon(Icons.exit_to_app),
                 title: Text(
                   'Cerrar Sesión',
-                  style: TextStyle(fontSize: 20.0),
+                  style: TextStyle(fontFamily: "Poppins", fontSize: 20.0),
                 ),
               ),
             ),

@@ -107,8 +107,18 @@ class _PromocionPageState extends State<PromocionPage> {
               headingRowColor:
                   MaterialStateProperty.all(const Color(0xFFD9D9D9)),
               columns: const [
-                DataColumn(label: Text('DNI')),
-                DataColumn(label: Text('Nombres y Apellidos')),
+                DataColumn(
+                    label: Text('DNI',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.bold,
+                        ))),
+                DataColumn(
+                    label: Text('Nombres y Apellidos',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.bold,
+                        ))),
                 DataColumn(label: Text('')),
               ],
               rows: userList
@@ -130,8 +140,14 @@ class _PromocionPageState extends State<PromocionPage> {
                     }
                   },
                   cells: [
-                    DataCell(Text(user.dni)),
-                    DataCell(Text("${user.name} ${user.lastName}")),
+                    DataCell(Text(user.dni,
+                        style: const TextStyle(
+                          fontFamily: 'Poppins',
+                        ))),
+                    DataCell(Text("${user.name} ${user.lastName}",
+                        style: const TextStyle(
+                          fontFamily: 'Poppins',
+                        ))),
                     const DataCell(Icon(Icons.check)),
                   ],
                 );
@@ -185,6 +201,7 @@ class _PromocionPageState extends State<PromocionPage> {
               child: const Text(
                 "PLAN DEL DIA",
                 style: TextStyle(
+                  fontFamily: 'Poppins',
                   fontSize: 18,
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontWeight: FontWeight.bold,
