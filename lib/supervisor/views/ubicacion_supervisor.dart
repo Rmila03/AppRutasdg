@@ -136,7 +136,7 @@ class _UbicacionSupervisorPage extends State {
                                   color: Color.fromARGB(255, 0, 76, 128),
                                   fontSize: 25.0,
                                   fontWeight: FontWeight.bold,
-                                  fontFamily: 'Unna-Bold',
+                                  fontFamily: 'Poppins',
                                 ),
                               ),
                             ),

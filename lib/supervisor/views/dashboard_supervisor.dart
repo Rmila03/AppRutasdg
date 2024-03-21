@@ -79,7 +79,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
-                fontFamily: 'Unna-Bold',
+                fontFamily: 'Poppins',
               ),
             ),
           );
@@ -96,7 +96,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
           style: TextStyle(
             color: Color.fromARGB(255, 0, 76, 128),
             fontSize: 15.0,
-            fontFamily: 'Unna-Bold',
+            fontFamily: 'Poppins',
           ),
         ),
       ),
@@ -144,7 +144,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                         color: Color.fromARGB(255, 0, 76, 128),
                                         fontSize: 25.0,
                                         fontWeight: FontWeight.w900,
-                                        fontFamily: 'Unna-Bold',
+                                        fontFamily: 'Poppins',
                                       ),
                                     ),
                                   ),
@@ -230,7 +230,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 18.0,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           )),
                                     ),
                                     tooltipBehavior: _tooltip,
@@ -282,7 +282,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 19.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         Row(
@@ -337,7 +337,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 19.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -347,7 +347,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         Text(
@@ -357,7 +357,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -367,7 +367,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         Text(
@@ -377,7 +377,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -387,7 +387,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         Text(
@@ -397,7 +397,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -407,7 +407,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         Text(
@@ -417,7 +417,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -428,7 +428,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 19.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -438,7 +438,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         Text(
@@ -448,7 +448,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -458,7 +458,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         Text(
@@ -468,7 +468,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -478,7 +478,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         Text(
@@ -488,7 +488,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -499,7 +499,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 19.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Unna-Bold',
+                                            fontFamily: 'Poppins',
                                           ),
                                         ),
                                         SfCircularChart(
@@ -508,22 +508,25 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             isResponsive: true,
                                             alignment: ChartAlignment.center,
                                             position: LegendPosition.bottom,
-                                            textStyle: TextStyle(fontSize: 14),
+                                            textStyle: TextStyle(
+                                              fontSize: 14,
+                                              fontFamily: 'Poppins',
+                                            ),
                                           ),
                                           series: <CircularSeries>[
                                             DoughnutSeries<ChartData, String>(
-                                                legendIconType: LegendIconType
-                                                    .rectangle,
+                                                legendIconType:
+                                                    LegendIconType.rectangle,
                                                 enableTooltip: true,
                                                 dataLabelSettings:
                                                     const DataLabelSettings(
                                                         isVisible: true,
-                                                        textStyle:
-                                                            TextStyle(
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                        textStyle: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontFamily: 'Poppins',
+                                                        ),
                                                         margin:
                                                             EdgeInsets.all(10),
                                                         labelPosition:
@@ -713,7 +716,7 @@ class Pie extends StatelessWidget {
                 style: TextStyle(
                   color: Color.fromARGB(255, 2, 76, 127),
                   fontSize: 18.0,
-                  fontFamily: 'Unna-Bold',
+                  fontFamily: 'Poppins',
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -740,7 +743,7 @@ class Pie extends StatelessWidget {
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 15.0,
-                          fontFamily: 'Unna-Bold',
+                          fontFamily: 'Poppins',
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -752,7 +755,7 @@ class Pie extends StatelessWidget {
                           style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18.0,
-                            fontFamily: 'Unna-Bold',
+                            fontFamily: 'Poppins',
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -787,7 +790,7 @@ class Pie extends StatelessWidget {
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 15.0,
-                          fontFamily: 'Unna-Bold',
+                          fontFamily: 'Poppins',
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -799,7 +802,7 @@ class Pie extends StatelessWidget {
                           style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18.0,
-                            fontFamily: 'Unna-Bold',
+                            fontFamily: 'Poppins',
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -846,7 +849,7 @@ class BarGraph extends StatelessWidget {
                 style: TextStyle(
                   color: Color.fromARGB(255, 2, 76, 127),
                   fontSize: 18.0,
-                  fontFamily: 'Unna-Bold',
+                  fontFamily: 'Poppins',
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -919,6 +922,7 @@ class Bar extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 15,
               color: color,
+              fontFamily: 'Poppins',
             ),
           ),
         ),
@@ -938,7 +942,10 @@ class Bar extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Text(
             "$amount",
-            style: const TextStyle(fontSize: 15),
+            style: const TextStyle(
+              fontSize: 15,
+              fontFamily: 'Poppins',
+            ),
           ),
         ),
       ],
@@ -976,6 +983,7 @@ class CardDinero extends StatelessWidget {
             style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
+              fontFamily: 'Poppins',
             ),
           ),
           const SizedBox(height: 5),
@@ -985,6 +993,7 @@ class CardDinero extends StatelessWidget {
             style: TextStyle(
               color: color,
               fontWeight: FontWeight.bold,
+              fontFamily: 'Poppins',
             ),
           ),
         ],
