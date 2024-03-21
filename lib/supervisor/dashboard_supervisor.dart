@@ -19,18 +19,88 @@ class DashboardSupervisorPage extends StatefulWidget {
 }
 
 class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
-  final List<ChartData> chartData = [
+  /*final List<ChartData> chartData = [
     ChartData('Cumplidos', 10, Colors.orange),
     ChartData('Sin cumplir', 2, Colors.green),
-  ];
+  ];*/
   String selectedItem = '';
   String opcionFecha = '';
   DateTime day = DateTime.now();
   DateTime month = DateTime.now();
   DateTime year = DateTime.now();
   DateTime _selectedDate = DateTime.now();
+  List<Analista> Analistas = getAnalistas();
+  int id = 0;
+  late List<_ChartData> data;
+  late TooltipBehavior _tooltip;
+  final List<ChartData> chartData = [
+    ChartData('Promoción', 50, const Color.fromRGBO(9, 0, 136, 1)),
+    ChartData('Seguimiento', 45, const Color.fromRGBO(147, 0, 119, 1)),
+    ChartData('Recuperación', 34, const Color.fromRGBO(255, 189, 57, 1))
+  ];
+  int? selectedIndex = 0;
+  List<Analista> analistas = getAnalistas();
+  Set<String> selectedBars = Set<String>();
+  @override
+  void initState() {
+    data = [
+      _ChartData(1, 'Juan', "Suarez Perez", 24000, 14000, 25000, 10.2, 10, 6, 2,
+          4, 23, 4, 7, 11, 40, "Normal"),
+      _ChartData(1, 'Carlos', "Suarez Perez", 26000, 12000, 22000, 2.2, 10, 6,
+          2, 4, 23, 4, 7, 4, 20, "Deficiente"),
+      _ChartData(1, 'Maria', "Suarez Perez", 21000, 14000, 23000, 18.2, 10, 6,
+          2, 4, 23, 4, 7, 18, 80, "Óptimo"),
+      _ChartData(1, 'Salvador', "Suarez Perez", 23000, 14000, 24000, 10.8, 10,
+          6, 2, 4, 23, 4, 7, 12, 50, "Normal"),
+      _ChartData(1, 'Adolfo', "Suarez Perez", 25000, 16000, 24000, 11.2, 10, 6,
+          2, 4, 23, 4, 7, 9, 66, "Normal"),
+    ];
+    _tooltip = TooltipBehavior(enable: true);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var dropdown = Container(
+      alignment: Alignment.bottomLeft,
+      padding: const EdgeInsets.all(8.0),
+      width: 450,
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 255, 255, 255),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: DropdownButton<String>(
+        value: selectedIndex != 0 ? selectedIndex.toString() : null,
+        items: List.generate(analistas.length, (index) {
+          return DropdownMenuItem<String>(
+            value: analistas[index].idAnalista,
+            child: Text(
+              '${analistas[index].name} ${analistas[index].lastName}',
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 15.0,
+                fontFamily: 'Unna-Bold',
+              ),
+            ),
+          );
+        }).toList(),
+        onChanged: (String? value) {
+          setState(() {
+            selectedItem = value ?? '';
+            print(">>>>><$value");
+            selectedIndex = value == null ? 0 : int.parse(value);
+          });
+        },
+        hint: const Text(
+          'Seleccione analista',
+          style: TextStyle(
+            color: Color.fromARGB(255, 0, 76, 128),
+            fontSize: 15.0,
+            fontFamily: 'Unna-Bold',
+          ),
+        ),
+      ),
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
@@ -52,207 +122,487 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
             if (MediaQuery.of(context).size.width >= 640)
               const MenuSupervisor(name: "DASHBOARD"),
             Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20.0),
-                      const Center(
-                        child: Text(
-                          'DASHBOARD',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 0, 76, 128),
-                            fontSize: 20.0,
-                            fontFamily: 'Unna-Bold',
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20.0),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 300,
-                            child: CustomDropdown(
-                              items: getAnalistas()
-                                  .map((objeto) =>
-                                      '${objeto.name} ${objeto.lastName}')
-                                  .toList(),
-                              borderColor:
-                                  const Color.fromARGB(255, 0, 76, 128),
-                              lenItem: 15,
-                              onChanged: (String? nuevoItem) {
-                                setState(() {
-                                  selectedItem = nuevoItem ?? '';
-                                });
-                              },
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          SizedBox(
-                            width: 250,
-                            child: CustomDropdown(
-                              items: const [
-                                'Dia',
-                                'Mes',
-                                'Año',
-                              ],
-                              borderColor: Colors.green,
-                              lenItem: 15,
-                              hint: 'Seleccione el tipo de fecha',
-                              onChanged: (String? Item) {
-                                setState(() {
-                                  opcionFecha = Item ?? '';
-                                });
-                              },
-                            ),
-                          ),
-
-                          if (opcionFecha == 'Año')
-                            IconButton(
-                              icon: const Icon(
-                                FontAwesomeIcons.calendarDay,
-                                color: Color.fromARGB(255, 0, 76, 128),
-                              ),
-                              onPressed: () {
-                                _pickYear(context);
-                              },
-                            ),
-                          if (opcionFecha == 'Mes')
-                            IconButton(
-                              onPressed: () {
-                                showMonthPicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        locale: const Locale('es'),
-                                        headerColor: const Color.fromARGB(
-                                            255, 4, 56, 99),
-                                        selectedMonthTextColor: Colors.white,
-                                        unselectedMonthTextColor: Colors.black,
-                                        selectedMonthBackgroundColor:
-                                            const Color.fromARGB(
-                                                255, 4, 56, 99))
-                                    .then((date) {
-                                  if (date != null) {
-                                    setState(() {
-                                      month = date;
-                                    });
-                                  }
-                                });
-                              },
-                              icon: const Icon(
-                                FontAwesomeIcons.calendarDay,
-                                color: Color.fromARGB(255, 0, 76, 128),
-                              ),
-                            ),
-                          if (opcionFecha == 'Dia')
-                            IconButton(
-                              icon: const Icon(
-                                FontAwesomeIcons.calendarDay,
-                                color: Color.fromARGB(255, 0, 76, 128),
-                              ),
-                              onPressed: () {
-                                showDatePicker(
-                                  context: context,
-                                  builder:
-                                      (BuildContext context, Widget? child) {
-                                    return Theme(
-                                      data: ThemeData.fallback(),
-                                      child: child!,
-                                    );
-                                  },
-                                  //locale: const Locale("es"),
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1920),
-                                  lastDate: DateTime(2100),
-                                ).then((date) {
-                                  setState(() {
-                                    day = date!;
-                                  });
-                                });
-                                //_selectDate(context);
-                              },
-                            ),
-                          const SizedBox(width: 10),
-                          Text(
-                            DateFormat('dd/MM/yyyy').format(_selectedDate),
-                            style: const TextStyle(
-                              color: Color.fromARGB(255, 0, 76, 128),
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-
-                          //DatePicker(initialMode: DatePickerMode.year),
-                        ],
-                      ),
-                      const SizedBox(height: 16.0),
-                      Container(
-                        width: double.infinity,
-                        color: Colors.green, // Color de fondo del Container
-                        padding: const EdgeInsets.all(
-                            20.0), // Padding alrededor del texto
-                        child: Text(
-                          selectedItem.toUpperCase(),
-                          style: const TextStyle(
-                            color: Colors.white, // Color del texto
-                            fontSize: 16.0,
-                            fontFamily: 'Unna-Bold',
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.green,
-                            width: 2.0,
-                          ),
-                        ),
-                        child: Column(
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 5,
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 16, right: 8, top: 41, bottom: 16),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Row(
-                              children: [
-                                Expanded(
-                                  child: CardDinero(
-                                    name: "SALDO DE CARTERA",
-                                    monto: 24000,
-                                    color: Colors.orange,
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    child: const Text(
+                                      'DASHBOARD',
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 0, 76, 128),
+                                        fontSize: 25.0,
+                                        fontWeight: FontWeight.w900,
+                                        fontFamily: 'Unna-Bold',
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: CardDinero(
-                                    name: "MONTO RECUPERADO",
-                                    monto: 14000,
-                                    color: Colors.blue,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.center,
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 8, horizontal: 12),
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 10),
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                              255, 0, 76, 128),
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        child: GestureDetector(
+                                          onTap: () {},
+                                          child: const Row(
+                                            children: [
+                                              Icon(FontAwesomeIcons.eye,
+                                                  color: Colors.white),
+                                              SizedBox(
+                                                width: 10.0,
+                                              ),
+                                              Text(
+                                                '  Ver todo ',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                Expanded(
-                                  child: CardDinero(
-                                    name: "SALDO VENCIDO",
-                                    monto: 24000,
-                                    color: Colors.red,
+                                  SfCartesianChart(
+                                    title: const ChartTitle(
+                                        alignment: ChartAlignment.near,
+                                        text: "Mes de Febrero",
+                                        textStyle: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 0, 76, 128),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        )),
+                                    onSelectionChanged: (value) {
+                                      //value.selectedColor = Colors.red;
+                                      /*setState(() {
+                                        selectedIndex = value.pointIndex + 1;
+                                      });
+                                      print("ddddd");*/
+                                      final String barName =
+                                          value.pointIndex.toString();
+                                      setState(() {
+                                        if (selectedBars.contains(barName)) {
+                                          selectedBars.remove(barName);
+                                          selectedIndex = 0;
+                                        } else {
+                                          selectedBars.add(barName);
+                                          selectedIndex = value.pointIndex + 1;
+                                        }
+                                      });
+                                    },
+                                    primaryXAxis: const CategoryAxis(
+                                      axisLine: AxisLine(
+                                          color: Colors.black, width: 1),
+                                    ),
+                                    primaryYAxis: const NumericAxis(
+                                      minimum: 0,
+                                      maximum: 30,
+                                      interval: 10,
+                                      axisLine: AxisLine(
+                                          color: Colors.black, width: 1),
+                                      title: AxisTitle(
+                                          text: "N° de Visitas",
+                                          textStyle: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 18.0,
+                                            fontFamily: 'Unna-Bold',
+                                          )),
+                                    ),
+                                    tooltipBehavior: _tooltip,
+                                    series: <CartesianSeries<_ChartData,
+                                        String>>[
+                                      BarSeries<_ChartData, String>(
+                                          width: 0.4,
+                                          selectionBehavior: SelectionBehavior(
+                                            enable: true,
+                                            selectedColor: const Color.fromARGB(
+                                                255, 0, 76, 128),
+                                            unselectedColor:
+                                                const Color(0xFFD9DEDA),
+                                          ),
+                                          dataSource: data,
+                                          xValueMapper: (_ChartData data, _) =>
+                                              data.nombreAnalista,
+                                          yValueMapper: (_ChartData data, _) =>
+                                              data.numeroVisitasTotal,
+                                          onPointTap: (value) {
+                                            /*final String barName =
+                                                value.pointIndex.toString();
+                                            setState(() {
+                                              if (selectedBars
+                                                  .contains(barName)) {
+                                                selectedBars.remove(barName);
+                                                selectedIndex = 0;
+                                              } else {
+                                                selectedBars.add(barName);
+                                                selectedIndex =
+                                                    value.pointIndex! + 1;
+                                              }
+                                            });*/
+                                          },
+                                          color: const Color(0xFFD9DEDA))
+                                    ],
                                   ),
-                                )
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text(
+                                          'Actividad',
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 19.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            IconButton(
+                                              icon: const Icon(
+                                                FontAwesomeIcons.calendarDay,
+                                                color: Color.fromARGB(
+                                                    255, 0, 76, 128),
+                                              ),
+                                              onPressed: () {
+                                                _selectDate(context);
+                                              },
+                                            ),
+                                            const SizedBox(width: 10),
+                                            Text(
+                                              DateFormat('dd/MM/yyyy')
+                                                  .format(_selectedDate),
+                                              style: const TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 0, 76, 128),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  _buildDataTable(Analistas),
+                                ],
+                              ),
                             ),
-                            const BarGraph(
-                              cantidadPromocion: 15,
-                              cantidadSeguimiento: 40,
-                              cantidadRecuperacion: 50,
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  dropdown,
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          'Resumen de Cartera',
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 19.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        const SizedBox(height: 15),
+                                        const Text(
+                                          'Saldo de Cartera (S/.)',
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        Text(
+                                          '${data[id].saldoCartera}',
+                                          style: const TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        const SizedBox(height: 15),
+                                        const Text(
+                                          'Monto Recuperado (S/.)',
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        Text(
+                                          '${data[id].montoRecuperado}',
+                                          style: const TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        const SizedBox(height: 15),
+                                        const Text(
+                                          'Saldo Vencido (S/.)',
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        Text(
+                                          '${data[id].saldoVencido}',
+                                          style: const TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        const SizedBox(height: 15),
+                                        const Text(
+                                          'Indice de Morosidad (%)',
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        Text(
+                                          '${data[id].indiceMorosidad}',
+                                          style: const TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        const SizedBox(height: 15),
+                                        const Text(
+                                          'Compromisos de Pago',
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 19.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        const SizedBox(height: 15),
+                                        const Text(
+                                          'Generados',
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        Text(
+                                          '${data[id].compromisosGenerado}',
+                                          style: const TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        const SizedBox(height: 15),
+                                        const Text(
+                                          'Sin Cumplir',
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        Text(
+                                          '${data[id].compromisosSinCumplir}',
+                                          style: const TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        const SizedBox(height: 15),
+                                        const Text(
+                                          'Cumplidos',
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        Text(
+                                          '${data[id].compromisosCumplidos}',
+                                          style: const TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        const SizedBox(height: 15),
+                                        const Text(
+                                          'N° Visitas por modalidad',
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 76, 128),
+                                            fontSize: 19.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Unna-Bold',
+                                          ),
+                                        ),
+                                        SfCircularChart(
+                                          legend: const Legend(
+                                            isVisible: true,
+                                            isResponsive: true,
+                                            alignment: ChartAlignment.center,
+                                            position: LegendPosition.bottom,
+                                            textStyle: TextStyle(fontSize: 14),
+                                          ),
+                                          series: <CircularSeries>[
+                                            DoughnutSeries<ChartData, String>(
+                                                legendIconType: LegendIconType
+                                                    .rectangle,
+                                                enableTooltip: true,
+                                                dataLabelSettings:
+                                                    const DataLabelSettings(
+                                                        isVisible: true,
+                                                        textStyle:
+                                                            TextStyle(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                        margin:
+                                                            EdgeInsets.all(10),
+                                                        labelPosition:
+                                                            ChartDataLabelPosition
+                                                                .outside,
+                                                        connectorLineSettings:
+                                                            ConnectorLineSettings(
+                                                                width: 3)),
+                                                explode: true,
+                                                dataSource: chartData,
+                                                pointColorMapper:
+                                                    (ChartData data, _) =>
+                                                        data.color,
+                                                xValueMapper:
+                                                    (ChartData data, _) =>
+                                                        data.x,
+                                                yValueMapper:
+                                                    (ChartData data, _) =>
+                                                        data.y)
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            Pie(chartData: chartData),
                           ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDataTable(List<Analista> userList) {
+    List<DataRow> rows = userList.map((user) {
+      return DataRow(
+        cells: [
+          DataCell(Text(user.dni)),
+          DataCell(Text("${user.name} ${user.lastName}")),
+          DataCell(Text(user.edad)),
+          DataCell(Text(user.edad)),
+        ],
+      );
+    }).toList();
+
+    return Card(
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(
+          color: Color.fromRGBO(255, 255, 255, 1),
+          width: 2.0,
+        ),
+        borderRadius: BorderRadius.circular(0.0),
+      ),
+      color: const Color.fromARGB(255, 255, 255, 255),
+      elevation: 0,
+      child: SizedBox(
+        height: 300,
+        width: 1000,
+        child: SingleChildScrollView(
+          child: DataTable(
+            showCheckboxColumn: false,
+            columnSpacing: 0.0,
+            headingRowColor: MaterialStateProperty.all(const Color(0xFFD9DEDA)),
+            columns: const [
+              DataColumn(label: Text('Analista')),
+              DataColumn(label: Text('Estado')),
+              DataColumn(label: Text('Nro de visitas')),
+              DataColumn(label: Text('Porcentaje')),
+            ],
+            rows: rows,
+          ),
         ),
       ),
     );
@@ -264,7 +614,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
       initialDate: _selectedDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
-      locale: const Locale('es'),
+      locale: const Locale('en'),
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
@@ -646,6 +996,45 @@ class CardDinero extends StatelessWidget {
 class ChartData {
   ChartData(this.x, this.y, this.color);
   final String x;
-  final double y;
+  final int y;
   final Color color;
+}
+
+class _ChartData {
+  _ChartData(
+      this.idAnalista,
+      this.nombreAnalista,
+      this.apellidosAnalista,
+      this.saldoCartera,
+      this.montoRecuperado,
+      this.saldoVencido,
+      this.indiceMorosidad,
+      this.compromisosGenerado,
+      this.compromisosSinCumplir,
+      this.compromisosCumplidos,
+      this.numeroVisitasPromocion,
+      this.numeroVisitasSeguimiento,
+      this.numeroVisitasRecuperacion,
+      this.numeroVisitasAmpliacion,
+      this.numeroVisitasTotal,
+      this.porcentajeVisitasRealizadas,
+      this.estado);
+
+  final int idAnalista;
+  final String nombreAnalista;
+  final String apellidosAnalista;
+  final double saldoCartera;
+  final double montoRecuperado;
+  final double saldoVencido;
+  final double indiceMorosidad;
+  final int compromisosGenerado;
+  final int compromisosSinCumplir;
+  final int compromisosCumplidos;
+  final int numeroVisitasPromocion;
+  final int numeroVisitasSeguimiento;
+  final int numeroVisitasRecuperacion;
+  final int numeroVisitasAmpliacion;
+  final double numeroVisitasTotal;
+  final double porcentajeVisitasRealizadas;
+  final String estado;
 }
