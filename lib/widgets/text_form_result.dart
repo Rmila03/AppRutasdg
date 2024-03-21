@@ -35,6 +35,7 @@ class _TextFormResult extends State<TextFormResult> {
           child: Text(
             widget.label,
             style: const TextStyle(
+              fontFamily: "Poppins",
               fontSize: 12,
               color: Color.fromARGB(255, 0, 76, 128),
             ),
@@ -57,7 +58,8 @@ class _TextFormResult extends State<TextFormResult> {
                     width: 2.0, color: Color.fromARGB(255, 0, 76, 128)),
               ),
             ),
-            style: const TextStyle(color: Colors.black, fontSize: 13),
+            style: const TextStyle(
+                fontFamily: "Poppins", color: Colors.black, fontSize: 13),
           ),
         ),
       ],

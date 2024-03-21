@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 //import 'package:ruta_sdg/conexcion_api.dart';
-import 'package:ruta_sdg/supervisor/homeSupervisor.dart';
+import 'package:ruta_sdg/supervisor/views/homeSupervisor.dart';
 import 'package:ruta_sdg/views/home.dart';
 
 void main() {
@@ -78,6 +78,7 @@ class _LoginState extends State<Login> {
                             Text(
                               'RUTASDG',
                               style: TextStyle(
+                                fontFamily: 'Poppins',
                                 fontSize: 20,
                                 letterSpacing: 5,
                                 fontWeight: FontWeight.bold,
@@ -90,6 +91,7 @@ class _LoginState extends State<Login> {
                             const Text(
                               'RUTASDG',
                               style: TextStyle(
+                                fontFamily: 'Poppins',
                                 fontSize: 20,
                                 letterSpacing: 5,
                                 fontWeight: FontWeight.bold,
@@ -126,6 +128,7 @@ class _LoginState extends State<Login> {
                             const Text(
                               '¡BIENVENIDO!',
                               style: TextStyle(
+                                fontFamily: 'Poppins',
                                 fontSize: 17,
                                 color: Color.fromARGB(255, 236, 130, 45),
                                 fontWeight: FontWeight.bold,
@@ -152,9 +155,11 @@ class _LoginState extends State<Login> {
                                     labelText: "Usuario",
                                     hintText: "ejemplo@gmail.com",
                                     hintStyle: TextStyle(
-                                      color: Colors.grey,
-                                    ),
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                        fontFamily: "Poppins"),
                                     labelStyle: TextStyle(
+                                      fontFamily: "Poppins",
                                       fontWeight: FontWeight.bold,
                                     ),
                                     floatingLabelBehavior:
@@ -190,6 +195,7 @@ class _LoginState extends State<Login> {
                                     ),
                                     labelText: "Contraseña",
                                     labelStyle: const TextStyle(
+                                      fontFamily: "Poppins",
                                       fontWeight: FontWeight.bold,
                                     ),
                                     suffixIcon: IconButton(
@@ -226,7 +232,10 @@ class _LoginState extends State<Login> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         content: Text(
-                                            'Usuario o contraseña incorrecta!'),
+                                          'Usuario o contraseña incorrecta!',
+                                          style:
+                                              TextStyle(fontFamily: "Poppins"),
+                                        ),
                                       ),
                                     );
                                   }
@@ -234,6 +243,7 @@ class _LoginState extends State<Login> {
                                 child: const Text(
                                   '¿Olvidaste tu contraseña?',
                                   style: TextStyle(
+                                    fontFamily: "Poppins",
                                     fontSize: 14,
                                     color: Colors.black,
                                   ),
@@ -247,7 +257,8 @@ class _LoginState extends State<Login> {
                     if (showError)
                       const Text(
                         '¡Usuario o contraseña incorrectos!',
-                        style: TextStyle(color: Colors.red),
+                        style:
+                            TextStyle(color: Colors.red, fontFamily: "Poppins"),
                         textAlign: TextAlign.center,
                       ),
                     Padding(
@@ -293,8 +304,12 @@ class _LoginState extends State<Login> {
                             }
                           },
                           child: const Text(
-                            'INGRESAR',
-                            style: TextStyle(fontSize: 15, color: Colors.black),
+                            'Ingresar',
+                            style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15,
+                                color: Colors.black),
                           ),
                         ),
                       ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:ruta_sdg/supervisor/listacartera.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/analista.dart';
@@ -94,7 +95,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
-                fontFamily: 'Unna-Bold',
+                fontFamily: 'Poppins',
               ),
             ),
           );
@@ -109,7 +110,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
           style: TextStyle(
             color: Color.fromARGB(255, 196, 196, 196),
             fontSize: 15.0,
-            fontFamily: 'Unna-Bold',
+            fontFamily: 'Poppins',
           ),
         ),
       ),
@@ -197,7 +198,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                               color: Color.fromARGB(255, 0, 76, 128),
                               fontSize: 25.0,
                               fontWeight: FontWeight.bold,
-                              fontFamily: 'Unna-Bold',
+                              fontFamily: 'Poppins',
                             ),
                           ),
                         ),
@@ -218,6 +219,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                               DateFormat('dd/MM/yyyy').format(selectedDate),
                               style: const TextStyle(
                                 color: Color.fromARGB(255, 0, 76, 128),
+                                fontFamily: 'Poppins',
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -324,6 +326,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                         Text(
                                           '  AÑADIR ',
                                           style: TextStyle(
+                                            fontFamily: 'Poppins',
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -355,6 +358,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                         Text(
                                           ' GENERAR',
                                           style: TextStyle(
+                                            fontFamily: 'Poppins',
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -428,6 +432,8 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     Function(dynamic)? onChanged,
   ) {
     return Container(
+      //padding: const EdgeInsets.all(1.0),
+      padding: const EdgeInsets.symmetric(horizontal: 3.0),
       width: 180,
       height: 120,
       decoration: BoxDecoration(
@@ -439,6 +445,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(
             icon,
@@ -450,7 +457,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
             style: const TextStyle(
               color: Color.fromARGB(255, 0, 76, 128),
               fontSize: 15.0,
-              fontFamily: 'Unna-Bold',
+              fontFamily: 'Poppins',
             ),
           ),
           const SizedBox(height: 5),
@@ -476,7 +483,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
             style: const TextStyle(
               color: Color.fromARGB(255, 0, 76, 128),
               fontSize: 15.0,
-              fontFamily: 'Unna-Bold',
+              fontFamily: 'Poppins',
             ),
           ),
         );
@@ -487,7 +494,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         style: TextStyle(
           color: Color.fromARGB(255, 196, 196, 196),
           fontSize: 15.0,
-          fontFamily: 'Unna-Bold',
+          fontFamily: 'Poppins',
         ),
       ),
     );
@@ -498,18 +505,24 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     required ValueChanged<int?> onChanged,
   }) {
     return DropdownButton<int>(
+      isExpanded: true,
       value: selectedNumber == 0
           ? 0
           : selectedNumber, // Si selectedNumber es 0, establece el valor en null
       items: List.generate(11, (index) {
         return DropdownMenuItem<int>(
           value: index,
-          child: Text(
-            '$index',
-            style: const TextStyle(
-              color: Color.fromARGB(255, 0, 76, 128),
-              fontSize: 15.0,
-              fontFamily: 'Unna-Bold',
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 8.0), // Agrega un padding horizontal de 8.0
+            child: Text(
+              '$index',
+              style: const TextStyle(
+                color: Color.fromARGB(255, 0, 76, 128),
+                fontSize: 15.0,
+                fontFamily: 'Poppins',
+              ),
             ),
           ),
         );
@@ -520,7 +533,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         style: TextStyle(
           color: Color.fromARGB(255, 196, 196, 196),
           fontSize: 15.0,
-          fontFamily: 'Unna-Bold',
+          fontFamily: 'Poppins',
         ),
       ),
     );
@@ -557,21 +570,61 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                 headingRowColor:
                     MaterialStateProperty.all(const Color(0xFFD9DEDA)),
                 columns: const [
-                  DataColumn(label: Text('DNI')),
-                  DataColumn(label: Text('NOMBRE')),
-                  DataColumn(label: Text('DIRECCIÓN')),
-                  DataColumn(label: Text('MODALIDAD')),
+                  DataColumn(
+                      label: Text(
+                    'DNI',
+                    style: TextStyle(
+                        fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+                  )),
+                  DataColumn(
+                      label: Text('NOMBRE',
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold))),
+                  DataColumn(
+                      label: Text('DIRECCIÓN',
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold))),
+                  DataColumn(
+                      label: Text('MODALIDAD',
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold))),
                   DataColumn(label: Text('  ')),
                 ],
-                rows: socioList.asMap().entries.map((entry) {
-                  Socio socio = entry.value;
-
+                rows: socioList.map((socio) {
                   return DataRow(
+                    onSelectChanged: (isSelected) {
+                      if (isSelected != null && isSelected) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ListaSupervisor(
+                              tabName: "PLAN DEL DÍA",
+                              socio: socio,
+                            ),
+                          ),
+                        );
+                      }
+                    },
                     cells: [
-                      DataCell(Text(socio.dni)),
-                      DataCell(Text("${socio.name} ${socio.lastName}")),
-                      DataCell(Text(socio.address)),
-                      DataCell(Text(socio.tipoGrupo)),
+                      DataCell(Text(socio.dni,
+                          style: const TextStyle(
+                            fontFamily: 'Poppins',
+                          ))),
+                      DataCell(Text("${socio.name} ${socio.lastName}",
+                          style: const TextStyle(
+                            fontFamily: 'Poppins',
+                          ))),
+                      DataCell(Text(socio.address,
+                          style: const TextStyle(
+                            fontFamily: 'Poppins',
+                          ))),
+                      DataCell(Text(socio.tipoGrupo,
+                          style: const TextStyle(
+                            fontFamily: 'Poppins',
+                          ))),
                       DataCell(
                         IconButton(
                           icon: const Icon(
@@ -716,6 +769,7 @@ class FloatingPage extends StatelessWidget {
                 '   LISTA DE SOCIOS   ',
                 style: TextStyle(
                   color: Colors.white,
+                  fontFamily: 'Poppins',
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -773,6 +827,7 @@ class FloatingPage extends StatelessWidget {
               color: Colors.white,
             ),
             textStyle: const TextStyle(
+              fontFamily: 'Poppins',
               color: Colors.black,
             ),
             preferBelow: false,
@@ -782,12 +837,16 @@ class FloatingPage extends StatelessWidget {
               children: [
                 Text(
                   '${socio.name} ${socio.lastName}',
-                  style: const TextStyle(fontSize: 16.0),
+                  style: const TextStyle(
+                    fontSize: 16.0,
+                    fontFamily: 'Poppins',
+                  ),
                 ),
                 const SizedBox(height: 8.0),
                 const Text(
                   'Motivo: Cambio de ciudad',
                   style: TextStyle(
+                    fontFamily: 'Poppins',
                     fontSize: 14.0,
                     color: Color.fromARGB(255, 0, 76, 128),
                   ),
@@ -904,6 +963,7 @@ class _SearchAndSocioListState extends State<SearchAndSocioList> {
                       // Color de fondo del Tooltip
                     ),
                     textStyle: const TextStyle(
+                      fontFamily: 'Poppins',
                       color: Colors.black, // Color del texto dentro del Tooltip
                     ),
                     preferBelow: false,
@@ -914,7 +974,10 @@ class _SearchAndSocioListState extends State<SearchAndSocioList> {
                       margin: const EdgeInsets.only(left: 10),
                       child: Text(
                         '${socio.name} ${socio.lastName}',
-                        style: const TextStyle(fontSize: 16.0),
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontFamily: 'Poppins',
+                        ),
                       ),
                     ),
                   ),

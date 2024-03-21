@@ -89,17 +89,32 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+  fonts:
+    - family: Unna
+      fonts:
+        - asset: fonts/Unna-Bold.ttf
+        - asset: fonts/Unna-BoldItalic.ttf
+        - asset: fonts/Unna-Italic.ttf
+        - asset: fonts/Unna-Regular.ttf
+          style: italic
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-BoldItalic.ttf
+        - asset: fonts/Poppins-Black.ttf
+        - asset: fonts/Poppins-BlackItalic.ttf
+        - asset: fonts/Poppins-Bold.ttf
+        - asset: fonts/Poppins-ExtraBold.ttf
+        - asset: fonts\Poppins-Light.ttf
+        #- asset: fonts/poppins/Poppins-Bold.ttf
+        #- asset: fonts/poppins/Poppins-Bold.ttf
+        #- asset: fonts/poppins/Poppins-Bold.ttf
+        
+          style: italic
+    # - family: Trajan Pro
+    #   fonts:
+    #     - asset: fonts/TrajanPro.ttf
+    #     - asset: fonts/TrajanPro_Bold.ttf
+    #       weight: 700
+  
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

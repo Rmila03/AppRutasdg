@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/analista.dart';
 import 'package:ruta_sdg/socio.dart';
+import 'package:ruta_sdg/supervisor/listacartera.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 
@@ -73,7 +74,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
         fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Poppins',
       ),
     );
   }
@@ -89,6 +90,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
             focusColor: Colors
                 .transparent, // Evita que el cuadro cambie de color al seleccionar un elemento
             style: const TextStyle(
+                fontFamily: 'Poppins',
                 color: Colors.black), // Establece el color del texto
             items: analistas.map((Analista analista) {
               return DropdownMenuItem<Analista>(
@@ -107,6 +109,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
               labelText: 'Seleccionar Analista',
               contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
               labelStyle: const TextStyle(
+                fontFamily: 'Poppins',
                 color: Color.fromARGB(255, 0, 76, 128),
               ),
               enabledBorder: OutlineInputBorder(
@@ -135,11 +138,36 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
   Widget _buildDataTable(List<Socio> userList) {
     List<DataRow> rows = userList.map((user) {
       return DataRow(
+        onSelectChanged: (isSelected) {
+          if (isSelected != null && isSelected) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ListaSupervisor(
+                  tabName: "MORA",
+                  socio: user,
+                ),
+              ),
+            );
+          }
+        },
         cells: [
-          DataCell(Text(user.dni)),
-          DataCell(Text("${user.name} ${user.lastName}")),
-          DataCell(Text(user.address)),
-          DataCell(Text(user.daysLate.toString())),
+          DataCell(Text(user.dni,
+              style: const TextStyle(
+                fontFamily: 'Poppins',
+              ))),
+          DataCell(Text("${user.name} ${user.lastName}",
+              style: const TextStyle(
+                fontFamily: 'Poppins',
+              ))),
+          DataCell(Text(user.address,
+              style: const TextStyle(
+                fontFamily: 'Poppins',
+              ))),
+          DataCell(Text(user.daysLate.toString(),
+              style: const TextStyle(
+                fontFamily: 'Poppins',
+              ))),
         ],
       );
     }).toList();
@@ -163,10 +191,30 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
             columnSpacing: 0.0,
             headingRowColor: MaterialStateProperty.all(const Color(0xFFD9DEDA)),
             columns: const [
-              DataColumn(label: Text('DNI')),
-              DataColumn(label: Text('NOMBRE')),
-              DataColumn(label: Text('DIRECCIÓN')),
-              DataColumn(label: Text('DÍAS DE ATRASO')),
+              DataColumn(
+                  label: Text('DNI',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                      ))),
+              DataColumn(
+                  label: Text('NOMBRE',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                      ))),
+              DataColumn(
+                  label: Text('DIRECCIÓN',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                      ))),
+              DataColumn(
+                  label: Text('DÍAS DE ATRASO',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                      ))),
             ],
             rows: rows,
           ),

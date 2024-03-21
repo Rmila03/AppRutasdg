@@ -91,7 +91,7 @@ class _NotificacionesSupervisorContentState
         fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Poppins',
       ),
     );
   }
@@ -111,11 +111,17 @@ class _NotificacionesSupervisorContentState
                   .transparent, // Evita que el cuadro cambie de color al seleccionar un elemento
               style: const TextStyle(
                 color: Colors.black,
+                fontFamily: "Poppins",
               ), // Establece el color del texto
               items: analistas.map((Analista analista) {
                 return DropdownMenuItem<Analista>(
                   value: analista,
-                  child: Text("${analista.name} ${analista.lastName}"),
+                  child: Text(
+                    "${analista.name} ${analista.lastName}",
+                    style: const TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),
                 );
               }).toList(),
               onChanged: (Analista? selectedAnalista) {
@@ -129,6 +135,7 @@ class _NotificacionesSupervisorContentState
                 labelText: 'Seleccionar Analista',
                 contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
                 labelStyle: const TextStyle(
+                  fontFamily: 'Poppins',
                   color: Color.fromARGB(255, 0, 76, 128),
                 ),
                 enabledBorder: OutlineInputBorder(
@@ -181,27 +188,34 @@ class _NotificacionesSupervisorContentState
                 const Text(
                   'Notificación de Cambio',
                   style: TextStyle(
+                    fontFamily: 'Poppins',
                     fontWeight: FontWeight.bold,
                     fontSize: 14.0,
-                    color: Color.fromARGB(255, 0, 76, 128),
+                    color: Color.fromARGB(255, 3, 3, 3),
                   ),
                 ),
                 const SizedBox(height: 8.0),
                 Text(
                   'Nombre: ${socio.name} ${socio.lastName}',
-                  style: const TextStyle(fontSize: 14.0),
+                  style: const TextStyle(fontFamily: 'Poppins', fontSize: 14.0),
                 ),
                 const Text(
                   'Fecha de notificación:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 0, 76, 128)),
                 ),
                 const Text(
                   'Descripción del cambio:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 0, 76, 128)),
                 ),
                 const Text(
                   'Aquí va la descripción detallada del cambio...',
-                  style: TextStyle(fontSize: 14.0),
+                  style: TextStyle(fontFamily: 'Poppins', fontSize: 14.0),
                 ),
               ],
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/analista.dart';
-import 'package:ruta_sdg/supervisor/cartera/listacartera.dart';
+import 'package:ruta_sdg/supervisor/listacartera.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
@@ -57,7 +57,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
-                fontFamily: 'Unna-Bold',
+                fontFamily: "Poppins",
               ),
             ),
           );
@@ -72,7 +72,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
           style: TextStyle(
             color: Color.fromARGB(255, 196, 196, 196),
             fontSize: 15.0,
-            fontFamily: 'Unna-Bold',
+            fontFamily: "Poppins",
           ),
         ),
       ),
@@ -139,7 +139,6 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
               if (MediaQuery.of(context).size.width >= 640)
                 const MenuSupervisor(name: "CARTERA"),
               Expanded(
-                //child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -212,9 +211,31 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
               headingRowColor:
                   MaterialStateProperty.all(const Color(0xFFD9DEDA)),
               columns: const [
-                DataColumn(label: Text('DNI')),
-                DataColumn(label: Text('NOMBRE')),
-                DataColumn(label: Text('DIRECCIÓN')),
+                DataColumn(
+                  label: Text(
+                    'DNI',
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                    label: Text(
+                  'NOMBRE',
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontWeight: FontWeight.bold,
+                  ),
+                )),
+                DataColumn(
+                    label: Text(
+                  'DIRECCIÓN',
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontWeight: FontWeight.bold,
+                  ),
+                )),
               ],
               rows: socioList.map((socio) {
                 return DataRow(
@@ -224,6 +245,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                         context,
                         MaterialPageRoute(
                           builder: (context) => ListaSupervisor(
+                            tabName: "CARTERA",
                             socio: socio,
                           ),
                         ),
@@ -231,9 +253,30 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                     }
                   },
                   cells: [
-                    DataCell(Text(socio.dni)),
-                    DataCell(Text("${socio.name} ${socio.lastName}")),
-                    DataCell(Text(socio.address)),
+                    DataCell(
+                      Text(
+                        socio.dni,
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        "${socio.name} ${socio.lastName}",
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        socio.address,
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    ),
                   ],
                 );
               }).toList(),

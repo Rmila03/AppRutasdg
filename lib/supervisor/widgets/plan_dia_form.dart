@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/supervisor/cartera/carterapage.dart';
+//import 'package:ruta_sdg/supervisor/views/carterapage.dart';
 import 'package:ruta_sdg/socio.dart';
+import 'package:ruta_sdg/supervisor/views/homeSupervisor.dart';
 import 'package:ruta_sdg/widgets/custom_supervisor.dart';
 import 'package:ruta_sdg/widgets/radio_button_custom.dart';
 
-class CarteraForm extends StatefulWidget {
+class PlanDiaSupervisor extends StatefulWidget {
   final Socio socio;
-  const CarteraForm({super.key, required this.socio});
+  const PlanDiaSupervisor({super.key, required this.socio});
 
   @override
   CarteraFormState createState() {
@@ -14,7 +15,7 @@ class CarteraForm extends StatefulWidget {
   }
 }
 
-class CarteraFormState extends State<CarteraForm> {
+class CarteraFormState extends State<PlanDiaSupervisor> {
   final _formKey = GlobalKey<FormState>();
 
   bool vigenteSelected = true;
@@ -39,7 +40,7 @@ class CarteraFormState extends State<CarteraForm> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const CarteraPage(),
+                        builder: (context) => const HomeSupervisorPage(),
                       ),
                     );
                   },
@@ -763,154 +764,6 @@ class CarteraFormState extends State<CarteraForm> {
                           ],
                         ),
                       ),
-                      /*Container(
-                        padding: const EdgeInsets.all(16.0),
-                        margin: const EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 250, 250, 250),
-                            border: Border.all(
-                              color: const Color.fromARGB(255, 0, 76, 128),
-                            ),
-                            borderRadius: BorderRadius.circular(30.0)),
-                        //width: 800,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextForm(
-                                    formKey: _formKey,
-                                    label: "Riesgo del Socio",
-                                    inputType: TextInputType.number,
-                                    content: "NORMAL",
-                                  ),
-                                ),
-                                const SizedBox(width: 30),
-                                Expanded(
-                                  child: TextForm(
-                                    formKey: _formKey,
-                                    label: "Tipo de Socio",
-                                    inputType: TextInputType.number,
-                                    content: "RECURRENTE",
-                                  ),
-                                ),
-                                const SizedBox(width: 30),
-                                Expanded(
-                                  child: TextForm(
-                                    formKey: _formKey,
-                                    label: "Tipo de Crédito",
-                                    inputType: TextInputType.number,
-                                    content: "GENÉRICO",
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextForm(
-                                    formKey: _formKey,
-                                    label: "Tipo de Producto",
-                                    inputType: TextInputType.number,
-                                    content: "MYPE",
-                                  ),
-                                ),
-                                const SizedBox(width: 30),
-                                Expanded(
-                                  child: TextForm(
-                                    formKey: _formKey,
-                                    label: "Modalidad",
-                                    inputType: TextInputType.number,
-                                    content: "COOPENAVIDEÑO",
-                                  ),
-                                ),
-                                const SizedBox(width: 30),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextForm(
-                                      formKey: _formKey,
-                                      label: "Crédito Total",
-                                      inputType: TextInputType.number,
-                                      content: "S/. 10 000"),
-                                ),
-                                const SizedBox(width: 30),
-                                Expanded(
-                                  child: TextForm(
-                                      formKey: _formKey,
-                                      label: "Plazo (meses)",
-                                      inputType: TextInputType.number,
-                                      content: "24"),
-                                ),
-                                const SizedBox(width: 30),
-                                Expanded(
-                                  child: TextForm(
-                                      formKey: _formKey,
-                                      label: "Tasa de Interés",
-                                      inputType: TextInputType.number,
-                                      content: "8.83 %"),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextForm(
-                                      formKey: _formKey,
-                                      label: "Fecha de Aprobación de Crédito",
-                                      inputType: TextInputType.number,
-                                      content: "10/12/2023"),
-                                ),
-                                const SizedBox(width: 30),
-                                Expanded(
-                                  child: TextForm(
-                                      formKey: _formKey,
-                                      label: "Primera Fecha de Pago",
-                                      inputType: TextInputType.number,
-                                      content: "10/01/2024"),
-                                ),
-                                const SizedBox(width: 30),
-                                Expanded(
-                                  child: TextForm(
-                                      formKey: _formKey,
-                                      label: "Ultima Fecha de Pago",
-                                      inputType: TextInputType.number,
-                                      content: "10/01/2026"),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextForm(
-                                      formKey: _formKey,
-                                      label: "Monto de la Cuota",
-                                      inputType: TextInputType.number,
-                                      content: "S/. 479.16"),
-                                ),
-                                const SizedBox(width: 30),
-                                Expanded(
-                                  child: TextForm(
-                                      formKey: _formKey,
-                                      label: "Saldo Vencido",
-                                      inputType: TextInputType.number,
-                                      content: "S/. 0"),
-                                ),
-                                const SizedBox(width: 30),
-                                Expanded(
-                                  child: TextForm(
-                                      formKey: _formKey,
-                                      label: "Saldo de Crédito",
-                                      inputType: TextInputType.number,
-                                      content: "S/. 10 000"),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),*/
                       const SizedBox(
                         height: 30,
                       ),

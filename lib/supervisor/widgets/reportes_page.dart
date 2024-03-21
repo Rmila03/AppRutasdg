@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:ruta_sdg/supervisor/reporteSupervisor.dart';
+import 'package:ruta_sdg/supervisor/views/reporteSupervisor.dart';
 import 'package:ruta_sdg/socio.dart';
 
 import 'package:ruta_sdg/analista.dart';
@@ -83,6 +83,7 @@ class ReportesFormState extends State<ReportesForm> {
                               "HOJA DE RUTA",
                               textAlign: TextAlign.center,
                               style: TextStyle(
+                                fontFamily: "Poppins",
                                 fontSize: 25,
                                 color: Color.fromARGB(255, 0, 76, 128),
                                 fontWeight: FontWeight.bold,
@@ -214,7 +215,7 @@ class ReportesFormState extends State<ReportesForm> {
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
-                fontFamily: 'Unna-Bold',
+                fontFamily: 'Poppins',
               ),
             ),
           );
