@@ -62,13 +62,16 @@ class _LoginState extends State<Login> {
                   child: Center(
                     child: Column(
                       children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
                         Container(
                           alignment: Alignment.topCenter,
-                          width: 100,
+                          width: 400,
                           height: 100,
                           child: Image.asset(
-                            'assets/logo-sdg.png',
-                            width: 100,
+                            'assets/NuevoLogo.png',
+                            width: 200,
                             height: 100,
                             fit: BoxFit.cover,
                           ),
@@ -78,7 +81,7 @@ class _LoginState extends State<Login> {
                             Text(
                               'RUTASDG',
                               style: TextStyle(
-                                fontFamily: 'Helvetica',
+                                fontFamily: 'Helvetica Condensed',
                                 fontSize: 20,
                                 letterSpacing: 5,
                                 fontWeight: FontWeight.bold,
@@ -91,11 +94,11 @@ class _LoginState extends State<Login> {
                             const Text(
                               'RUTASDG',
                               style: TextStyle(
-                                fontFamily: 'Helvetica',
+                                fontFamily: 'Helvetica Condensed',
                                 fontSize: 20,
                                 letterSpacing: 5,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.yellow,
+                                color: Colors.white,
                               ),
                             ),
                           ],
@@ -128,7 +131,7 @@ class _LoginState extends State<Login> {
                             const Text(
                               '¡BIENVENIDO!',
                               style: TextStyle(
-                                fontFamily: 'Helvetica',
+                                fontFamily: 'Helvetica Condensed',
                                 fontSize: 17,
                                 color: Color.fromARGB(255, 236, 130, 45),
                                 fontWeight: FontWeight.bold,
@@ -157,9 +160,9 @@ class _LoginState extends State<Login> {
                                     hintStyle: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 14,
-                                        fontFamily: "Helvetica"),
+                                        fontFamily: "Helvetica Condensed"),
                                     labelStyle: TextStyle(
-                                      fontFamily: "Helvetica",
+                                      fontFamily: "Helvetica Condensed",
                                       fontWeight: FontWeight.bold,
                                     ),
                                     floatingLabelBehavior:
@@ -195,7 +198,7 @@ class _LoginState extends State<Login> {
                                     ),
                                     labelText: "Contraseña",
                                     labelStyle: const TextStyle(
-                                      fontFamily: "Helvetica",
+                                      fontFamily: "Helvetica Condensed",
                                       fontWeight: FontWeight.bold,
                                     ),
                                     suffixIcon: IconButton(
@@ -234,7 +237,8 @@ class _LoginState extends State<Login> {
                                         content: Text(
                                           'Usuario o contraseña incorrecta!',
                                           style: TextStyle(
-                                              fontFamily: "Helvetica"),
+                                              fontFamily:
+                                                  "Helvetica Condensed"),
                                         ),
                                       ),
                                     );
@@ -243,8 +247,9 @@ class _LoginState extends State<Login> {
                                 child: const Text(
                                   '¿Olvidaste tu contraseña?',
                                   style: TextStyle(
-                                    fontFamily: "Helvetica",
-                                    fontSize: 14,
+                                    fontFamily: "Helvetica Condensed",
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 13,
                                     color: Colors.black,
                                   ),
                                 ),
@@ -258,7 +263,8 @@ class _LoginState extends State<Login> {
                       const Text(
                         '¡Usuario o contraseña incorrectos!',
                         style: TextStyle(
-                            color: Colors.red, fontFamily: "Helvetica"),
+                            color: Colors.red,
+                            fontFamily: "Helvetica Condensed"),
                         textAlign: TextAlign.center,
                       ),
                     Padding(
@@ -306,7 +312,7 @@ class _LoginState extends State<Login> {
                           child: const Text(
                             'Ingresar',
                             style: TextStyle(
-                                fontFamily: "Helvetica",
+                                fontFamily: "Helvetica Condensed",
                                 fontWeight: FontWeight.w400,
                                 fontSize: 15,
                                 color: Colors.black),
