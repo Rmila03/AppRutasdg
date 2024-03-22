@@ -123,7 +123,7 @@ class _FechaSelectorState extends State<FechaSelector> {
                 child: Text(
                   "FECHA :  ",
                   style: TextStyle(
-                    fontFamily: 'Poppins',
+                    fontFamily: 'HelveticaCondensed',
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
                   ),
@@ -142,7 +142,7 @@ class _FechaSelectorState extends State<FechaSelector> {
             child: Text(
               "Reporte generado :  ",
               style: TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
                 fontSize: 15,
                 fontWeight: FontWeight.normal,
               ),
@@ -190,7 +190,7 @@ class FechaGestureDetector extends StatelessWidget {
                   child: Text(
                     dateFormat.format(selectedDate),
                     style: const TextStyle(
-                      fontFamily: 'Poppins',
+                      fontFamily: 'HelveticaCondensed',
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                     ),
@@ -232,11 +232,26 @@ class FechaContent extends StatelessWidget {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text("Reporte del ${dateFormat.format(selectedDate)}"),
-                  content: const Text("Contenido del reporte"),
+                  title: Text(
+                    "Reporte del ${dateFormat.format(selectedDate)}",
+                    style: const TextStyle(
+                      fontFamily: "HelveticaCondensed",
+                    ),
+                  ),
+                  content: const Text(
+                    "Contenido del reporte",
+                    style: TextStyle(
+                      fontFamily: "HelveticaCondensed",
+                    ),
+                  ),
                   actions: [
                     TextButton(
-                      child: const Text("Cerrar"),
+                      child: const Text(
+                        "Cerrar",
+                        style: TextStyle(
+                          fontFamily: "HelveticaCondensed",
+                        ),
+                      ),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -260,7 +275,7 @@ class FechaContent extends StatelessWidget {
                   child: Text(
                     "Reporte del ${dateFormat.format(selectedDate)}",
                     style: const TextStyle(
-                      fontFamily: 'Poppins',
+                      fontFamily: 'HelveticaCondensed',
                       fontSize: 15,
                       fontWeight: FontWeight.normal,
                     ),
@@ -300,7 +315,7 @@ class MapButton extends StatelessWidget {
             Text(
               name,
               style: const TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
                 fontSize: 14,
                 color: Color.fromARGB(255, 0, 76, 128),
               ),
@@ -360,7 +375,7 @@ class CustomTextContainer extends StatelessWidget {
                 text,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontFamily: 'Poppins',
+                  fontFamily: 'HelveticaCondensed',
                   fontSize: 18,
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontWeight: FontWeight.bold,
