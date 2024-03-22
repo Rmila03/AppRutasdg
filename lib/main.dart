@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'AppRutasdg',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'HelveticaCondensed',
         useMaterial3: true,
       ),
       home: const SafeArea(
@@ -153,6 +154,9 @@ class _LoginState extends State<Login> {
                                     horizontal: 8, vertical: 16),
                                 child: TextFormField(
                                   controller: emailController,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'HelveticaCondensed'),
                                   decoration: const InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
