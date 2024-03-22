@@ -781,8 +781,26 @@ class FloatingPage extends StatelessWidget {
               labelColor: Colors.black,
               unselectedLabelColor: Colors.grey,
               tabs: [
-                Tab(text: 'General'),
-                Tab(text: 'Sugerencias'),
+                Tab(
+                  child: Text(
+                    'General',
+                    style: TextStyle(
+                        fontFamily: 'HelveticaCondensed',
+                        fontWeight:
+                            FontWeight.bold // Establece la fuente Helvetica
+                        ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'Sugerencias',
+                    style: TextStyle(
+                        fontFamily: 'HelveticaCondensed',
+                        fontWeight:
+                            FontWeight.bold // Establece la fuente Helvetica
+                        ),
+                  ),
+                ),
               ],
             ),
             Expanded(
@@ -932,6 +950,11 @@ class _SearchAndSocioListState extends State<SearchAndSocioList> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: TextField(
             controller: _searchController,
+            style: const TextStyle(
+                fontFamily: 'HelveticaCondensed',
+                fontWeight:
+                    FontWeight.bold // Establece la fuente Helvetica Condensed
+                ),
             decoration: const InputDecoration(
               hintText: 'Buscar',
               prefixIcon: Icon(Icons.search),
