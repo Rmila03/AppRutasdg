@@ -133,7 +133,7 @@ class Tab extends StatelessWidget {
             child: Text(
               name,
               style: const TextStyle(
-                fontFamily: "Poppins",
+                fontFamily: "HelveticaCondensed",
                 fontSize: 18,
                 //fontFamily: 'Rockwell Extra Bold',
                 fontWeight: FontWeight.bold,

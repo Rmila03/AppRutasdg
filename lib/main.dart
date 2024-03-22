@@ -70,7 +70,7 @@ class _LoginState extends State<Login> {
                             Text(
                               'RUTASDG',
                               style: TextStyle(
-                                  fontFamily: 'Helvetica Condensed',
+                                  fontFamily: 'HelveticaCondensed',
                                   fontSize: 20,
                                   letterSpacing: 3,
                                   fontWeight: FontWeight.bold,
@@ -82,7 +82,7 @@ class _LoginState extends State<Login> {
                             const Text(
                               'RUTASDG',
                               style: TextStyle(
-                                fontFamily: 'Helvetica Condensed',
+                                fontFamily: 'HelveticaCondensed',
                                 fontSize: 20,
                                 letterSpacing: 3,
                                 fontWeight: FontWeight.bold,

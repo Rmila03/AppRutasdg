@@ -22,7 +22,7 @@ class Header extends StatelessWidget {
         const Text(
           'RUTASDG',
           style: TextStyle(
-            fontFamily: "Poppins",
+            fontFamily: "HelveticaCondensed",
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.white,
