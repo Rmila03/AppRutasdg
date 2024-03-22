@@ -57,7 +57,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
-                fontFamily: "Poppins",
+                fontFamily: "HelveticaCondensed",
               ),
             ),
           );
@@ -72,7 +72,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
           style: TextStyle(
             color: Color.fromARGB(255, 196, 196, 196),
             fontSize: 15.0,
-            fontFamily: "Poppins",
+            fontFamily: "HelveticaCondensed",
           ),
         ),
       ),
@@ -215,7 +215,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                   label: Text(
                     'DNI',
                     style: TextStyle(
-                      fontFamily: "Poppins",
+                      fontFamily: "HelveticaCondensed",
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -224,7 +224,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                     label: Text(
                   'NOMBRE',
                   style: TextStyle(
-                    fontFamily: "Poppins",
+                    fontFamily: "HelveticaCondensed",
                     fontWeight: FontWeight.bold,
                   ),
                 )),
@@ -232,7 +232,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                     label: Text(
                   'DIRECCIÓN',
                   style: TextStyle(
-                    fontFamily: "Poppins",
+                    fontFamily: "HelveticaCondensed",
                     fontWeight: FontWeight.bold,
                   ),
                 )),
@@ -257,7 +257,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                       Text(
                         socio.dni,
                         style: const TextStyle(
-                          fontFamily: "Poppins",
+                          fontFamily: "HelveticaCondensed",
                         ),
                       ),
                     ),
@@ -265,7 +265,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                       Text(
                         "${socio.name} ${socio.lastName}",
                         style: const TextStyle(
-                          fontFamily: "Poppins",
+                          fontFamily: "HelveticaCondensed",
                         ),
                       ),
                     ),
@@ -273,7 +273,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                       Text(
                         socio.address,
                         style: const TextStyle(
-                          fontFamily: "Poppins",
+                          fontFamily: "HelveticaCondensed",
                         ),
                       ),
                     ),
