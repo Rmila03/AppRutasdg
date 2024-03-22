@@ -49,6 +49,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                       child: Text(
                         'DATOS DEL SOCIO',
                         style: TextStyle(
+                          fontFamily: "HelveticaCondensed",
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 0, 76, 128),
@@ -164,6 +165,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                     child: const Text(
                       "DATOS DEL CRÉDITO",
                       style: TextStyle(
+                        fontFamily: "HelveticaCondensed",
                         fontSize: 15,
                         color: Color.fromARGB(255, 0, 76, 128),
                         fontWeight: FontWeight.bold,
@@ -213,6 +215,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                             child: const Text(
                               "OBSERVACIONES",
                               style: TextStyle(
+                                fontFamily: "HelveticaCondensed",
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 0, 76, 128),
@@ -244,6 +247,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                               child: Text(
                                 _isSelected ? 'SIN UBICAR' : 'SIN UBICAR',
                                 style: TextStyle(
+                                  fontFamily: "HelveticaCondensed",
                                   color: _isSelected
                                       ? Colors.white
                                       : const Color.fromARGB(255, 0, 76, 128),
@@ -284,6 +288,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                           child: Text(
                             isEditing ? 'Actualizar datos' : 'Actualizar datos',
                             style: TextStyle(
+                              fontFamily: "HelveticaCondensed",
                               fontSize: 12,
                               color: isEditing ? Colors.white : Colors.black,
                             ),
@@ -330,6 +335,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                         child: const Text(
                           "FEEDBACK",
                           style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
                             fontSize: 12,
                             color: Color.fromARGB(255, 0, 76, 128),
                           ),
@@ -394,6 +400,7 @@ class SeguimientoFormState extends State<SeguimientoForm> {
                         Text(
                           'GUARDAR',
                           style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
                             fontSize: 15,
                             color: Color.fromARGB(255, 0, 76, 128),
                             fontWeight: FontWeight.bold,
@@ -444,6 +451,7 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
             child: Text(
               '¿Necesita actualizar dato(s)?',
               style: TextStyle(
+                  fontFamily: "HelveticaCondensed",
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.bold),
@@ -475,6 +483,7 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
                 child: Text(
                   'SI',
                   style: TextStyle(
+                      fontFamily: "HelveticaCondensed",
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold),
@@ -510,6 +519,7 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
                   child: Text(
                     'NO',
                     style: TextStyle(
+                        fontFamily: "HelveticaCondensed",
                         color: Colors.black,
                         fontSize: 15,
                         fontWeight: FontWeight.bold),
@@ -564,6 +574,7 @@ class _Encontro extends State<Encontro> {
                   child: Text(
                     'SE ENCONTRÓ',
                     style: TextStyle(
+                        fontFamily: "HelveticaCondensed",
                         color: Colors.black,
                         fontSize: 13,
                         fontWeight: FontWeight.bold),
@@ -596,6 +607,7 @@ class _Encontro extends State<Encontro> {
                 child: Text(
                   'NO SE ENCONTRÓ',
                   style: TextStyle(
+                      fontFamily: "HelveticaCondensed",
                       color: Colors.black,
                       fontSize: 13,
                       fontWeight: FontWeight.bold),

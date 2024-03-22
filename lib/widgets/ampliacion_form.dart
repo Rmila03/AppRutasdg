@@ -52,6 +52,7 @@ class AmpliacionFormState extends State<AmpliacionForm> {
                             child: Text(
                               'DATOS DEL SOCIO',
                               style: TextStyle(
+                                fontFamily: "HelveticaCondensed",
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 0, 76, 128),
@@ -73,6 +74,7 @@ class AmpliacionFormState extends State<AmpliacionForm> {
                           child: const Text(
                             'RIESGO',
                             style: TextStyle(
+                              fontFamily: "HelveticaCondensed",
                               color: Color.fromARGB(255, 0, 76, 128),
                               fontSize: 8,
                             ),
@@ -235,6 +237,7 @@ class AmpliacionFormState extends State<AmpliacionForm> {
                         child: Text(
                           "CRÉDITO ACTUAL",
                           style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Color.fromARGB(255, 0, 76, 128),
@@ -286,7 +289,9 @@ class AmpliacionFormState extends State<AmpliacionForm> {
                                 child: const Text(
                                   'Ver más',
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 12),
+                                      fontFamily: "HelveticaCondensed",
+                                      color: Colors.black,
+                                      fontSize: 12),
                                 ),
                               ),
                             ),
@@ -320,6 +325,7 @@ class AmpliacionFormState extends State<AmpliacionForm> {
                       child: const Text(
                         "CÁLCULO DEL CRÉDITO",
                         style: TextStyle(
+                          fontFamily: "HelveticaCondensed",
                           fontSize: 15,
                           color: Color.fromARGB(255, 0, 76, 128),
                           fontWeight: FontWeight.bold,
@@ -359,6 +365,7 @@ class AmpliacionFormState extends State<AmpliacionForm> {
                         const Text(
                           '¿ESTÁ INTERESADO?',
                           style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
                             fontSize: 10,
                             color: Color.fromARGB(255, 0, 76, 128),
                           ),
@@ -405,6 +412,7 @@ class AmpliacionFormState extends State<AmpliacionForm> {
                             child: Text(
                               "OBSERVACIONES",
                               style: TextStyle(
+                                fontFamily: "HelveticaCondensed",
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 0, 76, 128),
@@ -435,6 +443,7 @@ class AmpliacionFormState extends State<AmpliacionForm> {
                               child: Text(
                                 _isSelected ? 'SIN UBICAR' : 'SIN UBICAR',
                                 style: TextStyle(
+                                  fontFamily: "HelveticaCondensed",
                                   color: _isSelected
                                       ? Colors.white
                                       : const Color.fromARGB(255, 0, 76, 128),
@@ -463,6 +472,7 @@ class AmpliacionFormState extends State<AmpliacionForm> {
                           child: const Text(
                             'Actuzalizar datos',
                             style: TextStyle(
+                              fontFamily: "HelveticaCondensed",
                               fontSize: 10,
                               color: Colors.white,
                             ),
@@ -504,6 +514,7 @@ class AmpliacionFormState extends State<AmpliacionForm> {
                         child: const Text(
                           "FEEDBACK",
                           style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
                             fontSize: 12,
                             color: Color.fromARGB(255, 0, 76, 128),
                           ),
@@ -564,6 +575,7 @@ class AmpliacionFormState extends State<AmpliacionForm> {
                         Text(
                           'GUARDAR',
                           style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
                             fontSize: 15,
                             color: Color.fromARGB(255, 0, 76, 128),
                             fontWeight: FontWeight.bold,
@@ -600,6 +612,7 @@ class InputTextForm extends StatelessWidget {
           child: Text(
             label,
             style: const TextStyle(
+              fontFamily: "HelveticaCondensed",
               fontSize: 12,
               color: Color.fromARGB(255, 0, 76, 128),
             ),
