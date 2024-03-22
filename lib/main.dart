@@ -78,7 +78,7 @@ class _LoginState extends State<Login> {
                             Text(
                               'RUTASDG',
                               style: TextStyle(
-                                fontFamily: 'Poppins',
+                                fontFamily: 'Helvetica',
                                 fontSize: 20,
                                 letterSpacing: 5,
                                 fontWeight: FontWeight.bold,
@@ -91,7 +91,7 @@ class _LoginState extends State<Login> {
                             const Text(
                               'RUTASDG',
                               style: TextStyle(
-                                fontFamily: 'Poppins',
+                                fontFamily: 'Helvetica',
                                 fontSize: 20,
                                 letterSpacing: 5,
                                 fontWeight: FontWeight.bold,
@@ -128,7 +128,7 @@ class _LoginState extends State<Login> {
                             const Text(
                               '¡BIENVENIDO!',
                               style: TextStyle(
-                                fontFamily: 'Poppins',
+                                fontFamily: 'Helvetica',
                                 fontSize: 17,
                                 color: Color.fromARGB(255, 236, 130, 45),
                                 fontWeight: FontWeight.bold,
@@ -157,9 +157,9 @@ class _LoginState extends State<Login> {
                                     hintStyle: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 14,
-                                        fontFamily: "Poppins"),
+                                        fontFamily: "Helvetica"),
                                     labelStyle: TextStyle(
-                                      fontFamily: "Poppins",
+                                      fontFamily: "Helvetica",
                                       fontWeight: FontWeight.bold,
                                     ),
                                     floatingLabelBehavior:
@@ -195,7 +195,7 @@ class _LoginState extends State<Login> {
                                     ),
                                     labelText: "Contraseña",
                                     labelStyle: const TextStyle(
-                                      fontFamily: "Poppins",
+                                      fontFamily: "Helvetica",
                                       fontWeight: FontWeight.bold,
                                     ),
                                     suffixIcon: IconButton(
@@ -233,8 +233,8 @@ class _LoginState extends State<Login> {
                                       const SnackBar(
                                         content: Text(
                                           'Usuario o contraseña incorrecta!',
-                                          style:
-                                              TextStyle(fontFamily: "Poppins"),
+                                          style: TextStyle(
+                                              fontFamily: "Helvetica"),
                                         ),
                                       ),
                                     );
@@ -243,7 +243,7 @@ class _LoginState extends State<Login> {
                                 child: const Text(
                                   '¿Olvidaste tu contraseña?',
                                   style: TextStyle(
-                                    fontFamily: "Poppins",
+                                    fontFamily: "Helvetica",
                                     fontSize: 14,
                                     color: Colors.black,
                                   ),
@@ -257,8 +257,8 @@ class _LoginState extends State<Login> {
                     if (showError)
                       const Text(
                         '¡Usuario o contraseña incorrectos!',
-                        style:
-                            TextStyle(color: Colors.red, fontFamily: "Poppins"),
+                        style: TextStyle(
+                            color: Colors.red, fontFamily: "Helvetica"),
                         textAlign: TextAlign.center,
                       ),
                     Padding(
@@ -306,7 +306,7 @@ class _LoginState extends State<Login> {
                           child: const Text(
                             'Ingresar',
                             style: TextStyle(
-                                fontFamily: "Poppins",
+                                fontFamily: "Helvetica",
                                 fontWeight: FontWeight.w400,
                                 fontSize: 15,
                                 color: Colors.black),
