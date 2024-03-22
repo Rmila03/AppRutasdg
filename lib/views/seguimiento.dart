@@ -36,7 +36,13 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               _buildHeader(),
               TabBar(
                 tabs: [
-                  _buildTab("Seguimiento"),
+                  _buildTab(
+                    "Seguimiento",
+                    textStyle: const TextStyle(
+                      fontFamily: 'HelveticaCondensed',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
                 labelColor: const Color.fromARGB(255, 0, 76, 128),
                 indicatorColor: const Color.fromARGB(255, 0, 76, 128),
@@ -55,10 +61,13 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
     );
   }
 
-  Widget _buildTab(String text) {
+  Widget _buildTab(String text, {TextStyle? textStyle}) {
     return Container(
       padding: const EdgeInsets.all(8.0),
-      child: Text(text),
+      child: Text(
+        text,
+        style: textStyle,
+      ),
     );
   }
 
@@ -96,13 +105,13 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 DataColumn(
                     label: Text('DNI',
                         style: TextStyle(
-                          fontFamily: 'Poppins',
+                          fontFamily: 'HelveticaCondensed',
                           fontWeight: FontWeight.bold,
                         ))),
                 DataColumn(
                     label: Text('Nombres y Apellidos',
                         style: TextStyle(
-                          fontFamily: 'Poppins',
+                          fontFamily: 'HelveticaCondensed',
                           fontWeight: FontWeight.bold,
                         ))),
                 DataColumn(label: Text('')),
@@ -128,11 +137,11 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                   cells: [
                     DataCell(Text(
                       user.dni,
-                      style: const TextStyle(fontFamily: 'Poppins'),
+                      style: const TextStyle(fontFamily: 'HelveticaCondensed'),
                     )),
                     DataCell(Text(
                       "${user.name} ${user.lastName}",
-                      style: const TextStyle(fontFamily: 'Poppins'),
+                      style: const TextStyle(fontFamily: 'HelveticaCondensed'),
                     )),
                     const DataCell(Icon(Icons.check)),
                   ],
@@ -187,7 +196,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               child: const Text(
                 "PLAN DEL DIA",
                 style: TextStyle(
-                  fontFamily: 'Poppins',
+                  fontFamily: 'HelveticaCondensed',
                   fontSize: 18,
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontWeight: FontWeight.bold,

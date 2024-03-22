@@ -74,7 +74,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
         fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
-        fontFamily: 'Poppins',
+        fontFamily: 'HelveticaCondensed',
       ),
     );
   }
@@ -90,7 +90,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
             focusColor: Colors
                 .transparent, // Evita que el cuadro cambie de color al seleccionar un elemento
             style: const TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
                 color: Colors.black), // Establece el color del texto
             items: analistas.map((Analista analista) {
               return DropdownMenuItem<Analista>(
@@ -109,7 +109,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
               labelText: 'Seleccionar Analista',
               contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
               labelStyle: const TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
                 color: Color.fromARGB(255, 0, 76, 128),
               ),
               enabledBorder: OutlineInputBorder(
@@ -154,19 +154,19 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
         cells: [
           DataCell(Text(user.dni,
               style: const TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
               ))),
           DataCell(Text("${user.name} ${user.lastName}",
               style: const TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
               ))),
           DataCell(Text(user.address,
               style: const TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
               ))),
           DataCell(Text(user.daysLate.toString(),
               style: const TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
               ))),
         ],
       );
@@ -194,25 +194,25 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
               DataColumn(
                   label: Text('DNI',
                       style: TextStyle(
-                        fontFamily: 'Poppins',
+                        fontFamily: 'HelveticaCondensed',
                         fontWeight: FontWeight.bold,
                       ))),
               DataColumn(
                   label: Text('NOMBRE',
                       style: TextStyle(
-                        fontFamily: 'Poppins',
+                        fontFamily: 'HelveticaCondensed',
                         fontWeight: FontWeight.bold,
                       ))),
               DataColumn(
                   label: Text('DIRECCIÓN',
                       style: TextStyle(
-                        fontFamily: 'Poppins',
+                        fontFamily: 'HelveticaCondensed',
                         fontWeight: FontWeight.bold,
                       ))),
               DataColumn(
                   label: Text('DÍAS DE ATRASO',
                       style: TextStyle(
-                        fontFamily: 'Poppins',
+                        fontFamily: 'HelveticaCondensed',
                         fontWeight: FontWeight.bold,
                       ))),
             ],

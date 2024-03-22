@@ -88,7 +88,7 @@ class BottomAction extends StatelessWidget {
             child: Text(
               label,
               style: const TextStyle(
-                fontFamily: "Poppins",
+                fontFamily: "HelveticaCondensed",
               ),
             ),
           ),

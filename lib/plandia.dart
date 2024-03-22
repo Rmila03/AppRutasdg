@@ -88,7 +88,7 @@ class _MyPlanDiarioPageState extends State<MyPlanDiarioPage> {
                     child: const Text(
                       "PLAN DEL DIA",
                       style: TextStyle(
-                        fontFamily: "Poppins",
+                        fontFamily: "HelveticaCondensed",
                         fontSize: 18,
                         color: Color.fromARGB(255, 0, 0, 0),
                         fontWeight: FontWeight.bold,
@@ -169,7 +169,7 @@ class MapButton extends StatelessWidget {
             Text(
               name,
               style: const TextStyle(
-                fontFamily: "Poppins",
+                fontFamily: "HelveticaCondensed",
                 fontSize: 14,
                 color: Color.fromARGB(255, 0, 76, 128),
               ),
@@ -263,7 +263,7 @@ class CustomTextContainer extends StatelessWidget {
                         text,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                          fontFamily: "Poppins",
+                          fontFamily: "HelveticaCondensed",
                           fontSize: 18,
                           color: Color.fromARGB(255, 0, 0, 0),
                           fontWeight: FontWeight.bold,
