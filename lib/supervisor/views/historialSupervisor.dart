@@ -96,7 +96,7 @@ class _HistorialSupervisorContentState
         fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
-        fontFamily: 'Montserrat',
+        fontFamily: 'HelveticaCondensed',
       ),
     );
   }

@@ -314,7 +314,7 @@ class _LoginState extends State<Login> {
                             'Ingresar',
                             style: TextStyle(
                                 fontFamily: "HelveticaCondensed",
-                                fontWeight: FontWeight.w400,
+                                fontWeight: FontWeight.bold,
                                 fontSize: 15,
                                 color: Colors.black),
                           ),

@@ -95,7 +95,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
               ),
             ),
           );
@@ -110,7 +110,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
           style: TextStyle(
             color: Color.fromARGB(255, 196, 196, 196),
             fontSize: 15.0,
-            fontFamily: 'Poppins',
+            fontFamily: 'HelveticaCondensed',
           ),
         ),
       ),
@@ -198,7 +198,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                               color: Color.fromARGB(255, 0, 76, 128),
                               fontSize: 25.0,
                               fontWeight: FontWeight.bold,
-                              fontFamily: 'Poppins',
+                              fontFamily: 'HelveticaCondensed',
                             ),
                           ),
                         ),
@@ -219,7 +219,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                               DateFormat('dd/MM/yyyy').format(selectedDate),
                               style: const TextStyle(
                                 color: Color.fromARGB(255, 0, 76, 128),
-                                fontFamily: 'Poppins',
+                                fontFamily: 'HelveticaCondensed',
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -326,7 +326,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                         Text(
                                           '  AÑADIR ',
                                           style: TextStyle(
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -358,7 +358,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                         Text(
                                           ' GENERAR',
                                           style: TextStyle(
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -457,7 +457,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
             style: const TextStyle(
               color: Color.fromARGB(255, 0, 76, 128),
               fontSize: 15.0,
-              fontFamily: 'Poppins',
+              fontFamily: 'HelveticaCondensed',
             ),
           ),
           const SizedBox(height: 5),
@@ -483,7 +483,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
             style: const TextStyle(
               color: Color.fromARGB(255, 0, 76, 128),
               fontSize: 15.0,
-              fontFamily: 'Poppins',
+              fontFamily: 'HelveticaCondensed',
             ),
           ),
         );
@@ -494,7 +494,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         style: TextStyle(
           color: Color.fromARGB(255, 196, 196, 196),
           fontSize: 15.0,
-          fontFamily: 'Poppins',
+          fontFamily: 'HelveticaCondensed',
         ),
       ),
     );
@@ -521,7 +521,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
               style: const TextStyle(
                 color: Color.fromARGB(255, 0, 76, 128),
                 fontSize: 15.0,
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
               ),
             ),
           ),
@@ -533,7 +533,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         style: TextStyle(
           color: Color.fromARGB(255, 196, 196, 196),
           fontSize: 15.0,
-          fontFamily: 'Poppins',
+          fontFamily: 'HelveticaCondensed',
         ),
       ),
     );
@@ -574,22 +574,23 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                       label: Text(
                     'DNI',
                     style: TextStyle(
-                        fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+                        fontFamily: 'HelveticaCondensed',
+                        fontWeight: FontWeight.bold),
                   )),
                   DataColumn(
                       label: Text('NOMBRE',
                           style: TextStyle(
-                              fontFamily: 'Poppins',
+                              fontFamily: 'HelveticaCondensed',
                               fontWeight: FontWeight.bold))),
                   DataColumn(
                       label: Text('DIRECCIÓN',
                           style: TextStyle(
-                              fontFamily: 'Poppins',
+                              fontFamily: 'HelveticaCondensed',
                               fontWeight: FontWeight.bold))),
                   DataColumn(
                       label: Text('MODALIDAD',
                           style: TextStyle(
-                              fontFamily: 'Poppins',
+                              fontFamily: 'HelveticaCondensed',
                               fontWeight: FontWeight.bold))),
                   DataColumn(label: Text('  ')),
                 ],
@@ -611,19 +612,19 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                     cells: [
                       DataCell(Text(socio.dni,
                           style: const TextStyle(
-                            fontFamily: 'Poppins',
+                            fontFamily: 'HelveticaCondensed',
                           ))),
                       DataCell(Text("${socio.name} ${socio.lastName}",
                           style: const TextStyle(
-                            fontFamily: 'Poppins',
+                            fontFamily: 'HelveticaCondensed',
                           ))),
                       DataCell(Text(socio.address,
                           style: const TextStyle(
-                            fontFamily: 'Poppins',
+                            fontFamily: 'HelveticaCondensed',
                           ))),
                       DataCell(Text(socio.tipoGrupo,
                           style: const TextStyle(
-                            fontFamily: 'Poppins',
+                            fontFamily: 'HelveticaCondensed',
                           ))),
                       DataCell(
                         IconButton(
@@ -769,7 +770,7 @@ class FloatingPage extends StatelessWidget {
                 '   LISTA DE SOCIOS   ',
                 style: TextStyle(
                   color: Colors.white,
-                  fontFamily: 'Poppins',
+                  fontFamily: 'HelveticaCondensed',
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -827,7 +828,7 @@ class FloatingPage extends StatelessWidget {
               color: Colors.white,
             ),
             textStyle: const TextStyle(
-              fontFamily: 'Poppins',
+              fontFamily: 'HelveticaCondensed',
               color: Colors.black,
             ),
             preferBelow: false,
@@ -839,14 +840,14 @@ class FloatingPage extends StatelessWidget {
                   '${socio.name} ${socio.lastName}',
                   style: const TextStyle(
                     fontSize: 16.0,
-                    fontFamily: 'Poppins',
+                    fontFamily: 'HelveticaCondensed',
                   ),
                 ),
                 const SizedBox(height: 8.0),
                 const Text(
                   'Motivo: Cambio de ciudad',
                   style: TextStyle(
-                    fontFamily: 'Poppins',
+                    fontFamily: 'HelveticaCondensed',
                     fontSize: 14.0,
                     color: Color.fromARGB(255, 0, 76, 128),
                   ),
@@ -963,7 +964,7 @@ class _SearchAndSocioListState extends State<SearchAndSocioList> {
                       // Color de fondo del Tooltip
                     ),
                     textStyle: const TextStyle(
-                      fontFamily: 'Poppins',
+                      fontFamily: 'HelveticaCondensed',
                       color: Colors.black, // Color del texto dentro del Tooltip
                     ),
                     preferBelow: false,
@@ -976,7 +977,7 @@ class _SearchAndSocioListState extends State<SearchAndSocioList> {
                         '${socio.name} ${socio.lastName}',
                         style: const TextStyle(
                           fontSize: 16.0,
-                          fontFamily: 'Poppins',
+                          fontFamily: 'HelveticaCondensed',
                         ),
                       ),
                     ),
