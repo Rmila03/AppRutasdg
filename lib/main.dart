@@ -133,7 +133,7 @@ class _LoginState extends State<Login> {
                             const Text(
                               '¡BIENVENIDO!',
                               style: TextStyle(
-                                fontFamily: 'Helvetica Condensed',
+                                fontFamily: 'HelveticaCondensed',
                                 fontSize: 17,
                                 color: Color.fromARGB(255, 236, 130, 45),
                                 fontWeight: FontWeight.bold,
@@ -162,9 +162,9 @@ class _LoginState extends State<Login> {
                                     hintStyle: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 14,
-                                        fontFamily: "Helvetica Condensed"),
+                                        fontFamily: "HelveticaCondensed"),
                                     labelStyle: TextStyle(
-                                      fontFamily: "Helvetica Condensed",
+                                      fontFamily: "HelveticaCondensed",
                                       fontWeight: FontWeight.bold,
                                     ),
                                     floatingLabelBehavior:
@@ -200,7 +200,7 @@ class _LoginState extends State<Login> {
                                     ),
                                     labelText: "Contraseña",
                                     labelStyle: const TextStyle(
-                                      fontFamily: "Helvetica Condensed",
+                                      fontFamily: "HelveticaCondensed",
                                       fontWeight: FontWeight.bold,
                                     ),
                                     suffixIcon: IconButton(
@@ -239,8 +239,7 @@ class _LoginState extends State<Login> {
                                         content: Text(
                                           'Usuario o contraseña incorrecta!',
                                           style: TextStyle(
-                                              fontFamily:
-                                                  "Helvetica Condensed"),
+                                              fontFamily: "HelveticaCondensed"),
                                         ),
                                       ),
                                     );
@@ -249,9 +248,9 @@ class _LoginState extends State<Login> {
                                 child: const Text(
                                   '¿Olvidaste tu contraseña?',
                                   style: TextStyle(
-                                    fontFamily: "Helvetica Condensed",
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 13,
+                                    fontFamily: "HelveticaCondensed",
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14,
                                     color: Colors.black,
                                   ),
                                 ),
@@ -266,7 +265,7 @@ class _LoginState extends State<Login> {
                         '¡Usuario o contraseña incorrectos!',
                         style: TextStyle(
                             color: Colors.red,
-                            fontFamily: "Helvetica Condensed"),
+                            fontFamily: "HelveticaCondensed"),
                         textAlign: TextAlign.center,
                       ),
                     Padding(
@@ -314,7 +313,7 @@ class _LoginState extends State<Login> {
                           child: const Text(
                             'Ingresar',
                             style: TextStyle(
-                                fontFamily: "Helvetica Condensed",
+                                fontFamily: "HelveticaCondensed",
                                 fontWeight: FontWeight.w400,
                                 fontSize: 15,
                                 color: Colors.black),
