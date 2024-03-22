@@ -65,6 +65,35 @@ class _LoginState extends State<Login> {
                         const SizedBox(
                           height: 20,
                         ),
+                        Stack(
+                          children: [
+                            Text(
+                              'RUTASDG',
+                              style: TextStyle(
+                                  fontFamily: 'Helvetica Condensed',
+                                  fontSize: 20,
+                                  letterSpacing: 3,
+                                  fontWeight: FontWeight.bold,
+                                  foreground: Paint()
+                                    ..style = PaintingStyle.stroke
+                                    ..strokeWidth = 1
+                                    ..color = Colors.white),
+                            ),
+                            const Text(
+                              'RUTASDG',
+                              style: TextStyle(
+                                fontFamily: 'Helvetica Condensed',
+                                fontSize: 20,
+                                letterSpacing: 3,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         Container(
                           alignment: Alignment.topCenter,
                           width: 400,
@@ -75,33 +104,6 @@ class _LoginState extends State<Login> {
                             height: 100,
                             fit: BoxFit.cover,
                           ),
-                        ),
-                        Stack(
-                          children: [
-                            Text(
-                              'RUTASDG',
-                              style: TextStyle(
-                                fontFamily: 'Helvetica Condensed',
-                                fontSize: 20,
-                                letterSpacing: 5,
-                                fontWeight: FontWeight.bold,
-                                foreground: Paint()
-                                  ..style = PaintingStyle.stroke
-                                  ..strokeWidth = 10
-                                  ..color = Colors.black,
-                              ),
-                            ),
-                            const Text(
-                              'RUTASDG',
-                              style: TextStyle(
-                                fontFamily: 'Helvetica Condensed',
-                                fontSize: 20,
-                                letterSpacing: 5,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
                         ),
                       ],
                     ),
@@ -274,7 +276,7 @@ class _LoginState extends State<Login> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromARGB(254, 255, 224, 1),
+                                const Color.fromARGB(255, 255, 220, 0),
                             elevation: 5,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
