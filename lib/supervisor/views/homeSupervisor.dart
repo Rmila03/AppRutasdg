@@ -375,7 +375,41 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                         Center(
                           child: _buildDataTable(
                               selectedOption, sociosAssignedToToday),
-                        )
+                        ),
+                        const SizedBox(height: 15.0),
+                        Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              // Aquí puedes agregar la lógica para generar
+                              // Por ejemplo, puedes llamar a una función _handleGeneratePressed()
+                            },
+                            child: Container(
+                              width: 130,
+                              padding: const EdgeInsets.all(16.0),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 0, 76, 128),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              child: const Row(
+                                children: [
+                                  Icon(FontAwesomeIcons.floppyDisk,
+                                      color: Colors.white),
+                                  SizedBox(
+                                    width: 9.0,
+                                  ), // Espacio entre el icono y el texto
+                                  Text(
+                                    ' GUARDAR',
+                                    style: TextStyle(
+                                      fontFamily: 'HelveticaCondensed',
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -434,7 +468,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     return Container(
       //padding: const EdgeInsets.all(1.0),
       padding: const EdgeInsets.symmetric(horizontal: 3.0),
-      width: 180,
+      width: 170,
       height: 120,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -474,6 +508,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     required ValueChanged<String?> onChanged, // Cambiado a String?
   }) {
     return DropdownButton<String>(
+      isExpanded: true,
       value: selectedDistrict.isNotEmpty ? selectedDistrict : null,
       items: districts.map((district) {
         return DropdownMenuItem<String>(
@@ -514,8 +549,8 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
           value: index,
           child: Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: 8.0,
-                vertical: 8.0), // Agrega un padding horizontal de 8.0
+                horizontal: 4.0,
+                vertical: 4.0), // Agrega un padding horizontal de 8.0
             child: Text(
               '$index',
               style: const TextStyle(
@@ -552,7 +587,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
   Widget _buildDataTable(String title, List<Socio> socioList) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 2),
         child: Card(
           shape: RoundedRectangleBorder(
             side: const BorderSide(color: Color(0xFFD9DEDA), width: 2.0),
@@ -561,8 +596,8 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
           color: Colors.white,
           elevation: 0,
           child: SizedBox(
-            height: 320,
-            width: 1300,
+            height: 200,
+            width: 1000,
             child: SingleChildScrollView(
               child: DataTable(
                 showCheckboxColumn: false,
