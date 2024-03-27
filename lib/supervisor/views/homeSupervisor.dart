@@ -80,12 +80,13 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     var container = Container(
       alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(8.0),
-      width: 450,
+      width: 200,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: DropdownButton<String>(
+        isExpanded: true,
         value: selectedOption.isNotEmpty ? selectedOption : null,
         items: analistas.map((Analista analista) {
           return DropdownMenuItem<String>(
@@ -184,233 +185,455 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                 if (MediaQuery.of(context).size.width >= 640)
                   const MenuSupervisor(name: "PLAN DEL DÍA"),
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 25.0),
-                        Container(
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'PLAN DEL DÍA',
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 0, 76, 128),
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'HelveticaCondensed',
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20.0),
-                        Row(
-                          children: [
-                            IconButton(
-                              icon: const Icon(
-                                FontAwesomeIcons.calendarDay,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 25.0),
+                          Container(
+                            alignment: Alignment.center,
+                            child: const Text(
+                              'PLAN DEL DÍA',
+                              style: TextStyle(
                                 color: Color.fromARGB(255, 0, 76, 128),
-                              ),
-                              onPressed: () {
-                                _selectDate(context);
-                              },
-                            ),
-                            const SizedBox(width: 10),
-                            Text(
-                              DateFormat('dd/MM/yyyy').format(selectedDate),
-                              style: const TextStyle(
-                                color: Color.fromARGB(255, 0, 76, 128),
+                                fontSize: 25.0,
+                                fontWeight: FontWeight.bold,
                                 fontFamily: 'HelveticaCondensed',
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            container,
-                          ],
-                        ),
-                        const SizedBox(height: 25.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            _buildSquareWithIcon(
-                              FontAwesomeIcons.mapLocation,
-                              "Distrito",
-                              _buildDistrictSelector(
-                                districts: districts,
-                                selectedDistrict: selectedDistrict,
-                                onChanged: (String? value) {
-                                  setState(() {
-                                    selectedDistrict = value ?? '';
-                                  });
-                                },
-                              ),
-                              null,
-                            ),
-                            _buildSquareWithIcon(
-                              FontAwesomeIcons.bullhorn,
-                              "Promoción",
-                              _buildNumberSelector(
-                                selectedNumber: selectedPromotion,
-                                onChanged: (int? value) {
-                                  setState(() {
-                                    selectedPromotion = value ?? 0;
-                                  });
-                                },
-                              ),
-                              null,
-                            ),
-                            _buildSquareWithIcon(
-                              FontAwesomeIcons.personCirclePlus,
-                              "Ampliación",
-                              _buildNumberSelector(
-                                selectedNumber: selectedAmpliation,
-                                onChanged: (int? value) {
-                                  setState(() {
-                                    selectedAmpliation = value ?? 0;
-                                  });
-                                },
-                              ),
-                              null,
-                            ),
-                            _buildSquareWithIcon(
-                              FontAwesomeIcons.fileCircleCheck,
-                              "Seguimiento",
-                              _buildNumberSelector(
-                                selectedNumber: selectedTracking,
-                                onChanged: (int? value) {
-                                  setState(() {
-                                    selectedTracking = value ?? 0;
-                                  });
-                                },
-                              ),
-                              null,
-                            ),
-                            _buildSquareWithIcon(
-                              FontAwesomeIcons.wallet,
-                              "Recuperación",
-                              _buildNumberSelector(
-                                selectedNumber: selectedRecovery,
-                                onChanged: (int? value) {
-                                  setState(() {
-                                    selectedRecovery = value ?? 0;
-                                  });
-                                },
-                              ),
-                              null,
-                            ),
-                            Column(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    _toggleFloatingPage();
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(16.0),
-                                    decoration: BoxDecoration(
-                                      color:
-                                          const Color.fromARGB(255, 0, 76, 128),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    child: const Row(
-                                      children: [
-                                        Icon(FontAwesomeIcons.userPlus,
-                                            color: Colors.white),
-                                        SizedBox(
-                                          width: 10.0,
-                                        ),
-                                        Text(
-                                          '  AÑADIR ',
-                                          style: TextStyle(
-                                            fontFamily: 'HelveticaCondensed',
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 15.0),
-                                GestureDetector(
-                                  onTap: () {
-                                    // Aquí puedes agregar la lógica para generar
-                                    // Por ejemplo, puedes llamar a una función _handleGeneratePressed()
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(16.0),
-                                    decoration: BoxDecoration(
-                                      color:
-                                          const Color.fromARGB(255, 0, 76, 128),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    child: const Row(
-                                      children: [
-                                        Icon(FontAwesomeIcons.circleCheck,
-                                            color: Colors.white),
-                                        SizedBox(
-                                          width: 9.0,
-                                        ), // Espacio entre el icono y el texto
-                                        Text(
-                                          ' GENERAR',
-                                          style: TextStyle(
-                                            fontFamily: 'HelveticaCondensed',
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20.0),
-                        Center(
-                          child: _buildDataTable(
-                              selectedOption, sociosAssignedToToday),
-                        ),
-                        const SizedBox(height: 15.0),
-                        Center(
-                          child: GestureDetector(
-                            onTap: () {
-                              // Aquí puedes agregar la lógica para generar
-                              // Por ejemplo, puedes llamar a una función _handleGeneratePressed()
-                            },
-                            child: Container(
-                              width: 130,
-                              padding: const EdgeInsets.all(16.0),
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 0, 76, 128),
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              child: const Row(
-                                children: [
-                                  Icon(FontAwesomeIcons.floppyDisk,
-                                      color: Colors.white),
-                                  SizedBox(
-                                    width: 9.0,
-                                  ), // Espacio entre el icono y el texto
-                                  Text(
-                                    ' GUARDAR',
-                                    style: TextStyle(
-                                      fontFamily: 'HelveticaCondensed',
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 20.0),
+                          Row(
+                            children: [
+                              IconButton(
+                                icon: const Icon(
+                                  FontAwesomeIcons.calendarDay,
+                                  color: Color.fromARGB(255, 0, 76, 128),
+                                ),
+                                onPressed: () {
+                                  _selectDate(context);
+                                },
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                DateFormat('dd/MM/yyyy').format(selectedDate),
+                                style: const TextStyle(
+                                  color: Color.fromARGB(255, 0, 76, 128),
+                                  fontFamily: 'HelveticaCondensed',
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              container,
+                            ],
+                          ),
+                          const SizedBox(height: 25.0),
+                          LayoutBuilder(
+                            builder: (context, constraints) {
+                              final screenWidth = constraints.maxWidth;
+
+                              return screenWidth <= 1000
+                                  ? SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          _buildSquareWithIcon(
+                                            FontAwesomeIcons.mapLocation,
+                                            "Distrito",
+                                            _buildDistrictSelector(
+                                              districts: districts,
+                                              selectedDistrict:
+                                                  selectedDistrict,
+                                              onChanged: (String? value) {
+                                                setState(() {
+                                                  selectedDistrict =
+                                                      value ?? '';
+                                                });
+                                              },
+                                            ),
+                                            null,
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          _buildSquareWithIcon(
+                                            FontAwesomeIcons.bullhorn,
+                                            "Promoción",
+                                            _buildNumberSelector(
+                                              selectedNumber: selectedPromotion,
+                                              onChanged: (int? value) {
+                                                setState(() {
+                                                  selectedPromotion =
+                                                      value ?? 0;
+                                                });
+                                              },
+                                            ),
+                                            null,
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          _buildSquareWithIcon(
+                                            FontAwesomeIcons.personCirclePlus,
+                                            "Ampliación",
+                                            _buildNumberSelector(
+                                              selectedNumber:
+                                                  selectedAmpliation,
+                                              onChanged: (int? value) {
+                                                setState(() {
+                                                  selectedAmpliation =
+                                                      value ?? 0;
+                                                });
+                                              },
+                                            ),
+                                            null,
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          _buildSquareWithIcon(
+                                            FontAwesomeIcons.fileCircleCheck,
+                                            "Seguimiento",
+                                            _buildNumberSelector(
+                                              selectedNumber: selectedTracking,
+                                              onChanged: (int? value) {
+                                                setState(() {
+                                                  selectedTracking = value ?? 0;
+                                                });
+                                              },
+                                            ),
+                                            null,
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          _buildSquareWithIcon(
+                                            FontAwesomeIcons.wallet,
+                                            "Recuperación",
+                                            _buildNumberSelector(
+                                              selectedNumber: selectedRecovery,
+                                              onChanged: (int? value) {
+                                                setState(() {
+                                                  selectedRecovery = value ?? 0;
+                                                });
+                                              },
+                                            ),
+                                            null,
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Column(
+                                            children: [
+                                              GestureDetector(
+                                                onTap: () {
+                                                  _toggleFloatingPage();
+                                                },
+                                                child: Container(
+                                                  padding: const EdgeInsets.all(
+                                                      16.0),
+                                                  decoration: BoxDecoration(
+                                                    color: const Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
+                                                  ),
+                                                  child: const Row(
+                                                    children: [
+                                                      Icon(
+                                                          FontAwesomeIcons
+                                                              .userPlus,
+                                                          color: Colors.white),
+                                                      SizedBox(
+                                                        width: 10.0,
+                                                      ),
+                                                      Text(
+                                                        '  AÑADIR ',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'HelveticaCondensed',
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 15.0),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  // Aquí puedes agregar la lógica para generar
+                                                  // Por ejemplo, puedes llamar a una función _handleGeneratePressed()
+                                                },
+                                                child: Container(
+                                                  padding: const EdgeInsets.all(
+                                                      16.0),
+                                                  decoration: BoxDecoration(
+                                                    color: const Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
+                                                  ),
+                                                  child: const Row(
+                                                    children: [
+                                                      Icon(
+                                                          FontAwesomeIcons
+                                                              .circleCheck,
+                                                          color: Colors.white),
+                                                      SizedBox(
+                                                        width: 9.0,
+                                                      ), // Espacio entre el icono y el texto
+                                                      Text(
+                                                        ' GENERAR',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'HelveticaCondensed',
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        _buildSquareWithIcon(
+                                          FontAwesomeIcons.mapLocation,
+                                          "Distrito",
+                                          _buildDistrictSelector(
+                                            districts: districts,
+                                            selectedDistrict: selectedDistrict,
+                                            onChanged: (String? value) {
+                                              setState(() {
+                                                selectedDistrict = value ?? '';
+                                              });
+                                            },
+                                          ),
+                                          null,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        _buildSquareWithIcon(
+                                          FontAwesomeIcons.bullhorn,
+                                          "Promoción",
+                                          _buildNumberSelector(
+                                            selectedNumber: selectedPromotion,
+                                            onChanged: (int? value) {
+                                              setState(() {
+                                                selectedPromotion = value ?? 0;
+                                              });
+                                            },
+                                          ),
+                                          null,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        _buildSquareWithIcon(
+                                          FontAwesomeIcons.personCirclePlus,
+                                          "Ampliación",
+                                          _buildNumberSelector(
+                                            selectedNumber: selectedAmpliation,
+                                            onChanged: (int? value) {
+                                              setState(() {
+                                                selectedAmpliation = value ?? 0;
+                                              });
+                                            },
+                                          ),
+                                          null,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        _buildSquareWithIcon(
+                                          FontAwesomeIcons.fileCircleCheck,
+                                          "Seguimiento",
+                                          _buildNumberSelector(
+                                            selectedNumber: selectedTracking,
+                                            onChanged: (int? value) {
+                                              setState(() {
+                                                selectedTracking = value ?? 0;
+                                              });
+                                            },
+                                          ),
+                                          null,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        _buildSquareWithIcon(
+                                          FontAwesomeIcons.wallet,
+                                          "Recuperación",
+                                          _buildNumberSelector(
+                                            selectedNumber: selectedRecovery,
+                                            onChanged: (int? value) {
+                                              setState(() {
+                                                selectedRecovery = value ?? 0;
+                                              });
+                                            },
+                                          ),
+                                          null,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        Column(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                _toggleFloatingPage();
+                                              },
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                decoration: BoxDecoration(
+                                                  color: const Color.fromARGB(
+                                                      255, 0, 76, 128),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
+                                                child: const Row(
+                                                  children: [
+                                                    Icon(
+                                                        FontAwesomeIcons
+                                                            .userPlus,
+                                                        color: Colors.white),
+                                                    SizedBox(
+                                                      width: 10.0,
+                                                    ),
+                                                    Text(
+                                                      '  AÑADIR ',
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            'HelveticaCondensed',
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 15.0),
+                                            GestureDetector(
+                                              onTap: () {
+                                                // Aquí puedes agregar la lógica para generar
+                                                // Por ejemplo, puedes llamar a una función _handleGeneratePressed()
+                                              },
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                decoration: BoxDecoration(
+                                                  color: const Color.fromARGB(
+                                                      255, 0, 76, 128),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
+                                                child: const Row(
+                                                  children: [
+                                                    Icon(
+                                                        FontAwesomeIcons
+                                                            .circleCheck,
+                                                        color: Colors.white),
+                                                    SizedBox(
+                                                      width: 9.0,
+                                                    ), // Espacio entre el icono y el texto
+                                                    Text(
+                                                      ' GENERAR',
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            'HelveticaCondensed',
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                            },
+                          ),
+                          const SizedBox(height: 20.0),
+                          Center(
+                            child: _buildDataTable(
+                                selectedOption, sociosAssignedToToday),
+                          ),
+                          const SizedBox(height: 15.0),
+                          Center(
+                            child: GestureDetector(
+                              onTap: () {
+                                // Aquí puedes agregar la lógica para generar
+                                // Por ejemplo, puedes llamar a una función _handleGeneratePressed()
+                              },
+                              child: Container(
+                                width: 130,
+                                padding: const EdgeInsets.all(16.0),
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 0, 76, 128),
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                child: const Row(
+                                  children: [
+                                    Icon(FontAwesomeIcons.floppyDisk,
+                                        color: Colors.white),
+                                    SizedBox(
+                                      width: 9.0,
+                                    ), // Espacio entre el icono y el texto
+                                    Text(
+                                      ' GUARDAR',
+                                      style: TextStyle(
+                                        fontFamily: 'HelveticaCondensed',
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -596,7 +819,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
           color: Colors.white,
           elevation: 0,
           child: SizedBox(
-            height: 200,
+            height: 350,
             width: 1000,
             child: SingleChildScrollView(
               child: DataTable(
