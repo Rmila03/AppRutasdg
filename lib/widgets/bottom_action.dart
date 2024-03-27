@@ -13,7 +13,7 @@ class BottomAction extends StatelessWidget {
   final double iconSize;
   final VoidCallback? onTapCallback;
 
-  const BottomAction({
+  const BottomAction({ 
     super.key,
     required this.label,
     required this.icon,

@@ -100,12 +100,13 @@ class _NotificacionesSupervisorContentState
     return Padding(
       padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
             width: MediaQuery.of(context).size.width *
-                0.2, // Ajusta el tamaño del cuadro de búsqueda
+                0.5, // Ajusta el tamaño del cuadro de búsqueda
             child: DropdownButtonFormField<Analista>(
+              isExpanded: true,
               dropdownColor: Colors.white, // Establece el color de fondo blanco
               focusColor: Colors
                   .transparent, // Evita que el cuadro cambie de color al seleccionar un elemento
