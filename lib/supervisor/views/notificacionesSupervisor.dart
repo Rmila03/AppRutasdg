@@ -98,22 +98,21 @@ class _NotificacionesSupervisorContentState
 
   Widget _buildSearchBox() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
+      padding: const EdgeInsets.only(top: 20.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width *
-                0.5, // Ajusta el tamaño del cuadro de búsqueda
+          Container(
+            padding: EdgeInsets.zero, // Elimina el padding
+            width: 250.0, // Establece el ancho deseado
             child: DropdownButtonFormField<Analista>(
               isExpanded: true,
-              dropdownColor: Colors.white, // Establece el color de fondo blanco
-              focusColor: Colors
-                  .transparent, // Evita que el cuadro cambie de color al seleccionar un elemento
+              dropdownColor: Colors.white,
+              focusColor: Colors.transparent,
               style: const TextStyle(
                 color: Colors.black,
                 fontFamily: "HelveticaCondensed",
-              ), // Establece el color del texto
+              ),
               items: analistas.map((Analista analista) {
                 return DropdownMenuItem<Analista>(
                   value: analista,
@@ -140,19 +139,15 @@ class _NotificacionesSupervisorContentState
                   color: Color.fromARGB(255, 0, 76, 128),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(5.0), // Ajusta el radio del borde
+                  borderRadius: BorderRadius.circular(5.0),
                   borderSide: const BorderSide(
-                    color: Color.fromARGB(
-                        255, 4, 56, 99), // Establece el color del borde
+                    color: Color.fromARGB(255, 4, 56, 99),
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(5.0), // Ajusta el radio del borde
+                  borderRadius: BorderRadius.circular(5.0),
                   borderSide: const BorderSide(
-                    color: Color.fromARGB(
-                        255, 4, 56, 99), // Establece el color del borde
+                    color: Color.fromARGB(255, 4, 56, 99),
                   ),
                 ),
               ),

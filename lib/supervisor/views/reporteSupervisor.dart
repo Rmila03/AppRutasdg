@@ -91,7 +91,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
         fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
-        fontFamily: 'Montserrat',
+        fontFamily: 'HelveticaCondensed',
       ),
     );
   }
@@ -263,10 +263,10 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
       child: Card(
         shape: RoundedRectangleBorder(
           side: const BorderSide(
-            color: Color.fromRGBO(255, 255, 255, 1),
+            color: Color(0xFFD9DEDA),
             width: 2.0,
           ),
-          borderRadius: BorderRadius.circular(0.0),
+          borderRadius: BorderRadius.circular(2.0),
         ),
         color: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
