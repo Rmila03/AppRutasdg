@@ -68,6 +68,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: DropdownButton<String>(
+        isExpanded: true,
         value: selectedIndex != 0 ? selectedIndex.toString() : null,
         items: List.generate(analistas.length, (index) {
           return DropdownMenuItem<String>(
