@@ -79,7 +79,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     List<Socio> sociosNotAssignedToToday = [];
     var container = Container(
       alignment: Alignment.bottomLeft,
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 25.0),
       width: 200,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 255, 255, 255),
@@ -207,28 +207,31 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                             ),
                           ),
                           const SizedBox(height: 20.0),
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: const Icon(
-                                  FontAwesomeIcons.calendarDay,
-                                  color: Color.fromARGB(255, 0, 76, 128),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20.0),
+                            child: Row(
+                              children: [
+                                IconButton(
+                                  icon: const Icon(
+                                    FontAwesomeIcons.calendarDay,
+                                    color: Color.fromARGB(255, 0, 76, 128),
+                                  ),
+                                  onPressed: () {
+                                    _selectDate(context);
+                                  },
                                 ),
-                                onPressed: () {
-                                  _selectDate(context);
-                                },
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                DateFormat('dd/MM/yyyy').format(selectedDate),
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 0, 76, 128),
-                                  fontFamily: 'HelveticaCondensed',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
+                                const SizedBox(width: 10),
+                                Text(
+                                  DateFormat('dd/MM/yyyy').format(selectedDate),
+                                  style: const TextStyle(
+                                    color: Color.fromARGB(255, 0, 76, 128),
+                                    fontFamily: 'HelveticaCondensed',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           const SizedBox(height: 20.0),
                           Row(
