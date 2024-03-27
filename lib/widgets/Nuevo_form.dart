@@ -145,6 +145,7 @@ class NuevoFormState extends State<NuevoForm> {
                       child: Text(
                         'DATOS DEL CRÉDITO',
                         style: TextStyle(
+                          fontFamily: "HelveticaCondensed",
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 0, 76, 128),
@@ -193,6 +194,7 @@ class NuevoFormState extends State<NuevoForm> {
                       child: const Text(
                         "CÁLCULO DEL CRÉDITO",
                         style: TextStyle(
+                          fontFamily: "HelveticaCondensed",
                           fontSize: 15,
                           color: Color.fromARGB(255, 0, 76, 128),
                           fontWeight: FontWeight.bold,
@@ -232,6 +234,7 @@ class NuevoFormState extends State<NuevoForm> {
                         const Text(
                           '¿ESTÁ INTERESADO?',
                           style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
                             fontSize: 10,
                             color: Color.fromARGB(255, 0, 76, 128),
                           ),
@@ -275,6 +278,7 @@ class NuevoFormState extends State<NuevoForm> {
                       child: Text(
                         'OBSERVACIONES',
                         style: TextStyle(
+                          fontFamily: "HelveticaCondensed",
                           fontSize: 15,
                           color: Color.fromARGB(255, 0, 76, 128),
                           fontWeight: FontWeight.bold,
@@ -289,6 +293,7 @@ class NuevoFormState extends State<NuevoForm> {
                         child: const Text(
                           "FEEDBACK",
                           style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
                             fontSize: 12,
                             color: Color.fromARGB(255, 0, 76, 128),
                           ),
@@ -349,6 +354,7 @@ class NuevoFormState extends State<NuevoForm> {
                         Text(
                           'GUARDAR',
                           style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
                             fontSize: 15,
                             color: Color.fromARGB(255, 0, 76, 128),
                             fontWeight: FontWeight.bold,
@@ -385,6 +391,7 @@ class TextFormInto extends StatelessWidget {
             child: Text(
               label,
               style: const TextStyle(
+                fontFamily: "HelveticaCondensed",
                 fontSize: 12,
               ),
             ),
@@ -468,6 +475,7 @@ class TextForm extends StatelessWidget {
         Text(
           label,
           style: const TextStyle(
+            fontFamily: "HelveticaCondensed",
             fontSize: 12,
             color: Color.fromARGB(255, 0, 76, 128),
           ),

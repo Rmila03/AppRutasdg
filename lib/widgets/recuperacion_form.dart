@@ -52,6 +52,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                       child: Text(
                         'DATOS DEL SOCIO',
                         style: TextStyle(
+                          fontFamily: "HelveticaCondensed",
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 0, 76, 128),
@@ -266,7 +267,9 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                                 child: const Text(
                                   'Ver más',
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 12),
+                                      fontFamily: "HelveticaCondensed",
+                                      color: Colors.black,
+                                      fontSize: 12),
                                 ),
                               ),
                             ),
@@ -300,6 +303,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                           child: Text(
                             "COMPROMISO DE PAGO",
                             style: TextStyle(
+                              fontFamily: "HelveticaCondensed",
                               fontSize: 20,
                               color: Color.fromARGB(255, 0, 76, 128),
                               fontWeight: FontWeight.bold,
@@ -448,6 +452,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                             child: const Text(
                               "OBSERVACIONES",
                               style: TextStyle(
+                                fontFamily: "HelveticaCondensed",
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 0, 76, 128),
@@ -479,6 +484,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                               child: Text(
                                 _isSelected ? 'SIN UBICAR' : 'SIN UBICAR',
                                 style: TextStyle(
+                                  fontFamily: "HelveticaCondensed",
                                   color: _isSelected
                                       ? Colors.white
                                       : const Color.fromARGB(255, 0, 76, 128),
@@ -519,6 +525,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                           child: Text(
                             isEditing ? 'Actualizar datos' : 'Actualizar datos',
                             style: TextStyle(
+                              fontFamily: "HelveticaCondensed",
                               fontSize: 12,
                               color: isEditing ? Colors.white : Colors.black,
                             ),
@@ -565,6 +572,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                         child: const Text(
                           "FEEDBACK",
                           style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
                             fontSize: 12,
                             color: Color.fromARGB(255, 0, 76, 128),
                           ),
@@ -636,6 +644,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                               Text(
                                 'GUARDAR',
                                 style: TextStyle(
+                                  fontFamily: "HelveticaCondensed",
                                   fontSize: 15,
                                   color: Color.fromARGB(255, 0, 76, 128),
                                   fontWeight: FontWeight.bold,
@@ -675,6 +684,7 @@ class InputTextForm extends StatelessWidget {
           child: Text(
             label,
             style: const TextStyle(
+              fontFamily: "HelveticaCondensed",
               fontSize: 12,
             ),
           ),
@@ -717,7 +727,8 @@ class TextFormInto extends StatelessWidget {
           SizedBox(
             child: Text(
               label,
-              style: const TextStyle(fontSize: 13),
+              style: const TextStyle(
+                  fontFamily: "HelveticaCondensed", fontSize: 13),
             ),
           ),
           Expanded(
@@ -757,6 +768,7 @@ class TextFormDate extends StatelessWidget {
           child: Text(
             label,
             style: const TextStyle(
+              fontFamily: "HelveticaCondensed",
               fontSize: 10,
             ),
           ),

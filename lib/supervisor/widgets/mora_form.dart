@@ -51,6 +51,7 @@ class MoraFormState extends State<MoraForm> {
                   "PERFIL DEL SOCIO",
                   textAlign: TextAlign.center,
                   style: TextStyle(
+                    fontFamily: "HelveticaCondensed",
                     fontSize: 25,
                     color: Color.fromARGB(255, 0, 76, 128),
                     fontWeight: FontWeight.bold,
@@ -89,6 +90,7 @@ class MoraFormState extends State<MoraForm> {
                               child: Text(
                                 "DATOS PERSONALES",
                                 style: TextStyle(
+                                    fontFamily: "HelveticaCondensed",
                                     fontSize: 20,
                                     color: Color.fromARGB(255, 0, 76, 128),
                                     fontWeight: FontWeight.bold),
@@ -272,6 +274,7 @@ class MoraFormState extends State<MoraForm> {
                                 child: Text(
                                   "INFORMACIÓN DE CRÉDITO (S)",
                                   style: TextStyle(
+                                      fontFamily: "HelveticaCondensed",
                                       fontSize: 20,
                                       color: Color.fromARGB(255, 0, 76, 128),
                                       fontWeight: FontWeight.bold),
@@ -556,6 +559,7 @@ class _TextForm extends State<TextForm> {
         Text(
           widget.label,
           style: const TextStyle(
+            fontFamily: "HelveticaCondensed",
             fontSize: 13,
             color: Color.fromARGB(255, 0, 76, 128),
           ),

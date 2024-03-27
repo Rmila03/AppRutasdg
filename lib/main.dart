@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'AppRutasdg',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'HelveticaCondensed',
         useMaterial3: true,
       ),
       home: const SafeArea(
@@ -62,43 +63,48 @@ class _LoginState extends State<Login> {
                   child: Center(
                     child: Column(
                       children: [
-                        Container(
-                          alignment: Alignment.topCenter,
-                          width: 100,
-                          height: 100,
-                          child: Image.asset(
-                            'assets/logo-sdg.png',
-                            width: 100,
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
+                        const SizedBox(
+                          height: 20,
                         ),
                         Stack(
                           children: [
                             Text(
                               'RUTASDG',
                               style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: 20,
-                                letterSpacing: 5,
-                                fontWeight: FontWeight.bold,
-                                foreground: Paint()
-                                  ..style = PaintingStyle.stroke
-                                  ..strokeWidth = 10
-                                  ..color = Colors.black,
-                              ),
+                                  fontFamily: 'HelveticaCondensed',
+                                  fontSize: 20,
+                                  letterSpacing: 3,
+                                  fontWeight: FontWeight.bold,
+                                  foreground: Paint()
+                                    ..style = PaintingStyle.stroke
+                                    ..strokeWidth = 1
+                                    ..color = Colors.white),
                             ),
                             const Text(
                               'RUTASDG',
                               style: TextStyle(
-                                fontFamily: 'Poppins',
+                                fontFamily: 'HelveticaCondensed',
                                 fontSize: 20,
-                                letterSpacing: 5,
+                                letterSpacing: 3,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.yellow,
+                                color: Colors.white,
                               ),
                             ),
                           ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          alignment: Alignment.topCenter,
+                          width: 400,
+                          height: 100,
+                          child: Image.asset(
+                            'assets/NuevoLogo.png',
+                            width: 200,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ],
                     ),
@@ -128,7 +134,7 @@ class _LoginState extends State<Login> {
                             const Text(
                               '¡BIENVENIDO!',
                               style: TextStyle(
-                                fontFamily: 'Poppins',
+                                fontFamily: 'HelveticaCondensed',
                                 fontSize: 17,
                                 color: Color.fromARGB(255, 236, 130, 45),
                                 fontWeight: FontWeight.bold,
@@ -148,6 +154,9 @@ class _LoginState extends State<Login> {
                                     horizontal: 8, vertical: 16),
                                 child: TextFormField(
                                   controller: emailController,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'HelveticaCondensed'),
                                   decoration: const InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
@@ -157,9 +166,9 @@ class _LoginState extends State<Login> {
                                     hintStyle: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 14,
-                                        fontFamily: "Poppins"),
+                                        fontFamily: "HelveticaCondensed"),
                                     labelStyle: TextStyle(
-                                      fontFamily: "Poppins",
+                                      fontFamily: "HelveticaCondensed",
                                       fontWeight: FontWeight.bold,
                                     ),
                                     floatingLabelBehavior:
@@ -195,7 +204,7 @@ class _LoginState extends State<Login> {
                                     ),
                                     labelText: "Contraseña",
                                     labelStyle: const TextStyle(
-                                      fontFamily: "Poppins",
+                                      fontFamily: "HelveticaCondensed",
                                       fontWeight: FontWeight.bold,
                                     ),
                                     suffixIcon: IconButton(
@@ -233,8 +242,8 @@ class _LoginState extends State<Login> {
                                       const SnackBar(
                                         content: Text(
                                           'Usuario o contraseña incorrecta!',
-                                          style:
-                                              TextStyle(fontFamily: "Poppins"),
+                                          style: TextStyle(
+                                              fontFamily: "HelveticaCondensed"),
                                         ),
                                       ),
                                     );
@@ -243,7 +252,8 @@ class _LoginState extends State<Login> {
                                 child: const Text(
                                   '¿Olvidaste tu contraseña?',
                                   style: TextStyle(
-                                    fontFamily: "Poppins",
+                                    fontFamily: "HelveticaCondensed",
+                                    fontWeight: FontWeight.normal,
                                     fontSize: 14,
                                     color: Colors.black,
                                   ),
@@ -257,8 +267,9 @@ class _LoginState extends State<Login> {
                     if (showError)
                       const Text(
                         '¡Usuario o contraseña incorrectos!',
-                        style:
-                            TextStyle(color: Colors.red, fontFamily: "Poppins"),
+                        style: TextStyle(
+                            color: Colors.red,
+                            fontFamily: "HelveticaCondensed"),
                         textAlign: TextAlign.center,
                       ),
                     Padding(
@@ -268,7 +279,7 @@ class _LoginState extends State<Login> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromARGB(254, 255, 224, 1),
+                                const Color.fromARGB(255, 255, 220, 0),
                             elevation: 5,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -306,8 +317,8 @@ class _LoginState extends State<Login> {
                           child: const Text(
                             'Ingresar',
                             style: TextStyle(
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.w400,
+                                fontFamily: "HelveticaCondensed",
+                                fontWeight: FontWeight.bold,
                                 fontSize: 15,
                                 color: Colors.black),
                           ),

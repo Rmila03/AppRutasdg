@@ -110,6 +110,13 @@ flutter:
         #- asset: fonts/poppins/Poppins-Bold.ttf
         
           style: italic
+    - family: HelveticaCondensed
+      fonts:
+        - asset: fonts/helvetica_condensed.ttf
+        
+        
+      
+
     # - family: Trajan Pro
     #   fonts:
     #     - asset: fonts/TrajanPro.ttf

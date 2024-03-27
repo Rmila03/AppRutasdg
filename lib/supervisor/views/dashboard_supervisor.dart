@@ -5,8 +5,6 @@ import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../widgets/custom_dropdown.dart';
-import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ruta_sdg/analista.dart';
 
@@ -72,6 +70,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: DropdownButton<String>(
+        isExpanded: true,
         value: selectedIndex != 0 ? selectedIndex.toString() : null,
         items: List.generate(analistas.length, (index) {
           return DropdownMenuItem<String>(
@@ -81,7 +80,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
               ),
             ),
           );
@@ -98,7 +97,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
           style: TextStyle(
             color: Color.fromARGB(255, 0, 76, 128),
             fontSize: 15.0,
-            fontFamily: 'Poppins',
+            fontFamily: 'HelveticaCondensed',
           ),
         ),
       ),
@@ -146,7 +145,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                         color: Color.fromARGB(255, 0, 76, 128),
                                         fontSize: 25.0,
                                         fontWeight: FontWeight.w900,
-                                        fontFamily: 'Poppins',
+                                        fontFamily: 'HelveticaCondensed',
                                       ),
                                     ),
                                   ),
@@ -199,6 +198,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                               Text(
                                                 '  Ver todo ',
                                                 style: TextStyle(
+                                                  fontFamily:
+                                                      "HelveticaCondensed",
                                                   color: Colors.white,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.bold,
@@ -216,6 +217,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                         alignment: ChartAlignment.near,
                                         text: "Mes de Febrero",
                                         textStyle: TextStyle(
+                                          fontFamily: "HelveticaCondensed",
                                           color:
                                               Color.fromARGB(255, 0, 76, 128),
                                           fontWeight: FontWeight.bold,
@@ -255,7 +257,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 18.0,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           )),
                                     ),
                                     tooltipBehavior: _tooltip,
@@ -307,7 +309,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 19.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         Row(
@@ -327,6 +329,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                               DateFormat('dd/MM/yyyy')
                                                   .format(_selectedDate),
                                               style: const TextStyle(
+                                                fontFamily:
+                                                    "HelveticaCondensed",
                                                 color: Color.fromARGB(
                                                     255, 0, 76, 128),
                                                 fontSize: 15,
@@ -362,7 +366,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 19.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -372,7 +376,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         Text(
@@ -382,7 +386,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -392,7 +396,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         Text(
@@ -402,7 +406,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -412,7 +416,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         Text(
@@ -422,7 +426,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -432,7 +436,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         Text(
@@ -442,7 +446,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -453,7 +457,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 19.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -463,7 +467,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         Text(
@@ -473,7 +477,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -483,7 +487,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         Text(
@@ -493,7 +497,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -503,7 +507,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             color:
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         Text(
@@ -513,7 +517,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         const SizedBox(height: 15),
@@ -524,7 +528,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 Color.fromARGB(255, 0, 76, 128),
                                             fontSize: 19.0,
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'HelveticaCondensed',
                                           ),
                                         ),
                                         SfCircularChart(
@@ -535,7 +539,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             position: LegendPosition.bottom,
                                             textStyle: TextStyle(
                                               fontSize: 14,
-                                              fontFamily: 'Poppins',
+                                              fontFamily: 'HelveticaCondensed',
                                             ),
                                           ),
                                           series: <CircularSeries>[
@@ -550,7 +554,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                           fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          fontFamily: 'Poppins',
+                                                          fontFamily:
+                                                              'HelveticaCondensed',
                                                         ),
                                                         margin:
                                                             EdgeInsets.all(10),
@@ -597,10 +602,30 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
     List<DataRow> rows = userList.map((user) {
       return DataRow(
         cells: [
-          DataCell(Text(user.dni)),
-          DataCell(Text("${user.name} ${user.lastName}")),
-          DataCell(Text(user.edad)),
-          DataCell(Text(user.edad)),
+          DataCell(Text(
+            user.dni,
+            style: const TextStyle(
+              fontFamily: "HelveticaCondensed",
+            ),
+          )),
+          DataCell(Text(
+            "${user.name} ${user.lastName}",
+            style: const TextStyle(
+              fontFamily: "HelveticaCondensed",
+            ),
+          )),
+          DataCell(Text(
+            user.edad,
+            style: const TextStyle(
+              fontFamily: "HelveticaCondensed",
+            ),
+          )),
+          DataCell(Text(
+            user.edad,
+            style: const TextStyle(
+              fontFamily: "HelveticaCondensed",
+            ),
+          )),
         ],
       );
     }).toList();
@@ -624,10 +649,34 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
             columnSpacing: 0.0,
             headingRowColor: MaterialStateProperty.all(const Color(0xFFD9DEDA)),
             columns: const [
-              DataColumn(label: Text('Analista')),
-              DataColumn(label: Text('Estado')),
-              DataColumn(label: Text('Nro de visitas')),
-              DataColumn(label: Text('Porcentaje')),
+              DataColumn(
+                  label: Text(
+                'Analista',
+                style: TextStyle(
+                  fontFamily: "HelveticaCondensed",
+                ),
+              )),
+              DataColumn(
+                  label: Text(
+                'Estado',
+                style: TextStyle(
+                  fontFamily: "HelveticaCondensed",
+                ),
+              )),
+              DataColumn(
+                  label: Text(
+                'Nro de visitas',
+                style: TextStyle(
+                  fontFamily: "HelveticaCondensed",
+                ),
+              )),
+              DataColumn(
+                  label: Text(
+                'Porcentaje',
+                style: TextStyle(
+                  fontFamily: "HelveticaCondensed",
+                ),
+              )),
             ],
             rows: rows,
           ),
@@ -676,7 +725,12 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Select Year"),
+          title: const Text(
+            "Select Year",
+            style: TextStyle(
+              fontFamily: "HelveticaCondensed",
+            ),
+          ),
           content: SizedBox(
             // Need to use container to add size constraint.
             width: 300,
@@ -741,7 +795,7 @@ class Pie extends StatelessWidget {
                 style: TextStyle(
                   color: Color.fromARGB(255, 2, 76, 127),
                   fontSize: 18.0,
-                  fontFamily: 'Poppins',
+                  fontFamily: 'HelveticaCondensed',
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -768,7 +822,7 @@ class Pie extends StatelessWidget {
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 15.0,
-                          fontFamily: 'Poppins',
+                          fontFamily: 'HelveticaCondensed',
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -780,7 +834,7 @@ class Pie extends StatelessWidget {
                           style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18.0,
-                            fontFamily: 'Poppins',
+                            fontFamily: 'HelveticaCondensed',
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -815,7 +869,7 @@ class Pie extends StatelessWidget {
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 15.0,
-                          fontFamily: 'Poppins',
+                          fontFamily: 'HelveticaCondensed',
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -827,7 +881,7 @@ class Pie extends StatelessWidget {
                           style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18.0,
-                            fontFamily: 'Poppins',
+                            fontFamily: 'HelveticaCondensed',
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -874,7 +928,7 @@ class BarGraph extends StatelessWidget {
                 style: TextStyle(
                   color: Color.fromARGB(255, 2, 76, 127),
                   fontSize: 18.0,
-                  fontFamily: 'Poppins',
+                  fontFamily: 'HelveticaCondensed',
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -947,7 +1001,7 @@ class Bar extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 15,
               color: color,
-              fontFamily: 'Poppins',
+              fontFamily: 'HelveticaCondensed',
             ),
           ),
         ),
@@ -969,7 +1023,7 @@ class Bar extends StatelessWidget {
             "$amount",
             style: const TextStyle(
               fontSize: 15,
-              fontFamily: 'Poppins',
+              fontFamily: 'HelveticaCondensed',
             ),
           ),
         ),
@@ -1008,7 +1062,7 @@ class CardDinero extends StatelessWidget {
             style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
-              fontFamily: 'Poppins',
+              fontFamily: 'HelveticaCondensed',
             ),
           ),
           const SizedBox(height: 5),
@@ -1018,7 +1072,7 @@ class CardDinero extends StatelessWidget {
             style: TextStyle(
               color: color,
               fontWeight: FontWeight.bold,
-              fontFamily: 'Poppins',
+              fontFamily: 'HelveticaCondensed',
             ),
           ),
         ],

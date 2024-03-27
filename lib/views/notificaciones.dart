@@ -94,7 +94,7 @@ Widget _item(String nameAlert, String nameSocio, int dias) {
     title: Text(
       nameAlert,
       style: const TextStyle(
-          fontFamily: "Poppins",
+          fontFamily: "HelveticaCondensed",
           fontWeight: FontWeight.bold,
           fontSize: 14.0,
           color: Colors.black),
@@ -102,7 +102,7 @@ Widget _item(String nameAlert, String nameSocio, int dias) {
     subtitle: Text(
       nameSocio,
       style: const TextStyle(
-          fontFamily: "Poppins",
+          fontFamily: "HelveticaCondensed",
           fontWeight: FontWeight.bold,
           fontSize: 12.0,
           color: Color.fromARGB(255, 7, 62, 90)),
@@ -117,7 +117,7 @@ Widget _item(String nameAlert, String nameSocio, int dias) {
         child: Text(
           "$dias dias",
           style: const TextStyle(
-              fontFamily: "Poppins",
+              fontFamily: "HelveticaCondensed",
               color: Colors.black,
               fontWeight: FontWeight.w500,
               fontSize: 16.0),
@@ -156,7 +156,7 @@ class MapButton extends StatelessWidget {
             Text(
               name,
               style: const TextStyle(
-                fontFamily: "Poppins",
+                fontFamily: "HelveticaCondensed",
                 fontSize: 14,
                 color: Color.fromARGB(255, 0, 76, 128),
               ),
@@ -216,7 +216,7 @@ class CustomTextContainer extends StatelessWidget {
                 text,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontFamily: "Poppins",
+                  fontFamily: "HelveticaCondensed",
                   fontSize: 18,
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontWeight: FontWeight.bold,

@@ -13,7 +13,7 @@ class BottomAction extends StatelessWidget {
   final double iconSize;
   final VoidCallback? onTapCallback;
 
-  const BottomAction({
+  const BottomAction({ 
     super.key,
     required this.label,
     required this.icon,
@@ -88,7 +88,7 @@ class BottomAction extends StatelessWidget {
             child: Text(
               label,
               style: const TextStyle(
-                fontFamily: "Poppins",
+                fontFamily: "HelveticaCondensed",
               ),
             ),
           ),

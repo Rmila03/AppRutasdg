@@ -42,7 +42,7 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
-                fontFamily: "Poppins",
+                fontFamily: "HelveticaCondensed",
               ),
             ),
           );
@@ -57,7 +57,7 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
           style: TextStyle(
             color: Color.fromARGB(255, 196, 196, 196),
             fontSize: 15.0,
-            fontFamily: "Poppins",
+            fontFamily: "HelveticaCondensed",
           ),
         ),
       ),
@@ -96,7 +96,7 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
                     widget.option1,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: "Poppins",
+                      fontFamily: "HelveticaCondensed",
                       color: selectedButton == 1
                           ? Colors.white
                           : Colors
@@ -135,7 +135,7 @@ class _RadioButtonCustomState extends State<RadioButtonCustom> {
                     widget.option2,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: "Poppins",
+                      fontFamily: "HelveticaCondensed",
                       color: selectedButton == 2
                           ? Colors.white
                           : Colors

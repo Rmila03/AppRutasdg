@@ -22,7 +22,7 @@ class MoraSupervisorContent extends StatefulWidget {
 }
 
 class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
-  String selectedMenu = 'Mora';
+  String selectedMenu = 'MORA';
   DateTime selectedDate = DateTime.now();
   TextEditingController searchController = TextEditingController();
   FocusNode searchFocusNode = FocusNode();
@@ -74,7 +74,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
         fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
-        fontFamily: 'Poppins',
+        fontFamily: 'HelveticaCondensed',
       ),
     );
   }
@@ -85,47 +85,47 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DropdownButtonFormField<Analista>(
-            dropdownColor: Colors.white, // Establece el color de fondo blanco
-            focusColor: Colors
-                .transparent, // Evita que el cuadro cambie de color al seleccionar un elemento
-            style: const TextStyle(
-                fontFamily: 'Poppins',
-                color: Colors.black), // Establece el color del texto
-            items: analistas.map((Analista analista) {
-              return DropdownMenuItem<Analista>(
-                value: analista,
-                child: Text("${analista.name} ${analista.lastName}"),
-              );
-            }).toList(),
-            onChanged: (Analista? selectedAnalista) {
-              if (selectedAnalista != null) {
-                searchController.text =
-                    "${selectedAnalista.name} ${selectedAnalista.lastName}";
-                _updateSearchResults(selectedAnalista.idAnalista);
-              }
-            },
-            decoration: InputDecoration(
-              labelText: 'Seleccionar Analista',
-              contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
-              labelStyle: const TextStyle(
-                fontFamily: 'Poppins',
-                color: Color.fromARGB(255, 0, 76, 128),
+          SizedBox(
+            width: 250, // Establece el ancho deseado aquí
+            child: DropdownButtonFormField<Analista>(
+              isExpanded: true,
+              dropdownColor: Colors.white,
+              focusColor: Colors.transparent,
+              style: const TextStyle(
+                fontFamily: 'HelveticaCondensed',
+                color: Colors.black,
               ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(5.0), // Ajusta el radio del borde
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(
-                      255, 4, 56, 99), // Establece el color del borde
+              items: analistas.map((Analista analista) {
+                return DropdownMenuItem<Analista>(
+                  value: analista,
+                  child: Text("${analista.name} ${analista.lastName}"),
+                );
+              }).toList(),
+              onChanged: (Analista? selectedAnalista) {
+                if (selectedAnalista != null) {
+                  searchController.text =
+                      "${selectedAnalista.name} ${selectedAnalista.lastName}";
+                  _updateSearchResults(selectedAnalista.idAnalista);
+                }
+              },
+              decoration: InputDecoration(
+                labelText: 'Seleccionar Analista',
+                contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                labelStyle: const TextStyle(
+                  fontFamily: 'HelveticaCondensed',
+                  color: Color.fromARGB(255, 0, 76, 128),
                 ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(5.0), // Ajusta el radio del borde
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(
-                      255, 4, 56, 99), // Establece el color del borde
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: const BorderSide(
+                    color: Color.fromARGB(255, 4, 56, 99),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: const BorderSide(
+                    color: Color.fromARGB(255, 4, 56, 99),
+                  ),
                 ),
               ),
             ),
@@ -154,19 +154,19 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
         cells: [
           DataCell(Text(user.dni,
               style: const TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
               ))),
           DataCell(Text("${user.name} ${user.lastName}",
               style: const TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
               ))),
           DataCell(Text(user.address,
               style: const TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
               ))),
           DataCell(Text(user.daysLate.toString(),
               style: const TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
               ))),
         ],
       );
@@ -175,10 +175,10 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
     return Card(
       shape: RoundedRectangleBorder(
         side: const BorderSide(
-          color: Color.fromRGBO(255, 255, 255, 1),
+          color: Color(0xFFD9DEDA),
           width: 2.0,
         ),
-        borderRadius: BorderRadius.circular(0.0),
+        borderRadius: BorderRadius.circular(2.0),
       ),
       color: const Color.fromARGB(255, 255, 255, 255),
       elevation: 0,
@@ -194,25 +194,25 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
               DataColumn(
                   label: Text('DNI',
                       style: TextStyle(
-                        fontFamily: 'Poppins',
+                        fontFamily: 'HelveticaCondensed',
                         fontWeight: FontWeight.bold,
                       ))),
               DataColumn(
                   label: Text('NOMBRE',
                       style: TextStyle(
-                        fontFamily: 'Poppins',
+                        fontFamily: 'HelveticaCondensed',
                         fontWeight: FontWeight.bold,
                       ))),
               DataColumn(
                   label: Text('DIRECCIÓN',
                       style: TextStyle(
-                        fontFamily: 'Poppins',
+                        fontFamily: 'HelveticaCondensed',
                         fontWeight: FontWeight.bold,
                       ))),
               DataColumn(
-                  label: Text('DÍAS DE ATRASO',
+                  label: Text('DÍAS',
                       style: TextStyle(
-                        fontFamily: 'Poppins',
+                        fontFamily: 'HelveticaCondensed',
                         fontWeight: FontWeight.bold,
                       ))),
             ],

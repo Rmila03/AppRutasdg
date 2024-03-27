@@ -32,11 +32,13 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
     return DataRow(
       cells: [
         DataCell(Text(user.dni,
-            style: const TextStyle(fontFamily: 'Poppins', fontSize: 13))),
+            style: const TextStyle(
+                fontFamily: 'HelveticaCondensed', fontSize: 13))),
         DataCell(
           Text(
             "${user.name} ${user.lastName}",
-            style: const TextStyle(fontFamily: 'Poppins', fontSize: 13),
+            style:
+                const TextStyle(fontFamily: 'HelveticaCondensed', fontSize: 13),
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -52,7 +54,7 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
               child: Text(
                 motivos[user] ?? "agregar",
                 style: const TextStyle(
-                  fontFamily: 'Poppins',
+                  fontFamily: 'HelveticaCondensed',
                   fontSize: 12,
                   color: Colors.grey,
                   fontWeight: FontWeight.w600,
@@ -72,7 +74,12 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
       builder: (context) {
         String motivo = motivos[socio] ?? '';
         return AlertDialog(
-          title: const Text('Agregar motivo'),
+          title: const Text(
+            'Agregar motivo',
+            style: TextStyle(
+              fontFamily: "HelveticaCondensed",
+            ),
+          ),
           content: TextField(
             onChanged: (value) {
               motivo = value;
@@ -87,7 +94,12 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Cancelar'),
+              child: const Text(
+                'Cancelar',
+                style: TextStyle(
+                  fontFamily: "HelveticaCondensed",
+                ),
+              ),
             ),
             TextButton(
               onPressed: () {
@@ -96,7 +108,12 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
                 });
                 Navigator.pop(context);
               },
-              child: const Text('Aceptar'),
+              child: const Text(
+                'Aceptar',
+                style: TextStyle(
+                  fontFamily: "HelveticaCondensed",
+                ),
+              ),
             ),
           ],
         );
@@ -126,7 +143,7 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
                   controller: searchController,
                   onChanged: searchUsers,
                   style: const TextStyle(
-                    fontFamily: 'Poppins',
+                    fontFamily: 'HelveticaCondensed',
                     color: Colors.black,
                   ),
                   decoration: const InputDecoration(
@@ -172,21 +189,21 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
                         DataColumn(
                           label: Text('DNI',
                               style: TextStyle(
-                                  fontFamily: 'Poppins',
+                                  fontFamily: 'HelveticaCondensed',
                                   fontWeight: FontWeight.w600,
                                   color: Color.fromARGB(255, 0, 0, 0))),
                         ),
                         DataColumn(
                           label: Text('Nombres y Apellidos',
                               style: TextStyle(
-                                  fontFamily: 'Poppins',
+                                  fontFamily: 'HelveticaCondensed',
                                   fontWeight: FontWeight.w600,
                                   color: Color.fromARGB(255, 0, 0, 0))),
                         ),
                         DataColumn(
                           label: Text('Motivo',
                               style: TextStyle(
-                                  fontFamily: 'Poppins',
+                                  fontFamily: 'HelveticaCondensed',
                                   fontWeight: FontWeight.w600,
                                   color: Color.fromARGB(255, 0, 0, 0))),
                         ),

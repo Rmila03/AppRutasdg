@@ -91,7 +91,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
         fontSize: 25.0,
         color: Color.fromARGB(255, 0, 76, 128),
         fontWeight: FontWeight.bold,
-        fontFamily: 'Montserrat',
+        fontFamily: 'HelveticaCondensed',
       ),
     );
   }
@@ -127,7 +127,8 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
             ),
             child: Text(
               selectedDate.toLocal().toString().split(' ')[0],
-              style: const TextStyle(fontFamily: 'Poppins', fontSize: 16.0),
+              style: const TextStyle(
+                  fontFamily: 'HelveticaCondensed', fontSize: 16.0),
             ),
           ),
         ),
@@ -161,7 +162,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                   labelText: 'Buscar',
                   contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
                   labelStyle: const TextStyle(
-                    fontFamily: 'Poppins',
+                    fontFamily: 'HelveticaCondensed',
                     color: Color.fromARGB(255, 0, 76, 128),
                   ),
                   focusedBorder: const UnderlineInputBorder(
@@ -201,7 +202,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                       return ListTile(
                         title: Text(filteredUsers[index].name,
                             style: const TextStyle(
-                              fontFamily: 'Poppins',
+                              fontFamily: 'HelveticaCondensed',
                             )),
                         onTap: () {
                           searchController.text = filteredUsers[index].name;
@@ -225,11 +226,11 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
         cells: [
           DataCell(Text(user.dni,
               style: const TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
               ))),
           DataCell(Text("${user.name} ${user.lastName}",
               style: const TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'HelveticaCondensed',
               ))),
           DataCell(
             Row(
@@ -262,10 +263,10 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
       child: Card(
         shape: RoundedRectangleBorder(
           side: const BorderSide(
-            color: Color.fromRGBO(255, 255, 255, 1),
+            color: Color(0xFFD9DEDA),
             width: 2.0,
           ),
-          borderRadius: BorderRadius.circular(0.0),
+          borderRadius: BorderRadius.circular(2.0),
         ),
         color: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
@@ -282,19 +283,19 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                 DataColumn(
                     label: Text('DNI',
                         style: TextStyle(
-                          fontFamily: 'Poppins',
+                          fontFamily: 'HelveticaCondensed',
                           fontWeight: FontWeight.bold,
                         ))),
                 DataColumn(
                     label: Text('NOMBRE',
                         style: TextStyle(
-                          fontFamily: 'Poppins',
+                          fontFamily: 'HelveticaCondensed',
                           fontWeight: FontWeight.bold,
                         ))),
                 DataColumn(
                     label: Text('DESCARGAR',
                         style: TextStyle(
-                          fontFamily: 'Poppins',
+                          fontFamily: 'HelveticaCondensed',
                           fontWeight: FontWeight.bold,
                         ))),
               ],

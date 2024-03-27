@@ -50,6 +50,7 @@ class PromotionFormState extends State<PromotionForm> {
                       child: Text(
                         'DATOS DEL SOCIO',
                         style: TextStyle(
+                          fontFamily: "HelveticaCondensed",
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 0, 76, 128),
@@ -213,6 +214,7 @@ class PromotionFormState extends State<PromotionForm> {
                       child: const Text(
                         "CÁLCULO DEL CRÉDITO",
                         style: TextStyle(
+                          fontFamily: "HelveticaCondensed",
                           fontSize: 15,
                           color: Color.fromARGB(255, 0, 76, 128),
                           fontWeight: FontWeight.bold,
@@ -252,6 +254,7 @@ class PromotionFormState extends State<PromotionForm> {
                         const Text(
                           '¿ESTÁ INTERESADO?',
                           style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
                             fontSize: 10,
                             color: Color.fromARGB(255, 0, 76, 128),
                           ),
@@ -298,6 +301,7 @@ class PromotionFormState extends State<PromotionForm> {
                             child: const Text(
                               "OBSERVACIONES",
                               style: TextStyle(
+                                fontFamily: "HelveticaCondensed",
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 0, 76, 128),
@@ -329,6 +333,7 @@ class PromotionFormState extends State<PromotionForm> {
                               child: Text(
                                 _isSelected ? 'SIN UBICAR' : 'SIN UBICAR',
                                 style: TextStyle(
+                                  fontFamily: "HelveticaCondensed",
                                   color: _isSelected
                                       ? Colors.white
                                       : const Color.fromARGB(255, 0, 76, 128),
@@ -369,6 +374,7 @@ class PromotionFormState extends State<PromotionForm> {
                           child: Text(
                             isEditing ? 'Actualizar datos' : 'Actualizar datos',
                             style: TextStyle(
+                              fontFamily: "HelveticaCondensed",
                               fontSize: 12,
                               color: isEditing ? Colors.white : Colors.black,
                             ),
@@ -415,6 +421,7 @@ class PromotionFormState extends State<PromotionForm> {
                         child: const Text(
                           "FEEDBACK",
                           style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
                             fontSize: 12,
                             color: Color.fromARGB(255, 0, 76, 128),
                           ),
@@ -479,6 +486,7 @@ class PromotionFormState extends State<PromotionForm> {
                         Text(
                           'GUARDAR',
                           style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
                             fontSize: 15,
                             color: Color.fromARGB(255, 0, 76, 128),
                             fontWeight: FontWeight.bold,
