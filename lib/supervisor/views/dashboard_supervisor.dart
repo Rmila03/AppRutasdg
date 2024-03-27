@@ -41,6 +41,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
   int? selectedIndex = 0;
   List<Analista> analistas = getAnalistas();
   Set<String> selectedBars = Set<String>();
+  final GlobalKey<SfCartesianChartState> _chartKey =
+      GlobalKey<SfCartesianChartState>();
   @override
   void initState() {
     data = [
@@ -164,7 +166,29 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                               BorderRadius.circular(10.0),
                                         ),
                                         child: GestureDetector(
-                                          onTap: () {},
+                                          onTap: () {
+                                            setState(() {
+                                              selectedIndex = 0;
+                                              print(_chartKey.currentState
+                                                  ?.widget.series.length);
+                                              print(_chartKey
+                                                  .currentState
+                                                  ?.widget
+                                                  .series[0]
+                                                  .dataSource![1]
+                                                  .selectionBehavior!
+                                                  .selectedColor = Colors.red);
+                                              _chartKey
+                                                          .currentState
+                                                          ?.widget
+                                                          .series[0]
+                                                          .selectionBehavior!
+                                                          .selectedColor ==
+                                                      null
+                                                  ? Colors.red
+                                                  : null;
+                                            });
+                                          },
                                           child: const Row(
                                             children: [
                                               Icon(FontAwesomeIcons.eye,
@@ -187,6 +211,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                     ],
                                   ),
                                   SfCartesianChart(
+                                    key: _chartKey,
                                     title: const ChartTitle(
                                         alignment: ChartAlignment.near,
                                         text: "Mes de Febrero",
