@@ -140,10 +140,8 @@ class _ObservacionesWidgetState extends State<ObservacionesWidget> {
                       alignment: Alignment.center,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
-                        side: BorderSide(
-                          color: isEditing1
-                              ? const Color.fromARGB(255, 4, 54, 95)
-                              : const Color.fromARGB(255, 105, 105, 105),
+                        side: const BorderSide(
+                          color: Color.fromARGB(255, 0, 76, 128),
                           width: 1.0,
                         ),
                       ),
@@ -154,7 +152,9 @@ class _ObservacionesWidgetState extends State<ObservacionesWidget> {
                       style: TextStyle(
                         fontFamily: "HelveticaCondensed",
                         fontSize: 12,
-                        color: isEditing1 ? Colors.white : Colors.black,
+                        color: isEditing1
+                            ? Colors.white
+                            : const Color.fromARGB(255, 0, 76, 128),
                       ),
                     ),
                   ),
@@ -212,18 +212,20 @@ class _ObservacionesWidgetState extends State<ObservacionesWidget> {
                     side: BorderSide(
                       color: isEditing
                           ? const Color.fromARGB(255, 4, 54, 95)
-                          : const Color.fromARGB(255, 105, 105, 105),
+                          : const Color.fromARGB(255, 0, 76, 128),
                       width: 1.0,
                     ),
                   ),
                   minimumSize: const Size(70, 32),
                 ),
                 child: Text(
-                  isEditing ? 'Actualizar datos' : 'Actualizar datos',
+                  'Actualizar datos',
                   style: TextStyle(
                     fontFamily: "HelveticaCondensed",
                     fontSize: 12,
-                    color: isEditing ? Colors.white : Colors.black,
+                    color: isEditing
+                        ? Colors.white
+                        : const Color.fromARGB(255, 0, 76, 128),
                   ),
                 ),
               ),
@@ -233,7 +235,7 @@ class _ObservacionesWidgetState extends State<ObservacionesWidget> {
                   height: 25,
                   child: TextFormField(
                     enabled: isEditing,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                       filled: true,
@@ -274,7 +276,7 @@ class _ObservacionesWidgetState extends State<ObservacionesWidget> {
             ),
           ),
           TextFormField(
-            keyboardType: TextInputType.number,
+            keyboardType: TextInputType.text,
             textAlign: TextAlign.left,
             maxLines: 3,
             decoration: InputDecoration(

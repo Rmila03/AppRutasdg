@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/views/recuperacion.dart';
+import 'package:ruta_sdg/views/reportes.dart';
 import 'package:ruta_sdg/widgets/custom_dropdown.dart';
 import 'package:ruta_sdg/widgets/obervaciones.dart';
 import 'package:ruta_sdg/widgets/text_form_result.dart';
@@ -18,6 +21,43 @@ class RecuperacionForm extends StatefulWidget {
 class RecuperacionFormState extends State<RecuperacionForm> {
   final _formKey = GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
+  final DateFormat _dateFormat = DateFormat('dd/MM/yyyy');
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2022),
+      lastDate: DateTime(2025),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: const Color.fromARGB(255, 0, 76, 128),
+            hintColor: const Color.fromARGB(255, 140, 178, 210),
+            colorScheme: const ColorScheme.light(
+              primary: Color.fromARGB(255, 0, 76, 128),
+            ),
+            buttonTheme:
+                const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    // Verificar si el usuario seleccionó una fecha o canceló la selección
+    if (picked != null) {
+      setState(() {
+        selectedDate = picked!;
+      });
+    } else {
+      // Si el usuario canceló la selección, asignar la fecha actual
+      picked = DateTime.now();
+      setState(() {
+        selectedDate = picked!;
+      });
+    }
+  }
 
   bool isEditing = false;
   int show = 0;
@@ -297,11 +337,12 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                         ),
                       ],
                     ),
-                    child: const Column(
+                    child: Column(
                       children: [
-                        Align(
+                        Container(
                           alignment: Alignment.center,
-                          child: Text(
+                          margin: const EdgeInsets.only(bottom: 10),
+                          child: const Text(
                             "COMPROMISO DE PAGO",
                             style: TextStyle(
                               fontFamily: "HelveticaCondensed",
@@ -311,8 +352,35 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                             ),
                           ),
                         ),
-                        TextFormInto(label: "Fecha de cancelación: "),
-                        TextFormInto(label: "Método de pago: "),
+                        Row(
+                          children: [
+                            const Text(
+                              'Fecha de cancelación: ',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Color.fromARGB(255, 0, 76, 128),
+                                fontFamily: "HelveticaCondensed",
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: FechaGestureDetector(
+                                selectedDate: selectedDate,
+                                selectDateCallback: _selectDate,
+                                dateFormat: _dateFormat,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Row(
+                          children: [
+                            Expanded(
+                                child: CustomDropdown(
+                              items: ['Agencia', 'Kasnet'],
+                              label: 'Método de pago: ',
+                            ))
+                          ],
+                        ),
                       ],
                     ),
                   )
