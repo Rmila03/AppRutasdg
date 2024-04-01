@@ -116,11 +116,11 @@ class _FechaSelectorState extends State<FechaSelector> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 10.0, top: 20),
-                child: Text(
+          Padding(
+            padding: const EdgeInsets.only(left: 10, top: 10),
+            child: Row(
+              children: [
+                const Text(
                   "FECHA :  ",
                   style: TextStyle(
                     fontFamily: 'HelveticaCondensed',
@@ -128,14 +128,14 @@ class _FechaSelectorState extends State<FechaSelector> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              FechaGestureDetector(
-                selectedDate: selectedDate,
-                selectDateCallback: _selectDate,
-                dateFormat: _dateFormat,
-              ),
-            ],
+                const SizedBox(width: 8),
+                FechaGestureDetector(
+                  selectedDate: selectedDate,
+                  selectDateCallback: _selectDate,
+                  dateFormat: _dateFormat,
+                ),
+              ],
+            ),
           ),
           const Padding(
             padding: EdgeInsets.only(left: 10.0, top: 20),
@@ -176,14 +176,15 @@ class FechaGestureDetector extends StatelessWidget {
           child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 5.0, top: 20),
+                padding: const EdgeInsets.only(left: 5.0),
                 child: Container(
                   height: 24,
                   width: 100,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: const Color.fromARGB(255, 225, 228, 233)),
-                    borderRadius: BorderRadius.circular(5.0),
+                      color: const Color.fromARGB(255, 0, 76, 128),
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   padding: const EdgeInsets.all(0.0),
                   alignment: Alignment.center,
@@ -198,7 +199,7 @@ class FechaGestureDetector extends StatelessWidget {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 18.0, top: 18),
+                padding: EdgeInsets.only(left: 18.0),
                 child: Icon(
                   FontAwesomeIcons.calendarDay,
                   color: Color.fromARGB(255, 0, 76, 128),
