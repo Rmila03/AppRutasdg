@@ -182,8 +182,8 @@ class FechaGestureDetector extends StatelessWidget {
                   width: 100,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: Colors
-                            .black /*color: const Color.fromARGB(255, 225, 228, 233)*/),
+                      color: const Color.fromARGB(255, 0, 76, 128),
+                    ),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   padding: const EdgeInsets.all(0.0),
