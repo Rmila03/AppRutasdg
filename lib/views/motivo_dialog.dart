@@ -26,6 +26,7 @@ class MotivoDialog extends StatelessWidget {
       content: TextField(
         onChanged: onMotivoChanged,
         controller: TextEditingController(text: motivo),
+        cursorColor: Colors.black, // Cambia el color del cursor a negro
         decoration: const InputDecoration(
           hintText: 'Ingrese el motivo',
         ),
