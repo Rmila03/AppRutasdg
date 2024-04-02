@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:ruta_sdg/supervisor/views/carterapage.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/widgets/custom_supervisor.dart';
@@ -63,7 +64,7 @@ class CarteraFormState extends State<CarteraForm> {
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 90),
+                margin: const EdgeInsets.only(left: 90),
                 child: Form(
                   key: _formKey,
                   child: Column(

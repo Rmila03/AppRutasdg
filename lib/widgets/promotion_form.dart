@@ -247,7 +247,7 @@ class PromotionFormState extends State<PromotionForm> {
                       content: "12/02/2023",
                     ),
                     const TextFormResult(
-                        label: "Última fehca de pago", content: "12/02/2024"),
+                        label: "Última fecha de pago", content: "12/02/2024"),
                     Row(
                       children: [
                         const Text(
