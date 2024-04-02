@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/socio.dart';
+import 'package:ruta_sdg/views/motivo_dialog.dart';
 import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
@@ -28,17 +29,23 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
     });
   }
 
-  DataRow buildDataRow(Socio user) {
+  DataRow _buildDataRow(Socio user) {
     return DataRow(
       cells: [
-        DataCell(Text(user.dni,
-            style: const TextStyle(
-                fontFamily: 'HelveticaCondensed', fontSize: 13))),
+        DataCell(Text(
+          user.dni,
+          style: const TextStyle(
+            fontFamily: 'HelveticaCondensed',
+            fontSize: 13,
+          ),
+        )),
         DataCell(
           Text(
             "${user.name} ${user.lastName}",
-            style:
-                const TextStyle(fontFamily: 'HelveticaCondensed', fontSize: 13),
+            style: const TextStyle(
+              fontFamily: 'HelveticaCondensed',
+              fontSize: 13,
+            ),
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -69,56 +76,63 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
   }
 
   void _showMotivoDialog(Socio socio) {
+    String motivo = motivos[socio] ?? ''; // Definir el motivo aquí
     showDialog(
       context: context,
-      builder: (context) {
-        String motivo = motivos[socio] ?? '';
-        return AlertDialog(
-          title: const Text(
-            'Agregar motivo',
-            style: TextStyle(
-              fontFamily: "HelveticaCondensed",
-            ),
+      builder: (context) => AlertDialog(
+        title: const Text(
+          'Agregar motivo',
+          style: TextStyle(
+            fontFamily: "HelveticaCondensed",
           ),
-          content: TextField(
-            onChanged: (value) {
-              motivo = value;
+        ),
+        content: TextField(
+          onChanged: (value) {
+            motivo = value; // Actualizar el motivo cuando cambie el texto
+          },
+          controller: TextEditingController(text: motivo),
+          decoration: const InputDecoration(
+            hintText: 'Ingrese el motivo',
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
             },
-            controller: TextEditingController(text: motivo),
-            decoration: const InputDecoration(
-              hintText: 'Ingrese el motivo',
+            child: const Text(
+              'Cancelar',
+              style: TextStyle(
+                fontFamily: "HelveticaCondensed",
+                color: Color.fromARGB(255, 0, 76, 128),
+              ),
             ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text(
-                'Cancelar',
-                style: TextStyle(
-                  fontFamily: "HelveticaCondensed",
-                ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _updateMotivo(socio,
+                  motivo); // Llamar a una función para actualizar el motivo
+            },
+            child: const Text(
+              'Aceptar',
+              style: TextStyle(
+                fontFamily: "HelveticaCondensed",
+                color: Color.fromARGB(255, 0, 76, 128),
               ),
             ),
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  motivos[socio] = motivo;
-                });
-                Navigator.pop(context);
-              },
-              child: const Text(
-                'Aceptar',
-                style: TextStyle(
-                  fontFamily: "HelveticaCondensed",
-                ),
-              ),
-            ),
-          ],
-        );
-      },
+          ),
+        ],
+      ),
     );
+  }
+
+  void _updateMotivo(Socio socio, String motivo) {
+    setState(() {
+      motivos[socio] = motivo;
+    });
+
+    // enviar el motivo a la base de datos
   }
 
   @override
@@ -134,11 +148,10 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
             const SizedBox(
               height: 20,
             ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 8.0, right: 8.0, top: 5.0, bottom: 5.0),
+            Center(
+              // Centrar el TextField
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
                 child: TextField(
                   controller: searchController,
                   onChanged: searchUsers,
@@ -171,9 +184,10 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
             Expanded(
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
+                child: Center(
+                  // Centrar el DataTable
                   child: Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: const Color(0xFFD9D9D9),
@@ -209,7 +223,7 @@ class _SugerenciaPageState extends State<SugerenciaPage> {
                         ),
                       ],
                       rows: (searchResults.isEmpty ? socios : searchResults)
-                          .map((user) => buildDataRow(user))
+                          .map((user) => _buildDataRow(user))
                           .toList(),
                     ),
                   ),

@@ -60,32 +60,34 @@ class _CarteraPageState extends State<CarteraPage> {
             const SizedBox(
               height: 20,
             ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
-                child: TextField(
-                  controller: searchController,
-                  onChanged: searchUsers,
-                  style: const TextStyle(
-                    fontFamily: 'HelveticaCondensed',
-                    color: Colors.black,
-                  ),
-                  decoration: const InputDecoration(
-                    hintText: 'Buscar socio',
-                    hintStyle: TextStyle(
+            Center(
+              // Centrar el TextField
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextField(
+                    controller: searchController,
+                    onChanged: searchUsers,
+                    style: const TextStyle(
                       fontFamily: 'HelveticaCondensed',
-                      fontSize: 15,
+                      color: Colors.black,
                     ),
-                    prefixIcon: Icon(Icons.search, color: Colors.grey),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 0, 76, 128),
+                    decoration: const InputDecoration(
+                      hintText: 'Buscar socio',
+                      hintStyle: TextStyle(
+                        fontFamily: 'HelveticaCondensed',
+                        fontSize: 15,
                       ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      prefixIcon: Icon(Icons.search, color: Colors.grey),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(255, 0, 76, 128),
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey),
+                      ),
                     ),
                   ),
                 ),
@@ -95,8 +97,8 @@ class _CarteraPageState extends State<CarteraPage> {
             Expanded(
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
+                child: Center(
+                  // Centrar el DataTable
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: Container(
