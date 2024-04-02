@@ -387,57 +387,52 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                 ],
               ),
               ObservacionesWidget(),
-              Visibility(
-                visible: (show != 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const RecuperacionPage()),
-                            );
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromRGBO(244, 244, 244, 1),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const RecuperacionPage()),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(244, 244, 244, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
                         ),
-                        child: const SizedBox(
-                          width: 100,
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.save,
+                      ),
+                      child: const SizedBox(
+                        width: 100,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.save,
+                              color: Color.fromARGB(255, 0, 76, 128),
+                              size: 20,
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              'GUARDAR',
+                              style: TextStyle(
+                                fontFamily: "HelveticaCondensed",
+                                fontSize: 15,
                                 color: Color.fromARGB(255, 0, 76, 128),
-                                size: 20,
+                                fontWeight: FontWeight.bold,
                               ),
-                              SizedBox(width: 5),
-                              Text(
-                                'GUARDAR',
-                                style: TextStyle(
-                                  fontFamily: "HelveticaCondensed",
-                                  fontSize: 15,
-                                  color: Color.fromARGB(255, 0, 76, 128),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
