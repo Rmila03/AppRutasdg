@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/views/recuperacion.dart';
+import 'package:ruta_sdg/views/reportes.dart';
 import 'package:ruta_sdg/widgets/custom_dropdown.dart';
+import 'package:ruta_sdg/widgets/obervaciones.dart';
 import 'package:ruta_sdg/widgets/text_form_result.dart';
 
 class RecuperacionForm extends StatefulWidget {
@@ -17,7 +21,44 @@ class RecuperacionForm extends StatefulWidget {
 class RecuperacionFormState extends State<RecuperacionForm> {
   final _formKey = GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
-  bool _isSelected = false;
+  final DateFormat _dateFormat = DateFormat('dd/MM/yyyy');
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2022),
+      lastDate: DateTime(2025),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: const Color.fromARGB(255, 0, 76, 128),
+            hintColor: const Color.fromARGB(255, 140, 178, 210),
+            colorScheme: const ColorScheme.light(
+              primary: Color.fromARGB(255, 0, 76, 128),
+            ),
+            buttonTheme:
+                const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    // Verificar si el usuario seleccionó una fecha o canceló la selección
+    if (picked != null) {
+      setState(() {
+        selectedDate = picked!;
+      });
+    } else {
+      // Si el usuario canceló la selección, asignar la fecha actual
+      picked = DateTime.now();
+      setState(() {
+        selectedDate = picked!;
+      });
+    }
+  }
+
   bool isEditing = false;
   int show = 0;
   int valorSeleccionado = 0;
@@ -296,11 +337,12 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                         ),
                       ],
                     ),
-                    child: const Column(
+                    child: Column(
                       children: [
-                        Align(
+                        Container(
                           alignment: Alignment.center,
-                          child: Text(
+                          margin: const EdgeInsets.only(bottom: 10),
+                          child: const Text(
                             "COMPROMISO DE PAGO",
                             style: TextStyle(
                               fontFamily: "HelveticaCondensed",
@@ -310,302 +352,41 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                             ),
                           ),
                         ),
-                        TextFormInto(label: "Fecha de cancelación: "),
-                        TextFormInto(label: "Método de pago: "),
+                        Row(
+                          children: [
+                            const Text(
+                              'Fecha de cancelación: ',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Color.fromARGB(255, 0, 76, 128),
+                                fontFamily: "HelveticaCondensed",
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: FechaGestureDetector(
+                                selectedDate: selectedDate,
+                                selectDateCallback: _selectDate,
+                                dateFormat: _dateFormat,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Row(
+                          children: [
+                            Expanded(
+                                child: CustomDropdown(
+                              items: ['Agencia', 'Kasnet'],
+                              label: 'Método de pago: ',
+                            ))
+                          ],
+                        ),
                       ],
                     ),
                   )
                 ],
               ),
-              /*const SizedBox(height: 15),
-              RadioButtonCustom(
-                option1: "SE ENCONTRÓ",
-                option2: "NO SE ENCONTRÓ",
-                onValueChanged: (int newValue) {
-                  setState(() {
-                    valorSeleccionado = newValue;
-                    show = newValue;
-                  });
-                },
-              ),
-              const SizedBox(height: 15),
-              Visibility(
-                visible: (show == 1),
-                child: Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: const Color.fromRGBO(244, 244, 244, 1),
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.grey,
-                            spreadRadius: 2,
-                            blurRadius: 3,
-                            offset: Offset(1.0, 3.0),
-                          ),
-                        ],
-                      ),
-                      child: const Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              "COMPROMISO DE PAGO",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Color.fromARGB(255, 0, 76, 128),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          TextFormInto(label: "Fecha de cancelación: "),
-                          TextFormInto(label: "Método de pago: "),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Visibility(
-                visible: (show == 2 || show == 1),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 12),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              offset: const Offset(0, 2),
-                              blurRadius: 4,
-                            ),
-                          ],
-                        ),
-                        child: const Text(
-                          "FEEDBACK",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 0, 76, 128),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    TextField(
-                      maxLines: 2,
-                      keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.circular(10.0), // Bordes redondeados
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 0, 76, 128),
-                            width: 2.0, // Grosor del borde al tener foco
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.circular(10.0), // Bordes redondeados
-                          borderSide: const BorderSide(
-                            color: Colors
-                                .grey, // Color del borde cuando no tiene foco
-                            width: 1.0, // Grosor del borde cuando no tiene foco
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),*/
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(244, 244, 244, 1),
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.grey,
-                      spreadRadius: 2,
-                      blurRadius: 3,
-                      offset: Offset(1.0, 3.0),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(bottom: 10),
-                            child: const Text(
-                              "OBSERVACIONES",
-                              style: TextStyle(
-                                fontFamily: "HelveticaCondensed",
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 0, 76, 128),
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _isSelected = !_isSelected;
-                            });
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(bottom: 10),
-                            alignment: Alignment.centerRight,
-                            width: 80,
-                            height: 20,
-                            decoration: BoxDecoration(
-                              color: _isSelected
-                                  ? const Color.fromARGB(255, 0, 76, 128)
-                                  : const Color.fromRGBO(244, 244, 244, 1),
-                              border: Border.all(
-                                color: const Color.fromARGB(255, 0, 76, 128),
-                              ),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Center(
-                              child: Text(
-                                _isSelected ? 'SIN UBICAR' : 'SIN UBICAR',
-                                style: TextStyle(
-                                  fontFamily: "HelveticaCondensed",
-                                  color: _isSelected
-                                      ? Colors.white
-                                      : const Color.fromARGB(255, 0, 76, 128),
-                                  fontSize: 11,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              isEditing =
-                                  !isEditing; // Alternar el estado de isEditing
-                            });
-                          },
-                          style: TextButton.styleFrom(
-                            backgroundColor: isEditing
-                                ? const Color.fromARGB(255, 0, 76, 128)
-                                : const Color.fromRGBO(244, 244, 244, 1),
-                            //padding: const EdgeInsets.all(3),
-                            alignment: Alignment.center,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              side: BorderSide(
-                                color: isEditing
-                                    ? const Color.fromARGB(255, 4, 54, 95)
-                                    : const Color.fromARGB(255, 105, 105, 105),
-                                width: 1.0,
-                              ),
-                            ),
-                            minimumSize: const Size(70, 32),
-                          ),
-                          child: Text(
-                            isEditing ? 'Actualizar datos' : 'Actualizar datos',
-                            style: TextStyle(
-                              fontFamily: "HelveticaCondensed",
-                              fontSize: 12,
-                              color: isEditing ? Colors.white : Colors.black,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(left: 10),
-                            height: 25,
-                            child: TextFormField(
-                              enabled: isEditing,
-                              keyboardType: TextInputType.number,
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor:
-                                    const Color.fromRGBO(244, 244, 244, 1),
-                                contentPadding:
-                                    const EdgeInsets.symmetric(vertical: 4),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      10.0), // Bordes redondeados
-                                  borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 79, 81, 82),
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 79, 81, 82),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Container(
-                        //padding: const EdgeInsets.symmetric(horizontal: 8),
-                        margin: const EdgeInsets.only(top: 10),
-                        child: const Text(
-                          "FEEDBACK",
-                          style: TextStyle(
-                            fontFamily: "HelveticaCondensed",
-                            fontSize: 12,
-                            color: Color.fromARGB(255, 0, 76, 128),
-                          ),
-                        ),
-                      ),
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.left,
-                      maxLines: 3,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color.fromRGBO(244, 244, 244, 1),
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 4, horizontal: 5),
-                        border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.circular(10.0), // Bordes redondeados
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 79, 81, 82),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 79, 81, 82),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              ObservacionesWidget(),
               Visibility(
                 visible: (show != 0),
                 child: Row(
