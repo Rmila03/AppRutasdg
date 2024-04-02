@@ -14,8 +14,8 @@ class Header extends StatelessWidget {
           padding: const EdgeInsets.only(),
           child: Image.asset(
             'assets/logo-sdg.png',
-            width: 45,
-            height: 45,
+            width: 35,
+            height: 35,
             fit: BoxFit.cover,
           ),
         ),
@@ -23,7 +23,7 @@ class Header extends StatelessWidget {
           'RUTASDG',
           style: TextStyle(
             fontFamily: "HelveticaCondensed",
-            fontSize: 20,
+            fontSize: 30,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),

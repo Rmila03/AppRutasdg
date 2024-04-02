@@ -55,7 +55,7 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/logo-sdg.png', width: 50, height: 50),
+                Image.asset('assets/logo-sdg.png', width: 70, height: 70),
                 const SizedBox(width: 8.0),
                 const Text(
                   'RUTASDG',
