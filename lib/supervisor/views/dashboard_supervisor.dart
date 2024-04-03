@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:ruta_sdg/supervisor/widgets/table.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -298,51 +299,108 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Text(
-                                          'Actividad',
-                                          style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 0, 76, 128),
-                                            fontSize: 19.0,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'HelveticaCondensed',
-                                          ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            IconButton(
-                                              icon: const Icon(
-                                                FontAwesomeIcons.calendarDay,
-                                                color: Color.fromARGB(
-                                                    255, 0, 76, 128),
+                                    child: LayoutBuilder(
+                                      builder: (context, constraints) {
+                                        if (constraints.maxWidth > 200) {
+                                          return Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              const Text(
+                                                'Actividad',
+                                                style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 0, 76, 128),
+                                                  fontSize: 19.0,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontFamily:
+                                                      'HelveticaCondensed',
+                                                ),
                                               ),
-                                              onPressed: () {
-                                                _selectDate(context);
-                                              },
-                                            ),
-                                            const SizedBox(width: 10),
-                                            Text(
-                                              DateFormat('dd/MM/yyyy')
-                                                  .format(_selectedDate),
-                                              style: const TextStyle(
-                                                fontFamily:
-                                                    "HelveticaCondensed",
-                                                color: Color.fromARGB(
-                                                    255, 0, 76, 128),
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
+                                              Row(
+                                                children: [
+                                                  IconButton(
+                                                    icon: const Icon(
+                                                      FontAwesomeIcons
+                                                          .calendarDay,
+                                                      color: Color.fromARGB(
+                                                          255, 0, 76, 128),
+                                                    ),
+                                                    onPressed: () {
+                                                      _selectDate(context);
+                                                    },
+                                                  ),
+                                                  const SizedBox(width: 10),
+                                                  Text(
+                                                    DateFormat('dd/MM/yyyy')
+                                                        .format(_selectedDate),
+                                                    style: const TextStyle(
+                                                      fontFamily:
+                                                          "HelveticaCondensed",
+                                                      color: Color.fromARGB(
+                                                          255, 0, 76, 128),
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                            ],
+                                          );
+                                        } else {
+                                          return Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              const Text(
+                                                'Actividad',
+                                                style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 0, 76, 128),
+                                                  fontSize: 19.0,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontFamily:
+                                                      'HelveticaCondensed',
+                                                ),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  IconButton(
+                                                    icon: const Icon(
+                                                      FontAwesomeIcons
+                                                          .calendarDay,
+                                                      color: Color.fromARGB(
+                                                          255, 0, 76, 128),
+                                                    ),
+                                                    onPressed: () {
+                                                      _selectDate(context);
+                                                    },
+                                                  ),
+                                                  const SizedBox(width: 10),
+                                                  Text(
+                                                    DateFormat('dd/MM/yyyy')
+                                                        .format(_selectedDate),
+                                                    style: const TextStyle(
+                                                      fontFamily:
+                                                          "HelveticaCondensed",
+                                                      color: Color.fromARGB(
+                                                          255, 0, 76, 128),
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          );
+                                        }
+                                      },
                                     ),
                                   ),
-                                  _buildDataTable(Analistas),
+                                  //_buildDataTable(Analistas),
+                                  const DataTableCustom(),
                                 ],
                               ),
                             ),
@@ -644,6 +702,10 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
         height: 300,
         width: 1000,
         child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          //constrained: false,
+          //alignment: Alignment.center,
+          //panEnabled: true,
           child: DataTable(
             showCheckboxColumn: false,
             columnSpacing: 0.0,
