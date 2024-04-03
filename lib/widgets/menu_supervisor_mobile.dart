@@ -57,9 +57,18 @@ class _MenuSupervisorMobileState extends State<MenuSupervisorMobile> {
       onTap: (int index) {
         setState(() {
           _selectedIndex = index;
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => _screens[_selectedIndex],
+          Navigator.pushReplacement(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  _screens[_selectedIndex],
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
             ),
           );
         });
@@ -83,38 +92,4 @@ class _MenuSupervisorMobileState extends State<MenuSupervisorMobile> {
       ],
     );
   }
-
-  /*Widget buildMenuItem(String title) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          selectedMenu = title;
-        });
-
-        // Redirigir a la pantalla correspondiente
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => screens[selectedMenu]!,
-          ),
-        );
-      },
-      child: Container(
-        padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          color: selectedMenu == title
-              ? const Color(0xFFD9DEDA)
-              : Colors.transparent,
-        ),
-        child: Text(
-          title,
-          style: TextStyle(
-            color: selectedMenu == title ? Colors.orange : Colors.black,
-            fontSize: 12.0,
-            fontFamily: 'Montserrat',
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }*/
 }
