@@ -89,8 +89,9 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
         if (screens[selectedMenu] != null &&
             screens[selectedMenu]!.runtimeType != Navigator) {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => screens[selectedMenu]!,
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  screens[selectedMenu]!,
             ),
           );
         }
