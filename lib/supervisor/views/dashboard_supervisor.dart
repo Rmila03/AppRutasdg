@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:ruta_sdg/supervisor/widgets/table.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -39,6 +40,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
   int? selectedIndex = 0;
   List<Analista> analistas = getAnalistas();
   Set<String> selectedBars = Set<String>();
+  final GlobalKey<SfCartesianChartState> _chartKey =
+      GlobalKey<SfCartesianChartState>();
   @override
   void initState() {
     data = [
@@ -629,6 +632,10 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
         height: 300,
         width: 1000,
         child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          //constrained: false,
+          //alignment: Alignment.center,
+          //panEnabled: true,
           child: DataTable(
             showCheckboxColumn: false,
             columnSpacing: 0.0,
