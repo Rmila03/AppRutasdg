@@ -42,14 +42,10 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
     return Container(
       width: 250,
       color: customColor,
-      //decoration: const BoxDecoration(
-      //  border: Border(right: BorderSide(color: Colors.black, width: 2.0, style: BorderStyle.solid)),
-      //),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          // Agregar la imagen y el texto arriba de los buildMenuItem
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -69,7 +65,6 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
               ],
             ),
           ),
-
           buildMenuItem('PLAN DEL DÍA', Icons.note_alt_outlined),
           buildMenuItem('REPORTES', Icons.description_outlined),
           buildMenuItem('CARTERA', Icons.account_balance_wallet),
@@ -90,12 +85,15 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
           selectedMenu = title;
         });
 
-        // Redirigir a la pantalla correspondiente
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => screens[selectedMenu]!,
-          ),
-        );
+        // Redirigir a la pantalla correspondiente si no es la actual
+        if (screens[selectedMenu] != null &&
+            screens[selectedMenu]!.runtimeType != Navigator) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => screens[selectedMenu]!,
+            ),
+          );
+        }
       },
       child: Container(
         width: 250,
