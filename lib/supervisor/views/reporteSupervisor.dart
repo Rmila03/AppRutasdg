@@ -40,58 +40,62 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: MediaQuery.of(context).size.width < 640
-          ? MenuSupervisorMobile(name: selectedMenu)
-          : null,
-      body: Row(
-        children: [
-          // Left side menu
-          if (MediaQuery.of(context).size.width >= 640)
-            MenuSupervisor(name: selectedMenu),
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: MediaQuery.of(context).size.width < 640
+            ? MenuSupervisorMobile(name: selectedMenu)
+            : null,
+        body: Row(
+          children: [
+            // Left side menu
+            if (MediaQuery.of(context).size.width >= 640)
+              MenuSupervisor(name: selectedMenu),
 
-          // Expanded section for the main content
-          Expanded(
-            //child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                // Other widgets...
+            // Expanded section for the main content
+            Expanded(
+              //child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  // Other widgets...
 
-                // Title widget
-                const SizedBox(height: 40.0),
-                _buildTitle(),
-                const SizedBox(height: 20.0),
+                  // Title widget
 
-                // Date picker widget
-                _buildDatePicker(context),
-                const SizedBox(height: 10.0),
+                  _buildTitle(),
 
-                // Search box widget
-                _buildSearchBox(),
+                  // Date picker widget
+                  _buildDatePicker(context),
+                  const SizedBox(height: 10.0),
 
-                const SizedBox(height: 10.0),
+                  // Search box widget
+                  _buildSearchBox(),
 
-                // Data table widget
-                _buildDataTable(filteredUsers),
-              ],
-              // ),
+                  const SizedBox(height: 10.0),
+
+                  // Data table widget
+                  _buildDataTable(filteredUsers),
+                ],
+                // ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildTitle() {
-    return const Text(
-      'REPORTES',
-      style: TextStyle(
-        fontSize: 25.0,
-        color: Color.fromARGB(255, 0, 76, 128),
-        fontWeight: FontWeight.bold,
-        fontFamily: 'HelveticaCondensed',
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 16),
+      child: Text(
+        'REPORTES',
+        style: TextStyle(
+          fontSize: 25.0,
+          color: Color.fromARGB(255, 0, 76, 128),
+          fontWeight: FontWeight.bold,
+          fontFamily: 'HelveticaCondensed',
+        ),
       ),
     );
   }

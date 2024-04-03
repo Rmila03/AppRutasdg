@@ -51,40 +51,42 @@ class _HistorialSupervisorContentState
   Widget build(BuildContext context) {
     List<Cambio> cambiosDelDia = obtenerCambiosDelDia(selectedDate);
 
-    return Scaffold(
-      bottomNavigationBar: MediaQuery.of(context).size.width < 640
-          ? MenuSupervisorMobile(name: selectedMenu)
-          : null,
-      body: Row(
-        children: [
-          if (MediaQuery.of(context).size.width >= 640)
-            MenuSupervisor(name: selectedMenu),
-          Expanded(
-            //child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start, // Cambiado a start
-              children: [
-                const SizedBox(height: 40.0), // Añade un espacio en blanco
-                buildTitle(),
-                const SizedBox(height: 20.0),
-                buildDatePicker(),
-                const SizedBox(height: 20.0),
-                for (var cambio in cambiosDelDia) ...[
-                  buildAlarmInfo(
-                    cambio.fecha,
-                    cambio.nombre,
-                    cambio.descripcion,
-                    mostrarBotonVerTodo: true,
-                  ),
-                  const SizedBox(height: 10.0),
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: MediaQuery.of(context).size.width < 640
+            ? MenuSupervisorMobile(name: selectedMenu)
+            : null,
+        body: Row(
+          children: [
+            if (MediaQuery.of(context).size.width >= 640)
+              MenuSupervisor(name: selectedMenu),
+            Expanded(
+              //child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start, // Cambiado a start
+                children: [
+                  const SizedBox(height: 40.0), // Añade un espacio en blanco
+                  buildTitle(),
+                  const SizedBox(height: 20.0),
+                  buildDatePicker(),
+                  const SizedBox(height: 20.0),
+                  for (var cambio in cambiosDelDia) ...[
+                    buildAlarmInfo(
+                      cambio.fecha,
+                      cambio.nombre,
+                      cambio.descripcion,
+                      mostrarBotonVerTodo: true,
+                    ),
+                    const SizedBox(height: 10.0),
+                  ],
+                  buildAllEventsButton(),
                 ],
-                buildAllEventsButton(),
-              ],
-              //),
+                //),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

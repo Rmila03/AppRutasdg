@@ -48,50 +48,52 @@ class _NotificacionesSupervisorContentState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: MediaQuery.of(context).size.width < 640
-          ? const MenuSupervisorMobile(name: 'NOTIFICACIONES')
-          : null,
-      body: Row(
-        children: [
-          if (MediaQuery.of(context).size.width >= 640)
-            const MenuSupervisor(name: 'NOTIFICACIONES'),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 40.0),
-                  _buildTitle(),
-                  const SizedBox(height: 20.0),
-                  _buildSearchBox(),
-                  const SizedBox(height: 10.0),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: filteredSocio.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return _buildSocioCard(filteredSocio[index]);
-                      },
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: MediaQuery.of(context).size.width < 640
+            ? const MenuSupervisorMobile(name: 'NOTIFICACIONES')
+            : null,
+        body: Row(
+          children: [
+            if (MediaQuery.of(context).size.width >= 640)
+              const MenuSupervisor(name: 'NOTIFICACIONES'),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _buildTitle(),
+                    _buildSearchBox(),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: filteredSocio.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return _buildSocioCard(filteredSocio[index]);
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildTitle() {
-    return const Text(
-      'NOTIFICACIONES DE CAMBIOS',
-      style: TextStyle(
-        fontSize: 25.0,
-        color: Color.fromARGB(255, 0, 76, 128),
-        fontWeight: FontWeight.bold,
-        fontFamily: 'HelveticaCondensed',
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 16),
+      child: Text(
+        'NOTIFICACIONES DE CAMBIOS',
+        style: TextStyle(
+          fontSize: 25.0,
+          color: Color.fromARGB(255, 0, 76, 128),
+          fontWeight: FontWeight.bold,
+          fontFamily: 'HelveticaCondensed',
+        ),
       ),
     );
   }

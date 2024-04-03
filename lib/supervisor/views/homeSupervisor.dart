@@ -193,8 +193,8 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 25.0),
                           Container(
+                            margin: const EdgeInsets.symmetric(vertical: 16),
                             alignment: Alignment.center,
                             child: const Text(
                               'PLAN DEL DÍA',
@@ -206,7 +206,6 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20.0),
                           Padding(
                             padding: const EdgeInsets.only(left: 20.0),
                             child: Row(
