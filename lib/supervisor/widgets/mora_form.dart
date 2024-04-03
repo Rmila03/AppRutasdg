@@ -38,8 +38,9 @@ class MoraFormState extends State<MoraForm> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const MoraSupervisorPage(),
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            const MoraSupervisorPage(),
                       ),
                     );
                   },

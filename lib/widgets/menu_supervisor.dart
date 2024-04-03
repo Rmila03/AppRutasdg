@@ -90,12 +90,16 @@ class _MenuSupervisorState extends State<MenuSupervisor> {
           selectedMenu = title;
         });
 
-        // Redirigir a la pantalla correspondiente
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => screens[selectedMenu]!,
-          ),
-        );
+        // Redirigir a la pantalla correspondiente si no es la actual
+        if (screens[selectedMenu] != null &&
+            screens[selectedMenu]!.runtimeType != Navigator) {
+          Navigator.of(context).pushReplacement(
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  screens[selectedMenu]!,
+            ),
+          );
+        }
       },
       child: Container(
         width: 250,

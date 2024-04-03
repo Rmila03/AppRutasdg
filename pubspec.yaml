@@ -46,6 +46,7 @@ dependencies:
   flutter_google_maps_webservices: ^1.1.1
   image: ^4.1.4
   geolocator: ^11.0.0
+  syncfusion_flutter_datagrid: ^24.2.9
 
 
 dev_dependencies:
