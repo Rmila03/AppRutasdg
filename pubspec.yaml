@@ -76,6 +76,7 @@ flutter:
   assets:
     - assets/
     - assets/locations.json
+    - assets/logo_sdg.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
@@ -91,26 +92,6 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Unna
-      fonts:
-        - asset: fonts/Unna-Bold.ttf
-        - asset: fonts/Unna-BoldItalic.ttf
-        - asset: fonts/Unna-Italic.ttf
-        - asset: fonts/Unna-Regular.ttf
-          style: italic
-    - family: Poppins
-      fonts:
-        - asset: fonts/Poppins-BoldItalic.ttf
-        - asset: fonts/Poppins-Black.ttf
-        - asset: fonts/Poppins-BlackItalic.ttf
-        - asset: fonts/Poppins-Bold.ttf
-        - asset: fonts/Poppins-ExtraBold.ttf
-        - asset: fonts\Poppins-Light.ttf
-        #- asset: fonts/poppins/Poppins-Bold.ttf
-        #- asset: fonts/poppins/Poppins-Bold.ttf
-        #- asset: fonts/poppins/Poppins-Bold.ttf
-        
-          style: italic
     - family: HelveticaCondensed
       fonts:
         - asset: fonts/helvetica_condensed.ttf

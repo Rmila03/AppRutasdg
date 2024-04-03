@@ -56,7 +56,7 @@ class ListaSocioState extends State<ListaSocio> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        //resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Column(
             children: [

@@ -127,7 +127,6 @@ class _UbicacionSupervisorPage extends State {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 25.0),
                             Container(
                               alignment: Alignment.center,
                               child: const Text(
@@ -140,8 +139,8 @@ class _UbicacionSupervisorPage extends State {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 20.0),
                             Container(
+                              margin: const EdgeInsets.only(top: 16),
                               alignment: Alignment.bottomLeft,
                               padding: const EdgeInsets.all(8.0),
                               width: 450,

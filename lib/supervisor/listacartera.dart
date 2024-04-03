@@ -48,18 +48,20 @@ class ListaSupervisorState extends State<ListaSupervisor> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: MediaQuery.of(context).size.width < 640
-          ? const MenuSupervisorMobile(name: "CARTERA")
-          : null,
-      resizeToAvoidBottomInset: false,
-      body: Row(
-        children: [
-          if (MediaQuery.of(context).size.width >= 640) MenuWidget,
-          Expanded(
-            child: CasoFormWidget,
-          ),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: MediaQuery.of(context).size.width < 640
+            ? const MenuSupervisorMobile(name: "CARTERA")
+            : null,
+        resizeToAvoidBottomInset: false,
+        body: Row(
+          children: [
+            if (MediaQuery.of(context).size.width >= 640) MenuWidget,
+            Expanded(
+              child: CasoFormWidget,
+            ),
+          ],
+        ),
       ),
     );
   }

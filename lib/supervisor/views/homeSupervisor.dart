@@ -193,8 +193,8 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 25.0),
                           Container(
+                            margin: const EdgeInsets.symmetric(vertical: 16),
                             alignment: Alignment.center,
                             child: const Text(
                               'PLAN DEL DÍA',
@@ -206,7 +206,6 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20.0),
                           Padding(
                             padding: const EdgeInsets.only(left: 20.0),
                             child: Row(
@@ -635,6 +634,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                               ),
                             ),
                           ),
+                          const SizedBox(height: 15.0),
                         ],
                       ),
                     ),
@@ -659,7 +659,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                     child: SlideTransition(
                       position: _offsetAnimation,
                       child: SizedBox(
-                        width: 600,
+                        width: 550,
                         height: 800,
                         child: FloatingPage(
                           socioList: sociosNotAssignedToToday,
@@ -673,6 +673,12 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                               sociosNotAssignedToToday = updatedSocios;
                             });
                           },
+                          updateIsFloatingPageVisible: (bool value) {
+                            setState(() {
+                              isFloatingPageVisible =
+                                  value; // Actualiza isFloatingPageVisible
+                            });
+                          }, // Pasar la función updateIsFloatingPageVisible
                         ),
                       ),
                     ),
@@ -995,12 +1001,13 @@ class FloatingPage extends StatelessWidget {
   final List<Socio> socioList;
   final Function(Socio) onPlusIconPressed;
   final Function(List<Socio>, List<Socio>) onListsUpdated;
-
+  final Function(bool) updateIsFloatingPageVisible;
   const FloatingPage({
     super.key,
     required this.socioList,
     required this.onPlusIconPressed,
     required this.onListsUpdated,
+    required this.updateIsFloatingPageVisible,
   });
 
   @override
@@ -1009,7 +1016,7 @@ class FloatingPage extends StatelessWidget {
       length: 2,
       child: Container(
         height: 800,
-        width: 600,
+        width: 550,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(40.0),
@@ -1020,7 +1027,25 @@ class FloatingPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 20.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 10.0, top: 10), // Espacio a la derecha del icono
+                  child: IconButton(
+                    icon: const Icon(
+                      FontAwesomeIcons.circleXmark,
+                      color: Color.fromARGB(
+                          255, 0, 76, 128), // Cambia el color del icono a azul
+                    ),
+                    onPressed: () {
+                      updateIsFloatingPageVisible(false);
+                    },
+                  ),
+                ),
+              ],
+            ),
             Container(
               padding: const EdgeInsets.all(15.0),
               decoration: BoxDecoration(
@@ -1037,7 +1062,7 @@ class FloatingPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 10.0),
             const TabBar(
               labelColor: Colors.black,
               unselectedLabelColor: Colors.grey,

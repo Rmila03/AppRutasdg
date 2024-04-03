@@ -35,46 +35,49 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: MediaQuery.of(context).size.width < 640
-          ? const MenuSupervisorMobile(name: "MORA")
-          : null,
-      body: Row(
-        children: [
-          // Left side menu
-          if (MediaQuery.of(context).size.width >= 640)
-            MenuSupervisor(name: selectedMenu),
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: MediaQuery.of(context).size.width < 640
+            ? const MenuSupervisorMobile(name: "MORA")
+            : null,
+        body: Row(
+          children: [
+            // Left side menu
+            if (MediaQuery.of(context).size.width >= 640)
+              MenuSupervisor(name: selectedMenu),
 
-          // Expanded section for the main content
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 40.0),
-                  _buildTitle(),
-                  const SizedBox(height: 20.0),
-                  _buildSearchBox(),
-                  const SizedBox(height: 10.0),
-                  _buildDataTable(filteredSocio),
-                ],
+            // Expanded section for the main content
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _buildTitle(),
+                    _buildSearchBox(),
+                    const SizedBox(height: 10.0),
+                    _buildDataTable(filteredSocio),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildTitle() {
-    return const Text(
-      'SOCIOS EN MORA',
-      style: TextStyle(
-        fontSize: 25.0,
-        color: Color.fromARGB(255, 0, 76, 128),
-        fontWeight: FontWeight.bold,
-        fontFamily: 'HelveticaCondensed',
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 16),
+      child: Text(
+        'SOCIOS EN MORA',
+        style: TextStyle(
+          fontSize: 25.0,
+          color: Color.fromARGB(255, 0, 76, 128),
+          fontWeight: FontWeight.bold,
+          fontFamily: 'HelveticaCondensed',
+        ),
       ),
     );
   }
