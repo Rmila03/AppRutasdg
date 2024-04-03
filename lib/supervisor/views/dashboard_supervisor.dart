@@ -274,6 +274,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 const Color(0xFFD9DEDA),
                                           ),
                                           dataSource: data,
+                                          name: "N° de Visitas",
                                           xValueMapper: (_ChartData data, _) =>
                                               data.nombreAnalista,
                                           yValueMapper: (_ChartData data, _) =>
