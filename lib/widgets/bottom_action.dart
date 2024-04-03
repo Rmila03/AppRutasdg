@@ -13,8 +13,7 @@ class BottomAction extends StatelessWidget {
   final double iconSize;
   final VoidCallback? onTapCallback;
 
-  const BottomAction({ 
-    super.key,
+  const BottomAction({
     required this.label,
     required this.icon,
     required this.iconColor,
@@ -31,44 +30,94 @@ class BottomAction extends StatelessWidget {
             if (label == "Inicio") {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      const HomePage(),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                ),
               );
             } else if (label == "Notificaciones") {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const NotificacionPage(title: ''),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      const NotificacionPage(title: ''),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
                 ),
               );
             } else if (label == "Cartera") {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const CarteraPage(title: ''),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      const CarteraPage(title: ''),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
                 ),
               );
             } else if (label == "Reportes") {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const ReportePage(title: ''),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      const ReportePage(title: ''),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
                 ),
               );
             } else if (label == "Sugerencias") {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const SugerenciaPage(title: ''),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      const SugerenciaPage(title: ''),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
                 ),
               );
             } else if (label == "Nuevo") {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const ListaSocio(
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      const ListaSocio(
                     tabColorLeft: Colors.orange,
                     tabName: 'NUEVO',
                   ),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
                 ),
               );
             }
