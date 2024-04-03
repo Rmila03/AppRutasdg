@@ -400,7 +400,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                     ),
                                   ),
                                   //_buildDataTable(Analistas),
-                                  const DataTableCustom(),
+                                  const Center(child: DataTableCustom()),
                                 ],
                               ),
                             ),

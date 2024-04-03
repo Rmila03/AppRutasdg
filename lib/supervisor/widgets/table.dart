@@ -36,7 +36,7 @@ class _DataTableCustomState extends State<DataTableCustom> {
                 columnName: 'analista',
                 label: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    alignment: Alignment.centerRight,
+                    alignment: Alignment.center,
                     color: const Color(0xFFD9DEDA),
                     child: const Text(
                       'Analista',
@@ -47,7 +47,7 @@ class _DataTableCustomState extends State<DataTableCustom> {
                 columnName: 'estado',
                 label: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     color: const Color(0xFFD9DEDA),
                     child: const Text(
                       'Estado',
@@ -58,7 +58,7 @@ class _DataTableCustomState extends State<DataTableCustom> {
                 columnName: 'nrovisitas',
                 label: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     color: const Color(0xFFD9DEDA),
                     child: const Text(
                       'Nro de visitas',
@@ -69,7 +69,7 @@ class _DataTableCustomState extends State<DataTableCustom> {
                 columnName: 'porcentaje',
                 label: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    alignment: Alignment.centerRight,
+                    alignment: Alignment.center,
                     color: const Color(0xFFD9DEDA),
                     child: const Text(
                       'Porcentaje',
@@ -110,7 +110,7 @@ class AnalistaDataGridSource extends DataGridSource {
       return Container(
           alignment: (dataGridCell.columnName == 'analista' ||
                   dataGridCell.columnName == 'porcentaje')
-              ? Alignment.centerRight
+              ? Alignment.centerLeft
               : Alignment.centerLeft,
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
