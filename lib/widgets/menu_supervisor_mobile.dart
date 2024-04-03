@@ -58,8 +58,9 @@ class _MenuSupervisorMobileState extends State<MenuSupervisorMobile> {
         setState(() {
           _selectedIndex = index;
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => _screens[_selectedIndex],
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  _screens[_selectedIndex],
             ),
           );
         });

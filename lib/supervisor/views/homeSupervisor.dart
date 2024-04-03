@@ -194,7 +194,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                            margin: const EdgeInsets.symmetric(vertical: 16),
+                            margin: const EdgeInsets.symmetric(vertical: 25),
                             alignment: Alignment.center,
                             child: const Text(
                               'PLAN DEL DÍA',

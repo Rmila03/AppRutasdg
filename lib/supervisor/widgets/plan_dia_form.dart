@@ -39,8 +39,9 @@ class CarteraFormState extends State<PlanDiaSupervisor> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomeSupervisorPage(),
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            const HomeSupervisorPage(),
                       ),
                     );
                   },

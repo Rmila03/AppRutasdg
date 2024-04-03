@@ -69,8 +69,9 @@ class ReportesFormState extends State<ReportesForm> {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
+                                  PageRouteBuilder(
+                                    pageBuilder: (context, animation,
+                                            secondaryAnimation) =>
                                         const ReporteSupervisorPage(),
                                   ),
                                 );

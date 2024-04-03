@@ -39,8 +39,9 @@ class CarteraFormState extends State<CarteraForm> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const CarteraPage(),
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            const CarteraPage(),
                       ),
                     );
                   },
