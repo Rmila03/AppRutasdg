@@ -22,6 +22,7 @@ class MoraSupervisorContent extends StatefulWidget {
 }
 
 class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
+  // Properties
   String selectedMenu = 'MORA';
   DateTime selectedDate = DateTime.now();
   TextEditingController searchController = TextEditingController();
@@ -33,6 +34,16 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
   List<Analista> filteredAnalista = [];
   List<Socio> filteredSocio = [];
 
+  // Init State Method
+  @override
+  void initState() {
+    super.initState();
+    // Initially, show all socios ordered by daysLate
+    filteredSocio = List.from(socios);
+    filteredSocio.sort((a, b) => b.daysLate.compareTo(a.daysLate));
+  }
+
+  // Build Method
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -67,6 +78,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
     );
   }
 
+  // Widget Methods
   Widget _buildTitle() {
     return const Padding(
       padding: EdgeInsets.only(top: 25, bottom: 16),
@@ -89,7 +101,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 250, // Establece el ancho deseado aquí
+            width: 250,
             child: DropdownButtonFormField<Analista>(
               isExpanded: true,
               dropdownColor: Colors.white,
@@ -191,7 +203,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
         child: SingleChildScrollView(
           child: DataTable(
             showCheckboxColumn: false,
-            columnSpacing: 0.0,
+            columnSpacing: 10.0, // Adjust column spacing here
             headingRowColor: MaterialStateProperty.all(const Color(0xFFD9DEDA)),
             columns: const [
               DataColumn(
@@ -226,20 +238,21 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
     );
   }
 
+  // Helper Method
   void _updateSearchResults(String query) {
     setState(() {
       if (query.isEmpty) {
-        // Si no se ha seleccionado ningún analista, mostramos todos los socios
+        // Show all socios if no analista is selected
         filteredAnalista = analistas;
       } else {
-        // Filtramos los analistas por nombre que coincida con la búsqueda
+        // Filter analistas by name matching the search
         filteredAnalista = analistas
             .where(
                 (user) => user.name.toLowerCase().contains(query.toLowerCase()))
             .toList();
       }
 
-      // Si se ha seleccionado un analista, filtramos los socios asociados y los ordenamos por días de mora
+      // If an analista is selected, filter associated socios and sort by days late
       filteredSocio = query.isEmpty
           ? []
           : socios.where((socio) => socio.idAnalista == query).toList();
