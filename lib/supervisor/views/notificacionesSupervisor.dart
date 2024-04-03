@@ -47,12 +47,15 @@ class _NotificacionesSupervisorContentState
   }
 
   @override
+  void initState() {
+    super.initState();
+    filteredSocio = List.from(socios);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: MediaQuery.of(context).size.width < 640
-            ? const MenuSupervisorMobile(name: 'NOTIFICACIONES')
-            : null,
         body: Stack(
           children: [
             Row(
@@ -69,7 +72,7 @@ class _NotificacionesSupervisorContentState
                         child: ListView.builder(
                           itemCount: filteredSocio.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return _buildSocioCard(filteredSocio[index]);
+                            return _buildNotificationCard(filteredSocio[index]);
                           },
                         ),
                       ),
@@ -80,6 +83,9 @@ class _NotificacionesSupervisorContentState
             ),
           ],
         ),
+        bottomNavigationBar: MediaQuery.of(context).size.width < 640
+            ? const MenuSupervisorMobile(name: 'NOTIFICACIONES')
+            : null,
       ),
     );
   }
@@ -106,8 +112,8 @@ class _NotificacionesSupervisorContentState
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.zero, // Elimina el padding
-            width: 250.0, // Establece el ancho deseado
+            padding: EdgeInsets.zero,
+            width: 250.0,
             child: DropdownButtonFormField<Analista>(
               isExpanded: true,
               dropdownColor: Colors.white,
@@ -161,16 +167,16 @@ class _NotificacionesSupervisorContentState
     );
   }
 
-  Widget _buildSocioCard(Socio socio) {
+  Widget _buildNotificationCard(Socio socio) {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      padding: const EdgeInsets.all(8.0), // Ajusta el espacio interno aquí
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         border: Border.all(
           color: const Color.fromARGB(255, 0, 76, 128),
         ),
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(8.0),
       ),
       child: Row(
         children: [
@@ -184,39 +190,42 @@ class _NotificacionesSupervisorContentState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Notificación de Cambio',
-                  style: TextStyle(
-                    fontFamily: 'HelveticaCondensed',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.0,
-                    color: Color.fromARGB(255, 3, 3, 3),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${socio.name} ${socio.lastName}',
+                      style: const TextStyle(
+                        fontFamily: 'HelveticaCondensed',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    Text(
+                      'Fecha: ${selectedDate.toString().split(' ')[0]}',
+                      style: const TextStyle(
+                        fontFamily: 'HelveticaCondensed',
+                        fontSize: 14.0,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 8.0),
-                Text(
-                  'Nombre: ${socio.name} ${socio.lastName}',
-                  style: const TextStyle(
-                      fontFamily: 'HelveticaCondensed', fontSize: 14.0),
-                ),
-                const Text(
-                  'Fecha de notificación:',
-                  style: TextStyle(
-                      fontFamily: 'HelveticaCondensed',
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 76, 128)),
-                ),
+                const SizedBox(height: 4.0),
                 const Text(
                   'Descripción del cambio:',
                   style: TextStyle(
-                      fontFamily: 'HelveticaCondensed',
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 76, 128)),
+                    fontFamily: 'HelveticaCondensed',
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 0, 76, 128),
+                  ),
                 ),
+                const SizedBox(height: 4.0),
                 const Text(
                   'Aquí va la descripción detallada del cambio...',
                   style: TextStyle(
-                      fontFamily: 'HelveticaCondensed', fontSize: 14.0),
+                    fontFamily: 'HelveticaCondensed',
+                    fontSize: 14.0,
+                  ),
                 ),
               ],
             ),
