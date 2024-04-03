@@ -133,45 +133,49 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
         bottomNavigationBar: MediaQuery.of(context).size.width < 640
             ? const MenuSupervisorMobile(name: "CARTERA")
             : null,
-        body: Row(
+        body: Stack(
           children: [
-            if (MediaQuery.of(context).size.width >= 640)
-              const MenuSupervisor(name: "CARTERA"),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'CARTERA DE ANALISTAS',
-                        style: TextStyle(
-                          fontSize: 25.0,
-                          color: Color.fromARGB(255, 0, 76, 128),
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'HelveticaCondensed',
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Row(
+              children: [
+                if (MediaQuery.of(context).size.width >= 640)
+                  const MenuSupervisor(name: "CARTERA"),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        container,
-                        //const SizedBox(width: 0), // Ajuste del margen derecho
+                        Container(
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'CARTERA DE ANALISTAS',
+                            style: TextStyle(
+                              fontSize: 25.0,
+                              color: Color.fromARGB(255, 0, 76, 128),
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'HelveticaCondensed',
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            container,
+                            //const SizedBox(width: 0), // Ajuste del margen derecho
+                          ],
+                        ),
+                        const SizedBox(height: 25.0),
+                        Center(
+                          child: _buildDataTable(
+                              selectedOption, sociosAssignedToToday),
+                        )
                       ],
                     ),
-                    const SizedBox(height: 25.0),
-                    Center(
-                      child: _buildDataTable(
-                          selectedOption, sociosAssignedToToday),
-                    )
-                  ],
-                ),
-                //),
-              ),
-            )
+                    //),
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),

@@ -53,29 +53,30 @@ class _NotificacionesSupervisorContentState
         bottomNavigationBar: MediaQuery.of(context).size.width < 640
             ? const MenuSupervisorMobile(name: 'NOTIFICACIONES')
             : null,
-        body: Row(
+        body: Stack(
           children: [
-            if (MediaQuery.of(context).size.width >= 640)
-              const MenuSupervisor(name: 'NOTIFICACIONES'),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    _buildTitle(),
-                    _buildSearchBox(),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: filteredSocio.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return _buildSocioCard(filteredSocio[index]);
-                        },
+            Row(
+              children: [
+                if (MediaQuery.of(context).size.width >= 640)
+                  const MenuSupervisor(name: 'NOTIFICACIONES'),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _buildTitle(),
+                      _buildSearchBox(),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: filteredSocio.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return _buildSocioCard(filteredSocio[index]);
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),
@@ -85,7 +86,7 @@ class _NotificacionesSupervisorContentState
 
   Widget _buildTitle() {
     return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 16),
+      padding: EdgeInsets.only(top: 25, bottom: 16),
       child: Text(
         'NOTIFICACIONES DE CAMBIOS',
         style: TextStyle(

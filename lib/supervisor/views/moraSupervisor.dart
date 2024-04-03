@@ -69,7 +69,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
 
   Widget _buildTitle() {
     return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 16),
+      padding: EdgeInsets.only(top: 25, bottom: 16),
       child: Text(
         'SOCIOS EN MORA',
         style: TextStyle(

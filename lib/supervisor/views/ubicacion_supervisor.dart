@@ -122,7 +122,7 @@ class _UbicacionSupervisorPage extends State {
                     const MenuSupervisor(name: "UBICACIÓN"),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(25.0),
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

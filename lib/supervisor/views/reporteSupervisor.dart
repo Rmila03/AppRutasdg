@@ -87,7 +87,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
 
   Widget _buildTitle() {
     return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 16),
+      padding: EdgeInsets.only(top: 25, bottom: 16),
       child: Text(
         'REPORTES',
         style: TextStyle(
