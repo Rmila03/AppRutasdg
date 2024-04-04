@@ -16,6 +16,7 @@ class SeguimientoPage extends StatefulWidget {
 
 class _SeguimientoPageState extends State<SeguimientoPage> {
   final List<Socio> socios = getSocios();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -103,17 +104,13 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                   MaterialStateProperty.all(const Color(0xFFD9D9D9)),
               columns: const [
                 DataColumn(
-                    label: Text('DNI',
-                        style: TextStyle(
-                          fontFamily: 'HelveticaCondensed',
-                          fontWeight: FontWeight.bold,
-                        ))),
+                  label: Text('DNI',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
                 DataColumn(
-                    label: Text('Nombres y Apellidos',
-                        style: TextStyle(
-                          fontFamily: 'HelveticaCondensed',
-                          fontWeight: FontWeight.bold,
-                        ))),
+                  label: Text('Nombres y Apellidos',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
                 DataColumn(label: Text('')),
               ],
               rows: userList
@@ -160,20 +157,17 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(left: 20, right: 5),
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(0),
-        ),
+        borderRadius: BorderRadius.only(bottomRight: Radius.circular(0)),
         color: Color.fromARGB(255, 0, 76, 128),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: const EdgeInsets.only(
-                top: 10, bottom: 5), // Ajusta el margen inferior aquí
+            margin: const EdgeInsets.only(top: 10, bottom: 5),
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 2),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 255, 255, 255),
+              color: Colors.white,
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
@@ -198,7 +192,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 style: TextStyle(
                   fontFamily: 'HelveticaCondensed',
                   fontSize: 18,
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),

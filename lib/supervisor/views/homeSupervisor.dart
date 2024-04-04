@@ -82,7 +82,6 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
       padding: const EdgeInsets.only(left: 25.0),
       width: 200,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: DropdownButton<String>(

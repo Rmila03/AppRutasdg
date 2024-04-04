@@ -28,7 +28,6 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
   TextEditingController searchController = TextEditingController();
   FocusNode searchFocusNode = FocusNode();
   final List<Analista> analistas = getAnalistas();
-
   List<Analista> filteredUsers = [];
 
   @override
@@ -47,36 +46,20 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
             : null,
         body: Row(
           children: [
-            // Left side menu
             if (MediaQuery.of(context).size.width >= 640)
               MenuSupervisor(name: selectedMenu),
-
-            // Expanded section for the main content
             Expanded(
-              //child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // Other widgets...
-
-                  // Title widget
-
                   _buildTitle(),
-
-                  // Date picker widget
                   _buildDatePicker(context),
                   const SizedBox(height: 10.0),
-
-                  // Search box widget
                   _buildSearchBox(),
-
                   const SizedBox(height: 10.0),
-
-                  // Data table widget
                   _buildDataTable(filteredUsers),
                 ],
-                // ),
               ),
             ),
           ],
@@ -141,84 +124,87 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
   }
 
   Widget _buildSearchBox() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
-      child: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(searchFocusNode);
-        },
-        child: Stack(
-          children: [
-            Container(
-              width: 400.0,
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: Color.fromARGB(255, 0, 76, 128),
-                  ),
-                ),
-              ),
-              child: TextField(
-                controller: searchController,
-                focusNode: searchFocusNode,
-                cursorColor: const Color.fromARGB(255, 0, 76, 128),
-                decoration: InputDecoration(
-                  labelText: 'Buscar',
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  labelStyle: const TextStyle(
-                    fontFamily: 'HelveticaCondensed',
-                    color: Color.fromARGB(255, 0, 76, 128),
-                  ),
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color.fromARGB(255, 0, 76, 128), // Cambia a azul
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(searchFocusNode);
+          },
+          child: Stack(
+            children: [
+              Container(
+                width: 400.0,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Color.fromARGB(255, 0, 76, 128),
                     ),
                   ),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.clear_outlined),
-                    color: const Color.fromARGB(255, 0, 76, 128),
-                    onPressed: () {
-                      searchController.clear();
-                      _updateSearchResults('');
-                    },
-                  ),
                 ),
-                onChanged: (value) {
-                  _updateSearchResults(value);
-                },
-              ),
-            ),
-            if (searchFocusNode.hasFocus && filteredUsers.isNotEmpty)
-              Positioned(
-                top: 50.0,
-                child: Container(
-                  width: 400.0,
-                  height: 100.0,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 0, 76, 128)),
-                    borderRadius: BorderRadius.circular(8.0),
-                    color: Colors.white,
+                child: TextField(
+                  controller: searchController,
+                  focusNode: searchFocusNode,
+                  cursorColor: const Color.fromARGB(255, 0, 76, 128),
+                  decoration: InputDecoration(
+                    labelText: 'Buscar',
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 15.0),
+                    labelStyle: const TextStyle(
+                      fontFamily: 'HelveticaCondensed',
+                      color: Color.fromARGB(255, 0, 76, 128),
+                    ),
+                    focusedBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 0, 76, 128),
+                      ),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.clear_outlined),
+                      color: const Color.fromARGB(255, 0, 76, 128),
+                      onPressed: () {
+                        searchController.clear();
+                        _updateSearchResults('');
+                      },
+                    ),
                   ),
-                  child: ListView.builder(
-                    itemCount: filteredUsers.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(filteredUsers[index].name,
-                            style: const TextStyle(
-                              fontFamily: 'HelveticaCondensed',
-                            )),
-                        onTap: () {
-                          searchController.text = filteredUsers[index].name;
-                          _updateSearchResults(filteredUsers[index].name);
-                          searchFocusNode.unfocus();
-                        },
-                      );
-                    },
-                  ),
+                  onChanged: (value) {
+                    _updateSearchResults(value);
+                  },
                 ),
               ),
-          ],
+              if (searchFocusNode.hasFocus && filteredUsers.isNotEmpty)
+                Positioned(
+                  top: 50.0,
+                  child: Container(
+                    width: 400.0,
+                    height: 100.0,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 0, 76, 128)),
+                      borderRadius: BorderRadius.circular(8.0),
+                      color: Colors.white,
+                    ),
+                    child: ListView.builder(
+                      itemCount: filteredUsers.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(filteredUsers[index].name,
+                              style: const TextStyle(
+                                fontFamily: 'HelveticaCondensed',
+                              )),
+                          onTap: () {
+                            searchController.text = filteredUsers[index].name;
+                            _updateSearchResults(filteredUsers[index].name);
+                            searchFocusNode.unfocus();
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
@@ -245,9 +231,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                     // Agrega aquí la lógica de descarga para este usuario
                   },
                 ),
-                const SizedBox(
-                    width:
-                        10), // Espacio entre el icono de descarga y el nuevo icono
+                const SizedBox(width: 10),
                 IconButton(
                   icon: const Icon(Icons.visibility),
                   onPressed: () {

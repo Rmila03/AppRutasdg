@@ -145,7 +145,6 @@ class _UbicacionSupervisorPage extends State {
                               padding: const EdgeInsets.all(8.0),
                               width: 450,
                               decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 255, 255, 255),
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               child: DropdownButton<String>(

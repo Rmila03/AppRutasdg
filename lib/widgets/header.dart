@@ -19,6 +19,8 @@ class Header extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
+        const SizedBox(
+            width: 10), // Agregamos un espacio entre la imagen y el texto
         const Text(
           'RUTASDG',
           style: TextStyle(
