@@ -262,6 +262,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
           height: 300,
           width: 1000,
           child: SingleChildScrollView(
+            physics: const NeverScrollableScrollPhysics(),
             child: DataTable(
               showCheckboxColumn: false,
               columnSpacing: 7.0,

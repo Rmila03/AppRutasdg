@@ -16,7 +16,6 @@ class PromocionPage extends StatefulWidget {
 
 class _PromocionPageState extends State<PromocionPage> {
   final List<Socio> socios = getSocios();
-  String _currentPageTitle = "CARTERA DE PROMOCIÓN";
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +74,7 @@ class _PromocionPageState extends State<PromocionPage> {
 
   void _updateTitle(int index) {
     setState(() {
-      _currentPageTitle =
-          index == 0 ? "CARTERA DE PROMOCIÓN" : "CARTERA DE AMPLIACIÓN";
+      index == 0 ? "CARTERA DE PROMOCIÓN" : "CARTERA DE AMPLIACIÓN";
     });
   }
 
