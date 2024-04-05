@@ -41,6 +41,8 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset:
+            false, // Cambia a true si deseas redimensionar el contenido cuando se muestra el teclado
         bottomNavigationBar: MediaQuery.of(context).size.width < 640
             ? MenuSupervisorMobile(name: selectedMenu)
             : null,
