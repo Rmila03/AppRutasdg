@@ -44,7 +44,6 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
       alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: DropdownButton<String>(
@@ -141,7 +140,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                   const MenuSupervisor(name: "CARTERA"),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(30.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

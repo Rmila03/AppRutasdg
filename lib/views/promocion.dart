@@ -16,7 +16,6 @@ class PromocionPage extends StatefulWidget {
 
 class _PromocionPageState extends State<PromocionPage> {
   final List<Socio> socios = getSocios();
-  String _currentPageTitle = "CARTERA DE PROMOCIÓN";
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +55,7 @@ class _PromocionPageState extends State<PromocionPage> {
                 ],
                 labelColor: const Color.fromARGB(255, 0, 76, 128),
                 indicatorColor: const Color.fromARGB(255, 0, 76, 128),
-                onTap: (index) {
-                  setState(() {
-                    _currentPageTitle = index == 0
-                        ? "CARTERA DE PROMOCIÓN"
-                        : "CARTERA DE AMPLIACIÓN";
-                  });
-                },
+                onTap: _updateTitle,
               ),
               Expanded(
                 child: TabBarView(
@@ -79,6 +72,12 @@ class _PromocionPageState extends State<PromocionPage> {
     );
   }
 
+  void _updateTitle(int index) {
+    setState(() {
+      index == 0 ? "CARTERA DE PROMOCIÓN" : "CARTERA DE AMPLIACIÓN";
+    });
+  }
+
   Widget _buildTab(String text, {TextStyle? textStyle}) {
     return Container(
       padding: const EdgeInsets.all(8.0),
@@ -93,7 +92,7 @@ class _PromocionPageState extends State<PromocionPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          _buildDataTable(_currentPageTitle, userList),
+          _buildDataTable(title, userList),
           // Puedes agregar más contenido específico de la pestaña aquí
         ],
       ),
@@ -110,7 +109,7 @@ class _PromocionPageState extends State<PromocionPage> {
           side: const BorderSide(color: Color(0xFFD9D9D9)),
           borderRadius: BorderRadius.circular(0.0),
         ),
-        color: const Color.fromARGB(255, 255, 255, 255),
+        color: Colors.white,
         elevation: 0,
         child: SizedBox(
           height: 500,
@@ -123,17 +122,13 @@ class _PromocionPageState extends State<PromocionPage> {
                   MaterialStateProperty.all(const Color(0xFFD9D9D9)),
               columns: const [
                 DataColumn(
-                    label: Text('DNI',
-                        style: TextStyle(
-                          fontFamily: 'HelveticaCondensed',
-                          fontWeight: FontWeight.bold,
-                        ))),
+                  label: Text('DNI',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
                 DataColumn(
-                    label: Text('Nombres y Apellidos',
-                        style: TextStyle(
-                          fontFamily: 'HelveticaCondensed',
-                          fontWeight: FontWeight.bold,
-                        ))),
+                  label: Text('Nombres y Apellidos',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
                 DataColumn(label: Text('')),
               ],
               rows: userList
@@ -155,14 +150,8 @@ class _PromocionPageState extends State<PromocionPage> {
                     }
                   },
                   cells: [
-                    DataCell(Text(user.dni,
-                        style: const TextStyle(
-                          fontFamily: 'HelveticaCondensed',
-                        ))),
-                    DataCell(Text("${user.name} ${user.lastName}",
-                        style: const TextStyle(
-                          fontFamily: 'HelveticaCondensed',
-                        ))),
+                    DataCell(Text(user.dni)),
+                    DataCell(Text("${user.name} ${user.lastName}")),
                     const DataCell(Icon(Icons.check)),
                   ],
                 );
@@ -180,20 +169,17 @@ class _PromocionPageState extends State<PromocionPage> {
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(left: 20, right: 5),
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(0),
-        ),
+        borderRadius: BorderRadius.only(bottomRight: Radius.circular(0)),
         color: Color.fromARGB(255, 0, 76, 128),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: const EdgeInsets.only(
-                top: 10, bottom: 5), // Ajusta el margen inferior aquí
+            margin: const EdgeInsets.only(top: 10, bottom: 5),
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 2),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 255, 255, 255),
+              color: Colors.white,
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
@@ -218,7 +204,7 @@ class _PromocionPageState extends State<PromocionPage> {
                 style: TextStyle(
                   fontFamily: 'HelveticaCondensed',
                   fontSize: 18,
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),

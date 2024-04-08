@@ -82,7 +82,6 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
       padding: const EdgeInsets.only(left: 25.0),
       width: 200,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: DropdownButton<String>(
@@ -218,13 +217,26 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                 },
                               ),
                               const SizedBox(width: 10),
-                              Text(
-                                DateFormat('dd/MM/yyyy').format(selectedDate),
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 0, 76, 128),
-                                  fontFamily: 'HelveticaCondensed',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
+                              Container(
+                                padding: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: const Color.fromARGB(
+                                        255, 0, 76, 128), // Color del borde
+                                    width: 1.0, // Grosor del borde
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                      5.0), // Borde redondeado de 5
+                                ),
+                                child: Text(
+                                  DateFormat('dd/MM/yyyy').format(selectedDate),
+                                  style: const TextStyle(
+                                    color: Color.fromARGB(
+                                        255, 0, 76, 128), // Color del texto
+                                    fontFamily: 'HelveticaCondensed',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ],
