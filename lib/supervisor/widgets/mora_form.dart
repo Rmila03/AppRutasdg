@@ -193,7 +193,7 @@ class MoraFormState extends State<MoraForm> {
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                    right: 50,
+                                                    right: 30,
                                                   ),
                                                   child: TextFormSupervisor(
                                                     formKey: _formKey,
@@ -276,7 +276,7 @@ class MoraFormState extends State<MoraForm> {
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          right: 50),
+                                                          right: 30),
                                                   child: TextFormSupervisor(
                                                     formKey: _formKey,
                                                     label: "Departamento",
