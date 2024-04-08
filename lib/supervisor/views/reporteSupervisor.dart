@@ -314,8 +314,9 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
   void _navigateToReportesForm(BuildContext context, String idAnalista) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => ReportesForm(idAnalista: idAnalista),
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            ReportesForm(idAnalista: idAnalista),
       ),
     );
   }

@@ -4,6 +4,8 @@ import 'package:ruta_sdg/supervisor/views/reporteSupervisor.dart';
 import 'package:ruta_sdg/socio.dart';
 
 import 'package:ruta_sdg/analista.dart';
+import 'package:ruta_sdg/widgets/menu_supervisor.dart';
+import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
 
 class MyApp extends StatelessWidget {
   final String idAnalista;
@@ -48,82 +50,88 @@ class ReportesFormState extends State<ReportesForm> {
     // Filtra los socios por el ID del analista
     List<Socio> sociosAsociados = getSociosForAnalista(widget.idAnalista);
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          Row(
-            children: [
-              //const MenuSupervisor(name: "REPORTES"),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 20),
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (context, animation,
-                                            secondaryAnimation) =>
-                                        const ReporteSupervisorPage(),
-                                  ),
-                                );
-                              },
-                              icon: const Icon(Icons.arrow_back),
-                            ),
-                          ),
-                          const Expanded(
-                            child: Text(
-                              "HOJA DE RUTA",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: "HelveticaCondensed",
-                                fontSize: 25,
-                                color: Color.fromARGB(255, 0, 76, 128),
-                                fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: MediaQuery.of(context).size.width < 640
+            ? const MenuSupervisorMobile(name: "REPORTES")
+            : null,
+        body: Stack(
+          children: [
+            Row(
+              children: [
+                if (MediaQuery.of(context).size.width >= 640)
+                  const MenuSupervisor(name: "REPORTES"),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 20),
+                              child: IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (context, animation,
+                                              secondaryAnimation) =>
+                                          const ReporteSupervisorPage(),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(Icons.arrow_back),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 30),
-                            child: _DataTable(),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 50),
-                              child: Image.asset(
-                                'assets/xD.png',
-                                height: 150.0,
+                            const Expanded(
+                              child: Text(
+                                "HOJA DE RUTA",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: "HelveticaCondensed",
+                                  fontSize: 25,
+                                  color: Color.fromARGB(255, 0, 76, 128),
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Center(
-                            child: _buildDataTable(sociosAsociados),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 30),
+                              child: _DataTable(),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 50),
+                                child: Image.asset(
+                                  'assets/xD.png',
+                                  height: 150.0,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Center(
+                              child: _buildDataTable(sociosAsociados),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
