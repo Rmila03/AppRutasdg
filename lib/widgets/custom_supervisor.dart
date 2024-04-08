@@ -39,7 +39,6 @@ class _TextFormSupervisor extends State<TextFormSupervisor> {
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
           margin: const EdgeInsets.only(top: 5, bottom: 15),
           decoration: BoxDecoration(
             border: Border.all(
@@ -48,6 +47,7 @@ class _TextFormSupervisor extends State<TextFormSupervisor> {
             borderRadius: BorderRadius.circular(5),
           ),
           height: 30,
+          alignment: Alignment.center,
           child: TextFormField(
             controller: _controller,
             enabled: false,
@@ -56,7 +56,12 @@ class _TextFormSupervisor extends State<TextFormSupervisor> {
             cursorColor: const Color.fromARGB(255, 0, 76, 128),
             style: const TextStyle(
                 fontFamily: "HelveticaCondensed", color: Colors.black),
-            decoration: const InputDecoration(border: InputBorder.none),
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                  borderSide: BorderSide.none),
+            ),
           ),
         ),
       ],
