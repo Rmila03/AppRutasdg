@@ -1,9 +1,19 @@
+import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:ruta_sdg/api.dart';
 //import 'package:ruta_sdg/conexcion_api.dart';
 import 'package:ruta_sdg/supervisor/views/homeSupervisor.dart';
 import 'package:ruta_sdg/views/home.dart';
 
-void main() {
+Future<void> main() async {
+  /*WidgetsFlutterBinding.ensureInitialized();
+
+  ByteData data =
+      await PlatformAssetBundle().load('assets/ca/CERTIFICADO-SSL-SUNAT.pem');
+  SecurityContext.defaultContext
+      .setTrustedCertificatesBytes(data.buffer.asUint8List());*/
+  HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 }
 
@@ -288,6 +298,7 @@ class _LoginState extends State<Login> {
                           ),
                           onPressed: () {
                             setState(() {
+                              getData();
                               showError = false;
                             });
                             if (_formKey.currentState!.validate()) {
@@ -333,5 +344,14 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
