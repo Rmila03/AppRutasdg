@@ -9,7 +9,7 @@ import 'package:ruta_sdg/widgets/bottom_action.dart';
 import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
-import 'package:ruta_sdg/views/promocion.dart';
+import 'package:ruta_sdg/analista/views/promocion.dart';
 import 'dart:ui' as ui;
 import 'package:http/http.dart' as http;
 //import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';

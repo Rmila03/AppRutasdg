@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/supervisor/views/moraSupervisor.dart';
-import 'package:ruta_sdg/widgets/custom_supervisor.dart';
+import 'package:ruta_sdg/supervisor/widgets/custom_supervisor.dart';
 
 class MoraForm extends StatefulWidget {
   final Socio socio;

@@ -3,25 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:ruta_sdg/listasocio.dart';
 import 'package:ruta_sdg/socio.dart';
-import 'package:ruta_sdg/widgets/header.dart';
-import 'package:ruta_sdg/widgets/navigation_drawer.dart';
-import 'package:ruta_sdg/widgets/tabbar.dart';
+import 'package:ruta_sdg/analista/widgets/header.dart';
+import 'package:ruta_sdg/analista/widgets/navigation_drawer.dart';
+import 'package:ruta_sdg/analista/widgets/tabbar.dart';
 
-class SeguimientoPage extends StatefulWidget {
-  const SeguimientoPage({super.key});
+class PromocionPage extends StatefulWidget {
+  const PromocionPage({super.key});
 
   @override
-  State createState() => _SeguimientoPageState();
+  State createState() => _PromocionPageState();
 }
 
-class _SeguimientoPageState extends State<SeguimientoPage> {
+class _PromocionPageState extends State<PromocionPage> {
   final List<Socio> socios = getSocios();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: DefaultTabController(
-        length: 1,
+        length: 2,
         child: Scaffold(
           bottomNavigationBar: const BottomAppBar(
             child: TabBarBottom(),
@@ -35,10 +35,18 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
           body: Column(
             children: [
               _buildHeader(),
+              _buildPromotionCard(),
               TabBar(
                 tabs: [
                   _buildTab(
-                    "Seguimiento",
+                    "Promoción",
+                    textStyle: const TextStyle(
+                      fontFamily: 'HelveticaCondensed',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  _buildTab(
+                    "Ampliación",
                     textStyle: const TextStyle(
                       fontFamily: 'HelveticaCondensed',
                       fontWeight: FontWeight.bold,
@@ -47,11 +55,13 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 ],
                 labelColor: const Color.fromARGB(255, 0, 76, 128),
                 indicatorColor: const Color.fromARGB(255, 0, 76, 128),
+                onTap: _updateTitle,
               ),
               Expanded(
                 child: TabBarView(
                   children: [
-                    _buildPromotionContent("CARTERA DE SEGUIMIENTO", socios),
+                    _buildPromotionContent("CARTERA DE PROMOCIÓN", socios),
+                    _buildPromotionContent("CARTERA DE AMPLIACIÓN", socios),
                   ],
                 ),
               ),
@@ -60,6 +70,12 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
         ),
       ),
     );
+  }
+
+  void _updateTitle(int index) {
+    setState(() {
+      index == 0 ? "CARTERA DE PROMOCIÓN" : "CARTERA DE AMPLIACIÓN";
+    });
   }
 
   Widget _buildTab(String text, {TextStyle? textStyle}) {
@@ -84,6 +100,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
   }
 
   Widget _buildDataTable(String title, List<Socio> userList) {
+    String tipoGrupo =
+        title == "CARTERA DE PROMOCIÓN" ? "Promoción" : "Ampliación";
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Card(
@@ -91,7 +109,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
           side: const BorderSide(color: Color(0xFFD9D9D9)),
           borderRadius: BorderRadius.circular(0.0),
         ),
-        color: const Color.fromARGB(255, 255, 255, 255),
+        color: Colors.white,
         elevation: 0,
         child: SizedBox(
           height: 500,
@@ -114,7 +132,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 DataColumn(label: Text('')),
               ],
               rows: userList
-                  .where((user) => user.tipoGrupo == 'Seguimiento')
+                  .where((user) => user.tipoGrupo == tipoGrupo)
                   .map((user) {
                 return DataRow(
                   onSelectChanged: (isSelected) {
@@ -124,7 +142,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                         MaterialPageRoute(
                           builder: (context) => ListaSocio(
                             tabColorLeft: Colors.orange,
-                            tabName: 'SEGUIMIENTO',
+                            tabName: tipoGrupo.toUpperCase(),
                             socio: user,
                           ),
                         ),
@@ -132,14 +150,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                     }
                   },
                   cells: [
-                    DataCell(Text(
-                      user.dni,
-                      style: const TextStyle(fontFamily: 'HelveticaCondensed'),
-                    )),
-                    DataCell(Text(
-                      "${user.name} ${user.lastName}",
-                      style: const TextStyle(fontFamily: 'HelveticaCondensed'),
-                    )),
+                    DataCell(Text(user.dni)),
+                    DataCell(Text("${user.name} ${user.lastName}")),
                     const DataCell(Icon(Icons.check)),
                   ],
                 );
@@ -199,6 +211,23 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPromotionCard() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Card(
+        elevation: 5,
+        shadowColor: const Color.fromARGB(255, 5, 5, 5),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          side: BorderSide(
+            color: Colors.grey.withOpacity(0.5),
+            width: 1.0,
+          ),
+        ),
       ),
     );
   }

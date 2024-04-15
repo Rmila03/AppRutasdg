@@ -4,8 +4,8 @@ import 'package:ruta_sdg/supervisor/views/reporteSupervisor.dart';
 import 'package:ruta_sdg/socio.dart';
 
 import 'package:ruta_sdg/analista.dart';
-import 'package:ruta_sdg/widgets/menu_supervisor.dart';
-import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
+import 'package:ruta_sdg/supervisor/widgets/menu_supervisor.dart';
+import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
 
 class MyApp extends StatelessWidget {
   final String idAnalista;

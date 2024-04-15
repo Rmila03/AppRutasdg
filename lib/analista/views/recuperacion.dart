@@ -3,25 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:ruta_sdg/listasocio.dart';
 import 'package:ruta_sdg/socio.dart';
-import 'package:ruta_sdg/widgets/header.dart';
-import 'package:ruta_sdg/widgets/navigation_drawer.dart';
-import 'package:ruta_sdg/widgets/tabbar.dart';
+import 'package:ruta_sdg/analista/widgets/header.dart';
+import 'package:ruta_sdg/analista/widgets/navigation_drawer.dart';
+import 'package:ruta_sdg/analista/widgets/tabbar.dart';
 
-class PromocionPage extends StatefulWidget {
-  const PromocionPage({super.key});
+class RecuperacionPage extends StatefulWidget {
+  const RecuperacionPage({super.key});
 
   @override
-  State createState() => _PromocionPageState();
+  State createState() => _RecuperacionPageState();
 }
 
-class _PromocionPageState extends State<PromocionPage> {
+class _RecuperacionPageState extends State<RecuperacionPage> {
   final List<Socio> socios = getSocios();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: DefaultTabController(
-        length: 2,
+        length: 1,
         child: Scaffold(
           bottomNavigationBar: const BottomAppBar(
             child: TabBarBottom(),
@@ -35,18 +35,10 @@ class _PromocionPageState extends State<PromocionPage> {
           body: Column(
             children: [
               _buildHeader(),
-              _buildPromotionCard(),
               TabBar(
                 tabs: [
                   _buildTab(
-                    "Promoción",
-                    textStyle: const TextStyle(
-                      fontFamily: 'HelveticaCondensed',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  _buildTab(
-                    "Ampliación",
+                    "Recuperación",
                     textStyle: const TextStyle(
                       fontFamily: 'HelveticaCondensed',
                       fontWeight: FontWeight.bold,
@@ -55,13 +47,11 @@ class _PromocionPageState extends State<PromocionPage> {
                 ],
                 labelColor: const Color.fromARGB(255, 0, 76, 128),
                 indicatorColor: const Color.fromARGB(255, 0, 76, 128),
-                onTap: _updateTitle,
               ),
               Expanded(
                 child: TabBarView(
                   children: [
-                    _buildPromotionContent("CARTERA DE PROMOCIÓN", socios),
-                    _buildPromotionContent("CARTERA DE AMPLIACIÓN", socios),
+                    _buildPromotionContent("CARTERA DE RECUPERACIÓN", socios),
                   ],
                 ),
               ),
@@ -70,12 +60,6 @@ class _PromocionPageState extends State<PromocionPage> {
         ),
       ),
     );
-  }
-
-  void _updateTitle(int index) {
-    setState(() {
-      index == 0 ? "CARTERA DE PROMOCIÓN" : "CARTERA DE AMPLIACIÓN";
-    });
   }
 
   Widget _buildTab(String text, {TextStyle? textStyle}) {
@@ -100,8 +84,6 @@ class _PromocionPageState extends State<PromocionPage> {
   }
 
   Widget _buildDataTable(String title, List<Socio> userList) {
-    String tipoGrupo =
-        title == "CARTERA DE PROMOCIÓN" ? "Promoción" : "Ampliación";
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Card(
@@ -109,12 +91,13 @@ class _PromocionPageState extends State<PromocionPage> {
           side: const BorderSide(color: Color(0xFFD9D9D9)),
           borderRadius: BorderRadius.circular(0.0),
         ),
-        color: Colors.white,
+        color: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         child: SizedBox(
           height: 500,
           width: 600,
           child: SingleChildScrollView(
+            primary: false,
             child: DataTable(
               showCheckboxColumn: false,
               columnSpacing: 7.0,
@@ -132,7 +115,7 @@ class _PromocionPageState extends State<PromocionPage> {
                 DataColumn(label: Text('')),
               ],
               rows: userList
-                  .where((user) => user.tipoGrupo == tipoGrupo)
+                  .where((user) => user.tipoGrupo == 'Recuperación')
                   .map((user) {
                 return DataRow(
                   onSelectChanged: (isSelected) {
@@ -142,7 +125,7 @@ class _PromocionPageState extends State<PromocionPage> {
                         MaterialPageRoute(
                           builder: (context) => ListaSocio(
                             tabColorLeft: Colors.orange,
-                            tabName: tipoGrupo.toUpperCase(),
+                            tabName: 'RECUPERACIÓN',
                             socio: user,
                           ),
                         ),
@@ -150,8 +133,14 @@ class _PromocionPageState extends State<PromocionPage> {
                     }
                   },
                   cells: [
-                    DataCell(Text(user.dni)),
-                    DataCell(Text("${user.name} ${user.lastName}")),
+                    DataCell(Text(
+                      user.dni,
+                      style: const TextStyle(fontFamily: 'HelveticaCondensed'),
+                    )),
+                    DataCell(Text(
+                      "${user.name} ${user.lastName}",
+                      style: const TextStyle(fontFamily: 'HelveticaCondensed'),
+                    )),
                     const DataCell(Icon(Icons.check)),
                   ],
                 );
@@ -211,23 +200,6 @@ class _PromocionPageState extends State<PromocionPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildPromotionCard() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Card(
-        elevation: 5,
-        shadowColor: const Color.fromARGB(255, 5, 5, 5),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          side: BorderSide(
-            color: Colors.grey.withOpacity(0.5),
-            width: 1.0,
-          ),
-        ),
       ),
     );
   }

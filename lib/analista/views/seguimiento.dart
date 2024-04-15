@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:ruta_sdg/plandia.dart';
 import 'package:ruta_sdg/listasocio.dart';
 import 'package:ruta_sdg/socio.dart';
-import 'package:ruta_sdg/widgets/header.dart';
-import 'package:ruta_sdg/widgets/navigation_drawer.dart';
-import 'package:ruta_sdg/widgets/tabbar.dart';
+import 'package:ruta_sdg/analista/widgets/header.dart';
+import 'package:ruta_sdg/analista/widgets/navigation_drawer.dart';
+import 'package:ruta_sdg/analista/widgets/tabbar.dart';
 
-class RecuperacionPage extends StatefulWidget {
-  const RecuperacionPage({super.key});
+class SeguimientoPage extends StatefulWidget {
+  const SeguimientoPage({super.key});
 
   @override
-  State createState() => _RecuperacionPageState();
+  State createState() => _SeguimientoPageState();
 }
 
-class _RecuperacionPageState extends State<RecuperacionPage> {
+class _SeguimientoPageState extends State<SeguimientoPage> {
   final List<Socio> socios = getSocios();
 
   @override
@@ -38,7 +38,7 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
               TabBar(
                 tabs: [
                   _buildTab(
-                    "Recuperación",
+                    "Seguimiento",
                     textStyle: const TextStyle(
                       fontFamily: 'HelveticaCondensed',
                       fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
               Expanded(
                 child: TabBarView(
                   children: [
-                    _buildPromotionContent("CARTERA DE RECUPERACIÓN", socios),
+                    _buildPromotionContent("CARTERA DE SEGUIMIENTO", socios),
                   ],
                 ),
               ),
@@ -97,7 +97,6 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
           height: 500,
           width: 600,
           child: SingleChildScrollView(
-            primary: false,
             child: DataTable(
               showCheckboxColumn: false,
               columnSpacing: 7.0,
@@ -115,7 +114,7 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
                 DataColumn(label: Text('')),
               ],
               rows: userList
-                  .where((user) => user.tipoGrupo == 'Recuperación')
+                  .where((user) => user.tipoGrupo == 'Seguimiento')
                   .map((user) {
                 return DataRow(
                   onSelectChanged: (isSelected) {
@@ -125,7 +124,7 @@ class _RecuperacionPageState extends State<RecuperacionPage> {
                         MaterialPageRoute(
                           builder: (context) => ListaSocio(
                             tabColorLeft: Colors.orange,
-                            tabName: 'RECUPERACIÓN',
+                            tabName: 'SEGUIMIENTO',
                             socio: user,
                           ),
                         ),

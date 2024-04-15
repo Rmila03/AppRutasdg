@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ruta_sdg/socio.dart';
-import 'package:ruta_sdg/views/recuperacion.dart';
-import 'package:ruta_sdg/views/reportes.dart';
-import 'package:ruta_sdg/widgets/custom_dropdown.dart';
+import 'package:ruta_sdg/analista/views/reportes.dart';
+import 'package:ruta_sdg/analista/views/seguimiento.dart';
+import 'package:ruta_sdg/analista/widgets/custom_dropdown.dart';
+import 'package:ruta_sdg/analista/widgets/text_form_result.dart';
 
-import 'package:ruta_sdg/widgets/text_form_result.dart';
-
-class RecuperacionForm extends StatefulWidget {
+class SeguimientoForm extends StatefulWidget {
   final Socio socio;
-  const RecuperacionForm({super.key, required this.socio});
+  const SeguimientoForm({super.key, required this.socio});
 
   @override
-  RecuperacionFormState createState() {
-    return RecuperacionFormState();
+  SeguimientoFormState createState() {
+    return SeguimientoFormState();
   }
 }
 
-class RecuperacionFormState extends State<RecuperacionForm> {
+class SeguimientoFormState extends State<SeguimientoForm> {
   final _formKey = GlobalKey<FormState>();
+
   bool _isSelected = false;
   bool isEditing = false;
   bool isEditing1 = false;
@@ -63,8 +62,6 @@ class RecuperacionFormState extends State<RecuperacionForm> {
     }
   }
 
-  int show = 0;
-  int valorSeleccionado = 0;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -212,6 +209,7 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                     child: const Text(
                       "DATOS DEL CRÉDITO",
                       style: TextStyle(
+                        fontFamily: "HelveticaCondensed",
                         fontSize: 15,
                         color: Color.fromARGB(255, 0, 76, 128),
                         fontWeight: FontWeight.bold,
@@ -235,159 +233,6 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                     content: "COOPENAVIDEÑO",
                   ),
                 ]),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(244, 244, 244, 1),
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.grey,
-                      spreadRadius: 2,
-                      blurRadius: 3,
-                      offset: Offset(1.0, 3.0),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsetsDirectional.only(bottom: 10),
-                      child: const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "CRÉDITO ACTUAL",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 0, 76, 128),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Column(
-                      children: [
-                        const Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  TextFormResult(
-                                      label: "Crédito",
-                                      content: "S/. 10000.00"),
-                                  TextFormResult(
-                                      label: "Monto a pagar",
-                                      content: "S/. 1150.53"),
-                                  TextFormResult(
-                                      label: "Cuota a Pagar", content: "8"),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Expanded(
-                              child: TextFormResult(
-                                  label: "Fecha de CPAnt",
-                                  content: "12 de noviembre del 2023"),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(left: 20),
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  shape: const RoundedRectangleBorder(
-                                    side: BorderSide.none, // Borde transparente
-                                    borderRadius:
-                                        BorderRadius.zero, // Bordes cero
-                                  ),
-                                ),
-                                child: const Text(
-                                  'Ver más',
-                                  style: TextStyle(
-                                      fontFamily: "HelveticaCondensed",
-                                      color: Colors.black,
-                                      fontSize: 12),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(244, 244, 244, 1),
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          spreadRadius: 2,
-                          blurRadius: 3,
-                          offset: Offset(1.0, 3.0),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(bottom: 10),
-                          child: const Text(
-                            "COMPROMISO DE PAGO",
-                            style: TextStyle(
-                              fontFamily: "HelveticaCondensed",
-                              fontSize: 20,
-                              color: Color.fromARGB(255, 0, 76, 128),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            const Text(
-                              'Fecha de cancelación: ',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Color.fromARGB(255, 0, 76, 128),
-                                fontFamily: "HelveticaCondensed",
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: FechaGestureDetector(
-                                selectedDate: selectedDate,
-                                selectDateCallback: _selectDate,
-                                dateFormat: _dateFormat,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Row(
-                          children: [
-                            Expanded(
-                                child: CustomDropdown(
-                              items: ['Agencia', 'Kasnet'],
-                              label: 'Método de pago: ',
-                            ))
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                ],
               ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
@@ -643,52 +488,47 @@ class RecuperacionFormState extends State<RecuperacionForm> {
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const RecuperacionPage()),
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(244, 244, 244, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                      child: const SizedBox(
-                        width: 100,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.save,
-                              color: Color.fromARGB(255, 0, 76, 128),
-                              size: 20,
-                            ),
-                            SizedBox(width: 5),
-                            Text(
-                              'GUARDAR',
-                              style: TextStyle(
-                                fontFamily: "HelveticaCondensed",
-                                fontSize: 15,
-                                color: Color.fromARGB(255, 0, 76, 128),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+              Align(
+                alignment: Alignment.center,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SeguimientoPage()),
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(244, 244, 244, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
                     ),
                   ),
-                ],
+                  child: const SizedBox(
+                    width: 100,
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.save,
+                          color: Color.fromARGB(255, 0, 76, 128),
+                          size: 20,
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          'GUARDAR',
+                          style: TextStyle(
+                            fontFamily: "HelveticaCondensed",
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 0, 76, 128),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -698,44 +538,112 @@ class RecuperacionFormState extends State<RecuperacionForm> {
   }
 }
 
-class InputTextForm extends StatelessWidget {
-  final String label;
-  final String? percentage;
-  const InputTextForm({
-    super.key,
-    required this.label,
-    this.percentage = "",
-  });
+class RadioButtonCustom extends StatefulWidget {
+  const RadioButtonCustom({super.key});
+
+  @override
+  _RadioButtonCustomState createState() => _RadioButtonCustomState();
+}
+
+class _RadioButtonCustomState extends State<RadioButtonCustom> {
+  int selectedButton = 0; // Inicialmente ningún botón seleccionado
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            label,
-            style: const TextStyle(
-              fontFamily: "HelveticaCondensed",
-              fontSize: 12,
+        Container(
+          //width: 600,
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+          margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            // Bordes redondeados
+            border: Border.all(
+              color: const Color.fromRGBO(160, 218, 183, 1), // Color del borde
+              width: 3, // Grosor del borde
+            ),
+            color: const Color.fromRGBO(160, 218, 183, 1),
+          ),
+          child: const Center(
+            child: Text(
+              '¿Necesita actualizar dato(s)?',
+              style: TextStyle(
+                  fontFamily: "HelveticaCondensed",
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: TextFormField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.grey[300],
-              contentPadding: const EdgeInsets.symmetric(vertical: 4),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0), // Bordes redondeados
-                borderSide: BorderSide.none, // Sin borde visible
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                selectedButton = 1; // Primer botón seleccionado
+              });
+            },
+            child: Container(
+              //padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 10),
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8), // Bordes redondeados
+                border: Border.all(
+                  color:
+                      const Color.fromRGBO(150, 158, 153, 1), // Color del borde
+                  width: 1.5, // Grosor del borde
+                ),
+                color: selectedButton == 1
+                    ? const Color.fromRGBO(150, 158, 153, 1)
+                    : Colors.white,
               ),
-
-              // Puedes añadir más propiedades de estilo según tus necesidades
+              child: const Center(
+                child: Text(
+                  'SI',
+                  style: TextStyle(
+                      fontFamily: "HelveticaCondensed",
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
+          ),
+        ),
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                selectedButton = 2; // Segundo botón seleccionado
+              });
+            },
+            child: Container(
+
+                //padding:const EdgeInsets.symmetric(vertical: 2, horizontal: 40),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8), // Bordes redondeados
+                  border: Border.all(
+                    color: const Color.fromRGBO(
+                        150, 158, 153, 1), // Color del borde
+                    width: 1.5, // Grosor del borde
+                  ),
+                  color: selectedButton == 2
+                      ? const Color.fromRGBO(150, 158, 153, 1)
+                      : Colors.white,
+                ),
+                child: const Center(
+                  child: Text(
+                    'NO',
+                    style: TextStyle(
+                        fontFamily: "HelveticaCondensed",
+                        color: Colors.black,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
+                  ),
+                )),
           ),
         ),
       ],
@@ -743,69 +651,91 @@ class InputTextForm extends StatelessWidget {
   }
 }
 
-class TextFormInto extends StatelessWidget {
-  final String label;
-  const TextFormInto({
-    super.key,
-    required this.label,
-  });
+class Encontro extends StatefulWidget {
+  const Encontro({super.key});
+
+  @override
+  _Encontro createState() => _Encontro();
+}
+
+class _Encontro extends State<Encontro> {
+  int selectedButton = 0; // Inicialmente ningún botón seleccionado
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      child: Row(
-        children: [
-          SizedBox(
-            child: Text(
-              label,
-              style: const TextStyle(
-                  fontFamily: "HelveticaCondensed", fontSize: 13),
-            ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                selectedButton = 1; // Primer botón seleccionado
+              });
+            },
+            child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20), // Bordes redondeados
+                  border: Border.all(
+                    color: const Color.fromRGBO(
+                        150, 158, 153, 1), // Color del borde
+                    width: 1.5, // Grosor del borde
+                  ),
+                  color: selectedButton == 1
+                      ? const Color.fromRGBO(150, 158, 153, 1)
+                      : Colors.white,
+                ),
+                child: const Center(
+                  child: Text(
+                    'SE ENCONTRÓ',
+                    style: TextStyle(
+                        fontFamily: "HelveticaCondensed",
+                        color: Colors.black,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold),
+                  ),
+                )),
           ),
-          Expanded(
-            child: TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: const Color.fromARGB(255, 240, 240, 240),
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(10.0), // Bordes redondeados
-                  borderSide: BorderSide.none, // Sin borde visible
+        ),
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                selectedButton = 2; // Segundo botón seleccionado
+              });
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20), // Bordes redondeados
+                border: Border.all(
+                  color:
+                      const Color.fromRGBO(150, 158, 153, 1), // Color del borde
+                  width: 1.5, // Grosor del borde
+                ),
+                color: selectedButton == 2
+                    ? const Color.fromRGBO(150, 158, 153, 1)
+                    : Colors.white,
+              ),
+              child: const Center(
+                child: Text(
+                  'NO SE ENCONTRÓ',
+                  style: TextStyle(
+                      fontFamily: "HelveticaCondensed",
+                      color: Colors.black,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class TextFormDate extends StatelessWidget {
-  final String label;
-  const TextFormDate({
-    super.key,
-    required this.label,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(children: [
-        SizedBox(
-          width: 100,
-          child: Text(
-            label,
-            style: const TextStyle(
-              fontFamily: "HelveticaCondensed",
-              fontSize: 10,
-            ),
-          ),
         ),
-      ]),
+      ],
     );
   }
 }

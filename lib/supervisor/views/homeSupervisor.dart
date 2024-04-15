@@ -4,10 +4,10 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ruta_sdg/supervisor/listacartera.dart';
-import 'package:ruta_sdg/widgets/menu_supervisor.dart';
+import 'package:ruta_sdg/supervisor/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/analista.dart';
-import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
+import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
 //import 'package:tooltip/tooltip.dart';
 
 void main() {

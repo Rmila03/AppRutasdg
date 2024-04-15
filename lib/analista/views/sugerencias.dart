@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/socio.dart';
 //import 'package:ruta_sdg/views/motivo_dialog.dart';
-import 'package:ruta_sdg/widgets/header.dart';
-import 'package:ruta_sdg/widgets/navigation_drawer.dart';
-import 'package:ruta_sdg/widgets/tabbar.dart';
+import 'package:ruta_sdg/analista/widgets/header.dart';
+import 'package:ruta_sdg/analista/widgets/navigation_drawer.dart';
+import 'package:ruta_sdg/analista/widgets/tabbar.dart';
 
 class SugerenciaPage extends StatefulWidget {
   const SugerenciaPage({Key? key, required this.title}) : super(key: key);

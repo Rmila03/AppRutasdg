@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ruta_sdg/analista.dart';
-import 'package:ruta_sdg/widgets/menu_supervisor.dart';
+import 'package:ruta_sdg/supervisor/widgets/menu_supervisor.dart';
 import 'dart:ui' as ui;
 import 'package:http/http.dart' as http;
-import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
+import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
 
 class UbicacionSupervisorPage extends StatefulWidget {
   const UbicacionSupervisorPage({super.key});

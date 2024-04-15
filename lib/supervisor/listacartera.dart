@@ -3,8 +3,8 @@ import 'package:ruta_sdg/supervisor/widgets/cartera_form.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/supervisor/widgets/mora_form.dart';
 import 'package:ruta_sdg/supervisor/widgets/plan_dia_form.dart';
-import 'package:ruta_sdg/widgets/menu_supervisor.dart';
-import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
+import 'package:ruta_sdg/supervisor/widgets/menu_supervisor.dart';
+import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
 
 class ListaSupervisor extends StatefulWidget {
   final Socio? socio;
