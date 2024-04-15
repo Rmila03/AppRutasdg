@@ -1,6 +1,6 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/plandia.dart';
+import 'package:ruta_sdg/analista/views/plandia.dart';
 import 'package:ruta_sdg/listasocio.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/analista/widgets/header.dart';

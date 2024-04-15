@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/views/home.dart';
-import 'package:ruta_sdg/views/notificaciones.dart';
-import 'package:ruta_sdg/views/reportes.dart';
+import 'package:ruta_sdg/analista/views/home.dart';
+import 'package:ruta_sdg/analista/views/notificaciones.dart';
+import 'package:ruta_sdg/analista/views/reportes.dart';
 import 'package:ruta_sdg/listasocio.dart';
-import 'package:ruta_sdg/views/sugerencias.dart';
-import 'package:ruta_sdg/views/cartera.dart';
+import 'package:ruta_sdg/analista/views/sugerencias.dart';
+import 'package:ruta_sdg/analista/views/cartera.dart';
 
 class BottomAction extends StatelessWidget {
   final String label;

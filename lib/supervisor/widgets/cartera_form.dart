@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:ruta_sdg/supervisor/views/carterapage.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/supervisor/widgets/custom_supervisor.dart';
-import 'package:ruta_sdg/analista/widgets/radio_button_custom.dart';
+import 'package:ruta_sdg/supervisor/widgets/radio_button_custom.dart';
 
 class CarteraForm extends StatefulWidget {
   final Socio socio;

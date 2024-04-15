@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ruta_sdg/socio.dart';
-import 'package:ruta_sdg/views/promocion.dart';
-import 'package:ruta_sdg/views/reportes.dart';
-import 'package:ruta_sdg/widgets/custom_dropdown.dart';
+import 'package:ruta_sdg/analista/views/promocion.dart';
+import 'package:ruta_sdg/analista/views/reportes.dart';
+import 'package:ruta_sdg/analista/widgets/custom_dropdown.dart';
 
-import 'package:ruta_sdg/widgets/text_form_result.dart';
+import 'package:ruta_sdg/analista/widgets/text_form_result.dart';
 
 class PromotionForm extends StatefulWidget {
   final Socio socio;
