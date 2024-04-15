@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/analista/views/plandia.dart';
@@ -7,7 +6,6 @@ import 'package:ruta_sdg/analista/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/analista/widgets/tabbar.dart';
 import 'package:ruta_sdg/listasocio.dart';
 import 'package:ruta_sdg/socio.dart';
-import 'package:http/http.dart' as http;
 
 class PromocionPage extends StatefulWidget {
   const PromocionPage({super.key});
@@ -18,38 +16,6 @@ class PromocionPage extends StatefulWidget {
 
 class _PromocionPageState extends State<PromocionPage> {
   final List<Socio> socios = getSocios();
-  TextEditingController _controller = TextEditingController();
-
-  String _response = '';
-
-  // Agrega tu token de autenticación aquí
-  String token =
-      'TsJhbGviOiJIUzI1wiIsInR5cCI6IkpXVCJ9.eyJBZG1pbmlzdHJhZG9yIjoiVVNVQVJJTyBHTE9CT0tBUyIsIklkdGVyY2VybyI6bnVsbCwiZmVjaGFob3JhIjoiMjAyNFwvMDJcLzE0XC8gMDk6Mjc6NTgifQ==.sjeliJRWXNuB1DwCkM6sYSwtZz6sO61RrnlzGlZOyus=';
-
-  Future<void> postData() async {
-    String apiUrl =
-        'https://wsdomingo.coopsantodomingo.com/laboratorio/login.php';
-    Map data = {"usuario": "MRAMOS", "clave": "MRAMOS", "tipo": "CREDITOS"};
-
-    try {
-      var response = await http.post(
-        Uri.parse(apiUrl),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token', // Agrega el token de autenticación
-        },
-        body: jsonEncode(data),
-      );
-
-      setState(() {
-        _response = response.body;
-      });
-
-      print('Respuesta del servidor: ${response.body}');
-    } catch (e) {
-      print('Error en la solicitud: $e');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
