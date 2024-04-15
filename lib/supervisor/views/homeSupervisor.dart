@@ -86,6 +86,8 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
       ),
       child: DropdownButton<String>(
         isExpanded: true,
+        dropdownColor: Colors.white,
+        focusColor: Colors.transparent,
         value: selectedOption.isNotEmpty ? selectedOption : null,
         items: analistas.map((Analista analista) {
           return DropdownMenuItem<String>(

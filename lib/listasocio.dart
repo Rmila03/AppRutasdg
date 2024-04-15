@@ -7,7 +7,7 @@ import "package:ruta_sdg/analista/widgets/promotion_form.dart";
 import "package:ruta_sdg/analista/widgets/ampliacion_form.dart";
 import "package:ruta_sdg/analista/widgets/seguimiento_form.dart";
 import "package:ruta_sdg/analista/widgets/recuperacion_form.dart";
-import "package:ruta_sdg/widgets/nuevo_form.dart";
+import "package:ruta_sdg/analista//widgets/nuevo_form.dart";
 
 class ListaSocio extends StatefulWidget {
   final Color tabColorLeft;

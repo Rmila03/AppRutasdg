@@ -47,6 +47,8 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: DropdownButton<String>(
+        dropdownColor: Colors.white,
+        focusColor: Colors.transparent,
         value: selectedOption.isNotEmpty ? selectedOption : null,
         items: analistas.map((Analista analista) {
           return DropdownMenuItem<String>(
