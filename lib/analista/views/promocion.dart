@@ -1,13 +1,19 @@
 import 'dart:convert';
 import 'dart:core';
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/plandia.dart';
+import 'package:ruta_sdg/analista/views/plandia.dart';
 import 'package:ruta_sdg/listasocio.dart';
 import 'package:ruta_sdg/socio.dart';
+<<<<<<< HEAD:lib/views/promocion.dart
 import 'package:ruta_sdg/widgets/header.dart';
 import 'package:ruta_sdg/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/widgets/tabbar.dart';
 import 'package:http/http.dart' as http;
+=======
+import 'package:ruta_sdg/analista/widgets/header.dart';
+import 'package:ruta_sdg/analista/widgets/navigation_drawer.dart';
+import 'package:ruta_sdg/analista/widgets/tabbar.dart';
+>>>>>>> 4bb0bc1a055c2afc3366c6ca1dc3a0f18a640ef8:lib/analista/views/promocion.dart
 
 class PromocionPage extends StatefulWidget {
   const PromocionPage({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/main.dart';
-import 'package:ruta_sdg/views/home.dart';
+import 'package:ruta_sdg/analista/views/home.dart';
 import '../views/reportes.dart';
 import '../views/notificaciones.dart';
 

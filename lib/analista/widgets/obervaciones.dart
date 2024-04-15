@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:ruta_sdg/views/reportes.dart';
+import 'package:ruta_sdg/analista/views/reportes.dart';
 
 class ObservacionesWidget extends StatefulWidget {
   @override

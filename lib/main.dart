@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/api.dart';
 import 'package:ruta_sdg/supervisor/views/homeSupervisor.dart';
-import 'package:ruta_sdg/views/home.dart';
+import 'package:ruta_sdg/analista/views/home.dart';
 
 Future<void> main() async {
   /*WidgetsFlutterBinding.ensureInitialized();

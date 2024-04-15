@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
-import 'package:ruta_sdg/views/promocion.dart';
-import 'package:ruta_sdg/views/recuperacion.dart';
-import 'package:ruta_sdg/views/seguimiento.dart';
-import 'package:ruta_sdg/widgets/header.dart';
-import 'package:ruta_sdg/widgets/navigation_drawer.dart';
-import 'package:ruta_sdg/widgets/tabbar.dart';
+import 'package:ruta_sdg/analista/views/promocion.dart';
+import 'package:ruta_sdg/analista/views/recuperacion.dart';
+import 'package:ruta_sdg/analista/views/seguimiento.dart';
+import 'package:ruta_sdg/analista/widgets/header.dart';
+import 'package:ruta_sdg/analista/widgets/navigation_drawer.dart';
+import 'package:ruta_sdg/analista/widgets/tabbar.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

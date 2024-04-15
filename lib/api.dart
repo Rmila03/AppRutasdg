@@ -13,7 +13,7 @@ Future<String> getToken() async {
       body: jsonEncode({"usuario": "LABO_PRU", "clave": "Coop_S4nt0D0m1ng0"}),
       headers: <String, String>{'Content-Type': 'application/json'},
     );
-
+    print(response);
     if (response.statusCode == 200) {
       String responseBody = utf8.decoder.convert(response.bodyBytes);
       var res = jsonDecode(responseBody);
@@ -46,7 +46,7 @@ void getData() async {
         'Accept': '*/*'
       },
     );
-
+    print(response);
     if (response.statusCode == 200) {
       String responseBody = utf8.decoder.convert(response.bodyBytes);
 

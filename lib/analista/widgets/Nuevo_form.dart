@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 //import 'package:ruta_sdg/plandia.dart';
-import 'package:ruta_sdg/views/home.dart';
-import 'package:ruta_sdg/widgets/custom_dropdown.dart';
+import 'package:ruta_sdg/analista/views/home.dart';
+import 'package:ruta_sdg/analista/widgets/custom_dropdown.dart';
 
 import 'text_form_result.dart';
 

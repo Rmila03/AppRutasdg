@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ruta_sdg/widgets/bottom_action.dart';
+import 'package:ruta_sdg/analista/widgets/bottom_action.dart';
 
 class TabBarBottom extends StatelessWidget {
   const TabBarBottom({

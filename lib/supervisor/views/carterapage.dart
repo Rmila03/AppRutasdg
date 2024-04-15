@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/analista.dart';
 import 'package:ruta_sdg/supervisor/listacartera.dart';
-import 'package:ruta_sdg/widgets/menu_supervisor.dart';
+import 'package:ruta_sdg/supervisor/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/socio.dart';
-import 'package:ruta_sdg/widgets/menu_supervisor_mobile.dart';
+import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
 
 void main() {
   runApp(const CarteraPage());
@@ -47,6 +47,8 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: DropdownButton<String>(
+        dropdownColor: Colors.white,
+        focusColor: Colors.transparent,
         value: selectedOption.isNotEmpty ? selectedOption : null,
         items: analistas.map((Analista analista) {
           return DropdownMenuItem<String>(
