@@ -30,6 +30,7 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
   DateTime _selectedDate = DateTime.now();
   List<Analista> Analistas = getAnalistas();
   int id = 0;
+
   late List<_ChartData> data;
   late TooltipBehavior _tooltip;
   final List<ChartData> chartData = [
@@ -62,6 +63,12 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+// Determinar la orientación de la leyenda
+    final legendOrientation = screenWidth < 640
+        ? LegendItemOrientation.vertical
+        : LegendItemOrientation.auto;
     var dropdown = Container(
       alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(8.0),
@@ -144,7 +151,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                       child: const Text(
                                         'DASHBOARD',
                                         style: TextStyle(
-                                          color: Color.fromARGB(255, 0, 76, 128),
+                                          color:
+                                              Color.fromARGB(255, 0, 76, 128),
                                           fontSize: 25.0,
                                           fontWeight: FontWeight.w900,
                                           fontFamily: 'HelveticaCondensed',
@@ -173,12 +181,13 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                 print(_chartKey.currentState
                                                     ?.widget.series.length);
                                                 print(_chartKey
-                                                    .currentState
-                                                    ?.widget
-                                                    .series[0]
-                                                    .dataSource![1]
-                                                    .selectionBehavior!
-                                                    .selectedColor = Colors.red);
+                                                        .currentState
+                                                        ?.widget
+                                                        .series[0]
+                                                        .dataSource![1]
+                                                        .selectionBehavior!
+                                                        .selectedColor =
+                                                    Colors.red);
                                                 _chartKey
                                                             .currentState
                                                             ?.widget
@@ -239,7 +248,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                             selectedIndex = 0;
                                           } else {
                                             selectedBars.add(barName);
-                                            selectedIndex = value.pointIndex + 1;
+                                            selectedIndex =
+                                                value.pointIndex + 1;
                                           }
                                         });
                                       },
@@ -256,8 +266,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                         title: AxisTitle(
                                             text: "N° de Visitas",
                                             textStyle: TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 18.0,
                                               fontFamily: 'HelveticaCondensed',
                                             )),
@@ -267,19 +277,23 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           String>>[
                                         BarSeries<_ChartData, String>(
                                             width: 0.4,
-                                            selectionBehavior: SelectionBehavior(
+                                            selectionBehavior:
+                                                SelectionBehavior(
                                               enable: true,
-                                              selectedColor: const Color.fromARGB(
-                                                  255, 0, 76, 128),
+                                              selectedColor:
+                                                  const Color.fromARGB(
+                                                      255, 0, 76, 128),
                                               unselectedColor:
                                                   const Color(0xFFD9DEDA),
                                             ),
                                             dataSource: data,
                                             name: "N° de Visitas",
-                                            xValueMapper: (_ChartData data, _) =>
-                                                data.nombreAnalista,
-                                            yValueMapper: (_ChartData data, _) =>
-                                                data.numeroVisitasTotal,
+                                            xValueMapper:
+                                                (_ChartData data, _) =>
+                                                    data.nombreAnalista,
+                                            yValueMapper:
+                                                (_ChartData data, _) =>
+                                                    data.numeroVisitasTotal,
                                             onPointTap: (value) {
                                               /*final String barName =
                                                   value.pointIndex.toString();
@@ -306,7 +320,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           if (constraints.maxWidth > 200) {
                                             return Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 const Text(
                                                   'Actividad',
@@ -335,7 +350,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                     const SizedBox(width: 10),
                                                     Text(
                                                       DateFormat('dd/MM/yyyy')
-                                                          .format(_selectedDate),
+                                                          .format(
+                                                              _selectedDate),
                                                       style: const TextStyle(
                                                         fontFamily:
                                                             "HelveticaCondensed",
@@ -353,7 +369,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           } else {
                                             return Column(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 const Text(
                                                   'Actividad',
@@ -382,7 +399,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                     const SizedBox(width: 10),
                                                     Text(
                                                       DateFormat('dd/MM/yyyy')
-                                                          .format(_selectedDate),
+                                                          .format(
+                                                              _selectedDate),
                                                       style: const TextStyle(
                                                         fontFamily:
                                                             "HelveticaCondensed",
@@ -422,8 +440,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           const Text(
                                             'Resumen de Cartera',
                                             style: TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 19.0,
                                               fontWeight: FontWeight.bold,
                                               fontFamily: 'HelveticaCondensed',
@@ -433,8 +451,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           const Text(
                                             'Saldo de Cartera (S/.)',
                                             style: TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontFamily: 'HelveticaCondensed',
                                             ),
@@ -442,8 +460,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           Text(
                                             '${data[id].saldoCartera}',
                                             style: const TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontWeight: FontWeight.bold,
                                               fontFamily: 'HelveticaCondensed',
@@ -453,8 +471,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           const Text(
                                             'Monto Recuperado (S/.)',
                                             style: TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontFamily: 'HelveticaCondensed',
                                             ),
@@ -462,8 +480,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           Text(
                                             '${data[id].montoRecuperado}',
                                             style: const TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontWeight: FontWeight.bold,
                                               fontFamily: 'HelveticaCondensed',
@@ -473,8 +491,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           const Text(
                                             'Saldo Vencido (S/.)',
                                             style: TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontFamily: 'HelveticaCondensed',
                                             ),
@@ -482,8 +500,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           Text(
                                             '${data[id].saldoVencido}',
                                             style: const TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontWeight: FontWeight.bold,
                                               fontFamily: 'HelveticaCondensed',
@@ -493,8 +511,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           const Text(
                                             'Indice de Morosidad (%)',
                                             style: TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontFamily: 'HelveticaCondensed',
                                             ),
@@ -502,8 +520,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           Text(
                                             '${data[id].indiceMorosidad}',
                                             style: const TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontWeight: FontWeight.bold,
                                               fontFamily: 'HelveticaCondensed',
@@ -513,8 +531,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           const Text(
                                             'Compromisos de Pago',
                                             style: TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 19.0,
                                               fontWeight: FontWeight.bold,
                                               fontFamily: 'HelveticaCondensed',
@@ -524,8 +542,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           const Text(
                                             'Generados',
                                             style: TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontFamily: 'HelveticaCondensed',
                                             ),
@@ -533,8 +551,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           Text(
                                             '${data[id].compromisosGenerado}',
                                             style: const TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontWeight: FontWeight.bold,
                                               fontFamily: 'HelveticaCondensed',
@@ -544,8 +562,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           const Text(
                                             'Sin Cumplir',
                                             style: TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontFamily: 'HelveticaCondensed',
                                             ),
@@ -553,8 +571,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           Text(
                                             '${data[id].compromisosSinCumplir}',
                                             style: const TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontWeight: FontWeight.bold,
                                               fontFamily: 'HelveticaCondensed',
@@ -564,8 +582,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           const Text(
                                             'Cumplidos',
                                             style: TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontFamily: 'HelveticaCondensed',
                                             ),
@@ -573,8 +591,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           Text(
                                             '${data[id].compromisosCumplidos}',
                                             style: const TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 15.0,
                                               fontWeight: FontWeight.bold,
                                               fontFamily: 'HelveticaCondensed',
@@ -584,22 +602,24 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                           const Text(
                                             'N° Visitas por modalidad',
                                             style: TextStyle(
-                                              color:
-                                                  Color.fromARGB(255, 0, 76, 128),
+                                              color: Color.fromARGB(
+                                                  255, 0, 76, 128),
                                               fontSize: 19.0,
                                               fontWeight: FontWeight.bold,
                                               fontFamily: 'HelveticaCondensed',
                                             ),
                                           ),
                                           SfCircularChart(
-                                            legend: const Legend(
+                                            legend: Legend(
                                               isVisible: true,
                                               isResponsive: true,
                                               alignment: ChartAlignment.center,
                                               position: LegendPosition.bottom,
-                                              textStyle: TextStyle(
+                                              orientation: legendOrientation,
+                                              textStyle: const TextStyle(
                                                 fontSize: 14,
-                                                fontFamily: 'HelveticaCondensed',
+                                                fontFamily:
+                                                    'HelveticaCondensed',
                                               ),
                                             ),
                                             series: <CircularSeries>[
@@ -618,7 +638,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                                 'HelveticaCondensed',
                                                           ),
                                                           margin:
-                                                              EdgeInsets.all(10),
+                                                              EdgeInsets.all(
+                                                                  10),
                                                           labelPosition:
                                                               ChartDataLabelPosition
                                                                   .outside,

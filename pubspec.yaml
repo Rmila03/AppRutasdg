@@ -47,6 +47,7 @@ dependencies:
   image: ^4.1.4
   geolocator: ^11.0.0
   syncfusion_flutter_datagrid: ^24.2.9
+  dio: ^5.4.2+1
 
 
 dev_dependencies:
@@ -77,6 +78,7 @@ flutter:
     - assets/
     - assets/locations.json
     - assets/logo_sdg.png
+    - assets/ca/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
