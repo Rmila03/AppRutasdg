@@ -34,7 +34,7 @@ void getData() async {
   //var url = Uri.https('wsdomingo.coopsantodomingo.com',
   //    '/laboratorio/creditos.php', {'codServicio': '01'});
   var url = Uri.parse(
-      "https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=01");
+      "https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=02");
   try {
     final response = await http.post(
       url,
