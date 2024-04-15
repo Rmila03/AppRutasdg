@@ -18,6 +18,9 @@ class PromocionPage extends StatefulWidget {
 
 class _PromocionPageState extends State<PromocionPage> {
   final List<Socio> socios = getSocios();
+  TextEditingController _controller = TextEditingController();
+
+  String _response = '';
 
   // Agrega tu token de autenticación aquí
   String token =
@@ -38,7 +41,9 @@ class _PromocionPageState extends State<PromocionPage> {
         body: jsonEncode(data),
       );
 
-      setState(() {});
+      setState(() {
+        _response = response.body;
+      });
 
       print('Respuesta del servidor: ${response.body}');
     } catch (e) {
