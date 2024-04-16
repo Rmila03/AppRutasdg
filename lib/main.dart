@@ -2,9 +2,10 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/api.dart';
-//import 'package:ruta_sdg/conexcion_api.dart';
 import 'package:ruta_sdg/supervisor/views/homeSupervisor.dart';
 import 'package:ruta_sdg/analista/views/home.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 Future<void> main() async {
   /*WidgetsFlutterBinding.ensureInitialized();
@@ -246,7 +247,7 @@ class _LoginState extends State<Login> {
                               child: GestureDetector(
                                 onTap: () {
                                   if (_formKey.currentState!.validate()) {
-                                    // Navigate the user to the Home page
+                                    _login();
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
@@ -297,28 +298,8 @@ class _LoginState extends State<Login> {
                             minimumSize: const Size(180, 50),
                           ),
                           onPressed: () {
-                            setState(() {
-                              getData();
-                              showError = false;
-                            });
                             if (_formKey.currentState!.validate()) {
-                              if (emailController.text.trim() ==
-                                  "analista@gmail.com") {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const HomePage(),
-                                  ),
-                                );
-                              } else {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const HomeSupervisorPage(),
-                                  ),
-                                );
-                              }
+                              _login();
                             } else {
                               setState(() {
                                 showError = true;
@@ -344,6 +325,63 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  void _login() async {
+    String token = await getToken();
+
+    var url = Uri.parse(
+        "https://wsdomingo.coopsantodomingo.com/laboratorio/login.php");
+    // String bearerToken ="TsJhbGviOiJIUzI1wiIsInR5cCI6IkpXVCJ9.eyJBZG1pbmlzdHJhZG9yIjoiVVNVQVJJTyBHTE9CT0tBUyIsIklkdGVyY2VybyI6bnVsbCwiZmVjaGFob3JhIjoiMjAyNFwvMDJcLzE0XC8gMDk6Mjc6NTgifQ==.sjeliJRWXNuB1DwCkM6sYSwtZz6sO61RrnlzGlZOyus=";
+    String username = emailController.text.trim();
+    String password = passwordController.text.trim();
+    try {
+      final response = await http.post(
+        url,
+        body: jsonEncode(
+            {"usuario": username, "clave": password, "tipo": "CREDITOS"}),
+        headers: {
+          'Content-Type': 'application/json',
+          "Access-Control-Allow-Origin": "*",
+          'Authorization': 'Bearer $token',
+          'Accept': '*/*'
+        },
+      );
+      print(response);
+      if (response.statusCode == 200) {
+        String responseBody = utf8.decoder.convert(response.bodyBytes);
+        var res = jsonDecode(responseBody);
+        if (res == null) {
+          setState(() {
+            showError = true;
+          });
+          return;
+        }
+        String idusuario = res['idusuario'];
+        String rol = res['rol'];
+        if (rol == "ANALISTA") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+        }
+        if (rol == "SUPERVISOR") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomeSupervisorPage()),
+          );
+        }
+      } else {
+        setState(() {
+          showError = true;
+        });
+      }
+    } catch (error) {
+      print('Error during login: $error');
+      setState(() {
+        showError = true;
+      });
+    }
   }
 }
 
