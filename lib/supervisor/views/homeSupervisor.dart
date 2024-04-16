@@ -10,12 +10,9 @@ import 'package:ruta_sdg/analista.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
 //import 'package:tooltip/tooltip.dart';
 
-void main() {
-  runApp(const HomeSupervisorPage());
-}
-
 class HomeSupervisorPage extends StatelessWidget {
-  const HomeSupervisorPage({super.key});
+  final String? idusuario;
+  const HomeSupervisorPage({super.key, this.idusuario});
 
   @override
   Widget build(BuildContext context) {

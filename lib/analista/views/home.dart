@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ruta_sdg/analista/views/plandia.dart';
@@ -15,7 +14,8 @@ import 'package:http/http.dart' as http;
 //import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String? idusuario;
+  const HomePage({super.key, this.idusuario});
 
   @override
   State createState() => MapScreen();
