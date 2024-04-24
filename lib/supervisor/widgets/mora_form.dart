@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ruta_sdg/socio.dart';
-import 'package:ruta_sdg/supervisor/views/moraSupervisor.dart';
 import 'package:ruta_sdg/supervisor/widgets/custom_supervisor.dart';
 
 class MoraForm extends StatefulWidget {
@@ -38,16 +37,7 @@ class MoraFormState extends State<MoraForm> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10.0, vertical: 20),
                     child: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) =>
-                                    const MoraSupervisorPage(),
-                          ),
-                        );
-                      },
+                      onPressed: () {},
                       icon: const Icon(Icons.arrow_back),
                     ),
                   ),

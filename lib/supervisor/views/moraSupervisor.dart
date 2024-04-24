@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/analista.dart';
-import 'package:ruta_sdg/socio.dart';
-import 'package:ruta_sdg/supervisor/listacartera.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:ruta_sdg/api.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
 
@@ -22,28 +22,17 @@ class MoraSupervisorContent extends StatefulWidget {
 }
 
 class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
-  // Properties
   String selectedMenu = 'MORA';
-  DateTime selectedDate = DateTime.now();
-  TextEditingController searchController = TextEditingController();
-  FocusNode searchFocusNode = FocusNode();
-
-  final List<Analista> analistas = getAnalistas();
-  final List<Socio> socios = getSocios();
-
-  List<Analista> filteredAnalista = [];
   List<Socio> filteredSocio = [];
+  List<Analista> analistas = [];
 
-  // Init State Method
   @override
   void initState() {
     super.initState();
-    // Initially, show all socios ordered by daysLate
-    filteredSocio = List.from(socios);
-    filteredSocio.sort((a, b) => b.daysLate.compareTo(a.daysLate));
+    _fetchAnalistas();
+    _fetchSociosEnMora();
   }
 
-  // Build Method
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -56,7 +45,6 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
             // Left side menu
             if (MediaQuery.of(context).size.width >= 640)
               MenuSupervisor(name: selectedMenu),
-
             // Expanded section for the main content
             Expanded(
               child: Padding(
@@ -65,7 +53,9 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     _buildTitle(),
-                    _buildSearchBox(),
+                    const SizedBox(height: 10.0),
+                    // Aquí puedes agregar un DropdownButton para seleccionar analistas
+                    _buildAnalistasDropdown(),
                     const SizedBox(height: 10.0),
                     _buildDataTable(filteredSocio),
                   ],
@@ -78,7 +68,6 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
     );
   }
 
-  // Widget Methods
   Widget _buildTitle() {
     return const Padding(
       padding: EdgeInsets.only(top: 25, bottom: 16),
@@ -86,7 +75,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
         'SOCIOS EN MORA',
         style: TextStyle(
           fontSize: 25.0,
-          color: Color.fromARGB(255, 0, 76, 128),
+          color: Color.fromARGB(255, 0, 74, 125),
           fontWeight: FontWeight.bold,
           fontFamily: 'HelveticaCondensed',
         ),
@@ -94,58 +83,48 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
     );
   }
 
-  Widget _buildSearchBox() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 250,
-            child: DropdownButtonFormField<Analista>(
-              isExpanded: true,
-              dropdownColor: Colors.white,
-              focusColor: Colors.transparent,
-              style: const TextStyle(
-                fontFamily: 'HelveticaCondensed',
-                color: Colors.black,
-              ),
-              items: analistas.map((Analista analista) {
-                return DropdownMenuItem<Analista>(
-                  value: analista,
-                  child: Text("${analista.name} ${analista.lastName}"),
-                );
-              }).toList(),
-              onChanged: (Analista? selectedAnalista) {
-                if (selectedAnalista != null) {
-                  searchController.text =
-                      "${selectedAnalista.name} ${selectedAnalista.lastName}";
-                  _updateSearchResults(selectedAnalista.idAnalista);
-                }
-              },
-              decoration: InputDecoration(
-                labelText: 'Seleccionar Analista',
-                contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
-                labelStyle: const TextStyle(
-                  fontFamily: 'HelveticaCondensed',
-                  color: Color.fromARGB(255, 0, 76, 128),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  borderSide: const BorderSide(
-                    color: Color.fromARGB(255, 4, 56, 99),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  borderSide: const BorderSide(
-                    color: Color.fromARGB(255, 4, 56, 99),
-                  ),
-                ),
-              ),
+  Widget _buildAnalistasDropdown() {
+    return SizedBox(
+      width: 270,
+      child: DropdownButtonFormField<Analista>(
+        isExpanded: true,
+        dropdownColor: Colors.white,
+        focusColor: Colors.transparent,
+        style: const TextStyle(
+          fontFamily: 'HelveticaCondensed',
+          color: Colors.black,
+        ),
+        items: analistas.map((Analista analista) {
+          return DropdownMenuItem<Analista>(
+            value: analista,
+            child: Text(analista.analista),
+          );
+        }).toList(),
+        onChanged: (Analista? selectedAnalista) {
+          if (selectedAnalista != null) {
+            _fetchSociosEnMora(selectedAnalista.idusuario);
+          }
+        },
+        decoration: InputDecoration(
+          labelText: 'Seleccionar Analista',
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+          labelStyle: const TextStyle(
+            fontFamily: 'HelveticaCondensed',
+            color: Color.fromARGB(255, 0, 74, 125),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5.0),
+            borderSide: const BorderSide(
+              color: Color.fromARGB(255, 0, 74, 125),
             ),
           ),
-        ],
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5.0),
+            borderSide: const BorderSide(
+              color: Color.fromARGB(255, 0, 74, 125),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -153,33 +132,20 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
   Widget _buildDataTable(List<Socio> userList) {
     List<DataRow> rows = userList.map((user) {
       return DataRow(
-        onSelectChanged: (isSelected) {
-          if (isSelected != null && isSelected) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ListaSupervisor(
-                  tabName: "MORA",
-                  socio: user,
-                ),
-              ),
-            );
-          }
-        },
         cells: [
           DataCell(Text(user.dni,
               style: const TextStyle(
                 fontFamily: 'HelveticaCondensed',
               ))),
-          DataCell(Text("${user.name} ${user.lastName}",
+          DataCell(Text(user.fullnombre,
               style: const TextStyle(
                 fontFamily: 'HelveticaCondensed',
               ))),
-          DataCell(Text(user.address,
+          DataCell(Text(user.direccion,
               style: const TextStyle(
                 fontFamily: 'HelveticaCondensed',
               ))),
-          DataCell(Text(user.daysLate.toString(),
+          DataCell(Text(user.diasAtraso.toString(),
               style: const TextStyle(
                 fontFamily: 'HelveticaCondensed',
               ))),
@@ -203,7 +169,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
         child: SingleChildScrollView(
           child: DataTable(
             showCheckboxColumn: false,
-            columnSpacing: 10.0, // Adjust column spacing here
+            columnSpacing: 10.0,
             headingRowColor: MaterialStateProperty.all(const Color(0xFFD9DEDA)),
             columns: const [
               DataColumn(
@@ -238,25 +204,166 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
     );
   }
 
-  // Helper Method
-  void _updateSearchResults(String query) {
-    setState(() {
-      if (query.isEmpty) {
-        // Show all socios if no analista is selected
-        filteredAnalista = analistas;
-      } else {
-        // Filter analistas by name matching the search
-        filteredAnalista = analistas
-            .where(
-                (user) => user.name.toLowerCase().contains(query.toLowerCase()))
-            .toList();
-      }
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(
+            message,
+            style: const TextStyle(
+              fontSize: 14.0, // Tamaño de fuente
+              color: Colors.black, // Color de texto
+              fontFamily: 'HelveticaCondensed', // Tipo de letra
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: const Text(
+                'Aceptar',
+                style: TextStyle(
+                  fontSize: 16.0, // Tamaño de fuente
+                  color:
+                      Color.fromARGB(255, 0, 74, 125), // Color de texto en azul
+                  fontFamily: 'HelveticaCondensed',
+                  fontWeight: FontWeight.bold, // Tipo de letra
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
-      // If an analista is selected, filter associated socios and sort by days late
-      filteredSocio = query.isEmpty
-          ? []
-          : socios.where((socio) => socio.idAnalista == query).toList();
-      filteredSocio.sort((a, b) => b.daysLate.compareTo(a.daysLate));
-    });
+// LLAMADAS HACIA LAS APIS
+// ----------------------
+
+  Future<void> _fetchAnalistas() async {
+    String token = await getToken();
+
+    final url = Uri.parse(
+        'https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=04');
+
+    final headers = {
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "*",
+      'Authorization': 'Bearer $token',
+      'Accept': '*/*'
+    };
+
+    final body = {
+      'idusuario': '12279',
+    };
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(body),
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic>? jsonResponse = json.decode(response.body);
+
+      if (jsonResponse != null) {
+        analistas =
+            jsonResponse.map((json) => Analista.fromJson(json)).toList();
+      } else {
+        //print('La respuesta de la API fue nula.');
+        _showErrorDialog('La respuesta de la API fue nula.');
+      }
+    } else {
+      print(
+          'Error al obtener los analistas. Código de estado: ${response.statusCode}');
+    }
+  }
+
+  Future<void> _fetchSociosEnMora([String? idUsuario]) async {
+    String token = await getToken();
+
+    final url = Uri.parse(
+        'https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=02');
+
+    final headers = {
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "*",
+      'Authorization': 'Bearer $token',
+      'Accept': '*/*'
+    };
+
+    final body = {
+      'idusuario': idUsuario ?? '12542',
+    };
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(body),
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic>? jsonResponse = json.decode(response.body);
+
+      if (jsonResponse != null) {
+        List<Socio> fetchedSocios =
+            jsonResponse.map((json) => Socio.fromJson(json)).toList();
+
+        setState(() {
+          filteredSocio = fetchedSocios;
+          filteredSocio.sort((a, b) => b.diasAtraso.compareTo(a.diasAtraso));
+        });
+      } else {
+        //print('La respuesta de la API fue nula.');
+        _showErrorDialog('No existen datos de socios de este analista');
+      }
+    } else {
+      print(
+          'Error al obtener los socios en mora. Código de estado: ${response.statusCode}');
+    }
+  }
+}
+
+// CLASES
+// --------
+class Socio {
+  final String dni;
+  final String fullnombre;
+  final String direccion;
+  final int diasAtraso;
+
+  Socio({
+    required this.dni,
+    required this.fullnombre,
+    required this.direccion,
+    required this.diasAtraso,
+  });
+
+  factory Socio.fromJson(Map<String, dynamic> json) {
+    return Socio(
+      dni: json['dni'],
+      fullnombre: json['fullnombre'],
+      direccion: json['direccion'],
+      diasAtraso: int.parse(json['dias_Atraso']),
+    );
+  }
+}
+
+class Analista {
+  final String idusuario;
+  final String analista;
+
+  Analista({
+    required this.idusuario,
+    required this.analista,
+  });
+
+  factory Analista.fromJson(Map<String, dynamic> json) {
+    return Analista(
+      idusuario: json['idusuario'],
+      analista: json['analista'],
+    );
   }
 }
