@@ -31,12 +31,28 @@ class _NotificacionesSupervisorContentState
 
   List<Socio> filteredSocio = [];
   List<Analista> analistas = [];
+  bool loading = false;
 
   @override
   void initState() {
     super.initState();
-    _fetchAnalistas();
-    _fetchSocios();
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    setState(() {
+      loading = true;
+    });
+    try {
+      await _fetchAnalistas();
+      await _fetchAnalistas();
+    } catch (e) {
+      _showErrorDialog(e.toString());
+    } finally {
+      setState(() {
+        loading = false;
+      });
+    }
   }
 
   @override
@@ -54,7 +70,13 @@ class _NotificacionesSupervisorContentState
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       _buildTitle(),
-                      _buildSearchBox(),
+                      if (loading)
+                        const CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              Color.fromARGB(255, 0, 74, 125)),
+                        )
+                      else
+                        _buildSearchBox(),
                       Expanded(
                         child: ListView.builder(
                           itemCount: filteredSocio.length,
@@ -165,7 +187,7 @@ class _NotificacionesSupervisorContentState
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${socio.fullnombre}',
+                      socio.fullnombre,
                       style: const TextStyle(
                         fontFamily: 'HelveticaCondensed',
                         fontWeight: FontWeight.bold,
@@ -310,15 +332,16 @@ class _NotificacionesSupervisorContentState
       final List<dynamic>? jsonResponse = json.decode(response.body);
 
       if (jsonResponse != null) {
-        List<Socio> fetchedSocios =
-            jsonResponse.map((json) => Socio.fromJson(json)).toList();
+        if (idUsuario != null) {
+          List<Socio> fetchedSocios =
+              jsonResponse.map((json) => Socio.fromJson(json)).toList();
 
-        setState(() {
-          filteredSocio = fetchedSocios;
-          filteredSocio.sort((a, b) => b.diasAtraso.compareTo(a.diasAtraso));
-        });
+          setState(() {
+            filteredSocio = fetchedSocios;
+            filteredSocio.sort((a, b) => b.diasAtraso.compareTo(a.diasAtraso));
+          });
+        }
       } else {
-        //print('La respuesta de la API fue nula.');
         _showErrorDialog('No existen datos de socios de este analista');
       }
     } else {

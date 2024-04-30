@@ -324,13 +324,15 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
       final List<dynamic>? jsonResponse = json.decode(response.body);
 
       if (jsonResponse != null) {
-        List<Socio> fetchedSocios =
-            jsonResponse.map((json) => Socio.fromJson(json)).toList();
+        if (idanalista != null) {
+          List<Socio> fetchedSocios =
+              jsonResponse.map((json) => Socio.fromJson(json)).toList();
 
-        setState(() {
-          filteredSocio = fetchedSocios;
-          filteredSocio.sort((a, b) => b.diasAtraso.compareTo(a.diasAtraso));
-        });
+          setState(() {
+            filteredSocio = fetchedSocios;
+            filteredSocio.sort((a, b) => b.diasAtraso.compareTo(a.diasAtraso));
+          });
+        }
       } else {
         //print('La respuesta de la API fue nula.');
         _showErrorDialog('La respuesta de la API fue nula.');
