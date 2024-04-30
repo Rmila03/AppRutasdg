@@ -123,11 +123,15 @@ class _PromocionPageState extends State<PromocionPage> {
               columns: const [
                 DataColumn(
                   label: Text('DNI',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontFamily: 'HelveticaCondensed',
+                          fontWeight: FontWeight.bold)),
                 ),
                 DataColumn(
                   label: Text('Nombres y Apellidos',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontFamily: 'HelveticaCondensed',
+                          fontWeight: FontWeight.bold)),
                 ),
                 DataColumn(label: Text('')),
               ],
