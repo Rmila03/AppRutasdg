@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ruta_sdg/supervisor/views/reporteSupervisor.dart';
 import 'package:ruta_sdg/socio.dart';
@@ -195,7 +195,7 @@ class ReportesFormState extends State<ReportesForm> {
     );
   }
 
-  String getAnalistaName(String idAnalista) {
+ /* String getAnalistaName(String idAnalista) {
     // Lógica para obtener el nombre del analista según el id
     Analista analista = getAnalistaById(idAnalista);
     return '${analista.name} ${analista.lastName}';
@@ -207,7 +207,7 @@ class ReportesFormState extends State<ReportesForm> {
     return getAnalistas()
         .firstWhere((analista) => analista.idAnalista == idAnalista);
   }
-
+*/
   Widget _buildDataTable(List<Socio> socioList) {
     Set<String> tiposSet = {};
     Set<String> opcionesSet = {};
@@ -481,3 +481,4 @@ List<clasificacionSocio> getclasificacion() {
   ];
   return clasificacion;
 }
+*/

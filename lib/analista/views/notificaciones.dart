@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import "package:font_awesome_flutter/font_awesome_flutter.dart";
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ruta_sdg/api.dart';
 import 'package:ruta_sdg/analista/widgets/header.dart';
 import 'package:ruta_sdg/analista/widgets/navigation_drawer.dart';
 import 'package:ruta_sdg/analista/widgets/tabbar.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
 }
 
 class NotificacionPage extends StatefulWidget {
-  const NotificacionPage({super.key, required this.title});
+  const NotificacionPage({Key? key, required this.title});
   final String title;
 
   @override
@@ -29,7 +32,30 @@ class NotificacionPage extends StatefulWidget {
 }
 
 class _NotificacionPageState extends State<NotificacionPage> {
+  List<Socio> filteredSocio = [];
+  bool loading = false;
+
   @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    setState(() {
+      loading = true;
+    });
+    try {
+      await _fetchSocios();
+    } catch (e) {
+      _showErrorDialog(e.toString());
+    } finally {
+      setState(() {
+        loading = false;
+      });
+    }
+  }
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -51,98 +77,166 @@ class _NotificacionPageState extends State<NotificacionPage> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Column(
-          children: [
-            //Container(child: Column(children: <Widget>[_list()])),
-            Expanded(
-                child: ListView.separated(
-              itemCount: 15,
-              itemBuilder: (BuildContext context, int index) =>
-                  _item("Alerta de retraso ", "Justino Ferro Alvarez", 15),
-              separatorBuilder: (BuildContext context, int index) {
-                return Container(
-                  color:
-                      const Color.fromARGB(255, 45, 49, 62).withOpacity(0.15),
-                  height: 8.0,
-                );
-              },
-
-              /*children: <Widget>[
-                _item("Alerta de retraso 1", "Justino Ferro Alvarez", 15),
-                _item("Alerta de retraso 2", "Stiward Maldonado", 1),
-                _item("Alerta de retraso 3", "Ruth Milagros Arce Quispe", 4),
-                _item("Alerta de retraso 4", "Yolmy Milagros Cahuata Lavilla", 2),
-                _item("Alerta de retraso 5", "Yanet Cusi Quispe", 5),
-                _item("Alerta de retraso 6", "Glina de la Flor Puma Huamani", 7),
-                _item("Alerta de retraso 7", "Yerson Chirinos Vilca", 8)
-              ],*/
-            ))
-          ],
-        ),
+        body: loading
+            ? Center(
+                child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                    Color.fromARGB(255, 0, 74, 125)),
+              ))
+            : filteredSocio.isNotEmpty
+                ? Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: filteredSocio.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final socio = filteredSocio[index];
+                            return _item(socio.fullnombre, socio.diasAtraso);
+                          },
+                        ),
+                      ),
+                    ],
+                  )
+                : Center(
+                    child: Text('No hay datos de socios'),
+                  ),
       ),
     );
   }
-}
 
-Widget _item(String nameAlert, String nameSocio, int dias) {
-  return ListTile(
-    leading: const Icon(
-      FontAwesomeIcons.bell,
-      size: 25.0,
-      color: Colors.red,
-    ),
-    title: Text(
-      nameAlert,
-      style: const TextStyle(
-          fontFamily: "HelveticaCondensed",
-          fontWeight: FontWeight.bold,
-          fontSize: 14.0,
-          color: Colors.black),
-    ),
-    subtitle: Text(
-      nameSocio,
-      style: const TextStyle(
-          fontFamily: "HelveticaCondensed",
-          fontWeight: FontWeight.bold,
-          fontSize: 12.0,
-          color: Color.fromARGB(255, 7, 62, 90)),
-    ),
-    trailing: Container(
-      decoration: BoxDecoration(
-        color: Colors.red.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(5.0),
+  Widget _item(String nameSocio, int dias) {
+    return Card(
+      elevation: 4,
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        side: const BorderSide(
+            color: const Color.fromARGB(255, 0, 76, 128), width: 2.0),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          "$dias dias",
-          style: const TextStyle(
-              fontFamily: "HelveticaCondensed",
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
-              fontSize: 16.0),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(16),
+        leading: Container(
+          padding: const EdgeInsets.all(8),
+          child: Icon(
+            FontAwesomeIcons.bell,
+            color: Colors.red,
+          ),
         ),
+        title: Text(
+          nameSocio,
+          style: const TextStyle(
+            fontFamily: "HelveticaCondensed",
+            fontSize: 12.0,
+            color: Colors.black87,
+          ),
+        ),
+        trailing: Chip(
+          label: Text(
+            "$dias días",
+            style: const TextStyle(
+              fontFamily: "HelveticaCondensed",
+              fontSize: 12.0,
+              color: Color.fromARGB(255, 255, 255, 255),
+            ),
+          ),
+          backgroundColor: const Color.fromARGB(255, 0, 76, 128),
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: const BorderSide(
+                color: const Color.fromARGB(255, 0, 76, 128), width: 2.0),
+          ),
+        ),
+        onTap: () {
+          // Acción al hacer clic en el socio, si es necesario
+        },
       ),
-    ),
-  );
-}
+    );
+  }
 
-/*Widget _list() {
-  return Expanded(
-      child: ListView(
-    children: <Widget>[
-      _item(FontAwesomeIcons.bell, "Alerta 1", 3),
-      _item(FontAwesomeIcons.bell, "Alerta 2", 3),
-      _item(FontAwesomeIcons.bell, "Alerta 3", 3),
-      _item(FontAwesomeIcons.bell, "Alerta 4", 3)
-    ],
-  ));
-}*/
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(
+            message,
+            style: const TextStyle(
+              fontSize: 14.0, // Tamaño de fuente
+              color: Color.fromARGB(255, 179, 10, 10), // Color de texto
+              fontFamily: 'HelveticaCondensed', // Tipo de letra
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: const Text(
+                'Aceptar',
+                style: TextStyle(
+                  fontSize: 16.0, // Tamaño de fuente
+                  color:
+                      Color.fromARGB(255, 0, 74, 125), // Color de texto en azul
+                  fontFamily: 'HelveticaCondensed',
+                  fontWeight: FontWeight.bold, // Tipo de letra
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _fetchSocios() async {
+    String token = await getToken();
+
+    final url = Uri.parse(
+        'https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=02');
+
+    final headers = {
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "*",
+      'Authorization': 'Bearer $token',
+      'Accept': '*/*'
+    };
+
+    final body = {
+      'idusuario': '17935',
+    };
+
+    try {
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: jsonEncode(body),
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic> jsonResponse = json.decode(response.body);
+
+        List<Socio> fetchedSocios =
+            jsonResponse.map((json) => Socio.fromJson(json)).toList();
+
+        setState(() {
+          filteredSocio = fetchedSocios;
+          filteredSocio.sort((a, b) => b.diasAtraso.compareTo(a.diasAtraso));
+        });
+      } else {
+        _showErrorDialog(
+            'Error al obtener los socios en mora. Código de estado: ${response.statusCode}');
+      }
+    } catch (e) {
+      _showErrorDialog('Error: $e');
+    }
+  }
+}
 
 class MapButton extends StatelessWidget {
   final String name;
   const MapButton({
-    super.key,
+    Key? key,
     required this.name,
   });
   @override
@@ -175,7 +269,7 @@ class CustomTextContainer extends StatelessWidget {
   final Color shadowColor;
 
   const CustomTextContainer({
-    super.key,
+    Key? key,
     required this.text,
     required this.leftIcon,
     this.rightIcon = FontAwesomeIcons.greaterThan,
@@ -235,6 +329,31 @@ class CustomTextContainer extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+// CLASES
+// --------
+class Socio {
+  final String dni;
+  final String fullnombre;
+  final String direccion;
+  final int diasAtraso;
+
+  Socio({
+    required this.dni,
+    required this.fullnombre,
+    required this.direccion,
+    required this.diasAtraso,
+  });
+
+  factory Socio.fromJson(Map<String, dynamic> json) {
+    return Socio(
+      dni: json['dni'],
+      fullnombre: json['fullnombre'],
+      direccion: json['direccion'],
+      diasAtraso: int.parse(json['dias_Atraso']),
     );
   }
 }

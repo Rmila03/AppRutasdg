@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_sdg/analista.dart';
-import 'package:ruta_sdg/supervisor/widgets/reportes_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:ruta_sdg/api.dart';
+//import 'package:ruta_sdg/supervisor/widgets/reportes_page.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
@@ -27,14 +29,15 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
   DateTime selectedDate = DateTime.now();
   TextEditingController searchController = TextEditingController();
   FocusNode searchFocusNode = FocusNode();
-  final List<Analista> analistas = getAnalistas();
+
+  List<Analista> analistas = [];
   List<Analista> filteredUsers = [];
 
   @override
   void initState() {
     super.initState();
     selectedDate = DateTime.now();
-    filteredUsers = analistas;
+    _fetchAnalistas();
   }
 
   @override
@@ -191,13 +194,14 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                       itemCount: filteredUsers.length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                          title: Text(filteredUsers[index].name,
+                          title: Text(filteredUsers[index].analista,
                               style: const TextStyle(
                                 fontFamily: 'HelveticaCondensed',
                               )),
                           onTap: () {
-                            searchController.text = filteredUsers[index].name;
-                            _updateSearchResults(filteredUsers[index].name);
+                            searchController.text =
+                                filteredUsers[index].analista;
+                            _updateSearchResults(filteredUsers[index].analista);
                             searchFocusNode.unfocus();
                           },
                         );
@@ -212,15 +216,49 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
     );
   }
 
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(
+            message,
+            style: const TextStyle(
+              fontSize: 14.0,
+              color: Colors.black,
+              fontFamily: 'HelveticaCondensed',
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: const Text(
+                'Aceptar',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: Color.fromARGB(255, 0, 74, 125),
+                  fontFamily: 'HelveticaCondensed',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget _buildDataTable(List<Analista> userList) {
     List<DataRow> rows = userList.map((user) {
       return DataRow(
         cells: [
-          DataCell(Text(user.dni,
+          DataCell(Text(user.idanalista,
               style: const TextStyle(
                 fontFamily: 'HelveticaCondensed',
               ))),
-          DataCell(Text("${user.name} ${user.lastName}",
+          DataCell(Text(user.analista,
               style: const TextStyle(
                 fontFamily: 'HelveticaCondensed',
               ))),
@@ -238,7 +276,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
                   icon: const Icon(Icons.visibility),
                   onPressed: () {
                     // Agrega aquí la lógica para el nuevo icono de "ver"
-                    _navigateToReportesForm(context, user.idAnalista);
+                    //_navigateToReportesForm(context, user.idAnalista);
                   },
                 ),
               ],
@@ -297,7 +335,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
       ),
     );
   }
-
+/*
   void _navigateToReportesForm(BuildContext context, String idAnalista) {
     Navigator.push(
       context,
@@ -306,7 +344,7 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
             ReportesForm(idAnalista: idAnalista),
       ),
     );
-  }
+  }*/
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = (await showDatePicker(
@@ -340,9 +378,64 @@ class _ReporteSupervisorContentState extends State<ReporteSupervisorContent> {
   void _updateSearchResults(String query) {
     setState(() {
       filteredUsers = analistas
-          .where(
-              (user) => user.name.toLowerCase().contains(query.toLowerCase()))
+          .where((user) =>
+              user.analista.toLowerCase().contains(query.toLowerCase()))
           .toList();
     });
+  }
+
+  Future<void> _fetchAnalistas() async {
+    String token = await getToken();
+
+    final url = Uri.parse(
+        'https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=04');
+
+    final headers = {
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "*",
+      'Authorization': 'Bearer $token',
+      'Accept': '*/*'
+    };
+
+    final body = {
+      'idusuario': '12279',
+    };
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(body),
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic>? jsonResponse = json.decode(response.body);
+
+      if (jsonResponse != null) {
+        setState(() {
+          analistas =
+              jsonResponse.map((json) => Analista.fromJson(json)).toList();
+          filteredUsers = analistas; // Actualiza la lista filtrada
+        });
+      } else {
+        _showErrorDialog('La respuesta de la API fue nula.');
+      }
+    }
+  }
+}
+
+class Analista {
+  final String idanalista;
+  final String analista;
+
+  Analista({
+    required this.idanalista,
+    required this.analista,
+  });
+
+  factory Analista.fromJson(Map<String, dynamic> json) {
+    return Analista(
+      idanalista: json['idusuario'],
+      analista: json['analista'],
+    );
   }
 }
