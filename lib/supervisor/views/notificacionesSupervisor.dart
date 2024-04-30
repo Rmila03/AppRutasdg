@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:ruta_sdg/api.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor.dart';
-import 'package:ruta_sdg/socio.dart';
-import 'package:ruta_sdg/analista.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
 
 class NotificacionesSupervisorPage extends StatelessWidget {
@@ -28,28 +29,14 @@ class _NotificacionesSupervisorContentState
   TextEditingController searchController = TextEditingController();
   FocusNode searchFocusNode = FocusNode();
 
-  final List<Analista> analistas = getAnalistas();
-  final List<Socio> socios = getSocios();
-
-  List<Analista> filteredAnalista = [];
   List<Socio> filteredSocio = [];
-
-  List<Socio> getSociosByAnalistaId(String analistaId) {
-    return getSocios()
-        .where((socio) => socio.idAnalista == analistaId)
-        .toList();
-  }
-
-  void updateSocios(String analistaId) {
-    setState(() {
-      filteredSocio = getSociosByAnalistaId(analistaId);
-    });
-  }
+  List<Analista> analistas = [];
 
   @override
   void initState() {
     super.initState();
-    filteredSocio = List.from(socios);
+    _fetchAnalistas();
+    _fetchSocios();
   }
 
   @override
@@ -106,63 +93,47 @@ class _NotificacionesSupervisorContentState
   }
 
   Widget _buildSearchBox() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: EdgeInsets.zero,
-            width: 250.0,
-            child: DropdownButtonFormField<Analista>(
-              isExpanded: true,
-              dropdownColor: Colors.white,
-              focusColor: Colors.transparent,
-              style: const TextStyle(
-                color: Colors.black,
-                fontFamily: "HelveticaCondensed",
-              ),
-              items: analistas.map((Analista analista) {
-                return DropdownMenuItem<Analista>(
-                  value: analista,
-                  child: Text(
-                    "${analista.name} ${analista.lastName}",
-                    style: const TextStyle(
-                      fontFamily: "HelveticaCondensed",
-                    ),
-                  ),
-                );
-              }).toList(),
-              onChanged: (Analista? selectedAnalista) {
-                if (selectedAnalista != null) {
-                  searchController.text =
-                      "${selectedAnalista.name} ${selectedAnalista.lastName}";
-                  updateSocios(selectedAnalista.idAnalista);
-                }
-              },
-              decoration: InputDecoration(
-                labelText: 'Seleccionar Analista',
-                contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
-                labelStyle: const TextStyle(
-                  fontFamily: 'HelveticaCondensed',
-                  color: Color.fromARGB(255, 0, 76, 128),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  borderSide: const BorderSide(
-                    color: Color.fromARGB(255, 4, 56, 99),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  borderSide: const BorderSide(
-                    color: Color.fromARGB(255, 4, 56, 99),
-                  ),
-                ),
-              ),
+    return SizedBox(
+      width: 270,
+      child: DropdownButtonFormField<Analista>(
+        isExpanded: true,
+        dropdownColor: Colors.white,
+        focusColor: Colors.transparent,
+        style: const TextStyle(
+          fontFamily: 'HelveticaCondensed',
+          color: Colors.black,
+        ),
+        items: analistas.map((Analista analista) {
+          return DropdownMenuItem<Analista>(
+            value: analista,
+            child: Text(analista.analista),
+          );
+        }).toList(),
+        onChanged: (Analista? selectedAnalista) {
+          if (selectedAnalista != null) {
+            _fetchSocios(selectedAnalista.idusuario);
+          }
+        },
+        decoration: InputDecoration(
+          labelText: 'Seleccionar Analista',
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+          labelStyle: const TextStyle(
+            fontFamily: 'HelveticaCondensed',
+            color: Color.fromARGB(255, 0, 74, 125),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5.0),
+            borderSide: const BorderSide(
+              color: Color.fromARGB(255, 0, 74, 125),
             ),
           ),
-        ],
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5.0),
+            borderSide: const BorderSide(
+              color: Color.fromARGB(255, 0, 74, 125),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -194,7 +165,7 @@ class _NotificacionesSupervisorContentState
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${socio.name} ${socio.lastName}',
+                      '${socio.fullnombre}',
                       style: const TextStyle(
                         fontFamily: 'HelveticaCondensed',
                         fontWeight: FontWeight.bold,
@@ -232,6 +203,169 @@ class _NotificacionesSupervisorContentState
           ),
         ],
       ),
+    );
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(
+            message,
+            style: const TextStyle(
+              fontSize: 14.0, // Tamaño de fuente
+              color: Colors.black, // Color de texto
+              fontFamily: 'HelveticaCondensed', // Tipo de letra
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: const Text(
+                'Aceptar',
+                style: TextStyle(
+                  fontSize: 16.0, // Tamaño de fuente
+                  color:
+                      Color.fromARGB(255, 0, 74, 125), // Color de texto en azul
+                  fontFamily: 'HelveticaCondensed',
+                  fontWeight: FontWeight.bold, // Tipo de letra
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+// LLAMADAS HACIA LAS APIS
+// ----------------------
+
+  Future<void> _fetchAnalistas() async {
+    String token = await getToken();
+
+    final url = Uri.parse(
+        'https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=04');
+
+    final headers = {
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "*",
+      'Authorization': 'Bearer $token',
+      'Accept': '*/*'
+    };
+
+    final body = {
+      'idusuario': '12279',
+    };
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(body),
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic>? jsonResponse = json.decode(response.body);
+
+      if (jsonResponse != null) {
+        analistas =
+            jsonResponse.map((json) => Analista.fromJson(json)).toList();
+      } else {
+        //print('La respuesta de la API fue nula.');
+        _showErrorDialog('La respuesta de la API fue nula.');
+      }
+    } else {
+      print(
+          'Error al obtener los analistas. Código de estado: ${response.statusCode}');
+    }
+  }
+
+  Future<void> _fetchSocios([String? idUsuario]) async {
+    String token = await getToken();
+
+    final url = Uri.parse(
+        'https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=02');
+
+    final headers = {
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "*",
+      'Authorization': 'Bearer $token',
+      'Accept': '*/*'
+    };
+
+    final body = {
+      'idusuario': idUsuario ?? '12542',
+    };
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(body),
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic>? jsonResponse = json.decode(response.body);
+
+      if (jsonResponse != null) {
+        List<Socio> fetchedSocios =
+            jsonResponse.map((json) => Socio.fromJson(json)).toList();
+
+        setState(() {
+          filteredSocio = fetchedSocios;
+          filteredSocio.sort((a, b) => b.diasAtraso.compareTo(a.diasAtraso));
+        });
+      } else {
+        //print('La respuesta de la API fue nula.');
+        _showErrorDialog('No existen datos de socios de este analista');
+      }
+    } else {
+      print(
+          'Error al obtener los socios en mora. Código de estado: ${response.statusCode}');
+    }
+  }
+}
+
+// CLASES
+// --------
+class Socio {
+  final String dni;
+  final String fullnombre;
+  final String direccion;
+  final int diasAtraso;
+
+  Socio({
+    required this.dni,
+    required this.fullnombre,
+    required this.direccion,
+    required this.diasAtraso,
+  });
+
+  factory Socio.fromJson(Map<String, dynamic> json) {
+    return Socio(
+      dni: json['dni'],
+      fullnombre: json['fullnombre'],
+      direccion: json['direccion'],
+      diasAtraso: int.parse(json['dias_Atraso']),
+    );
+  }
+}
+
+class Analista {
+  final String idusuario;
+  final String analista;
+
+  Analista({
+    required this.idusuario,
+    required this.analista,
+  });
+
+  factory Analista.fromJson(Map<String, dynamic> json) {
+    return Analista(
+      idusuario: json['idusuario'],
+      analista: json['analista'],
     );
   }
 }
