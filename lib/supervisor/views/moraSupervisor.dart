@@ -10,7 +10,7 @@ class MoraSupervisorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MoraSupervisorContent();
+    return MoraSupervisorContent();
   }
 }
 
@@ -25,12 +25,28 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
   String selectedMenu = 'MORA';
   List<Socio> filteredSocio = [];
   List<Analista> analistas = [];
+  bool loading = false;
 
   @override
   void initState() {
     super.initState();
-    _fetchAnalistas();
-    _fetchSociosEnMora();
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    setState(() {
+      loading = true;
+    });
+    try {
+      await _fetchAnalistas();
+      await _fetchSociosEnMora();
+    } catch (e) {
+      _showErrorDialog(e.toString());
+    } finally {
+      setState(() {
+        loading = false;
+      });
+    }
   }
 
   @override
@@ -42,10 +58,8 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
             : null,
         body: Row(
           children: [
-            // Left side menu
             if (MediaQuery.of(context).size.width >= 640)
               MenuSupervisor(name: selectedMenu),
-            // Expanded section for the main content
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -54,8 +68,13 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
                   children: [
                     _buildTitle(),
                     const SizedBox(height: 10.0),
-                    // Aquí puedes agregar un DropdownButton para seleccionar analistas
-                    _buildAnalistasDropdown(),
+                    if (loading)
+                      const CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            Color.fromARGB(255, 0, 74, 125)),
+                      )
+                    else
+                      _buildAnalistasDropdown(),
                     const SizedBox(height: 10.0),
                     _buildDataTable(filteredSocio),
                   ],
@@ -102,7 +121,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
         }).toList(),
         onChanged: (Analista? selectedAnalista) {
           if (selectedAnalista != null) {
-            _fetchSociosEnMora(selectedAnalista.idusuario);
+            _fetchSociosEnMora(selectedAnalista.idanalista);
           }
         },
         decoration: InputDecoration(
@@ -212,9 +231,9 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
           content: Text(
             message,
             style: const TextStyle(
-              fontSize: 14.0, // Tamaño de fuente
-              color: Colors.black, // Color de texto
-              fontFamily: 'HelveticaCondensed', // Tipo de letra
+              fontSize: 14.0,
+              color: Colors.black,
+              fontFamily: 'HelveticaCondensed',
             ),
           ),
           actions: [
@@ -222,11 +241,10 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
               child: const Text(
                 'Aceptar',
                 style: TextStyle(
-                  fontSize: 16.0, // Tamaño de fuente
-                  color:
-                      Color.fromARGB(255, 0, 74, 125), // Color de texto en azul
+                  fontSize: 16.0,
+                  color: Color.fromARGB(255, 0, 74, 125),
                   fontFamily: 'HelveticaCondensed',
-                  fontWeight: FontWeight.bold, // Tipo de letra
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               onPressed: () {
@@ -238,9 +256,6 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
       },
     );
   }
-
-// LLAMADAS HACIA LAS APIS
-// ----------------------
 
   Future<void> _fetchAnalistas() async {
     String token = await getToken();
@@ -276,12 +291,13 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
         _showErrorDialog('La respuesta de la API fue nula.');
       }
     } else {
-      print(
+      //print('La respuesta de la API fue nula.');
+      _showErrorDialog(
           'Error al obtener los analistas. Código de estado: ${response.statusCode}');
     }
   }
 
-  Future<void> _fetchSociosEnMora([String? idUsuario]) async {
+  Future<void> _fetchSociosEnMora([String? idanalista]) async {
     String token = await getToken();
 
     final url = Uri.parse(
@@ -295,7 +311,7 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
     };
 
     final body = {
-      'idusuario': idUsuario ?? '12542',
+      'idusuario': idanalista ?? '12542',
     };
 
     final response = await http.post(
@@ -308,26 +324,27 @@ class _MoraSupervisorContentState extends State<MoraSupervisorContent> {
       final List<dynamic>? jsonResponse = json.decode(response.body);
 
       if (jsonResponse != null) {
-        List<Socio> fetchedSocios =
-            jsonResponse.map((json) => Socio.fromJson(json)).toList();
+        if (idanalista != null) {
+          List<Socio> fetchedSocios =
+              jsonResponse.map((json) => Socio.fromJson(json)).toList();
 
-        setState(() {
-          filteredSocio = fetchedSocios;
-          filteredSocio.sort((a, b) => b.diasAtraso.compareTo(a.diasAtraso));
-        });
+          setState(() {
+            filteredSocio = fetchedSocios;
+            filteredSocio.sort((a, b) => b.diasAtraso.compareTo(a.diasAtraso));
+          });
+        }
       } else {
         //print('La respuesta de la API fue nula.');
-        _showErrorDialog('No existen datos de socios de este analista');
+        _showErrorDialog('La respuesta de la API fue nula.');
       }
     } else {
-      print(
-          'Error al obtener los socios en mora. Código de estado: ${response.statusCode}');
+      //print('La respuesta de la API fue nula.');
+      _showErrorDialog(
+          'Error al obtener los analistas. Código de estado: ${response.statusCode}');
     }
   }
 }
 
-// CLASES
-// --------
 class Socio {
   final String dni;
   final String fullnombre;
@@ -352,17 +369,17 @@ class Socio {
 }
 
 class Analista {
-  final String idusuario;
+  final String idanalista;
   final String analista;
 
   Analista({
-    required this.idusuario,
+    required this.idanalista,
     required this.analista,
   });
 
   factory Analista.fromJson(Map<String, dynamic> json) {
     return Analista(
-      idusuario: json['idusuario'],
+      idanalista: json['idusuario'],
       analista: json['analista'],
     );
   }
