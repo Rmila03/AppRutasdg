@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:ruta_sdg/api.dart';
+import 'package:ruta_sdg/providers/location_provider.dart';
 import 'package:ruta_sdg/supervisor/views/homeSupervisor.dart';
 import 'package:ruta_sdg/analista/views/home.dart';
 import 'dart:convert';
@@ -15,7 +17,29 @@ Future<void> main() async {
   SecurityContext.defaultContext
       .setTrustedCertificatesBytes(data.buffer.asUint8List());*/
   HttpOverrides.global = MyHttpOverrides();
-  runApp(const MyApp());
+  //getData();
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => LocationProvider()),
+      ChangeNotifierProvider(create: (context) => UserData()),
+      // Agrega más proveedores según sea necesario
+    ],
+    child: MyApp(),
+  )
+      /*MultiProvider(
+      providers: [
+        /*ChangeNotifierProvider<UserData>(
+          create: (_) => UserData(),
+        ),*/
+        ChangeNotifierProxyProvider<UserData, LocationProvider>(
+          create: (_) => LocationProvider(),
+          update: (_, userData, locationProvider) =>
+              LocationProvider(userData.userId),
+        ),
+      ],
+      child: const MyApp(),
+    ),*/
+      );
 }
 
 class MyApp extends StatelessWidget {
@@ -351,7 +375,6 @@ class _LoginState extends State<Login> {
           'Accept': '*/*'
         },
       );
-      print(response);
       if (response.statusCode == 200) {
         String responseBody = utf8.decoder.convert(response.bodyBytes);
         var res = jsonDecode(responseBody);
@@ -363,7 +386,9 @@ class _LoginState extends State<Login> {
         }
         String idusuario = res['idusuario'];
         String rol = res['rol'];
+        final user = Provider.of<UserData>(context, listen: false);
         if (rol == "ANALISTA") {
+          user.setUser(idusuario, "Analista");
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -371,6 +396,7 @@ class _LoginState extends State<Login> {
           );
         }
         if (rol == "SUPERVISOR") {
+          user.setUser(idusuario, "Supervisor");
           Navigator.push(
             context,
             MaterialPageRoute(

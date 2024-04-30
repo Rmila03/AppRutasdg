@@ -32,11 +32,11 @@ void getData() async {
   //var url = Uri.https('wsdomingo.coopsantodomingo.com',
   //    '/laboratorio/creditos.php', {'codServicio': '01'});
   var url = Uri.parse(
-      "https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=02");
+      "https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=03");
   try {
     final response = await http.post(
       url,
-      body: jsonEncode({"idusuario": "17935"}),
+      body: jsonEncode({"dni": "23993794"}),
       headers: {
         'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": "*",
@@ -44,7 +44,7 @@ void getData() async {
         'Accept': '*/*'
       },
     );
-    print(response);
+    print(">>>>>");
     if (response.statusCode == 200) {
       String responseBody = utf8.decoder.convert(response.bodyBytes);
 

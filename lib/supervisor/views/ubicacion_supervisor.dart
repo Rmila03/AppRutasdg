@@ -1,11 +1,16 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:ruta_sdg/analista.dart';
+import 'package:ruta_sdg/providers/location_provider.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor.dart';
 import 'dart:ui' as ui;
 import 'package:http/http.dart' as http;
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
+import 'package:geolocator/geolocator.dart';
 
 class UbicacionSupervisorPage extends StatefulWidget {
   const UbicacionSupervisorPage({super.key});
@@ -195,6 +200,42 @@ class _UbicacionSupervisorPage extends State {
                                 ),
                               ),
                             ),
+                            Container(
+                              constraints: BoxConstraints(maxHeight: 500),
+                              child: StreamBuilder<Position>(
+                                stream: Geolocator.getPositionStream(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    final position = snapshot.data;
+                                    final locationProvider =
+                                        Provider.of<LocationProvider>(
+                                      context,
+                                    );
+                                    final user = Provider.of<UserData>(
+                                      context,
+                                    );
+                                    print(user.rol);
+                                    print(user.userid);
+                                    return GoogleMap(
+                                      initialCameraPosition: CameraPosition(
+                                        target: LatLng(position!.latitude,
+                                            position.longitude),
+                                        zoom: 15.0,
+                                      ),
+                                      markers: Set<Marker>.from([
+                                        Marker(
+                                          markerId: MarkerId('user_location'),
+                                          position: LatLng(position.latitude,
+                                              position.longitude),
+                                          icon: BitmapDescriptor.defaultMarker,
+                                        ),
+                                      ]),
+                                    );
+                                  }
+                                  return CircularProgressIndicator();
+                                },
+                              ),
+                            )
                           ],
                         ),
                       ),
