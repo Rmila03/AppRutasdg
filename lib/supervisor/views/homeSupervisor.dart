@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ruta_sdg/supervisor/listacartera.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/socio.dart';
-import 'package:ruta_sdg/analista.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:ruta_sdg/api.dart';
 //import 'package:tooltip/tooltip.dart';
 
 class HomeSupervisorPage extends StatelessWidget {
@@ -16,15 +16,17 @@ class HomeSupervisorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomeSupervisorPage(),
+    return MaterialApp(
+      home: MyHomeSupervisorPage(
+          idusuario: idusuario), // Pasamos el idusuario aquí
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyHomeSupervisorPage extends StatefulWidget {
-  const MyHomeSupervisorPage({super.key});
+  final String? idusuario;
+  const MyHomeSupervisorPage({super.key, this.idusuario});
 
   @override
   _MyHomeSupervisorPageState createState() => _MyHomeSupervisorPageState();
@@ -32,26 +34,23 @@ class MyHomeSupervisorPage extends StatefulWidget {
 
 class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     with SingleTickerProviderStateMixin {
-  String selectedOption = '';
   DateTime selectedDate = DateTime.now();
-  List<Analista> analistas = getAnalistas();
-  List<String> menuOptions = [];
-  final List<Socio> socios = getSocios();
   bool isFloatingPageVisible = false;
   late AnimationController _animationController;
   late Animation<Offset> _offsetAnimation;
-  List<String> districts = [
-    'District 1',
-    'District 2',
-    'District 3'
-  ]; // Example districts list
-  final List<String> numbers =
-      List.generate(11, (index) => (index).toString()); // Numbers from 1 to 10
   int selectedPromotion = 0;
   int selectedAmpliation = 0;
   int selectedTracking = 0;
   int selectedRecovery = 0;
-  String selectedDistrict = '';
+  String DistritoSeleccionado = "";
+  String AnalistaSeleccionado = "";
+  List<String> districts = [];
+  List<Analista> analistas = [];
+  List<Distrito> distritos = [];
+  List<HojaRuta> SociosHojaRuta = [];
+  Analista? selectedAnalista;
+  Distrito? selectedDistrito;
+  int? selectedNumber;
   @override
   void initState() {
     super.initState();
@@ -68,109 +67,12 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
       parent: _animationController,
       curve: Curves.easeInOut,
     ));
+
+    _fetchAnalistas();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Socio> sociosAssignedToToday = [];
-    List<Socio> sociosNotAssignedToToday = [];
-    var container = Container(
-      alignment: Alignment.bottomLeft,
-      padding: const EdgeInsets.only(left: 25.0),
-      width: 200,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: DropdownButton<String>(
-        isExpanded: true,
-        dropdownColor: Colors.white,
-        focusColor: Colors.transparent,
-        value: selectedOption.isNotEmpty ? selectedOption : null,
-        items: analistas.map((Analista analista) {
-          return DropdownMenuItem<String>(
-            value: analista.idAnalista,
-            child: Text(
-              '${analista.name} ${analista.lastName}',
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 15.0,
-                fontFamily: 'HelveticaCondensed',
-              ),
-            ),
-          );
-        }).toList(),
-        onChanged: (String? value) {
-          setState(() {
-            selectedOption = value ?? '';
-          });
-        },
-        hint: const Text(
-          'Seleccionar analista',
-          style: TextStyle(
-            color: Color.fromARGB(255, 196, 196, 196),
-            fontSize: 15.0,
-            fontFamily: 'HelveticaCondensed',
-          ),
-        ),
-      ),
-    );
-
-    List<String> selectedSociosIds = [];
-
-    switch (selectedOption) {
-      case '1':
-        selectedSociosIds = SociosPorAnalista(analistaId: '1', socios: socios);
-        break;
-      case '2':
-        selectedSociosIds = SociosPorAnalista(analistaId: '2', socios: socios);
-        break;
-      case '3':
-        selectedSociosIds = SociosPorAnalista(analistaId: '3', socios: socios);
-        break;
-      case '4':
-        selectedSociosIds = SociosPorAnalista(analistaId: '4', socios: socios);
-        break;
-      case '5':
-        selectedSociosIds = SociosPorAnalista(analistaId: '5', socios: socios);
-        break;
-      case '6':
-        selectedSociosIds = SociosPorAnalista(analistaId: '6', socios: socios);
-        break;
-      case '7':
-        selectedSociosIds = SociosPorAnalista(analistaId: '7', socios: socios);
-        break;
-      case '8':
-        selectedSociosIds = SociosPorAnalista(analistaId: '8', socios: socios);
-        break;
-      case '9':
-        selectedSociosIds = SociosPorAnalista(analistaId: '9', socios: socios);
-        break;
-
-      // Repite este bloque para cada analista (hasta el '10')
-      case '10':
-        selectedSociosIds = SociosPorAnalista(analistaId: '10', socios: socios);
-        break;
-      default:
-        // Handle default case if needed
-        break;
-    }
-
-    //List<Socio> filteredUsers = users.where((user) {return selectedUsersIds.contains(user.number);
-    //}).toList();
-    // List<Socio> usersAssignedToToday = [];
-    //List<Socio> usersNotAssignedToToday = [];
-
-    // Filtrar usuarios asignados y no asignados a la fecha seleccionada
-    for (Socio socio in socios) {
-      if (selectedSociosIds.contains(socio.idSocio)) {
-        if (socioIsAssignedToToday(socio)) {
-          sociosAssignedToToday.add(socio);
-        } else {
-          sociosNotAssignedToToday.add(socio);
-        }
-      }
-    }
-
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: MediaQuery.of(context).size.width < 640
@@ -202,6 +104,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                             ),
                           ),
                         ),
+                        // =================================== Fecha ===============================================
                         Padding(
                           padding: const EdgeInsets.only(left: 20.0),
                           child: Row(
@@ -242,13 +145,16 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                           ),
                         ),
                         const SizedBox(height: 20.0),
+                        // =================================== Seleccionador analista ===============================================
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            container,
+                            _buildAnalistasDropdown(),
                           ],
                         ),
                         const SizedBox(height: 25.0),
+                        // =================================== Seleccionadores distrito, num prom,ampl,seg,rec ===============================================
+
                         LayoutBuilder(
                           builder: (context, constraints) {
                             final screenWidth = constraints.maxWidth;
@@ -266,15 +172,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                         _buildSquareWithIcon(
                                           FontAwesomeIcons.mapLocation,
                                           "Distrito",
-                                          _buildDistrictSelector(
-                                            districts: districts,
-                                            selectedDistrict: selectedDistrict,
-                                            onChanged: (String? value) {
-                                              setState(() {
-                                                selectedDistrict = value ?? '';
-                                              });
-                                            },
-                                          ),
+                                          _buildDistrictSelector(),
                                           null,
                                         ),
                                         const SizedBox(
@@ -388,6 +286,15 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                               onTap: () {
                                                 // Aquí puedes agregar la lógica para generar
                                                 // Por ejemplo, puedes llamar a una función _handleGeneratePressed()
+
+                                                _fetchHojaRuta(
+                                                    AnalistaSeleccionado,
+                                                    DistritoSeleccionado,
+                                                    selectedPromotion,
+                                                    selectedAmpliation,
+                                                    selectedTracking,
+                                                    selectedRecovery);
+                                                print(SociosHojaRuta);
                                               },
                                               child: Container(
                                                 padding:
@@ -437,15 +344,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                       _buildSquareWithIcon(
                                         FontAwesomeIcons.mapLocation,
                                         "Distrito",
-                                        _buildDistrictSelector(
-                                          districts: districts,
-                                          selectedDistrict: selectedDistrict,
-                                          onChanged: (String? value) {
-                                            setState(() {
-                                              selectedDistrict = value ?? '';
-                                            });
-                                          },
-                                        ),
+                                        _buildDistrictSelector(),
                                         null,
                                       ),
                                       const SizedBox(
@@ -555,8 +454,14 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                           const SizedBox(height: 15.0),
                                           GestureDetector(
                                             onTap: () {
-                                              // Aquí puedes agregar la lógica para generar
-                                              // Por ejemplo, puedes llamar a una función _handleGeneratePressed()
+                                              _fetchHojaRuta(
+                                                  AnalistaSeleccionado,
+                                                  DistritoSeleccionado,
+                                                  selectedPromotion,
+                                                  selectedAmpliation,
+                                                  selectedTracking,
+                                                  selectedRecovery);
+                                              print(SociosHojaRuta);
                                             },
                                             child: Container(
                                               padding:
@@ -597,14 +502,16 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                           },
                         ),
                         const SizedBox(height: 20.0),
+                        // =================================== TABLA ===============================================
                         Center(
-                          child: _buildDataTable(
-                              selectedOption, sociosAssignedToToday),
-                        ),
+                            //child: _buildDataTable(selectedOption, sociosAssignedToToday),
+                            ),
                         const SizedBox(height: 15.0),
+                        // =================================== Boton Guardar ===============================================
                         Center(
                           child: GestureDetector(
                             onTap: () {
+                              print(DistritoSeleccionado);
                               // Aquí puedes agregar la lógica para generar
                               // Por ejemplo, puedes llamar a una función _handleGeneratePressed()
                             },
@@ -642,7 +549,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                 ),
               ],
             ),
-            if (isFloatingPageVisible)
+            /*if (isFloatingPageVisible)
               Stack(
                 children: [
                   Positioned.fill(
@@ -684,8 +591,58 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                     ),
                   ),
                 ],
-              ),
+              ),*/
           ],
+        ),
+      ),
+    );
+  }
+
+  // =================================== WIDGETS ===============================================
+  Widget _buildAnalistasDropdown() {
+    return Container(
+      alignment: Alignment.bottomLeft,
+      padding: const EdgeInsets.only(left: 25.0),
+      width: 300,
+      child: DropdownButtonFormField<Analista>(
+        isExpanded: true,
+        dropdownColor: Colors.white,
+        focusColor: Colors.transparent,
+        style: const TextStyle(
+          fontSize: 13,
+          fontFamily: 'HelveticaCondensed',
+          color: Colors.black,
+        ),
+        items: analistas.map((Analista analista) {
+          return DropdownMenuItem<Analista>(
+            value: analista,
+            child: Text(
+              analista.analista,
+              style: const TextStyle(
+                fontSize: 13.0,
+                fontFamily: 'HelveticaCondensed',
+                color: Color.fromARGB(255, 0, 76, 128),
+              ),
+            ),
+          );
+        }).toList(),
+        onChanged: (Analista? selectedAnalista) {
+          if (selectedAnalista != null) {
+            setState(() {
+              this.selectedAnalista = selectedAnalista;
+            });
+            AnalistaSeleccionado = selectedAnalista.idusuario.toString();
+            _fetchDistritos(selectedAnalista.idusuario.toString());
+          }
+        },
+        decoration: const InputDecoration(
+          labelText: 'Seleccionar Analista',
+          contentPadding: EdgeInsets.symmetric(horizontal: 15.0),
+          labelStyle: TextStyle(
+            fontSize: 15,
+            fontFamily: 'HelveticaCondensed',
+            color: Color.fromARGB(255, 0, 74, 125),
+          ),
         ),
       ),
     );
@@ -734,34 +691,39 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
   }
 
   // Widget para construir el selector de distrito
-  Widget _buildDistrictSelector({
-    required List<String> districts,
-    required String selectedDistrict,
-    required ValueChanged<String?> onChanged, // Cambiado a String?
-  }) {
-    return DropdownButton<String>(
+  Widget _buildDistrictSelector() {
+    return DropdownButtonFormField<Distrito>(
       isExpanded: true,
-      value: selectedDistrict.isNotEmpty ? selectedDistrict : null,
-      items: districts.map((district) {
-        return DropdownMenuItem<String>(
-          value: district,
+      dropdownColor: Colors.white,
+      focusColor: Colors.transparent,
+      value: selectedDistrito, // Establece el valor seleccionado
+      items: distritos.map((Distrito descripcion) {
+        return DropdownMenuItem<Distrito>(
+          value: descripcion,
           child: Text(
-            district,
+            descripcion.descripcion,
             style: const TextStyle(
-              color: Color.fromARGB(255, 0, 76, 128),
-              fontSize: 15.0,
+              fontSize: 13.0,
               fontFamily: 'HelveticaCondensed',
+              color: Color.fromARGB(255, 0, 76, 128),
             ),
           ),
         );
       }).toList(),
-      onChanged: onChanged,
+      onChanged: (Distrito? selectedDistrito) {
+        if (selectedDistrito != null) {
+          setState(() {
+            this.selectedDistrito = selectedDistrito;
+          });
+          DistritoSeleccionado = selectedDistrito.iddistrito.toString();
+        }
+      },
       hint: const Text(
-        'Seleccionar distrito',
+        'Seleccionar Distrito',
         style: TextStyle(
-          color: Color.fromARGB(255, 196, 196, 196),
-          fontSize: 15.0,
+          fontSize: 13.0,
           fontFamily: 'HelveticaCondensed',
+          color: Color.fromARGB(255, 196, 196, 196),
         ),
       ),
     );
@@ -787,7 +749,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
               '$index',
               style: const TextStyle(
                 color: Color.fromARGB(255, 0, 76, 128),
-                fontSize: 15.0,
+                fontSize: 13.0,
                 fontFamily: 'HelveticaCondensed',
               ),
             ),
@@ -799,21 +761,11 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         'Seleccionar número',
         style: TextStyle(
           color: Color.fromARGB(255, 196, 196, 196),
-          fontSize: 15.0,
+          fontSize: 13.0,
           fontFamily: 'HelveticaCondensed',
         ),
       ),
     );
-  }
-
-  List<String> SociosPorAnalista({
-    required String analistaId,
-    required List<Socio> socios,
-  }) {
-    return socios
-        .where((socio) => socio.idAnalista == analistaId)
-        .map((socio) => socio.idSocio)
-        .toList();
   }
 
   Widget _buildDataTable(String title, List<Socio> socioList) {
@@ -915,28 +867,198 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     );
   }
 
+  // =================================== APIS ===============================================
+  Future<void> _fetchAnalistas() async {
+    try {
+      String token = await getToken();
+
+      final url = Uri.parse(
+          'https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=04');
+
+      final headers = {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        'Authorization': 'Bearer $token',
+        'Accept': '*/*'
+      };
+
+      final body = {
+        'idusuario': "12279",
+        //'idusuario': widget.idusuario,
+      };
+
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: jsonEncode(body),
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic>? jsonResponse = json.decode(response.body);
+
+        if (jsonResponse != null) {
+          setState(() {
+            analistas =
+                jsonResponse.map((json) => Analista.fromJson(json)).toList();
+            selectedAnalista = analistas.isNotEmpty ? analistas.first : null;
+
+            _fetchDistritos(selectedAnalista?.idusuario.toString() ?? '');
+          });
+        } else {
+          _showErrorDialog('La respuesta de la API fue nula.');
+        }
+      } else {
+        print(
+            'Error al obtener los analistas. Código de estado: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> _fetchDistritos(String idusuario) async {
+    try {
+      String token = await getToken();
+
+      final url = Uri.parse(
+          'https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=01');
+
+      final headers = {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        'Authorization': 'Bearer $token',
+        'Accept': '*/*'
+      };
+
+      final body = {
+        'idusuario': idusuario,
+      };
+
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: jsonEncode(body),
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic>? jsonResponse = json.decode(response.body);
+
+        if (jsonResponse != null) {
+          setState(() {
+            distritos =
+                jsonResponse.map((json) => Distrito.fromJson(json)).toList();
+            selectedDistrito = distritos.isNotEmpty ? null : null;
+          });
+        } else {
+          _showErrorDialog('No existen datos de socios de este analista');
+        }
+      } else {
+        print(
+            'Error al obtener los socios en mora. Código de estado: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> _fetchHojaRuta(
+      String idusuario,
+      String iddistrito,
+      int selectedPromotion,
+      int selectedAmpliation,
+      int selectedTracking,
+      int selectedRecovery) async {
+    try {
+      String token = await getToken();
+
+      final url = Uri.parse(
+          'https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=09');
+
+      final headers = {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        'Authorization': 'Bearer $token',
+        'Accept': '*/*'
+      };
+
+      final body = {
+        {
+          "idusuario": idusuario,
+          "iddistrito": iddistrito,
+          "cantidadPro": selectedPromotion,
+          "cantidadAmp": selectedAmpliation,
+          "cantidadSeg": selectedTracking,
+          "cantiddRec": selectedRecovery,
+        }
+      };
+
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: jsonEncode(body),
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic>? jsonResponse = json.decode(response.body);
+
+        if (jsonResponse != null) {
+          setState(() {
+            SociosHojaRuta =
+                jsonResponse.map((json) => HojaRuta.fromJson(json)).toList();
+          });
+        } else {
+          _showErrorDialog('La respuesta de la API fue nula.');
+        }
+      } else {
+        print(
+            'Error al obtener los analistas. Código de estado: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+// =================================== VOID ===============================================
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(
+            message,
+            style: const TextStyle(
+              fontSize: 14.0, // Tamaño de fuente
+              color: Colors.black, // Color de texto
+              fontFamily: 'HelveticaCondensed', // Tipo de letra
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: const Text(
+                'Aceptar',
+                style: TextStyle(
+                  fontSize: 16.0, // Tamaño de fuente
+                  color:
+                      Color.fromARGB(255, 0, 74, 125), // Color de texto en azul
+                  fontFamily: 'HelveticaCondensed',
+                  fontWeight: FontWeight.bold, // Tipo de letra
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _handlePlusIconPressed(Socio socio) {
     setState(() {
       socio.assignedDate = DateTime(2024, 1, 8);
     });
     _toggleFloatingPage();
-  }
-
-  void _onDistrictChanged(dynamic value) {
-    if (value is String) {
-      // Handle district selection
-      setState(() {
-        selectedDistrict = value;
-      });
-    } else if (value is int) {
-      // Handle number selection
-      setState(() {
-        selectedPromotion = value;
-        selectedAmpliation = value;
-        selectedTracking = value;
-        selectedRecovery = value;
-      });
-    }
   }
 
   void _handleTrashIconPressed(Socio socio) {
@@ -994,6 +1116,66 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     setState(() {
       isFloatingPageVisible = !isFloatingPageVisible;
     });
+  }
+}
+
+// =================================== CLASES ===============================================
+class HojaRuta {
+  final String dni;
+  final String socio;
+  final String direccion;
+  final String idprestamo;
+  final String modalidad;
+
+  HojaRuta({
+    required this.dni,
+    required this.socio,
+    required this.direccion,
+    required this.idprestamo,
+    required this.modalidad,
+  });
+
+  factory HojaRuta.fromJson(Map<String, dynamic> json) {
+    return HojaRuta(
+      dni: json['dni'],
+      socio: json['socio'],
+      direccion: json['direccion'],
+      idprestamo: json['idprestamo'],
+      modalidad: json['modalidad'],
+    );
+  }
+}
+
+class Distrito {
+  final String iddistrito;
+  final String descripcion;
+  Distrito({
+    required this.iddistrito,
+    required this.descripcion,
+  });
+
+  factory Distrito.fromJson(Map<String, dynamic> json) {
+    return Distrito(
+      iddistrito: json['iddistrito'],
+      descripcion: json['descripcion'],
+    );
+  }
+}
+
+class Analista {
+  final String idusuario;
+  final String analista;
+
+  Analista({
+    required this.idusuario,
+    required this.analista,
+  });
+
+  factory Analista.fromJson(Map<String, dynamic> json) {
+    return Analista(
+      idusuario: json['idusuario'],
+      analista: json['analista'],
+    );
   }
 }
 
