@@ -55,7 +55,7 @@ class _TextFormResult extends State<TextFormResult> {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
                 borderSide: const BorderSide(
-                    width: 2.0, color: Color.fromARGB(255, 0, 76, 128)),
+                    width: 2.0, color: Color.fromARGB(255, 2, 7, 10)),
               ),
             ),
             style: const TextStyle(

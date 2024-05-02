@@ -352,14 +352,13 @@ class AmpliacionFormState extends State<AmpliacionForm> {
                         ),
                       ],
                     ),
-                    const TextFormResult(
-                        label: "Pago Mensual:", content: "s/. 120.50"),
+                    const TextFormResult(label: "Pago Mensual:", content: ""),
                     const TextFormResult(
                       label: "Primera fecha de pago:",
-                      content: "12/02/2023",
+                      content: "",
                     ),
                     const TextFormResult(
-                        label: "Última fehca de pago", content: "12/02/2024"),
+                        label: "Última fecha de pago", content: ""),
                     Row(
                       children: [
                         const Text(

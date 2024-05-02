@@ -78,7 +78,7 @@ class _NotificacionPageState extends State<NotificacionPage> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: loading
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(
                     Color.fromARGB(255, 0, 74, 125)),
@@ -97,7 +97,7 @@ class _NotificacionPageState extends State<NotificacionPage> {
                       ),
                     ],
                   )
-                : Center(
+                : const Center(
                     child: Text('No hay datos de socios'),
                   ),
       ),
@@ -111,13 +111,13 @@ class _NotificacionPageState extends State<NotificacionPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
         side: const BorderSide(
-            color: const Color.fromARGB(255, 0, 76, 128), width: 2.0),
+            color: Color.fromARGB(255, 0, 76, 128), width: 1.0),
       ),
       child: ListTile(
-        contentPadding: const EdgeInsets.all(16),
+        contentPadding: const EdgeInsets.all(8),
         leading: Container(
           padding: const EdgeInsets.all(8),
-          child: Icon(
+          child: const Icon(
             FontAwesomeIcons.bell,
             color: Colors.red,
           ),
@@ -144,7 +144,7 @@ class _NotificacionPageState extends State<NotificacionPage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
             side: const BorderSide(
-                color: const Color.fromARGB(255, 0, 76, 128), width: 2.0),
+                color: const Color.fromARGB(255, 0, 76, 128), width: 1.0),
           ),
         ),
         onTap: () {
