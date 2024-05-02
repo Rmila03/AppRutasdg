@@ -152,7 +152,14 @@ class _UbicacionSupervisorPage extends State {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
-                              child: DropdownButton<String>(
+                              child: DropdownButtonFormField<String>(
+                                isExpanded: true,
+                                dropdownColor: Colors.white,
+                                focusColor: Colors.transparent,
+                                style: const TextStyle(
+                                  fontFamily: 'HelveticaCondensed',
+                                  color: Colors.black,
+                                ),
                                 value: selectedOption.isNotEmpty
                                     ? selectedOption
                                     : null,
@@ -183,6 +190,27 @@ class _UbicacionSupervisorPage extends State {
                                     fontFamily: "HelveticaCondensed",
                                   ),
                                 ),
+                                decoration: InputDecoration(
+                                  labelText: 'Seleccionar Analista',
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 15.0),
+                                  labelStyle: const TextStyle(
+                                    fontFamily: 'HelveticaCondensed',
+                                    color: Color.fromARGB(255, 0, 74, 125),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderSide: const BorderSide(
+                                      color: Color.fromARGB(255, 0, 74, 125),
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderSide: const BorderSide(
+                                      color: Color.fromARGB(255, 0, 74, 125),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 25.0),
@@ -200,7 +228,7 @@ class _UbicacionSupervisorPage extends State {
                                 ),
                               ),
                             ),
-                            Container(
+                            /*Container(
                               constraints: BoxConstraints(maxHeight: 500),
                               child: StreamBuilder<Position>(
                                 stream: Geolocator.getPositionStream(),
@@ -235,7 +263,7 @@ class _UbicacionSupervisorPage extends State {
                                   return CircularProgressIndicator();
                                 },
                               ),
-                            )
+                            )*/
                           ],
                         ),
                       ),

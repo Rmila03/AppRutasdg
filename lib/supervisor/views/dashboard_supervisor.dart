@@ -110,14 +110,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
         color: const Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(8.0),
       ),
-      child: DropdownButtonFormField<String>(
+      child: DropdownButton<String>(
         isExpanded: true,
-        dropdownColor: Colors.white,
-        focusColor: Colors.transparent,
-        style: const TextStyle(
-          fontFamily: 'HelveticaCondensed',
-          color: Colors.black,
-        ),
         value: selectedIndex != 0 ? selectedIndex.toString() : null,
         items: List.generate(analistas.length, (index) {
           return DropdownMenuItem<String>(
@@ -145,26 +139,6 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
             color: Color.fromARGB(255, 0, 76, 128),
             fontSize: 15.0,
             fontFamily: 'HelveticaCondensed',
-          ),
-        ),
-        decoration: InputDecoration(
-          labelText: 'Seleccionar Analista',
-          contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
-          labelStyle: const TextStyle(
-            fontFamily: 'HelveticaCondensed',
-            color: Color.fromARGB(255, 0, 74, 125),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5.0),
-            borderSide: const BorderSide(
-              color: Color.fromARGB(255, 0, 74, 125),
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5.0),
-            borderSide: const BorderSide(
-              color: Color.fromARGB(255, 0, 74, 125),
-            ),
           ),
         ),
       ),
