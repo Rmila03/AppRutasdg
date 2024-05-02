@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:ruta_sdg/api.dart';
 import 'package:ruta_sdg/supervisor/widgets/table.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
@@ -8,6 +10,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ruta_sdg/analista.dart';
+import 'package:http/http.dart' as http;
 
 class DashboardSupervisorPage extends StatefulWidget {
   const DashboardSupervisorPage({super.key});
@@ -28,26 +31,55 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
   DateTime month = DateTime.now();
   DateTime year = DateTime.now();
   DateTime _selectedDate = DateTime.now();
-  List<Analista> Analistas = getAnalistas();
+  List<Analista> analistas = [];
   int id = 0;
-
-  late List<_ChartData> data;
+  final Color azul = const Color.fromRGBO(9, 0, 136, 1);
+  final Color morado = const Color.fromRGBO(147, 0, 119, 1);
+  final Color amarillo = const Color.fromRGBO(255, 189, 57, 1);
+  //late List<_ChartData> data;
   late TooltipBehavior _tooltip;
+  bool loading = false;
   final List<ChartData> chartData = [
     ChartData('Promoción', 50, const Color.fromRGBO(9, 0, 136, 1)),
     ChartData('Seguimiento', 45, const Color.fromRGBO(147, 0, 119, 1)),
     ChartData('Recuperación', 34, const Color.fromRGBO(255, 189, 57, 1))
   ];
   int? selectedIndex = 0;
-  List<Analista> analistas = getAnalistas();
+  //List<Analista> analistas = getAnalistas();
   Set<String> selectedBars = Set<String>();
   final GlobalKey<SfCartesianChartState> _chartKey =
       GlobalKey<SfCartesianChartState>();
   @override
   void initState() {
-    data = [
-      _ChartData(1, 'Juan', "Suarez Perez", 24000, 14000, 25000, 10.2, 10, 6, 2,
-          4, 23, 4, 7, 11, 40, "Normal"),
+    _fetchData();
+    /*data = [
+      _ChartData(
+          1,
+          'Juan',
+          "Suarez Perez",
+          24000,
+          14000,
+          25000,
+          10.2,
+          10,
+          6,
+          2,
+          4,
+          23,
+          4,
+          7,
+          11,
+          40,
+          "Normal",
+          'Promoción',
+          'Seguimiento',
+          'Recuperación',
+          50,
+          45,
+          34,
+          azul,
+          morado,
+          amarillo),
       _ChartData(1, 'Carlos', "Suarez Perez", 26000, 12000, 22000, 2.2, 10, 6,
           2, 4, 23, 4, 7, 4, 20, "Deficiente"),
       _ChartData(1, 'Maria', "Suarez Perez", 21000, 14000, 23000, 18.2, 10, 6,
@@ -56,7 +88,8 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
           6, 2, 4, 23, 4, 7, 12, 50, "Normal"),
       _ChartData(1, 'Adolfo', "Suarez Perez", 25000, 16000, 24000, 11.2, 10, 6,
           2, 4, 23, 4, 7, 9, 66, "Normal"),
-    ];
+    ];*/
+
     _tooltip = TooltipBehavior(enable: true);
     super.initState();
   }
@@ -77,14 +110,20 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
         color: const Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.circular(8.0),
       ),
-      child: DropdownButton<String>(
+      child: DropdownButtonFormField<String>(
         isExpanded: true,
+        dropdownColor: Colors.white,
+        focusColor: Colors.transparent,
+        style: const TextStyle(
+          fontFamily: 'HelveticaCondensed',
+          color: Colors.black,
+        ),
         value: selectedIndex != 0 ? selectedIndex.toString() : null,
         items: List.generate(analistas.length, (index) {
           return DropdownMenuItem<String>(
-            value: analistas[index].idAnalista,
+            value: analistas[index].idAnalista.toString(),
             child: Text(
-              '${analistas[index].name} ${analistas[index].lastName}',
+              analistas[index].nombreAnalista,
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15.0,
@@ -108,6 +147,26 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
             fontFamily: 'HelveticaCondensed',
           ),
         ),
+        decoration: InputDecoration(
+          labelText: 'Seleccionar Analista',
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+          labelStyle: const TextStyle(
+            fontFamily: 'HelveticaCondensed',
+            color: Color.fromARGB(255, 0, 74, 125),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5.0),
+            borderSide: const BorderSide(
+              color: Color.fromARGB(255, 0, 74, 125),
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5.0),
+            borderSide: const BorderSide(
+              color: Color.fromARGB(255, 0, 74, 125),
+            ),
+          ),
+        ),
       ),
     );
     return MaterialApp(
@@ -121,181 +180,207 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
         Locale('en', ''),
         Locale('es', ''),
       ],
-      home: SafeArea(
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          bottomNavigationBar: MediaQuery.of(context).size.width < 640
-              ? const MenuSupervisorMobile(name: "DASHBOARD")
-              : null,
-          body: Row(
-            children: [
-              if (MediaQuery.of(context).size.width >= 640)
-                const MenuSupervisor(name: "DASHBOARD"),
-              Expanded(
-                child: Column(
+      home: loading
+          ? Scaffold(
+              body: Container(
+                width: 50,
+                height: 50,
+                child: const CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Color.fromARGB(255, 0, 74, 125)),
+                ),
+              ),
+            )
+          : SafeArea(
+              child: Scaffold(
+                resizeToAvoidBottomInset: false,
+                bottomNavigationBar: MediaQuery.of(context).size.width < 640
+                    ? const MenuSupervisorMobile(name: "DASHBOARD")
+                    : null,
+                body: Row(
                   children: [
+                    if (MediaQuery.of(context).size.width >= 640)
+                      const MenuSupervisor(name: "DASHBOARD"),
                     Expanded(
-                      flex: 5,
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16, right: 8, top: 41, bottom: 16),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Column(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: SingleChildScrollView(
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 16, right: 8, top: 41, bottom: 16),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      child: const Text(
-                                        'DASHBOARD',
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 0, 76, 128),
-                                          fontSize: 25.0,
-                                          fontWeight: FontWeight.w900,
-                                          fontFamily: 'HelveticaCondensed',
-                                        ),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Container(
-                                          alignment: Alignment.center,
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 8, horizontal: 12),
-                                          margin: const EdgeInsets.symmetric(
-                                              vertical: 10),
-                                          decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                255, 0, 76, 128),
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                selectedIndex = 0;
-                                                print(_chartKey.currentState
-                                                    ?.widget.series.length);
-                                                print(_chartKey
-                                                        .currentState
-                                                        ?.widget
-                                                        .series[0]
-                                                        .dataSource![1]
-                                                        .selectionBehavior!
-                                                        .selectedColor =
-                                                    Colors.red);
-                                                _chartKey
-                                                            .currentState
-                                                            ?.widget
-                                                            .series[0]
-                                                            .selectionBehavior!
-                                                            .selectedColor ==
-                                                        null
-                                                    ? Colors.red
-                                                    : null;
-                                              });
-                                            },
-                                            child: const Row(
-                                              children: [
-                                                Icon(FontAwesomeIcons.eye,
-                                                    color: Colors.white),
-                                                SizedBox(
-                                                  width: 10.0,
-                                                ),
-                                                Text(
-                                                  '  Ver todo ',
-                                                  style: TextStyle(
-                                                    fontFamily:
-                                                        "HelveticaCondensed",
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ],
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            alignment: Alignment.center,
+                                            child: const Text(
+                                              'DASHBOARD',
+                                              style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 0, 76, 128),
+                                                fontSize: 25.0,
+                                                fontWeight: FontWeight.w900,
+                                                fontFamily:
+                                                    'HelveticaCondensed',
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    SfCartesianChart(
-                                      key: _chartKey,
-                                      title: const ChartTitle(
-                                          alignment: ChartAlignment.near,
-                                          text: "Mes de Febrero",
-                                          textStyle: TextStyle(
-                                            fontFamily: "HelveticaCondensed",
-                                            color:
-                                                Color.fromARGB(255, 0, 76, 128),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          )),
-                                      onSelectionChanged: (value) {
-                                        //value.selectedColor = Colors.red;
-                                        /*setState(() {
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Container(
+                                                alignment: Alignment.center,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8,
+                                                        horizontal: 12),
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 10),
+                                                decoration: BoxDecoration(
+                                                  color: const Color.fromARGB(
+                                                      255, 0, 76, 128),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      selectedIndex = 0;
+                                                      print(_chartKey
+                                                          .currentState
+                                                          ?.widget
+                                                          .series
+                                                          .length);
+                                                      print(_chartKey
+                                                              .currentState
+                                                              ?.widget
+                                                              .series[0]
+                                                              .dataSource![1]
+                                                              .selectionBehavior!
+                                                              .selectedColor =
+                                                          Colors.red);
+                                                      _chartKey
+                                                                  .currentState
+                                                                  ?.widget
+                                                                  .series[0]
+                                                                  .selectionBehavior!
+                                                                  .selectedColor ==
+                                                              null
+                                                          ? Colors.red
+                                                          : null;
+                                                    });
+                                                  },
+                                                  child: const Row(
+                                                    children: [
+                                                      Icon(FontAwesomeIcons.eye,
+                                                          color: Colors.white),
+                                                      SizedBox(
+                                                        width: 10.0,
+                                                      ),
+                                                      Text(
+                                                        '  Ver todo ',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              "HelveticaCondensed",
+                                                          color: Colors.white,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SfCartesianChart(
+                                            key: _chartKey,
+                                            title: const ChartTitle(
+                                                alignment: ChartAlignment.near,
+                                                text: "Mes de Febrero",
+                                                textStyle: TextStyle(
+                                                  fontFamily:
+                                                      "HelveticaCondensed",
+                                                  color: Color.fromARGB(
+                                                      255, 0, 76, 128),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16,
+                                                )),
+                                            onSelectionChanged: (value) {
+                                              //value.selectedColor = Colors.red;
+                                              /*setState(() {
                                           selectedIndex = value.pointIndex + 1;
                                         });
                                         print("ddddd");*/
-                                        final String barName =
-                                            value.pointIndex.toString();
-                                        setState(() {
-                                          if (selectedBars.contains(barName)) {
-                                            selectedBars.remove(barName);
-                                            selectedIndex = 0;
-                                          } else {
-                                            selectedBars.add(barName);
-                                            selectedIndex =
-                                                value.pointIndex + 1;
-                                          }
-                                        });
-                                      },
-                                      primaryXAxis: const CategoryAxis(
-                                        axisLine: AxisLine(
-                                            color: Colors.black, width: 1),
-                                      ),
-                                      primaryYAxis: const NumericAxis(
-                                        minimum: 0,
-                                        maximum: 30,
-                                        interval: 10,
-                                        axisLine: AxisLine(
-                                            color: Colors.black, width: 1),
-                                        title: AxisTitle(
-                                            text: "N° de Visitas",
-                                            textStyle: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 18.0,
-                                              fontFamily: 'HelveticaCondensed',
-                                            )),
-                                      ),
-                                      tooltipBehavior: _tooltip,
-                                      series: <CartesianSeries<_ChartData,
-                                          String>>[
-                                        BarSeries<_ChartData, String>(
-                                            width: 0.4,
-                                            selectionBehavior:
-                                                SelectionBehavior(
-                                              enable: true,
-                                              selectedColor:
-                                                  const Color.fromARGB(
-                                                      255, 0, 76, 128),
-                                              unselectedColor:
-                                                  const Color(0xFFD9DEDA),
+                                              final String barName =
+                                                  value.pointIndex.toString();
+                                              setState(() {
+                                                if (selectedBars
+                                                    .contains(barName)) {
+                                                  selectedBars.remove(barName);
+                                                  selectedIndex = 0;
+                                                } else {
+                                                  selectedBars.add(barName);
+                                                  selectedIndex =
+                                                      value.pointIndex + 1;
+                                                }
+                                              });
+                                            },
+                                            primaryXAxis: const CategoryAxis(
+                                              axisLine: AxisLine(
+                                                  color: Colors.black,
+                                                  width: 1),
                                             ),
-                                            dataSource: data,
-                                            name: "N° de Visitas",
-                                            xValueMapper:
-                                                (_ChartData data, _) =>
-                                                    data.nombreAnalista,
-                                            yValueMapper:
-                                                (_ChartData data, _) =>
-                                                    data.numeroVisitasTotal,
-                                            onPointTap: (value) {
-                                              /*final String barName =
+                                            primaryYAxis: const NumericAxis(
+                                              minimum: 0,
+                                              maximum: 30,
+                                              interval: 10,
+                                              axisLine: AxisLine(
+                                                  color: Colors.black,
+                                                  width: 1),
+                                              title: AxisTitle(
+                                                  text: "N° de Visitas",
+                                                  textStyle: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 18.0,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  )),
+                                            ),
+                                            tooltipBehavior: _tooltip,
+                                            series: <CartesianSeries<Analista,
+                                                String>>[
+                                              BarSeries<Analista, String>(
+                                                  width: 0.4,
+                                                  selectionBehavior:
+                                                      SelectionBehavior(
+                                                    enable: true,
+                                                    selectedColor:
+                                                        const Color.fromARGB(
+                                                            255, 0, 76, 128),
+                                                    unselectedColor:
+                                                        const Color(0xFFD9DEDA),
+                                                  ),
+                                                  dataSource: analistas,
+                                                  name: "N° de Visitas",
+                                                  xValueMapper:
+                                                      (Analista data, _) =>
+                                                          data.nombreAnalista,
+                                                  yValueMapper: (Analista data,
+                                                          _) =>
+                                                      data.numeroVisitasTotal,
+                                                  onPointTap: (value) {
+                                                    /*final String barName =
                                                   value.pointIndex.toString();
                                               setState(() {
                                                 if (selectedBars
@@ -308,356 +393,417 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                                       value.pointIndex! + 1;
                                                 }
                                               });*/
-                                            },
-                                            color: const Color(0xFFD9DEDA))
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10),
-                                      child: LayoutBuilder(
-                                        builder: (context, constraints) {
-                                          if (constraints.maxWidth > 200) {
-                                            return Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                const Text(
-                                                  'Actividad',
-                                                  style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 0, 76, 128),
-                                                    fontSize: 19.0,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontFamily:
-                                                        'HelveticaCondensed',
-                                                  ),
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    IconButton(
-                                                      icon: const Icon(
-                                                        FontAwesomeIcons
-                                                            .calendarDay,
-                                                        color: Color.fromARGB(
-                                                            255, 0, 76, 128),
+                                                  },
+                                                  color:
+                                                      const Color(0xFFD9DEDA))
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            child: LayoutBuilder(
+                                              builder: (context, constraints) {
+                                                if (constraints.maxWidth >
+                                                    200) {
+                                                  return Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      const Text(
+                                                        'Actividad',
+                                                        style: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255, 0, 76, 128),
+                                                          fontSize: 19.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontFamily:
+                                                              'HelveticaCondensed',
+                                                        ),
                                                       ),
-                                                      onPressed: () {
-                                                        _selectDate(context);
-                                                      },
-                                                    ),
-                                                    const SizedBox(width: 10),
-                                                    Text(
-                                                      DateFormat('dd/MM/yyyy')
-                                                          .format(
-                                                              _selectedDate),
-                                                      style: const TextStyle(
-                                                        fontFamily:
-                                                            "HelveticaCondensed",
-                                                        color: Color.fromARGB(
-                                                            255, 0, 76, 128),
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w500,
+                                                      Row(
+                                                        children: [
+                                                          IconButton(
+                                                            icon: const Icon(
+                                                              FontAwesomeIcons
+                                                                  .calendarDay,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      0,
+                                                                      76,
+                                                                      128),
+                                                            ),
+                                                            onPressed: () {
+                                                              _selectDate(
+                                                                  context);
+                                                            },
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 10),
+                                                          Text(
+                                                            DateFormat(
+                                                                    'dd/MM/yyyy')
+                                                                .format(
+                                                                    _selectedDate),
+                                                            style:
+                                                                const TextStyle(
+                                                              fontFamily:
+                                                                  "HelveticaCondensed",
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      0,
+                                                                      76,
+                                                                      128),
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            );
-                                          } else {
-                                            return Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                const Text(
-                                                  'Actividad',
-                                                  style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 0, 76, 128),
-                                                    fontSize: 19.0,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontFamily:
-                                                        'HelveticaCondensed',
-                                                  ),
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    IconButton(
-                                                      icon: const Icon(
-                                                        FontAwesomeIcons
-                                                            .calendarDay,
-                                                        color: Color.fromARGB(
-                                                            255, 0, 76, 128),
+                                                    ],
+                                                  );
+                                                } else {
+                                                  return Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      const Text(
+                                                        'Actividad',
+                                                        style: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255, 0, 76, 128),
+                                                          fontSize: 19.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontFamily:
+                                                              'HelveticaCondensed',
+                                                        ),
                                                       ),
-                                                      onPressed: () {
-                                                        _selectDate(context);
-                                                      },
-                                                    ),
-                                                    const SizedBox(width: 10),
-                                                    Text(
-                                                      DateFormat('dd/MM/yyyy')
-                                                          .format(
-                                                              _selectedDate),
-                                                      style: const TextStyle(
-                                                        fontFamily:
-                                                            "HelveticaCondensed",
-                                                        color: Color.fromARGB(
-                                                            255, 0, 76, 128),
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w500,
+                                                      Row(
+                                                        children: [
+                                                          IconButton(
+                                                            icon: const Icon(
+                                                              FontAwesomeIcons
+                                                                  .calendarDay,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      0,
+                                                                      76,
+                                                                      128),
+                                                            ),
+                                                            onPressed: () {
+                                                              _selectDate(
+                                                                  context);
+                                                            },
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 10),
+                                                          Text(
+                                                            DateFormat(
+                                                                    'dd/MM/yyyy')
+                                                                .format(
+                                                                    _selectedDate),
+                                                            style:
+                                                                const TextStyle(
+                                                              fontFamily:
+                                                                  "HelveticaCondensed",
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      0,
+                                                                      76,
+                                                                      128),
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            );
-                                          }
-                                        },
+                                                    ],
+                                                  );
+                                                }
+                                              },
+                                            ),
+                                          ),
+                                          //_buildDataTable(Analistas),
+                                          const DataTableCustom(),
+                                        ],
                                       ),
                                     ),
-                                    //_buildDataTable(Analistas),
-                                    const DataTableCustom(),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(width: 15),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    dropdown,
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 30),
+                                    const SizedBox(width: 15),
+                                    Expanded(
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const Text(
-                                            'Resumen de Cartera',
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 19.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'HelveticaCondensed',
+                                          dropdown,
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 30),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  'Resumen de Cartera',
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 19.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 15),
+                                                const Text(
+                                                  'Saldo de Cartera (S/.)',
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                Text(
+                                                  '${analistas[id].saldoCartera}',
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 15),
+                                                const Text(
+                                                  'Monto Recuperado (S/.)',
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                Text(
+                                                  '${analistas[id].montoRecuperado}',
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 15),
+                                                const Text(
+                                                  'Saldo Vencido (S/.)',
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                Text(
+                                                  '${analistas[id].saldoVencido}',
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 15),
+                                                const Text(
+                                                  'Indice de Morosidad (%)',
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                Text(
+                                                  '${analistas[id].indiceMorosidad}',
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 15),
+                                                const Text(
+                                                  'Compromisos de Pago',
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 19.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 15),
+                                                const Text(
+                                                  'Generados',
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                Text(
+                                                  '${analistas[id].compromisosGenerado}',
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 15),
+                                                const Text(
+                                                  'Sin Cumplir',
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                Text(
+                                                  '${analistas[id].compromisosSinCumplir}',
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 15),
+                                                const Text(
+                                                  'Cumplidos',
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                Text(
+                                                  '${analistas[id].compromisosCumplidos}',
+                                                  style: const TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 15),
+                                                const Text(
+                                                  'N° Visitas por modalidad',
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 0, 76, 128),
+                                                    fontSize: 19.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontFamily:
+                                                        'HelveticaCondensed',
+                                                  ),
+                                                ),
+                                                SfCircularChart(
+                                                  legend: Legend(
+                                                    isVisible: true,
+                                                    isResponsive: true,
+                                                    alignment:
+                                                        ChartAlignment.center,
+                                                    position:
+                                                        LegendPosition.bottom,
+                                                    orientation:
+                                                        legendOrientation,
+                                                    textStyle: const TextStyle(
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                          'HelveticaCondensed',
+                                                    ),
+                                                  ),
+                                                  series: <CircularSeries>[
+                                                    DoughnutSeries<ChartData,
+                                                            String>(
+                                                        legendIconType:
+                                                            LegendIconType
+                                                                .rectangle,
+                                                        enableTooltip: true,
+                                                        dataLabelSettings:
+                                                            const DataLabelSettings(
+                                                                isVisible: true,
+                                                                textStyle:
+                                                                    TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontFamily:
+                                                                      'HelveticaCondensed',
+                                                                ),
+                                                                margin: EdgeInsets
+                                                                    .all(10),
+                                                                labelPosition:
+                                                                    ChartDataLabelPosition
+                                                                        .outside,
+                                                                connectorLineSettings:
+                                                                    ConnectorLineSettings(
+                                                                        width:
+                                                                            3)),
+                                                        explode: true,
+                                                        dataSource: chartData,
+                                                        pointColorMapper:
+                                                            (ChartData data,
+                                                                    _) =>
+                                                                data.color,
+                                                        xValueMapper:
+                                                            (ChartData data,
+                                                                    _) =>
+                                                                data.x,
+                                                        yValueMapper:
+                                                            (ChartData data,
+                                                                    _) =>
+                                                                data.y)
+                                                  ],
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Text(
-                                            'Saldo de Cartera (S/.)',
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          Text(
-                                            '${data[id].saldoCartera}',
-                                            style: const TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Text(
-                                            'Monto Recuperado (S/.)',
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          Text(
-                                            '${data[id].montoRecuperado}',
-                                            style: const TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Text(
-                                            'Saldo Vencido (S/.)',
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          Text(
-                                            '${data[id].saldoVencido}',
-                                            style: const TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Text(
-                                            'Indice de Morosidad (%)',
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          Text(
-                                            '${data[id].indiceMorosidad}',
-                                            style: const TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Text(
-                                            'Compromisos de Pago',
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 19.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Text(
-                                            'Generados',
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          Text(
-                                            '${data[id].compromisosGenerado}',
-                                            style: const TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Text(
-                                            'Sin Cumplir',
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          Text(
-                                            '${data[id].compromisosSinCumplir}',
-                                            style: const TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Text(
-                                            'Cumplidos',
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          Text(
-                                            '${data[id].compromisosCumplidos}',
-                                            style: const TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          const SizedBox(height: 15),
-                                          const Text(
-                                            'N° Visitas por modalidad',
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 0, 76, 128),
-                                              fontSize: 19.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'HelveticaCondensed',
-                                            ),
-                                          ),
-                                          SfCircularChart(
-                                            legend: Legend(
-                                              isVisible: true,
-                                              isResponsive: true,
-                                              alignment: ChartAlignment.center,
-                                              position: LegendPosition.bottom,
-                                              orientation: legendOrientation,
-                                              textStyle: const TextStyle(
-                                                fontSize: 14,
-                                                fontFamily:
-                                                    'HelveticaCondensed',
-                                              ),
-                                            ),
-                                            series: <CircularSeries>[
-                                              DoughnutSeries<ChartData, String>(
-                                                  legendIconType:
-                                                      LegendIconType.rectangle,
-                                                  enableTooltip: true,
-                                                  dataLabelSettings:
-                                                      const DataLabelSettings(
-                                                          isVisible: true,
-                                                          textStyle: TextStyle(
-                                                            fontSize: 15,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontFamily:
-                                                                'HelveticaCondensed',
-                                                          ),
-                                                          margin:
-                                                              EdgeInsets.all(
-                                                                  10),
-                                                          labelPosition:
-                                                              ChartDataLabelPosition
-                                                                  .outside,
-                                                          connectorLineSettings:
-                                                              ConnectorLineSettings(
-                                                                  width: 3)),
-                                                  explode: true,
-                                                  dataSource: chartData,
-                                                  pointColorMapper:
-                                                      (ChartData data, _) =>
-                                                          data.color,
-                                                  xValueMapper:
-                                                      (ChartData data, _) =>
-                                                          data.x,
-                                                  yValueMapper:
-                                                      (ChartData data, _) =>
-                                                          data.y)
-                                            ],
                                           ),
                                         ],
                                       ),
@@ -665,18 +811,15 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
                                   ],
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 
@@ -753,6 +896,95 @@ class _DashboardSupervisorPageState extends State<DashboardSupervisorPage> {
         );
       },
     );
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(
+            message,
+            style: const TextStyle(
+              fontSize: 14.0,
+              color: Colors.black,
+              fontFamily: 'HelveticaCondensed',
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: const Text(
+                'Aceptar',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: Color.fromARGB(255, 0, 74, 125),
+                  fontFamily: 'HelveticaCondensed',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _fetchAnalistas() async {
+    String token = await getToken();
+
+    final url = Uri.parse(
+        'https://wsdomingo.coopsantodomingo.com/laboratorio/creditos.php?codServicio=04');
+
+    final headers = {
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "*",
+      'Authorization': 'Bearer $token',
+      'Accept': '*/*'
+    };
+
+    final body = {
+      'idusuario': '12279',
+    };
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(body),
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic>? jsonResponse = json.decode(response.body);
+
+      if (jsonResponse != null) {
+        analistas =
+            jsonResponse.map((json) => Analista.fromJson(json)).toList();
+      } else {
+        //print('La respuesta de la API fue nula.');
+        _showErrorDialog('La respuesta de la API fue nula.');
+      }
+    } else {
+      //print('La respuesta de la API fue nula.');
+      _showErrorDialog(
+          'Error al obtener los analistas. Código de estado: ${response.statusCode}');
+    }
+  }
+
+  Future<void> _fetchData() async {
+    setState(() {
+      loading = true;
+    });
+    try {
+      await _fetchAnalistas();
+    } catch (e) {
+      _showErrorDialog(e.toString());
+    } finally {
+      setState(() {
+        loading = false;
+      });
+    }
   }
 }
 
@@ -1083,27 +1315,36 @@ class ChartData {
   final Color color;
 }
 
-class _ChartData {
-  _ChartData(
-      this.idAnalista,
-      this.nombreAnalista,
-      this.apellidosAnalista,
-      this.saldoCartera,
-      this.montoRecuperado,
-      this.saldoVencido,
-      this.indiceMorosidad,
-      this.compromisosGenerado,
-      this.compromisosSinCumplir,
-      this.compromisosCumplidos,
-      this.numeroVisitasPromocion,
-      this.numeroVisitasSeguimiento,
-      this.numeroVisitasRecuperacion,
-      this.numeroVisitasAmpliacion,
-      this.numeroVisitasTotal,
-      this.porcentajeVisitasRealizadas,
-      this.estado);
+class Analista {
+  Analista(
+      {required this.idAnalista,
+      required this.nombreAnalista,
+      required this.apellidosAnalista,
+      required this.saldoCartera,
+      required this.montoRecuperado,
+      required this.saldoVencido,
+      required this.indiceMorosidad,
+      required this.compromisosGenerado,
+      required this.compromisosSinCumplir,
+      required this.compromisosCumplidos,
+      required this.numeroVisitasPromocion,
+      required this.numeroVisitasSeguimiento,
+      required this.numeroVisitasRecuperacion,
+      required this.numeroVisitasAmpliacion,
+      required this.numeroVisitasTotal,
+      required this.porcentajeVisitasRealizadas,
+      required this.estado,
+      required this.nombrePromocion,
+      required this.nombreSeguimiento,
+      required this.nombreRecuperacion,
+      required this.cantidadPromocion,
+      required this.cantidadSeguimiento,
+      required this.cantidadRecuperacion,
+      required this.colorPromocion,
+      required this.colorSeguimiento,
+      required this.colorRecuperacion});
 
-  final int idAnalista;
+  final String idAnalista;
   final String nombreAnalista;
   final String apellidosAnalista;
   final double saldoCartera;
@@ -1120,4 +1361,42 @@ class _ChartData {
   final double numeroVisitasTotal;
   final double porcentajeVisitasRealizadas;
   final String estado;
+  final String nombrePromocion;
+  final String nombreSeguimiento;
+  final String nombreRecuperacion;
+  final int cantidadPromocion;
+  final int cantidadSeguimiento;
+  final int cantidadRecuperacion;
+  final Color colorPromocion;
+  final Color colorSeguimiento;
+  final Color colorRecuperacion;
+  factory Analista.fromJson(Map<String, dynamic> json) {
+    return Analista(
+        idAnalista: json['idusuario'],
+        nombreAnalista: json['analista'],
+        apellidosAnalista: json['analista'],
+        saldoCartera: 0,
+        montoRecuperado: 0,
+        saldoVencido: 0,
+        indiceMorosidad: 0,
+        compromisosGenerado: 0,
+        compromisosSinCumplir: 0,
+        compromisosCumplidos: 0,
+        numeroVisitasPromocion: 0,
+        numeroVisitasSeguimiento: 0,
+        numeroVisitasRecuperacion: 0,
+        numeroVisitasAmpliacion: 0,
+        numeroVisitasTotal: 0,
+        porcentajeVisitasRealizadas: 0,
+        estado: "Normal",
+        nombrePromocion: "Promocion",
+        nombreSeguimiento: "Seguimiento",
+        nombreRecuperacion: "Recuperacion",
+        cantidadPromocion: 50,
+        cantidadSeguimiento: 45,
+        cantidadRecuperacion: 34,
+        colorPromocion: const Color.fromRGBO(9, 0, 136, 1),
+        colorSeguimiento: const Color.fromRGBO(147, 0, 119, 1),
+        colorRecuperacion: const Color.fromRGBO(255, 189, 57, 1));
+  }
 }
