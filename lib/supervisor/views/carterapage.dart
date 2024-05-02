@@ -1,46 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_sdg/analista.dart';
+import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/supervisor/listacartera.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor.dart';
-import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
 
-void main() {
-  runApp(const CarteraPage());
-}
-
-class CarteraPage extends StatelessWidget {
-  const CarteraPage({super.key});
+class CarteraPage extends StatefulWidget {
+  const CarteraPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomeCarteraPage(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+  _CarteraPageState createState() => _CarteraPageState();
 }
 
-class MyHomeCarteraPage extends StatefulWidget {
-  const MyHomeCarteraPage({super.key});
-
-  @override
-  _MyHomeCarteraPageState createState() => _MyHomeCarteraPageState();
-}
-
-class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
-    with SingleTickerProviderStateMixin {
-  String selectedOption = '';
-  DateTime selectedDate = DateTime.now();
-
-  List<Analista> analistas = getAnalistas();
+class _CarteraPageState extends State<CarteraPage> {
+  late String selectedOption;
+  final List<Analista> analistas = getAnalistas();
   final List<Socio> socios = getSocios();
 
   @override
+  void initState() {
+    super.initState();
+    selectedOption = '';
+  }
+
+  @override
   Widget build(BuildContext context) {
-    List<Socio> sociosAssignedToToday = [];
-    List<Socio> sociosNotAssignedToToday = [];
-    var container = Container(
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: MediaQuery.of(context).size.width < 640
+            ? const MenuSupervisorMobile(name: "CARTERA")
+            : null,
+        body: Row(
+          children: [
+            if (MediaQuery.of(context).size.width >= 640)
+              const MenuSupervisor(name: "CARTERA"),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'CARTERA DE ANALISTAS',
+                      style: TextStyle(
+                        fontSize: 25.0,
+                        color: Color.fromARGB(255, 0, 76, 128),
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'HelveticaCondensed',
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    _buildDropdown(),
+                    SizedBox(height: 25.0),
+                    if (selectedOption.isNotEmpty)
+                      _buildDataTable(
+                          "CARTERA", SociosPorAnalista(selectedOption)),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDropdown() {
+    return Container(
       alignment: Alignment.bottomLeft,
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
@@ -50,7 +76,7 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
         dropdownColor: Colors.white,
         focusColor: Colors.transparent,
         value: selectedOption.isNotEmpty ? selectedOption : null,
-        items: analistas.map((Analista analista) {
+        items: analistas.map((analista) {
           return DropdownMenuItem<String>(
             value: analista.idAnalista,
             child: Text(
@@ -63,137 +89,31 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
             ),
           );
         }).toList(),
-        onChanged: (String? value) {
+        onChanged: (value) {
           setState(() {
-            selectedOption = value ?? '';
+            selectedOption = value!;
           });
         },
         hint: const Text(
           'Seleccionar analista',
           style: TextStyle(
-            color: Color.fromARGB(255, 196, 196, 196),
+            color: Color.fromARGB(255, 0, 74, 125),
             fontSize: 15.0,
             fontFamily: "HelveticaCondensed",
           ),
         ),
       ),
     );
-
-    List<String> selectedSociosIds = [];
-
-    switch (selectedOption) {
-      case '1':
-        selectedSociosIds = SociosPorAnalista(analistaId: '1', socios: socios);
-        break;
-      case '2':
-        selectedSociosIds = SociosPorAnalista(analistaId: '2', socios: socios);
-        break;
-      case '3':
-        selectedSociosIds = SociosPorAnalista(analistaId: '3', socios: socios);
-        break;
-      case '4':
-        selectedSociosIds = SociosPorAnalista(analistaId: '4', socios: socios);
-        break;
-      case '5':
-        selectedSociosIds = SociosPorAnalista(analistaId: '5', socios: socios);
-        break;
-      case '6':
-        selectedSociosIds = SociosPorAnalista(analistaId: '6', socios: socios);
-        break;
-      case '7':
-        selectedSociosIds = SociosPorAnalista(analistaId: '7', socios: socios);
-        break;
-      case '8':
-        selectedSociosIds = SociosPorAnalista(analistaId: '8', socios: socios);
-        break;
-      case '9':
-        selectedSociosIds = SociosPorAnalista(analistaId: '9', socios: socios);
-        break;
-
-      // Repite este bloque para cada analista (hasta el '10')
-      case '10':
-        selectedSociosIds = SociosPorAnalista(analistaId: '10', socios: socios);
-        break;
-      default:
-        // Handle default case if needed
-        break;
-    }
-    for (Socio socio in socios) {
-      if (selectedSociosIds.contains(socio.idSocio)) {
-        // Verificar si el usuario está asignado a la fecha de hoy
-        if (socioIsAssignedToToday(socio)) {
-          sociosAssignedToToday.add(socio);
-        } else {
-          sociosNotAssignedToToday.add(socio);
-        }
-      }
-    }
-
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: MediaQuery.of(context).size.width < 640
-            ? const MenuSupervisorMobile(name: "CARTERA")
-            : null,
-        body: Stack(
-          children: [
-            Row(
-              children: [
-                if (MediaQuery.of(context).size.width >= 640)
-                  const MenuSupervisor(name: "CARTERA"),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'CARTERA DE ANALISTAS',
-                            style: TextStyle(
-                              fontSize: 25.0,
-                              color: Color.fromARGB(255, 0, 76, 128),
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'HelveticaCondensed',
-                            ),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            container,
-                            //const SizedBox(width: 0), // Ajuste del margen derecho
-                          ],
-                        ),
-                        const SizedBox(height: 25.0),
-                        Center(
-                          child: _buildDataTable(
-                              selectedOption, sociosAssignedToToday),
-                        )
-                      ],
-                    ),
-                    //),
-                  ),
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
-  List<String> SociosPorAnalista({
-    required String analistaId,
-    required List<Socio> socios,
-  }) {
+  List<String> SociosPorAnalista(String analistaId) {
     return socios
         .where((socio) => socio.idAnalista == analistaId)
         .map((socio) => socio.idSocio)
         .toList();
   }
 
-  Widget _buildDataTable(String title, List<Socio> socioList) {
+  Widget _buildDataTable(String title, List<String> socioList) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
@@ -239,20 +159,19 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
                   ),
                 )),
               ],
-              rows: socioList.map((socio) {
+              rows: socioList.map((socioId) {
+                var socio = socios.firstWhere((s) => s.idSocio == socioId);
                 return DataRow(
-                  onSelectChanged: (isSelected) {
-                    if (isSelected != null && isSelected) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ListaSupervisor(
-                            tabName: "CARTERA",
-                            socio: socio,
-                          ),
+                  onSelectChanged: (_) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ListaSupervisor(
+                          tabName: title,
+                          socio: socio,
                         ),
-                      );
-                    }
+                      ),
+                    );
                   },
                   cells: [
                     DataCell(
@@ -287,10 +206,5 @@ class _MyHomeCarteraPageState extends State<MyHomeCarteraPage>
         ),
       ),
     );
-  }
-
-  bool socioIsAssignedToToday(Socio socio) {
-    // Lógica para verificar si el usuario está asignado a la fecha de hoy
-    return true;
   }
 }

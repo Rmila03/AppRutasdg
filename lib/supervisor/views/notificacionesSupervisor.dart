@@ -191,14 +191,15 @@ class _NotificacionesSupervisorContentState
                       style: const TextStyle(
                         fontFamily: 'HelveticaCondensed',
                         fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
+                        fontSize: 14.0,
                       ),
                     ),
                     Text(
-                      'Fecha: ${selectedDate.toString().split(' ')[0]}',
+                      'Fecha: ${selectedDate.day.toString().padLeft(2, '0')}/${selectedDate.month.toString().padLeft(2, '0')}',
                       style: const TextStyle(
                         fontFamily: 'HelveticaCondensed',
-                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13.0,
                       ),
                     ),
                   ],

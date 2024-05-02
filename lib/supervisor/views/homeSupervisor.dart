@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:ruta_sdg/supervisor/listacartera.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor.dart';
 import 'package:ruta_sdg/socio.dart';
 import 'package:ruta_sdg/supervisor/widgets/menu_supervisor_mobile.dart';
@@ -284,9 +283,6 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                             const SizedBox(height: 15.0),
                                             GestureDetector(
                                               onTap: () {
-                                                // Aquí puedes agregar la lógica para generar
-                                                // Por ejemplo, puedes llamar a una función _handleGeneratePressed()
-
                                                 _fetchHojaRuta(
                                                     AnalistaSeleccionado,
                                                     DistritoSeleccionado,
@@ -294,7 +290,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                                     selectedAmpliation,
                                                     selectedTracking,
                                                     selectedRecovery);
-                                                print(SociosHojaRuta);
+                                                //print(SociosHojaRuta);
                                               },
                                               child: Container(
                                                 padding:
@@ -461,7 +457,6 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                                                   selectedAmpliation,
                                                   selectedTracking,
                                                   selectedRecovery);
-                                              print(SociosHojaRuta);
                                             },
                                             child: Container(
                                               padding:
@@ -504,14 +499,13 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                         const SizedBox(height: 20.0),
                         // =================================== TABLA ===============================================
                         Center(
-                            //child: _buildDataTable(selectedOption, sociosAssignedToToday),
-                            ),
+                          child: _buildDataTable(SociosHojaRuta),
+                        ),
                         const SizedBox(height: 15.0),
                         // =================================== Boton Guardar ===============================================
                         Center(
                           child: GestureDetector(
                             onTap: () {
-                              print(DistritoSeleccionado);
                               // Aquí puedes agregar la lógica para generar
                               // Por ejemplo, puedes llamar a una función _handleGeneratePressed()
                             },
@@ -768,7 +762,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
     );
   }
 
-  Widget _buildDataTable(String title, List<Socio> socioList) {
+  Widget _buildDataTable(List<HojaRuta> SociosHojaRuta) {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 2),
@@ -790,32 +784,48 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                     MaterialStateProperty.all(const Color(0xFFD9DEDA)),
                 columns: const [
                   DataColumn(
-                      label: Text(
-                    'DNI',
-                    style: TextStyle(
+                    label: Text(
+                      'DNI',
+                      style: TextStyle(
                         fontFamily: 'HelveticaCondensed',
-                        fontWeight: FontWeight.bold),
-                  )),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                   DataColumn(
-                      label: Text('NOMBRE',
-                          style: TextStyle(
-                              fontFamily: 'HelveticaCondensed',
-                              fontWeight: FontWeight.bold))),
+                    label: Text(
+                      'NOMBRE',
+                      style: TextStyle(
+                        fontFamily: 'HelveticaCondensed',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                   DataColumn(
-                      label: Text('DIRECCIÓN',
-                          style: TextStyle(
-                              fontFamily: 'HelveticaCondensed',
-                              fontWeight: FontWeight.bold))),
+                    label: Text(
+                      'DIRECCIÓN',
+                      style: TextStyle(
+                        fontFamily: 'HelveticaCondensed',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                   DataColumn(
-                      label: Text('MODALIDAD',
-                          style: TextStyle(
-                              fontFamily: 'HelveticaCondensed',
-                              fontWeight: FontWeight.bold))),
-                  DataColumn(label: Text('  ')),
+                    label: Text(
+                      'MODALIDAD',
+                      style: TextStyle(
+                        fontFamily: 'HelveticaCondensed',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text('  '),
+                  ),
                 ],
-                rows: socioList.map((socio) {
+                rows: SociosHojaRuta.map((socio) {
                   return DataRow(
-                    onSelectChanged: (isSelected) {
+                    /*onSelectChanged: (isSelected) {
                       if (isSelected != null && isSelected) {
                         Navigator.push(
                           context,
@@ -827,24 +837,40 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
                           ),
                         );
                       }
-                    },
+                    },*/
                     cells: [
-                      DataCell(Text(socio.dni,
+                      DataCell(
+                        Text(
+                          socio.dni,
                           style: const TextStyle(
                             fontFamily: 'HelveticaCondensed',
-                          ))),
-                      DataCell(Text("${socio.name} ${socio.lastName}",
+                          ),
+                        ),
+                      ),
+                      DataCell(
+                        Text(
+                          socio.socio,
                           style: const TextStyle(
                             fontFamily: 'HelveticaCondensed',
-                          ))),
-                      DataCell(Text(socio.address,
+                          ),
+                        ),
+                      ),
+                      DataCell(
+                        Text(
+                          socio.direccion,
                           style: const TextStyle(
                             fontFamily: 'HelveticaCondensed',
-                          ))),
-                      DataCell(Text(socio.tipoGrupo,
+                          ),
+                        ),
+                      ),
+                      DataCell(
+                        Text(
+                          socio.modalidad,
                           style: const TextStyle(
                             fontFamily: 'HelveticaCondensed',
-                          ))),
+                          ),
+                        ),
+                      ),
                       DataCell(
                         IconButton(
                           icon: const Icon(
@@ -954,7 +980,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         }
       } else {
         print(
-            'Error al obtener los socios en mora. Código de estado: ${response.statusCode}');
+            'Error al obtener los distritos. Código de estado: ${response.statusCode}');
       }
     } catch (e) {
       print('Error: $e');
@@ -982,14 +1008,12 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
       };
 
       final body = {
-        {
-          "idusuario": idusuario,
-          "iddistrito": iddistrito,
-          "cantidadPro": selectedPromotion,
-          "cantidadAmp": selectedAmpliation,
-          "cantidadSeg": selectedTracking,
-          "cantiddRec": selectedRecovery,
-        }
+        "idusuario": idusuario,
+        "iddistrito": iddistrito,
+        "cantidadPro": selectedPromotion,
+        "cantidadAmp": selectedAmpliation,
+        "cantidadSeg": selectedTracking,
+        "cantiddRec": selectedRecovery,
       };
 
       final response = await http.post(
@@ -1011,7 +1035,7 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
         }
       } else {
         print(
-            'Error al obtener los analistas. Código de estado: ${response.statusCode}');
+            'Error al obtener la hoja de ruta. Código de estado: ${response.statusCode}');
       }
     } catch (e) {
       print('Error: $e');
@@ -1019,6 +1043,12 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
   }
 
 // =================================== VOID ===============================================
+  void _handleTrashIconPressed(HojaRuta hojaRuta) {
+    setState(() {
+      SociosHojaRuta.removeWhere((socio) => socio == hojaRuta);
+    });
+  }
+
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
@@ -1059,12 +1089,6 @@ class _MyHomeSupervisorPageState extends State<MyHomeSupervisorPage>
       socio.assignedDate = DateTime(2024, 1, 8);
     });
     _toggleFloatingPage();
-  }
-
-  void _handleTrashIconPressed(Socio socio) {
-    setState(() {
-      socio.assignedDate = DateTime.now().add(const Duration(days: 1));
-    });
   }
 
   bool socioIsAssignedToToday(Socio socio) {

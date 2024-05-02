@@ -87,7 +87,7 @@ class BottomAction extends StatelessWidget {
                   },
                 ),
               );
-            } else if (label == "Sugerencias") {
+            } /* else if (label == "Sugerencias") {
               Navigator.push(
                 context,
                 PageRouteBuilder(
@@ -102,7 +102,8 @@ class BottomAction extends StatelessWidget {
                   },
                 ),
               );
-            } else if (label == "Nuevo") {
+            }*/
+            else if (label == "Nuevo") {
               Navigator.push(
                 context,
                 PageRouteBuilder(
